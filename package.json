@@ -1,5 +1,6 @@
 {
   "name": "realtime-test",
+  "homepage": "https://ouch-cs.github.io/Client-Realtime-Test/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,11 +9,14 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "gen-pwa": "pwa-assets-generator --preset minimal public/logo.svg"
+    "gen-pwa": "pwa-assets-generator --preset minimal public/logo.svg",
+    "predeploy": "npm run build",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.15",
     "clsx": "^2.1.1",
+    "gh-pages": "^6.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.0",

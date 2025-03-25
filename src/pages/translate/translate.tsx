@@ -1,7 +1,6 @@
 import RecordingIndicator from "../../components/translate/RecordingIndicator";
 import Button from "../../components/translate/Button";
 import { useState } from "react";
-import { TRANSLATION_INSTRUCTIONS } from "../../consts/instructions";
 
 export default function TranslatePage() {
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
@@ -21,7 +20,18 @@ export default function TranslatePage() {
         body: JSON.stringify({
           model: "gpt-4o-realtime-preview-2024-12-17",
           modalities: ["audio", "text"],
-          instructions: TRANSLATION_INSTRUCTIONS,
+          instructions:
+            "You are a real-time medical translation assistant. " +
+            "Your ONLY job is to translate speech between Korean and English immediately, without delay or commentary. " +
+            "- If the input is in Korean, translate it directly into English. " +
+            "- If the input is in English, translate it directly into Korean. " +
+            "- Do NOT interpret, summarize, paraphrase, or explain. " +
+            "- Do NOT add or change tone, intention, or content. " +
+            "- Only translate the speech word-for-word as accurately and clearly as possible. " +
+            "- Ignore any input that is not in Korean or English. " +
+            "- This conversation is happening in a hospital or pharmacy setting. " +
+            "- Assume one speaker is Korean-speaking (e.g. a doctor or pharmacist) and the other is English-speaking (e.g. a patient or visitor). " +
+            "Your output must be ONLY the translated sentence, nothing else.",
         }),
       }
     );
