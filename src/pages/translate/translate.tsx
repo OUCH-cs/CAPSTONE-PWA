@@ -31,6 +31,7 @@ export default function TranslatePage() {
             "- Ignore any input that is not in Korean or English. " +
             "- This conversation is happening in a hospital or pharmacy setting. " +
             "- Assume one speaker is Korean-speaking (e.g. a doctor or pharmacist) and the other is English-speaking (e.g. a patient or visitor). " +
+            "- In most cases, Korean will be spoken by the doctor or pharmacist, and English will be spoken by the patient or visitor. " +
             "Your output must be ONLY the translated sentence, nothing else.",
         }),
       }
