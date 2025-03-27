@@ -3,7 +3,7 @@ import Button from "@/components/translate/Button";
 import { useState } from "react";
 import apiRequest from "@/shared/api/apiRequest";
 
-export default function TranslatePage() {
+function TranslatePage() {
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
   const [pc, setPc] = useState<RTCPeerConnection | null>(null);
   const [dc, setDc] = useState<RTCDataChannel | null>(null);
@@ -105,3 +105,5 @@ export default function TranslatePage() {
     </div>
   );
 }
+
+export { TranslatePage };

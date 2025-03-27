@@ -1,4 +1,4 @@
-import micIcon from "../../assets/mic.svg";
+import micIcon from "@/shared/assets/common/mic.svg";
 
 interface IRecordingIndicatorProps {
   children: React.ReactNode;
