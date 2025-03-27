@@ -32,6 +32,8 @@ export default function TranslatePage() {
             "- This conversation is happening in a hospital or pharmacy setting. " +
             "- Assume one speaker is Korean-speaking (e.g. a doctor or pharmacist) and the other is English-speaking (e.g. a patient or visitor). " +
             "- In most cases, Korean will be spoken by the doctor or pharmacist, and English will be spoken by the patient or visitor. " +
+            "- When translating Korean to English, use a calm, polite, and patient-friendly tone suitable for medical professionals. " +
+            "- When translating English to Korean, use respectful, clear, and natural language that a Korean doctor would use when speaking to a patient. " +
             "Your output must be ONLY the translated sentence, nothing else.",
         }),
       }
