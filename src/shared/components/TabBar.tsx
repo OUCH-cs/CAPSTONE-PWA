@@ -55,10 +55,13 @@ export default function TabBar() {
 const Container = styled.div`
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
   width: 100%;
+  min-width: 360px;
+  max-width: 600px;
   height: 52px;
   padding: 0 30px;
   border-top: 1px solid ${({ theme }) => theme.colors.white_f5};
