@@ -1,7 +1,7 @@
-import RecordingIndicator from "@/components/translate/RecordingIndicator";
-import Button from "@/components/translate/Button";
+import RecordingIndicator from "@/features/translate/ui/RecordingIndicator";
 import { useState } from "react";
 import apiRequest from "@/shared/api/apiRequest";
+import { Button } from "@/shared/components/button/Button";
 
 function TranslatePage() {
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
@@ -95,10 +95,20 @@ function TranslatePage() {
     <div className="flex flex-col items-center gap-[100px] h-screen pt-[50%]">
       <RecordingIndicator>Recording...</RecordingIndicator>
       <div className="flex gap-[10px]">
-        <Button disabled={isTranslating} onClick={handleStartTranslate}>
+        <Button
+          width={120}
+          height={52}
+          disabled={isTranslating}
+          onClick={handleStartTranslate}
+        >
           Start
         </Button>
-        <Button disabled={!isTranslating} onClick={handleStopTranslate}>
+        <Button
+          width={120}
+          height={52}
+          disabled={!isTranslating}
+          onClick={handleStopTranslate}
+        >
           Finish
         </Button>
       </div>
