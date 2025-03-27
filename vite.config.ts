@@ -4,13 +4,11 @@ import path from "path";
 import svgr from "vite-plugin-svgr";
 
 import { VitePWA } from "vite-plugin-pwa";
-import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(),
     svgr(),
     VitePWA({
       registerType: "autoUpdate",

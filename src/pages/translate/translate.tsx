@@ -2,6 +2,7 @@ import RecordingIndicator from "@/features/translate/ui/RecordingIndicator";
 import { useState } from "react";
 import apiRequest from "@/shared/api/apiRequest";
 import { Button } from "@/shared/components/button/Button";
+import styled from "@emotion/styled";
 
 function TranslatePage() {
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
@@ -92,9 +93,9 @@ function TranslatePage() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-[100px] h-screen pt-[50%]">
+    <Container>
       <RecordingIndicator>Recording...</RecordingIndicator>
-      <div className="flex gap-[10px]">
+      <ButtonWrapper>
         <Button
           width={120}
           height={52}
@@ -111,9 +112,23 @@ function TranslatePage() {
         >
           Finish
         </Button>
-      </div>
-    </div>
+      </ButtonWrapper>
+    </Container>
   );
 }
 
 export { TranslatePage };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+  height: 100vh;
+  padding-top: 50%;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;
