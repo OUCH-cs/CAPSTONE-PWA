@@ -1,11 +1,7 @@
 import styled from "@emotion/styled";
-import TabBar from "./TabBar";
+import { TabBar } from "./TabBar";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <Container>
       {children}
@@ -14,9 +10,11 @@ export default function RootLayout({
   );
 }
 
+export { RootLayout };
+
 const Container = styled.div`
   min-width: 360px;
-  max-width: 600px;
+  max-width: 450px;
   height: 100vh;
   padding-bottom: 52px;
   margin: 0 auto;

@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import RootLayout from "@/shared/components/RootLayout";
 import AppRoutes from "./routes/Routes";
+import { RootLayout } from "@/shared/components/base";
 
 function App() {
   return (

@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 import micIcon from "@/shared/assets/common/mic.svg";
-
-interface IRecordingIndicatorProps {
-  children: React.ReactNode;
-}
+import { IRecordingIndicatorProps } from "../\btranslate.types";
 
 export default function RecordingIndicator({
   children,
