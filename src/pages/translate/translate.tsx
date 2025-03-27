@@ -1,6 +1,7 @@
-import RecordingIndicator from "../../components/translate/RecordingIndicator";
-import Button from "../../components/translate/Button";
+import RecordingIndicator from "@/components/translate/RecordingIndicator";
+import Button from "@/components/translate/Button";
 import { useState } from "react";
+import apiRequest from "@/shared/api/apiRequest";
 
 export default function TranslatePage() {
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
@@ -9,36 +10,8 @@ export default function TranslatePage() {
 
   const handleStartTranslate = async () => {
     setIsTranslating(true);
-    const tokenResponse = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/sessions`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-4o-realtime-preview-2024-12-17",
-          modalities: ["audio", "text"],
-          instructions:
-            "You are a real-time medical translation assistant. " +
-            "Your ONLY job is to translate speech between Korean and English immediately, without delay or commentary. " +
-            "- If the input is in Korean, translate it directly into English. " +
-            "- If the input is in English, translate it directly into Korean. " +
-            "- Do NOT interpret, summarize, paraphrase, or explain. " +
-            "- Do NOT add or change tone, intention, or content. " +
-            "- Only translate the speech word-for-word as accurately and clearly as possible. " +
-            "- Ignore any input that is not in Korean or English. " +
-            "- This conversation is happening in a hospital or pharmacy setting. " +
-            "- Assume one speaker is Korean-speaking (e.g. a doctor or pharmacist) and the other is English-speaking (e.g. a patient or visitor). " +
-            "- In most cases, Korean will be spoken by the doctor or pharmacist, and English will be spoken by the patient or visitor. " +
-            "- When translating Korean to English, use a calm, polite, and patient-friendly tone suitable for medical professionals. " +
-            "- When translating English to Korean, use respectful, clear, and natural language that a Korean doctor would use when speaking to a patient. " +
-            "Your output must be ONLY the translated sentence, nothing else.",
-        }),
-      }
-    );
-    const data = await tokenResponse.json();
+    const data = await apiRequest({ url: "/session", method: "POST" });
+
     const EPHEMERAL_KEY = data.client_secret.value; //임시 키 발급
 
     // PeerConnection 생성
@@ -70,7 +43,7 @@ export default function TranslatePage() {
 
     const sdpResponse = await fetch(
       `${
-        import.meta.env.VITE_BASE_URL
+        import.meta.env.VITE_OPEN_API_URL
       }?model=gpt-4o-mini-realtime-preview-2024-12-17`,
       {
         method: "POST",
