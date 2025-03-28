@@ -25,5 +25,5 @@ const Container = styled.div``;
 const ModalWrapper = styled.div`
   width: 300px;
   height: 300px;
-  background-color: skyblue;
+  background-color: white;
 `;

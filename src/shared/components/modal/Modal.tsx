@@ -112,7 +112,7 @@ const Dialog = styled.dialog<{ $isOpen: boolean }>`
   animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.4s ease;
   outline: none;
 
-  $[open] {
+  &[open] {
     outline: none;
   }
 
