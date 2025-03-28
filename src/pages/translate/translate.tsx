@@ -3,6 +3,7 @@ import { useState } from "react";
 import apiRequest from "@/shared/api/apiRequest";
 import { Button } from "@/shared/components/button/Button";
 import styled from "@emotion/styled";
+import { MODEL } from "@/features/translate/translate.consts";
 
 function TranslatePage() {
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
@@ -43,9 +44,7 @@ function TranslatePage() {
     await pc.setLocalDescription(offer);
 
     const sdpResponse = await fetch(
-      `${
-        import.meta.env.VITE_OPEN_API_URL
-      }?model=gpt-4o-mini-realtime-preview-2024-12-17`,
+      `${import.meta.env.VITE_OPEN_API_URL}?${MODEL}`,
       {
         method: "POST",
         body: offer.sdp,
