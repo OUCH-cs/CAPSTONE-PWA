@@ -18,16 +18,16 @@ const DiagnosisPost = ({ steps, nextClickHandler, Funnel, Step }: ClassPostProps
 
     <Funnel>
       <Step name={steps[0]}>
-        <StepOne/>
+        <StepOne onNext={() => nextClickHandler(steps[1])} />
       </Step>
       <Step name={steps[1]}>
-        <StepTwo/>
+        <StepTwo onNext={() => nextClickHandler(steps[2])} />
       </Step>
       <Step name={steps[2]}>
-        <StepThree/>
+        <StepThree onNext={() => nextClickHandler(steps[3])} />
       </Step>
       <Step name={steps[3]}>
-        <StepFour/>
+        <StepFour onNext={() => nextClickHandler(steps[4])} />
       </Step>
       <Step name={steps[4]}>
         <StepFive/>
