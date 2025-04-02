@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import theme from "@/shared/styles/theme";
@@ -23,7 +22,6 @@ const PainLevelBar = () => {
               type="range"
               min={0}
               max={10}
-              step={1}
               value={value}
               onChange={(e) => onChange(Number(e.target.value))}
             />
@@ -66,12 +64,13 @@ const SliderWrapper = styled.div`
   align-items: center;
 `;
 
-const SliderInput = styled.input`
+const SliderInput = styled.input<{ value: number }>`
   width: 100%;
   appearance: none;
   height: 4px;
   border-radius: 5px;
-  background: ${theme.colors.white_ec};
+  background: ${({ value }) =>
+    `linear-gradient(to right,${theme.colors.primary} 0%,${theme.colors.primary} ${value * 10}%, ${theme.colors.white_e5} ${value * 10}%, ${theme.colors.white_e5} 100%)`};
   outline: none;
   transition: background 0.3s;
 

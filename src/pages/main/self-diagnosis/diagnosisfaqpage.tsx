@@ -46,7 +46,7 @@ function DiagnosisFaqPage() {
         </Card>
       ))}
 
-      <NextButton onClick={() => navigate("/diagnosis")}>
+      <NextButton onClick={() => navigate("/self-diagnosis")}>
         <span css={nextButtonText}>Next</span>
       </NextButton>
     </Container>

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
@@ -46,9 +45,8 @@ const AddSymptoms = ({ onClose }: AddSymptomsProps) => {
           </SymptomItem>
         ))}
       </SymptomList>
-
       <Button css={closeButton} onClick={onClose}>
-        <p css={closeButtonText}>Close</p>
+        <CloseButtonText>Close</CloseButtonText>
       </Button>
     </Container>
   );
@@ -115,18 +113,17 @@ const symptomText = css`
   font-size: 16px;
 `;
 
-const closeButton = css`
-  background-color: ${theme.colors.primary};
-  padding: 12px 0;
-  border-radius: 10px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 16px;
-`;
+const closeButton = {
+  height: 48,
+  width: "100%",
+  marginTop: 8,
+  textAlign: "center" as const,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
 
-const closeButtonText = css`
-  color: ${theme.colors.white};
-  font-size: 18px;
-`;
+const CloseButtonText = styled.p`
+  color: theme.colors.white,
+  fontSize: 18,
+`

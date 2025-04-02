@@ -1,9 +1,7 @@
-/** @jsxImportSource @emotion/react */
 import { useState } from "react";
+import * as S from '../style'
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import { useFormContext } from "react-hook-form";
-import { Button } from "@/shared/components/button/Button";
 import theme from "@/shared/styles/theme";
 import SelectedSymptoms from "../SelectedSymptoms";
 import { StepProps } from "../../diagnosis.type";
@@ -16,15 +14,14 @@ const StepThree = ({ onNext }: StepProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <Container>
-      <p css={question}>How long did the symptoms lasted?</p>
+    <S.Container>
+      <S.Question>How long did the symptoms lasted?</S.Question>
       <SelectedSymptoms />
-
       <Card>
         <DropdownButton onClick={() => setDropdownOpen((prev) => !prev)}>
-          <p css={dropdownText}>
+          <DropdownText>
             {duration ? duration : "Duration of symptoms"}
-          </p>
+          </DropdownText>
           {dropdownOpen ? (
             <IoChevronUp size={20} />
           ) : (
@@ -43,29 +40,21 @@ const StepThree = ({ onNext }: StepProps) => {
                 setDropdownOpen(false);
               }}
             >
-              <p css={dropdownItemText}>{item}</p>
+              <DropdownItemText>{item}</DropdownItemText>
             </DropdownItem>
           ))}
       </Card>
-
-      <Button css={nextButton} disabled={!duration} onClick={onNext}>
-        <p css={nextButtonText}>Next</p>
-      </Button>
-    </Container>
+      <S.NextButton
+        disabled={!duration}
+        onClick={onNext}
+      >
+        <S.NextButtonText>Next</S.NextButtonText>
+      </S.NextButton>
+    </S.Container>
   );
 };
 
 export default StepThree;
-
-const Container = styled.div`
-  padding-top: 46px;
-`;
-
-const question = css`
-  font-size: 21px;
-  text-align: center;
-  margin-bottom: 22px;
-`;
 
 const Card = styled.div`
   background-color: ${theme.colors.white};
@@ -86,9 +75,9 @@ const DropdownButton = styled.button`
   cursor: pointer;
 `;
 
-const dropdownText = css`
+const DropdownText = styled.p`
   font-size: 16px;
-  color: ${theme.colors.gray_7};
+  color: ${ theme.colors.gray_7};
 `;
 
 const DropdownItem = styled.button<{ selected: boolean }>`
@@ -102,7 +91,7 @@ const DropdownItem = styled.button<{ selected: boolean }>`
   cursor: pointer;
 `;
 
-const dropdownItemText = css`
+const DropdownItemText = styled.p`
   font-size: 16px;
 `;
 
@@ -110,22 +99,4 @@ const Divider = styled.div`
   height: 1px;
   background-color: ${theme.colors.white_e5};
   margin: 5px -18px;
-`;
-
-const nextButton = css`
-  backgroundColor: theme.colors.primary,
-  padding: "12px 0",
-  borderRadius: 10,
-  height: 48,
-  width: "100%",
-  marginTop: 20,
-  textAlign: "center" as const,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-`;
-
-const nextButtonText = css`
-  color: ${theme.colors.white};
-  font-size: 18px;
 `;

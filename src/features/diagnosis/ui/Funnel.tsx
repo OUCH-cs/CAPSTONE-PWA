@@ -15,7 +15,6 @@ export interface ClassPostProps {
 
 const DiagnosisPost = ({ steps, nextClickHandler, Funnel, Step }: ClassPostProps) => {
   return (
-
     <Funnel>
       <Step name={steps[0]}>
         <StepOne onNext={() => nextClickHandler(steps[1])} />

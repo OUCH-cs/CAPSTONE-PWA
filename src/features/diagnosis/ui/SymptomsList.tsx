@@ -1,6 +1,4 @@
-/** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import theme from "@/shared/styles/theme";
 import { useFormContext } from "react-hook-form";
 import { useSymptomsStore } from "../service/useDiagnosisStore";
@@ -40,14 +38,9 @@ const SymptomsList = () => {
               selected={selectedSymptoms.includes(item)}
               onClick={() => toggleSymptom(item)}
             >
-              <p
-                css={[
-                  symptomText,
-                  selectedSymptoms.includes(item) && selectedText,
-                ]}
-              >
+              <SymptomText selected={selectedSymptoms.includes(item)}>
                 {item}
-              </p>
+              </SymptomText>
             </SymptomButton>
           ))}
         </SymptomsRow>
@@ -61,12 +54,19 @@ export default SymptomsList;
 const SymptomsRow = styled.div`
   display: flex;
   gap: 4px;
-  justify-content: center;
+  overflow-x: auto;
   margin-top: 16px;
+  width:100%;
+  justify-content: flex-start;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none; /* Firefox */
 `;
 
 const SymptomButton = styled.button<{ selected: boolean }>`
   padding: 10px 16px;
+  height:40px;
   border-radius: 400px;
   border: 1px solid
     ${(props) =>
@@ -76,14 +76,11 @@ const SymptomButton = styled.button<{ selected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  white-space: nowrap;
 `;
 
-const symptomText = css`
+const SymptomText = styled.p<{ selected: boolean }>`
   font-size: 16px;
-  color: ${theme.colors.gray_7};
-`;
-
-const selectedText = css`
-  color: ${theme.colors.primary};
+  color: ${({ selected, theme }) =>
+    selected ? theme.colors.primary : theme.colors.gray_7};
 `;

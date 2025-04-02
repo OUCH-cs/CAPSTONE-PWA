@@ -1,8 +1,7 @@
-/** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import theme from "@/shared/styles/theme";
-import { SelectDestinationProps, DestinationType } from "../../diagnosis.type";
+import { SelectDestinationProps, DestinationType } from "../diagnosis.type";
 import { useFormContext } from "react-hook-form";
 
 const SelectDestination = ({ selectedDestination }: SelectDestinationProps) => {

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import DiagnosisPost from "@/features/diagnosis/ui/Funnel";
 import { useFunnel } from "@/features/diagnosis/lib/useFunnel";
@@ -40,7 +39,7 @@ function SelfDiagnosisPage () {
 
   return (
     <Container>
-      <p css={title}>Self-diagnosis</p>
+      <Title>Self-diagnosis</Title>
       <FormProvider {...methods}>
         {currentPage === "main" && (
           <ProgressBar progress={progress} currentStep={currentStep} />
@@ -61,12 +60,11 @@ export {SelfDiagnosisPage}
 const Container = styled.div`
   background-color: ${theme.colors.background};
   padding: 0 16px;
-  min-height: 100vh;
 `;
 
-const title = {
-  fontSize: 20,
-  textAlign: "center" as const,
-  marginTop: 12,
-  marginBottom: 48,
-};
+const Title = styled.p`
+  font-size: 20px;
+  text-align: center;
+  padding: 16px;
+  margin-bottom: 32px;
+`;

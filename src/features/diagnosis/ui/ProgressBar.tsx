@@ -1,5 +1,5 @@
-/** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 
@@ -50,8 +50,8 @@ const Progress = styled.div`
   transition: width 0.3s ease;
 `;
 
-const progressText = {
-  color: theme.colors.gray_7,
-  textAlign: "right" as const,
-  marginRight: 16,
-};
+const progressText = css`
+  color: ${theme.colors.gray_7};
+  text-align: right;
+  margin-right: 16px;
+`;

@@ -20,7 +20,7 @@ function MainPage() {
         <p style={{ fontSize: 16, fontWeight: "bold" }}>ENG</p>
       </Header>
       
-      <Link to="/self-diagnosis">
+      <Link to="/self-diagnosisFAQ">
         <DiagnosisCard>
           <div>
             <HomeDiagnosis/>
