@@ -77,9 +77,6 @@ const AccordionHeaderWrapper = styled.div`
 
   width: inherit;
   height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 9px 15px;
   border: 1px solid #f0f0f0;
   border-radius: 6px;
