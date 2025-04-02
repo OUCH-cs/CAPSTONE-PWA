@@ -6,9 +6,6 @@ const useAccordionToggle = () => {
   const childRef = useRef<HTMLDivElement>(null);
 
   const toggleAccordion = () => {
-    // parentRef와 childRef가 존재하지 않으면 함수 종료
-    if (!parentRef.current || !childRef.current) return;
-
     // 열려있는 상태면 닫기
     if (parentRef.current!.clientHeight > 0) {
       parentRef.current!.style.height = "0";
