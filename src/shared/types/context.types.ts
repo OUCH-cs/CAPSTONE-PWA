@@ -1,8 +1,8 @@
-interface IAccrodionContext {
+interface IAccordionContext {
   isOpen: boolean;
-  toggleAccrodion: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  toggleAccordion: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   parentRef: React.RefObject<HTMLDivElement | null>;
   childRef: React.RefObject<HTMLDivElement | null>;
 }
 
-export type { IAccrodionContext };
+export type { IAccordionContext };

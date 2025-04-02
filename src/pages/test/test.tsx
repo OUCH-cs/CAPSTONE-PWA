@@ -26,23 +26,25 @@ export default function TestPage() {
         {/* 아코디언 콘텐츠 */}
         <Accordion.Body>
           {/* 아코디언 콘텐츠 */}
-          <Accordion.Item>
-            <ItemWrapper onClick={() => setSelectedItem("MALE")}>
-              MALE
-            </ItemWrapper>
-          </Accordion.Item>
-          <Accordion.Item>
-            <ItemWrapper onClick={() => setSelectedItem("FEMALE")}>
-              FEMALE
-            </ItemWrapper>
-          </Accordion.Item>
+          <BodyWrapper>
+            <Accordion.Item>
+              <ItemWrapper onClick={() => setSelectedItem("MALE")}>
+                MALE
+              </ItemWrapper>
+            </Accordion.Item>
+            <Accordion.Item>
+              <ItemWrapper onClick={() => setSelectedItem("FEMALE")}>
+                FEMALE
+              </ItemWrapper>
+            </Accordion.Item>
+          </BodyWrapper>
         </Accordion.Body>
       </Accordion>
       <Accordion>
         {/* 아코디언 헤더 */}
         <Accordion.Header>
           <AccordionHeaderWrapper>
-            <h1>{selectedItem || "Gender"}</h1>
+            <h1>Description</h1>
 
             {/* 아코디언 아이콘 컨테이너 */}
             <Accordion.Trigger>
@@ -85,8 +87,9 @@ const AccordionHeaderWrapper = styled.div`
 `;
 
 const BodyWrapper = styled.div`
-  width: 100%;
-  height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const ItemWrapper = styled.div`

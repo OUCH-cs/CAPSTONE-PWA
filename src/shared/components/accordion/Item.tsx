@@ -2,9 +2,9 @@ import { useAccordionContext } from "@/shared/lib/useAccordionContext";
 import styled from "@emotion/styled";
 
 function AccordionItem({ children }: { children: React.ReactNode }) {
-  const { toggleAccrodion } = useAccordionContext();
+  const { toggleAccordion } = useAccordionContext();
 
-  return <Container onClick={toggleAccrodion}>{children}</Container>;
+  return <Container onClick={toggleAccordion}>{children}</Container>;
 }
 
 export { AccordionItem };

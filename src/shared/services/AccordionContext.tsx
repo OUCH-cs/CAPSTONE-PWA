@@ -1,17 +1,17 @@
 import { createContext } from "react";
 import useAccordionToggle from "../lib/useAccordionToggle";
-import { IAccrodionContext } from "../types";
+import { IAccordionContext } from "../types";
 
-const AccordionContext = createContext<IAccrodionContext | undefined>(
+const AccordionContext = createContext<IAccordionContext | undefined>(
   undefined
 );
 
 function AccordionProvider({ children }: { children: React.ReactNode }) {
-  const { isOpen, toggleAccrodion, parentRef, childRef } = useAccordionToggle();
+  const { isOpen, toggleAccordion, parentRef, childRef } = useAccordionToggle();
 
   return (
     <AccordionContext.Provider
-      value={{ isOpen, toggleAccrodion, parentRef, childRef }}
+      value={{ isOpen, toggleAccordion, parentRef, childRef }}
     >
       {children}
     </AccordionContext.Provider>
