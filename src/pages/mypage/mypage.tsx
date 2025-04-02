@@ -1,5 +1,5 @@
 import Modal from "@/shared/components/modal/Modal";
-import useToggle from "@/shared/hooks/useToggle";
+import useToggle from "@/shared/lib/useToggle";
 import styled from "@emotion/styled";
 
 function Mypage() {

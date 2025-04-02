@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import { IModalProps } from "@/shared/types/components.types";
+import { IModalProps } from "@/shared/types";
 
 /**
  * Modal 컴포넌트는 모달을 렌더링합니다.
