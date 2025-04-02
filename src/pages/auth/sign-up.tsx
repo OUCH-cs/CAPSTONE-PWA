@@ -1,5 +1,5 @@
 function SignUpPage() {
-  return <div>sign-up</div>;
+  return <div>signup</div>;
 }
 
 export { SignUpPage };
