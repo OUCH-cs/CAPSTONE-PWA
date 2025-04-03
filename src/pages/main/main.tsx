@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import ScrollContainer from "react-indiana-drag-scroll";
 import theme from "@/shared/styles/theme";
 import HomeCamera from "@/shared/assets/home/HomeCamera";
 import HomeDiagnosis from "@/shared/assets/home/HomeDiagnosis";
@@ -15,17 +14,15 @@ function MainPage() {
       <Header>
         <Location>
           <HomeLocation />
-          <p style={{ fontSize: 14, marginLeft: 8 }}>Banseok-dong</p>
+          <p style={{ fontSize: "1.2rem", marginLeft: "0.5rem" }}>Banseok-dong</p>
         </Location>
-        <p style={{ fontSize: 16, fontWeight: "bold" }}>ENG</p>
+        <p style={{ fontSize: "1.4rem" }}>ENG</p>
       </Header>
-      
+
       <Link to="/self-diagnosisFAQ">
         <DiagnosisCard>
-          <div>
-            <HomeDiagnosis/>
-          </div>
-          <p style={{ fontSize: 18, textAlign: "center", color: theme.colors.black }}>
+          <HomeDiagnosis />
+          <p style={{ fontSize: "1.57rem", textAlign: "center" }}>
             Let’s fill out the <span style={{ color: theme.colors.primary }}>self-diagnosis form</span> to explain your disease!
           </p>
         </DiagnosisCard>
@@ -33,52 +30,52 @@ function MainPage() {
 
       <ButtonContainer>
         <ActionButton>
-          <HomeCamera style={{ marginBottom: 6 }} />
-          <p style={{ fontSize: 14 }}>Text translation</p>
+          <HomeCamera />
+          <p style={{ fontSize: "1.2rem" }}>Text translation</p>
         </ActionButton>
         <SelectedButton>
-          <HomeGuide style={{ marginBottom: 6 }} />
-          <p style={{ fontSize: 14, color: theme.colors.primary }}>OUCH guide</p>
+          <HomeGuide />
+          <p style={{ fontSize: "1.2rem", color: theme.colors.primary }}>OUCH guide</p>
         </SelectedButton>
       </ButtonContainer>
 
-      <p style={{ fontSize: 18, marginBottom: 20 }}>recommended hospital</p>
-      <ScrollContainer vertical={false} hideScrollbars={true}>
+      <p style={{ fontSize: "1.57rem", marginBottom: "1.5rem" }}>recommended hospital</p>
+
+      <HospitalListWrapper>
         <HospitalList>
           {hospitals.map((item) => (
             <HospitalCard key={item.id}>
-              <p style={{ fontSize: 16 }}>{item.name}</p>
-              <p style={{ fontSize: 12, color: theme.colors.gray_7, marginBottom:16}}>
+              <p style={{ fontSize: "1.4rem" }}>{item.name}</p>
+              <p style={{ fontSize: "1.05rem", color: theme.colors.gray_7, marginBottom: 16 }}>
                 {item.openStatus}
               </p>
               <HospitalInfo>
                 <HospitalRate />
-                <p style={{ fontSize: 12, color: theme.colors.yellow }}>{item.rating}</p>
-                <p style={{ fontSize: 12 }}> · </p>
-                <p style={{ fontSize: 12 }}>{item.distance}</p>
+                <p style={{ fontSize: "1.05rem", color: theme.colors.yellow }}>{item.rating}</p>
+                <p style={{ fontSize: "1.05rem" }}> · </p>
+                <p style={{ fontSize: "1.05rem" }}>{item.distance}</p>
               </HospitalInfo>
             </HospitalCard>
           ))}
         </HospitalList>
-      </ScrollContainer>
+      </HospitalListWrapper>
     </Container>
   );
 }
 
 export { MainPage };
 
-// 같은 파일 or 별도 styles.tsx
 const Container = styled.div`
   background-color: ${theme.colors.background};
-  padding: 0 16px;
+  padding: 0 1rem;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 13px 0;
-  margin-bottom: 36px;
+  padding: 1rem 0;
+  margin-bottom: 2.5rem;
 `;
 
 const Location = styled.div`
@@ -88,30 +85,30 @@ const Location = styled.div`
 
 const DiagnosisCard = styled.div`
   background-color: ${theme.colors.white};
-  height: 202px;
+  height: 18rem;
   border-radius: 20px;
-  padding: 36px;
+  gap: 1.6rem;
+  padding: 2.6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.04);
-  margin-bottom: 8px;
+  margin-bottom: 0.6rem;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 60px;
+  gap: 0.6rem;
+  margin-bottom: 4.3rem;
 `;
-
 
 const ActionButton = styled.button`
   flex: 1;
-  height: 120px;
+  height: 10rem;
   background-color: ${theme.colors.white};
   border-radius: 20px;
-  padding: 35px 0;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,20 +119,32 @@ const SelectedButton = styled(ActionButton)`
   background-color: ${theme.colors.tertiary};
 `;
 
+const HospitalListWrapper = styled.div`
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+`;
+
 const HospitalList = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 0.7rem;
 `;
 
 const HospitalCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   flex: 0 0 auto;
-  width: 236px;
-  height: 120px;
+  width: 20.3rem;
+  height: 10rem;
   background-color: ${theme.colors.white};
-  padding: 26px;
+  padding: 1.86rem;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-  cursor: pointer;
 `;
 
 const HospitalInfo = styled.div`
