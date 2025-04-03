@@ -52,7 +52,6 @@ const OptionButton = styled.button<{ selected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 `;
 
 const optionText = css`

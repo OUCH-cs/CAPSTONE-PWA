@@ -1,37 +1,17 @@
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
-import { useFormContext } from "react-hook-form";
-import { useSymptomsStore } from "../service/useDiagnosisStore";
-import { SYMPTOMS } from "@/shared/mock";
-
-const ITEMS_PER_ROW = 5;
+import { chunkArray } from "../lib/chunkArray";
+import { useSymptomsList } from "../lib/useSymptomsList";
+import { ITEMS_PER_ROW } from "@/shared/mock";
 
 const SymptomsList = () => {
-  const { setValue, watch } = useFormContext<{ symptoms: string[] }>();
-  const selectedSymptoms = watch("symptoms") || [];
-  const { customSymptoms } = useSymptomsStore();
-  const allSymptoms = [...SYMPTOMS, ...customSymptoms];
-
-  const toggleSymptom = (symptom: string) => {
-    const updatedSymptoms = selectedSymptoms.includes(symptom)
-      ? selectedSymptoms.filter((s) => s !== symptom)
-      : [...selectedSymptoms, symptom];
-
-    setValue("symptoms", updatedSymptoms);
-  };
-
-  const chunkArray = (arr: string[], size: number) => {
-    return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
-      arr.slice(i * size, i * size + size)
-    );
-  };
-
+  const { selectedSymptoms, allSymptoms, toggleSymptom } = useSymptomsList();
   const groupedSymptoms = chunkArray(allSymptoms, ITEMS_PER_ROW);
 
   return (
     <>
       {groupedSymptoms.map((group, index) => (
-        <SymptomsRow key={`group-${index}`}>
+        <SymptomList key={`group-${index}`}>
           {group.map((item) => (
             <SymptomButton
               key={item}
@@ -43,7 +23,7 @@ const SymptomsList = () => {
               </SymptomText>
             </SymptomButton>
           ))}
-        </SymptomsRow>
+        </SymptomList>
       ))}
     </>
   );
@@ -51,7 +31,7 @@ const SymptomsList = () => {
 
 export default SymptomsList;
 
-const SymptomsRow = styled.div`
+const SymptomList = styled.div`
   display: flex;
   gap: 4px;
   overflow-x: auto;

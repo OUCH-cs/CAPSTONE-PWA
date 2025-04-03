@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
-
-
-interface ProgressBarProps {
-  progress: number; // 0~100
-  currentStep: string;
-}
+import { ProgressBarProps } from "../diagnosis.type";
 
 const ProgressBar = ({ progress, currentStep }: ProgressBarProps) => {
   const [animatedProgress, setAnimatedProgress] = useState(0);

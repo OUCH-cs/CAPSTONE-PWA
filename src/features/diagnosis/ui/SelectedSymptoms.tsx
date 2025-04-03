@@ -1,16 +1,10 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { useFormContext } from "react-hook-form";
+import { useSelectedSymptoms } from "../lib/useSelectedSymptoms";
 import theme from "@/shared/styles/theme";
 
 const SelectedSymptoms = () => {
-  const { getValues, setValue } = useFormContext<{ symptoms: string[] }>();
-  const selectedSymptoms = getValues("symptoms") || [];
-
-  const removeSymptom = (symptom: string) => {
-    const updated = selectedSymptoms.filter((s) => s !== symptom);
-    setValue("symptoms", updated);
-  };
+  const { selectedSymptoms, removeSymptom } = useSelectedSymptoms();
 
   return (
     <Container>

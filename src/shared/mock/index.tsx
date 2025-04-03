@@ -34,3 +34,4 @@ export const FAQ_DATA = [
     "MORE_THAN_MONTH",
   ];
   
+  export const ITEMS_PER_ROW = 5;
