@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import { useSelectedSymptoms } from "../lib/useSelectedSymptoms";
 import theme from "@/shared/styles/theme";
 
@@ -8,11 +7,11 @@ const SelectedSymptoms = () => {
 
   return (
     <Container>
-      <p css={selectedSymptomsLabel}>Selected symptoms</p>
+      <SelectedSymptomsLabel>Selected symptoms</SelectedSymptomsLabel>
       <SymptomsList>
         {selectedSymptoms.map((item) => (
           <SymptomBadge key={item}>
-            <p css={symptomText}>{item}</p>
+            <SymptomText>{item}</SymptomText>
             <RemoveButton onClick={() => removeSymptom(item)}>✕</RemoveButton>
           </SymptomBadge>
         ))}
@@ -23,16 +22,17 @@ const SelectedSymptoms = () => {
 
 export default SelectedSymptoms;
 
+// Styled Components
 const Container = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 1.125rem;
 `;
 
-const selectedSymptomsLabel = css`
-  font-size: 16px;
-  margin-left: 16px;
-  margin-right: 12px;
+const SelectedSymptomsLabel = styled.p`
+  font-size: 1.4rem; 
+  margin-left: 1rem; 
+  margin-right: 0.75rem; 
   white-space: nowrap;
 `;
 
@@ -40,32 +40,32 @@ const SymptomsList = styled.div`
   display: flex;
   overflow-x: auto;
   align-items: center;
-  gap: 5px;
-    /* 스크롤바 숨기기 */
+  gap: 0.3125rem; /* 5px */
+
   &::-webkit-scrollbar {
     display: none;
   }
-  /* Firefox용 */
-  scrollbar-width: none;
+
+  scrollbar-width: none; /* Firefox */
 `;
 
 const SymptomBadge = styled.div`
   display: flex;
   align-items: center;
-  padding: 6px 5px 6px 12px;
+  height:2.5rem;
+  padding: 0.375rem 0.31rem 0.375rem 0.75rem;
   border-radius: 100px;
   border: 1px solid ${theme.colors.gray_de};
   white-space: nowrap;
 `;
 
-const symptomText = css`
-  font-size: 12px;
+const SymptomText = styled.p`
+  font-size: 1rem; /
   color: ${theme.colors.gray_4};
-  margin-right: 5px;
+  margin-right: 0.31rem;
 `;
 
 const RemoveButton = styled.button`
   background: none;
   border: none;
-  font-weight: bold;
 `;

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import { ProgressBarProps } from "../diagnosis.type";
@@ -20,7 +19,7 @@ const ProgressBar = ({ progress, currentStep }: ProgressBarProps) => {
       <ProgressBarContainer>
         <Progress style={{ width: `${animatedProgress}%` }} />
       </ProgressBarContainer>
-      <p css={progressText}>{currentStep} of 5</p>
+      <ProgressText>{currentStep} of 5</ProgressText>
     </div>
   );
 };
@@ -30,12 +29,12 @@ export default ProgressBar;
 
 const ProgressBarContainer = styled.div`
   position: relative;
-  height: 8px;
+  height: 0.71rem;
   background-color: ${theme.colors.white};
-  border-radius: 100px;
+  border-radius: 100px
   overflow: hidden;
-  margin-bottom: 8px;
-  margin: 0 16px 8px;
+  margin-bottom: 0.57rem;
+  margin: 0 1.14rem 0.57rem;
 `;
 
 const Progress = styled.div`
@@ -45,8 +44,8 @@ const Progress = styled.div`
   transition: width 0.3s ease;
 `;
 
-const progressText = css`
+const ProgressText = styled.p`
   color: ${theme.colors.gray_7};
   text-align: right;
-  margin-right: 16px;
+  margin-right: 1rem;
 `;

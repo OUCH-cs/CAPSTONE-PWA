@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import theme from "@/shared/styles/theme";
 import { SelectDestinationProps, DestinationType } from "../diagnosis.type";
 import { useFormContext } from "react-hook-form";
@@ -13,18 +12,17 @@ const SelectDestination = ({ selectedDestination }: SelectDestinationProps) => {
         selected={selectedDestination === "HOSPITAL"}
         onClick={() => setValue("visitType", "HOSPITAL")}
       >
-        <p css={[optionText, selectedDestination === "HOSPITAL" && selectedText]}>
+        <OptionText selected={selectedDestination === "HOSPITAL"}>
           Hospital
-        </p>
+        </OptionText>
       </OptionButton>
-
       <OptionButton
         selected={selectedDestination === "PHARMACY"}
         onClick={() => setValue("visitType", "PHARMACY")}
       >
-        <p css={[optionText, selectedDestination === "PHARMACY" && selectedText]}>
+        <OptionText selected={selectedDestination === "PHARMACY"}>
           Pharmacy
-        </p>
+        </OptionText>
       </OptionButton>
     </ButtonContainer>
   );
@@ -32,19 +30,18 @@ const SelectDestination = ({ selectedDestination }: SelectDestinationProps) => {
 
 export default SelectDestination;
 
-
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 32px;
+  gap: 0.5rem;
+  margin-bottom: 2.3rem; 
 `;
 
 const OptionButton = styled.button<{ selected: boolean }>`
   flex: 1;
-  height: 56px;
+  height: 5rem;
   border-radius: 10px;
-  border: 1px solid
+  border: 1.5px solid
     ${(props) =>
       props.selected ? theme.colors.primary : theme.colors.white_e5};
   background-color: ${(props) =>
@@ -54,11 +51,8 @@ const OptionButton = styled.button<{ selected: boolean }>`
   justify-content: center;
 `;
 
-const optionText = css`
-  font-size: 17px;
-  color: ${theme.colors.gray_7};
-`;
-
-const selectedText = css`
-  color: ${theme.colors.primary};
+const OptionText = styled.p<{ selected: boolean }>`
+  font-size: 1.5rem;
+  color: ${(props) =>
+    props.selected ? theme.colors.primary : theme.colors.gray_7};
 `;

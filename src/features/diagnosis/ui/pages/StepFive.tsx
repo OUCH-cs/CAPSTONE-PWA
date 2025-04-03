@@ -37,13 +37,12 @@ export default StepFive;
 
 const TextArea = styled.textarea`
   width: 100%;
-  height: 160px;
-  border: 1px solid ${theme.colors.white};
-  border-radius: 16px;
-  padding: 14px;
+  height: 13rem;
+  border: 0.06rem solid ${theme.colors.white}; 
+  border-radius: 1rem; 
+  padding: 1rem; 
   background-color: ${theme.colors.white};
-  font-size: 16px;
-  margin-bottom: 32px;
-  resize: none;
+  font-size: 1.3rem; 
+  margin-bottom: 2rem; 
 `;
 

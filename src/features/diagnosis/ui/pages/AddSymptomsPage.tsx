@@ -45,9 +45,9 @@ const AddSymptoms = ({ onClose }: AddSymptomsProps) => {
           </SymptomItem>
         ))}
       </SymptomList>
-      <Button css={closeButton} onClick={onClose}>
+      <CloseButton onClick={onClose}>
         <CloseButtonText>Close</CloseButtonText>
-      </Button>
+      </CloseButton>
     </Container>
   );
 };
@@ -113,17 +113,17 @@ const symptomText = css`
   font-size: 16px;
 `;
 
-const closeButton = {
-  height: 48,
-  width: "100%",
-  marginTop: 8,
-  textAlign: "center" as const,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
+const CloseButton = styled(Button)`
+  height: 4rem;
+  width: 100%;
+  margin-top: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const CloseButtonText = styled.p`
-  color: theme.colors.white,
-  fontSize: 18,
+  color: ${theme.colors.white};
+  font-size: 1.5rem;
 `

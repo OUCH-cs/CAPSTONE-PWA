@@ -63,8 +63,9 @@ const Container = styled.div`
 `;
 
 const Title = styled.p`
-  font-size: 20px;
+  font-size: 1.7rem;
+  font-weight: 500;
   text-align: center;
-  padding: 16px;
-  margin-bottom: 32px;
+  padding: 1.5rem;
+  margin-bottom: 2.3rem;
 `;

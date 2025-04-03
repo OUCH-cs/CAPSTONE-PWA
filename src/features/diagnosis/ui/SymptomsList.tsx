@@ -33,10 +33,10 @@ export default SymptomsList;
 
 const SymptomList = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 0.29rem;
   overflow-x: auto;
-  margin-top: 16px;
-  width:100%;
+  margin-top: 1.14rem;
+  width: 100%;
   justify-content: flex-start;
   &::-webkit-scrollbar {
     display: none;
@@ -45,14 +45,14 @@ const SymptomList = styled.div`
 `;
 
 const SymptomButton = styled.button<{ selected: boolean }>`
-  padding: 10px 16px;
-  height:40px;
+  padding: 0.71rem 1.14rem;
+  height: 3.5rem;
   border-radius: 400px;
   border: 1px solid
     ${(props) =>
       props.selected ? theme.colors.primary : theme.colors.white_e5};
   background-color: ${(props) =>
-    props.selected ? theme.colors.tertiary : "transparent"};
+    props.selected ? theme.colors.tertiary : theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,7 +60,7 @@ const SymptomButton = styled.button<{ selected: boolean }>`
 `;
 
 const SymptomText = styled.p<{ selected: boolean }>`
-  font-size: 16px;
+  font-size: 1.4rem;
   color: ${({ selected, theme }) =>
     selected ? theme.colors.primary : theme.colors.gray_7};
 `;

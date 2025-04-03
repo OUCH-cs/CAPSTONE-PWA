@@ -16,7 +16,7 @@ const StepTwo = ({ onNext }: StepProps) => {
           <S.Question>Please select your symptoms</S.Question>
           <SymptomsList />
           <AddButton onClick={() => setPage("add")}>
-            <PlusButton />
+            <PlusButton/>
           </AddButton>
           <S.NextButton onClick={onNext}>
             <S.NextButtonText>Next</S.NextButtonText>
@@ -32,12 +32,11 @@ const StepTwo = ({ onNext }: StepProps) => {
 export default StepTwo;
 
 const AddButton = styled.div`
-  padding: 32px;
-  margin-bottom: 60px;
+  padding: 2.3rem;        
+  margin-bottom: 4.3rem;  
   background: none;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 `;

@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import theme from "@/shared/styles/theme";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -9,8 +8,8 @@ const PainLevelBar = () => {
   return (
     <ScaleContainer>
       <ScaleLabelContainer>
-        <p css={scaleText}>0</p>
-        <p css={scaleText}>10</p>
+        <ScaleText>0</ScaleText>
+        <ScaleText>10</ScaleText>
       </ScaleLabelContainer>
 
       <SliderWrapper>
@@ -30,8 +29,8 @@ const PainLevelBar = () => {
       </SliderWrapper>
 
       <ScaleLabelContainer>
-        <p css={scaleText}>mild</p>
-        <p css={scaleText}>severe</p>
+        <ScaleText>mild</ScaleText>
+        <ScaleText>severe</ScaleText>
       </ScaleLabelContainer>
     </ScaleContainer>
   );
@@ -39,27 +38,29 @@ const PainLevelBar = () => {
 
 export default PainLevelBar;
 
+// Styled components
+
 const ScaleContainer = styled.div`
-  margin-bottom: 38px;
+  margin-bottom: 2.38rem; /* 38px */
 `;
 
 const ScaleLabelContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0 16px;
+  margin: 0 1rem;
 `;
 
-const scaleText = css`
-  font-size: 14px;
+const ScaleText = styled.p`
+  font-size: 1rem;
   color: ${theme.colors.gray_4};
 `;
 
 const SliderWrapper = styled.div`
   background-color: ${theme.colors.white};
   border-radius: 100px;
-  padding: 0 16px;
-  margin: 6px 16px;
-  height: 36px;
+  padding: 0 1rem; 
+  margin: 0.38rem 1rem; 
+  height: 2.8rem; 
   display: flex;
   align-items: center;
 `;
@@ -67,35 +68,33 @@ const SliderWrapper = styled.div`
 const SliderInput = styled.input<{ value: number }>`
   width: 100%;
   appearance: none;
-  height: 4px;
-  border-radius: 5px;
+  height: 0.38rem; 
+  border-radius: 0.31rem; 
   background: ${({ value }) =>
-    `linear-gradient(to right,${theme.colors.primary} 0%,${theme.colors.primary} ${value * 10}%, ${theme.colors.white_e5} ${value * 10}%, ${theme.colors.white_e5} 100%)`};
+    `linear-gradient(to right,${theme.colors.primary} 0%,${theme.colors.primary} ${value * 10}%, ${theme.colors.white_ec} ${value * 10}%, ${theme.colors.white_ec} 100%)`};
   outline: none;
   transition: background 0.3s;
 
   &::-webkit-slider-thumb {
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 1.8rem; 
+    height: 1.8rem;
     background: ${theme.colors.primary};
     border-radius: 50%;
-    cursor: pointer;
   }
 
   &::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 1.8rem;
+    height: 1.8rem;
     background: ${theme.colors.primary};
     border-radius: 50%;
-    cursor: pointer;
   }
 
   &::-ms-thumb {
-    width: 20px;
-    height: 20px;
+    width: 1.8rem;
+    height: 1.8rem;
     background: ${theme.colors.primary};
     border-radius: 50%;
-    cursor: pointer;
+
   }
 `;
