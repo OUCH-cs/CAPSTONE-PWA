@@ -9,15 +9,23 @@ import {
   SignUpPage,
   TranslatePage,
 } from "@/pages";
+import MedicalRecordList from "@/pages/records/medicalRecordList"; // 올바른 import 추가
+import HealthStatusRecordList from "@/pages/records/healthStatusRecordList"; // 올바른 import 추가
+import MedicalRecord from "@/pages/records/medicalRecord"; // 올바른 import 추가
+import HealthStatus from "@/pages/records/healthStatus"; // 올바른 import 추가
+
 import NotFoundPage from "@/pages/not-found/not-found";
+
 import TestPage from "@/pages/test/test";
 
 export default function AppRoutes() {
   return (
     <Routes>
       {/* 회원가입, 로그인 */}
-      <Route path="/sign-up" element={<SignUpPage />} />
-      <Route path="/sign-in" element={<SignInPage />} />
+      <Route path="/auth">
+        <Route path="/auth/sign-up" element={<SignUpPage />} />
+        <Route path="/auth/sign-in" element={<SignInPage />} />
+      </Route>
 
       {/* 메인 페이지 */}
       <Route path="/" element={<MainPage />} />
@@ -29,15 +37,16 @@ export default function AppRoutes() {
 
       {/* 의료 기록관리 페이지 */}
       <Route path="/records" element={<RecordsPage />} />
+      <Route path="/records/medicalRecordList" element={<MedicalRecordList />} />
+      <Route path="/records/healthStatusRecordList" element={<HealthStatusRecordList />} />
+      <Route path="/records/medicalRecord" element={<MedicalRecord />} />
+      <Route path="/records/healthStatus" element={<HealthStatus />} />
 
       {/* 통역 페이지 */}
       <Route path="/translate" element={<TranslatePage />} />
 
       {/* 마이 페이지 */}
       <Route path="/mypage" element={<Mypage />} />
-
-      {/* 테스트 페이지 */}
-      <Route path="/test" element={<TestPage />} />
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
