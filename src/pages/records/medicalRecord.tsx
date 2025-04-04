@@ -18,7 +18,7 @@ export default function MedicalRecord() {
 
       {/* 헤더 */}
       <div style={styles.header}>
-        <button onClick={() => navigate("/records")} style={styles.backButton}>
+        <button onClick={() => navigate("/records/medicalRecordList")} style={styles.backButton}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </button>
         <h2 style={styles.headerTitle}>Medical Record</h2>
