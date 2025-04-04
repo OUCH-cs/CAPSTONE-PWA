@@ -13,6 +13,8 @@ import MedicalRecordList from "@/pages/records/medicalRecordList"; // 올바른 
 import HealthStatusRecordList from "@/pages/records/healthStatusRecordList"; // 올바른 import 추가
 import MedicalRecord from "@/pages/records/medicalRecord"; // 올바른 import 추가
 import HealthStatus from "@/pages/records/healthStatus"; // 올바른 import 추가
+import MedicalRecordAdd from "@/pages/records/medicalRecordAdd"; // 올바른 import 추가
+import HealthStatusAdd from "@/pages/records/healthStatusAdd"; // 올바른 import 추가
 
 import NotFoundPage from "@/pages/not-found/not-found";
 
@@ -41,6 +43,8 @@ export default function AppRoutes() {
       <Route path="/records/healthStatusRecordList" element={<HealthStatusRecordList />} />
       <Route path="/records/medicalRecord" element={<MedicalRecord />} />
       <Route path="/records/healthStatus" element={<HealthStatus />} />
+      <Route path="/records/medicalRecordAdd" element={<MedicalRecordAdd />} />
+      <Route path="/records/healthStatusAdd" element={<HealthStatusAdd />} />
 
       {/* 통역 페이지 */}
       <Route path="/translate" element={<TranslatePage />} />
