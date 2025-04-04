@@ -41,7 +41,7 @@ export default function MedicalRecordList() {
       ))}
 
       {/* + New 버튼 */}
-      <button onClick={() => navigate("/records/medicalRecordEdit")} style={styles.fabButton}>
+      <button onClick={() => navigate("/records/medicalRecordAdd")} style={styles.fabButton}>
         + New
       </button>
     </div>

@@ -40,7 +40,7 @@ export default function HealthStatusRecordList() {
       ))}
 
       {/* + New 버튼 */}
-      <button onClick={() => navigate("/records/healthStatusEdit")} style={styles.fabButton}>
+      <button onClick={() => navigate("/records/healthStatusAdd")} style={styles.fabButton}>
         + New
       </button>
     </div>
