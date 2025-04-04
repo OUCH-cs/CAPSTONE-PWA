@@ -19,7 +19,12 @@ export default function MedicalRecordAdd() {
           <h2 style={styles.headerTitle}>Medical Record</h2>
         </div>
          <MedicalAddData />
-      </div> 
+
+      <button style={styles.saveButton}>
+      Save
+    </button>
+    </div> 
+      
     );
   }
   
@@ -58,6 +63,19 @@ export default function MedicalRecordAdd() {
       marginBottom: 10,
       fontFamily: "Pretendard",
     },
+    saveButton: {
+        position:"absolute",
+        marginTop: "-260px",
+        padding: "13px",
+        fontSize: "18px",
+        fontWeight: 400,
+        backgroundColor: "#0097A7",
+        color: "#fff",
+        border: "none",
+        borderRadius: "10px",
+        cursor: "pointer",
+        width: "100%",
+      },
   };
 
   export { MedicalRecordAdd };
