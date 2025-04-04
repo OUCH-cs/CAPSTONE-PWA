@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import { useSymptomsStore } from "@/features/diagnosis/service/useDiagnosisStore";
+import { useAtom } from "jotai";
+import { customSymptomsAtom } from "../service/selfDiagnosisAtoms";
 import { SYMPTOMS } from "@/shared/mock";
 
 export const useSymptomsList = () => {
@@ -7,7 +8,7 @@ export const useSymptomsList = () => {
   const selectedSymptoms = watch("symptoms") || [];
   
   // 따로 분리시켜야 하지않나?/
-  const { customSymptoms } = useSymptomsStore();
+  const [customSymptoms] = useAtom(customSymptomsAtom);
   const allSymptoms = [...SYMPTOMS, ...customSymptoms];
 
   const toggleSymptom = (symptom: string) => {

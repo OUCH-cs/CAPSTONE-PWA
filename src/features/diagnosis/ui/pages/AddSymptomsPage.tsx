@@ -4,8 +4,9 @@ import { css } from "@emotion/react";
 import theme from "@/shared/styles/theme";
 import PlusButton from "@/shared/assets/diagnosis/PlusButton";
 import { Button } from "@/shared/components/button/Button";
-import { useSymptomsStore } from "../../service/useDiagnosisStore";
 import MinusButton from "@/shared/assets/diagnosis/MinusButton";
+import { useAtom } from "jotai";
+import { customSymptomsAtom, addSymptomAtom, removeSymptomAtom } from "../../service/selfDiagnosisAtoms";
 
 interface AddSymptomsProps {
   onClose: () => void;
@@ -13,7 +14,9 @@ interface AddSymptomsProps {
 
 const AddSymptoms = ({ onClose }: AddSymptomsProps) => {
   const [inputText, setInputText] = useState("");
-  const { customSymptoms, addSymptom, removeSymptom } = useSymptomsStore();
+  const [customSymptoms] = useAtom(customSymptomsAtom);
+  const [, addSymptom] = useAtom(addSymptomAtom);
+  const [, removeSymptom] = useAtom(removeSymptomAtom);
 
   const handleAddSymptom = () => {
     if (inputText.trim() && !customSymptoms.includes(inputText)) {

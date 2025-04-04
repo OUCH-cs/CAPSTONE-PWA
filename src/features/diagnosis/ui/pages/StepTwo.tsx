@@ -3,11 +3,13 @@ import styled from "@emotion/styled";
 import PlusButton from "@/shared/assets/diagnosis/PlusButton";
 import SymptomsList from "../SymptomsList";
 import { StepProps } from "../../diagnosis.type";
-import { useDiagnosisStore } from "../../service/useDiagnosisStore";
+import { useAtom } from "jotai";
+import { currentPageAtom, setPageAtom } from "../../service/selfDiagnosisAtoms";
 import AddSymptoms from "./AddSymptomsPage";
 
 const StepTwo = ({ onNext }: StepProps) => {
-  const { currentPage, setPage } = useDiagnosisStore();
+  const [currentPage] = useAtom(currentPageAtom);
+  const [, setPage] = useAtom(setPageAtom);
 
   return (
     <S.Container>

@@ -7,13 +7,14 @@ import useProgress from "@/features/diagnosis/lib/useProgress";
 import { handleNextClick } from "@/features/diagnosis/service/updateProgress";
 import theme from "@/shared/styles/theme";
 import { useForm, FormProvider } from "react-hook-form";
-import { useDiagnosisStore } from "@/features/diagnosis/service/useDiagnosisStore";
+import { useAtom } from "jotai";
+import { currentPageAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
 import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
 
 const steps = ["1", "2", "3", "4", "5"];
 
 function SelfDiagnosisPage () {
-  const { currentPage } = useDiagnosisStore();
+  const [currentPage] = useAtom(currentPageAtom);
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
   const { currentStep, setCurrentStep, initialProgress, getCurrentStepIndex } = useProgress(steps);
   const [progress, setProgress] = useState<number>(initialProgress);
