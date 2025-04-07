@@ -33,7 +33,7 @@ export default function MedicalAddData() {
             <div
               style={{
                 ...styles.date,
-                color: isSelected ? "rgba(0, 151, 167, 1)" : "#000",
+                color: isSelected ? "rgba(0, 151, 167, 1)" : "rgba(67,67,67,1)",
               }}
             >
               {item.title}
@@ -57,9 +57,9 @@ export default function MedicalAddData() {
                 ...styles.dateText,
                 color: item.value ? "rgba(0, 0, 0, 1)" : "#767676",
                 }}
->
-  {item.value}
-</span>
+              >
+                {item.value}
+                </span>
               </div>
             ) : (
               <div
