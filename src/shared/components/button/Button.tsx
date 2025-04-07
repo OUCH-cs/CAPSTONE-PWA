@@ -1,5 +1,5 @@
-import { IButtonProps } from "@/shared/types/components.types";
 import styled from "@emotion/styled";
+import { IButtonProps } from "@/shared/types";
 
 function Button({
   children,
