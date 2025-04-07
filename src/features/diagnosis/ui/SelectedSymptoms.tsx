@@ -26,6 +26,7 @@ export default SelectedSymptoms;
 const Container = styled.div`
   display: flex;
   align-items: center;
+  height:2.5rem;
   margin-bottom: 1.125rem;
 `;
 

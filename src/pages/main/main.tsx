@@ -22,7 +22,7 @@ function MainPage() {
       <Link to="/self-diagnosisFAQ">
         <DiagnosisCard>
           <HomeDiagnosis />
-          <p style={{ fontSize: "1.57rem", textAlign: "center" }}>
+          <p style={{ fontSize: "1.5rem", textAlign: "center" }}>
             Let’s fill out the <span style={{ color: theme.colors.primary }}>self-diagnosis form</span> to explain your disease!
           </p>
         </DiagnosisCard>
@@ -87,8 +87,8 @@ const DiagnosisCard = styled.div`
   background-color: ${theme.colors.white};
   height: 18rem;
   border-radius: 20px;
-  gap: 1.6rem;
-  padding: 2.6rem;
+  gap: 0.8rem;
+  padding: 2.6rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,7 +108,7 @@ const ActionButton = styled.button`
   height: 10rem;
   background-color: ${theme.colors.white};
   border-radius: 20px;
-  padding: 3rem;
+  padding: 3rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -7,6 +7,7 @@ import { ITEMS_PER_ROW } from "@/shared/mock";
 const SymptomsList = () => {
   const { selectedSymptoms, allSymptoms, toggleSymptom } = useSymptomsList();
   const groupedSymptoms = chunkArray(allSymptoms, ITEMS_PER_ROW);
+  
 
   return (
     <>
