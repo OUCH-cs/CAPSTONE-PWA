@@ -1,5 +1,5 @@
+import { AccordionContext } from "@/app/providers";
 import { useContext } from "react";
-import { AccordionContext } from "../services";
 
 const useAccordionContext = () => {
   const context = useContext(AccordionContext);

@@ -12,13 +12,16 @@ import {
 } from "@/pages";
 import NotFoundPage from "@/pages/not-found/not-found";
 import TestPage from "@/pages/test/test";
+import { AuthGuard } from "@/app/providers";
 
 export default function AppRoutes() {
   return (
     <Routes>
       {/* 회원가입, 로그인 */}
-      <Route path="/sign-up" element={<SignUpPage />} />
-      <Route path="/sign-in" element={<SignInPage />} />
+      <Route element={<AuthGuard />}>
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
+      </Route>
 
       {/* 메인 페이지 */}
       <Route path="/" element={<MainPage />} />
