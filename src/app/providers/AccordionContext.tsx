@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import useAccordionToggle from "../lib/useAccordionToggle";
-import { IAccordionContext } from "../types";
+import useAccordionToggle from "../../shared/lib/useAccordionToggle";
+import { IAccordionContext } from "../../shared/types";
 
 const AccordionContext = createContext<IAccordionContext | undefined>(
   undefined
