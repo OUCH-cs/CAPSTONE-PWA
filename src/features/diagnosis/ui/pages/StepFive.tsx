@@ -44,5 +44,6 @@ const TextArea = styled.textarea`
   background-color: ${theme.colors.white};
   font-size: 1.3rem; 
   margin-bottom: 2rem; 
+  resize: none;
 `;
 
