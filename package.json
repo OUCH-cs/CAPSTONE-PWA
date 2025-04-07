@@ -19,11 +19,13 @@
     "@types/node": "^22.13.13",
     "axios": "^1.8.4",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
     "gh-pages": "^6.3.0",
     "jotai": "^2.12.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
+    "react-modal": "^3.16.3",
     "react-router-dom": "^7.4.0",
     "swr": "^2.3.3"
   },
