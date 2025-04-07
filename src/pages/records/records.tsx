@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom'; // react-router-dom의 useNavigate 훅을 사용
 import MedicalRecordDetails from '@/features/records/medicalRecordDetails';
 import HealthStatusDetails from '@/features/records/healthStatusDetails';

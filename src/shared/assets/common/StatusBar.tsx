@@ -1,4 +1,3 @@
-import React from "react";
 import Wifi from "@/shared/assets/common/wifi.svg?react";
 import Signal from "@/shared/assets/common/signal.svg?react";
 import Battery from "@/shared/assets/common/battery.svg?react";
