@@ -18,16 +18,14 @@ function MainPage() {
         </Location>
         <p style={{ fontSize: "1.4rem" }}>ENG</p>
       </Header>
-
       <Link to="/self-diagnosisFAQ">
         <DiagnosisCard>
           <HomeDiagnosis />
-          <p style={{ fontSize: "1.5rem", textAlign: "center" }}>
-            Let’s fill out the <span style={{ color: theme.colors.primary }}>self-diagnosis form</span> to explain your disease!
-          </p>
+          <ResponsiveText>
+            Let’s fill out the <span>self-diagnosis form</span> to explain your disease!
+          </ResponsiveText>
         </DiagnosisCard>
       </Link>
-
       <ButtonContainer>
         <ActionButton>
           <HomeCamera />
@@ -38,9 +36,7 @@ function MainPage() {
           <p style={{ fontSize: "1.2rem", color: theme.colors.primary }}>OUCH guide</p>
         </SelectedButton>
       </ButtonContainer>
-
       <p style={{ fontSize: "1.57rem", marginBottom: "1.5rem" }}>recommended hospital</p>
-
       <HospitalListWrapper>
         <HospitalList>
           {hospitals.map((item) => (
@@ -81,6 +77,22 @@ const Header = styled.div`
 const Location = styled.div`
   display: flex;
   align-items: center;
+`;
+export const ResponsiveText = styled.p`
+  font-size: 1.5rem;
+  text-align: center;
+
+  span {
+    color: ${theme.colors.primary};
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 375px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const DiagnosisCard = styled.div`
