@@ -1,1 +1,1 @@
-export * from "./AccordionContext";
+export * from "../../app/providers/AccordionContext";

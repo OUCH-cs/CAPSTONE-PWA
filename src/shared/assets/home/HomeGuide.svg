@@ -1,14 +1,8 @@
-import React from "react";
 
-const HomeGuide = (props: React.SVGProps<SVGSVGElement>) => (
-  <div>
     <svg
-      width={29}
-      height={28}
       viewBox="0 0 26 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
     >
       <g clipPath="url(#clip0)">
         <path
@@ -22,7 +16,3 @@ const HomeGuide = (props: React.SVGProps<SVGSVGElement>) => (
         </clipPath>
       </defs>
     </svg>
-  </div>
-);
-
-export default HomeGuide;

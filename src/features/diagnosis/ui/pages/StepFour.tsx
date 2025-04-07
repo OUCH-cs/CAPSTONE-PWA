@@ -1,4 +1,4 @@
-import * as S from '../style'
+import * as S from '../common'
 import SelectedSymptoms from "../SelectedSymptoms";
 import PainLevelBar from "../PainLevelBar";
 import { StepProps } from "../../diagnosis.type";

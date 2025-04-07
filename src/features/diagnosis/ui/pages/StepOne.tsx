@@ -1,4 +1,4 @@
-import * as S from '../style'
+import * as S from '../common'
 import SelectDestination from "../SelectDestination";
 import { useFormContext } from "react-hook-form";
 import { DestinationType, StepProps } from "../../diagnosis.type";

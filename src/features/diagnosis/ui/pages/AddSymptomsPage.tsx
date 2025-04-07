@@ -2,9 +2,9 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import theme from "@/shared/styles/theme";
-import PlusButton from "@/shared/assets/diagnosis/PlusButton";
+import PlusButton from "@/shared/assets/diagnosis/PlusButton.svg?react";
 import { Button } from "@/shared/components/button/Button";
-import MinusButton from "@/shared/assets/diagnosis/MinusButton";
+import MinusButton from "@/shared/assets/diagnosis/MinusButton.svg?react";
 import { useAtom } from "jotai";
 import { customSymptomsAtom, addSymptomAtom, removeSymptomAtom } from "../../service/selfDiagnosisAtoms";
 
@@ -34,7 +34,7 @@ const AddSymptoms = ({ onClose }: AddSymptomsProps) => {
           placeholder="Add symptoms"
         />
         <AddButton onClick={handleAddSymptom}>
-          <PlusButton />
+          <PlusButton width={16} height={16} />
         </AddButton>
       </InputContainer>
 
@@ -43,7 +43,7 @@ const AddSymptoms = ({ onClose }: AddSymptomsProps) => {
           <SymptomItem key={index}>
             <p css={symptomText}>{item}</p>
             <RemoveButton onClick={() => removeSymptom(item)}>
-              <MinusButton />
+              <MinusButton width={16} height={16} />
             </RemoveButton>
           </SymptomItem>
         ))}

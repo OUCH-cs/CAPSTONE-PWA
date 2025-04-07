@@ -1,6 +1,6 @@
 import { Accordion } from "@/shared/components/accordion";
 import { useNavigate } from "react-router-dom";
-import * as S from "../../../features/diagnosis/ui/style"
+import * as S from "../../../features/diagnosis/ui/common"
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import theme from "@/shared/styles/theme";

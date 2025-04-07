@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { AccordionProvider } from "@/shared/services/AccordionContext.tsx";
+import { AccordionProvider } from "@/app/providers/AccordionContext.tsx";
 import { AccordionHeader } from "./Header.tsx";
 import { AccordionBody } from "./Body.tsx";
 import { AccordionTrigger } from "./Trigger.tsx";

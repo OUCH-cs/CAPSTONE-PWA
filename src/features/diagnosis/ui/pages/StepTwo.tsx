@@ -1,6 +1,6 @@
-import * as S from "../style"
+import * as S from "../common"
 import styled from "@emotion/styled";
-import PlusButton from "@/shared/assets/diagnosis/PlusButton";
+import PlusButton from "@/shared/assets/diagnosis/PlusButton.svg?react";
 import SymptomsList from "../SymptomsList";
 import { StepProps } from "../../diagnosis.type";
 import { useAtom } from "jotai";
@@ -18,7 +18,7 @@ const StepTwo = ({ onNext }: StepProps) => {
           <S.Question>Please select your symptoms</S.Question>
           <SymptomsList />
           <AddButton onClick={() => setPage("add")}>
-            <PlusButton/>
+            <PlusButton width={16} height={16}/>
           </AddButton>
           <S.NextButton onClick={onNext}>
             <S.NextButtonText>Next</S.NextButtonText>
