@@ -1,5 +1,3 @@
-import React from "react";
-
 const healthStatusData = [
     { title: "Disease", value: "diabetes, colic1" },
     { title: "Allergy", value: "pollen, shellfish, peach" },

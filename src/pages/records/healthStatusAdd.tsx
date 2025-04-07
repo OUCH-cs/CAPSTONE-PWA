@@ -1,4 +1,3 @@
-import React from "react";
 import ArrowIcon  from "@/shared/assets/common/backarrow.svg?react";
 import { useNavigate } from "react-router-dom";
 import HealthStatusAddData from "@/features/records/healthStatusAddData";

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-  
+import { useState } from "react";
 
-export default function MedicineHistoryPart({ onClose, onSave }) {
+type Props = {
+  onClose: () => void;
+  onSave: (data: string) => void;
+};
+
+export default function MedicineHistoryPart({ onClose, onSave }: Props) {
   const [inputValue, setInputValue] = useState("");
   const [medicinehistory, setMedicineHistory] = useState<{ text: string }[]>([]);
-
 
   const handleAdd = () => {
     if (inputValue.trim() !== "") {
@@ -19,9 +22,9 @@ export default function MedicineHistoryPart({ onClose, onSave }) {
 
   const handleSave = () => {
     if (medicinehistory.length > 0) {
-        const combinedText = medicinehistory.map(item => item.text).join(", ");
-        onSave(combinedText); // 변경된 부분
-        onClose();
+      const combinedText = medicinehistory.map(item => item.text).join(", ");
+      onSave(combinedText);
+      onClose();
     }
   };
 
@@ -67,15 +70,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1000, // 최상위 레벨
+    zIndex: 1000,
   },
   container: {
     backgroundColor: "rgba(245, 249, 252, 1)",
     borderRadius: "20px",
     padding: "24px",
     width: 388,
-    height:700,
-    marginTop:140,
+    height: 700,
+    marginTop: 140,
     overflowY: "auto",
     position: "relative",
     display: "flex",
@@ -90,11 +93,11 @@ const styles: { [key: string]: React.CSSProperties } = {
   title: {
     fontSize: "18px",
     fontWeight: 400,
-    marginTop:28,
+    marginTop: 28,
   },
   inputWrapper: {
     display: "flex",
-    position:"relative",
+    position: "relative",
     alignItems: "center",
     marginBottom: "16px",
   },
@@ -107,14 +110,14 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   addButton: {
     position: "absolute",
-    right:4,
+    right: 4,
     fontSize: "20px",
     backgroundColor: "#FFF",
     color: "rgba(0,0,0,1)",
     border: "none",
     borderRadius: "8px",
     padding: "7px",
-    marginBottom:2,
+    marginBottom: 2,
     cursor: "pointer",
   },
   entry: {
@@ -130,7 +133,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   deleteButton: {
     position: "absolute",
-    right:33,
+    right: 33,
     backgroundColor: "transparent",
     border: "none",
     fontSize: "12px",
@@ -138,8 +141,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     cursor: "pointer",
   },
   saveButton: {
-    position:"absolute",
-    marginTop: 300,
+    position: "absolute",
+    marginTop: 340,
     padding: "13px 156px",
     backgroundColor: "#0097A7",
     color: "white",

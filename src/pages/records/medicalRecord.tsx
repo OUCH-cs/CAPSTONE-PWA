@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";

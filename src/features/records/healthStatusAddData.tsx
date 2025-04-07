@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import BloodPressurePart from "./bloodPressurePart";
 import BloodSugarPart from "./bloodSugarPart";
 import MedicineHistoryPart from "./medicineHistoryPart";

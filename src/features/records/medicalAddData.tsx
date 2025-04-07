@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DateSelection from "./dateSelection";
 
 const initialData = [
@@ -104,7 +104,6 @@ const styles = {
   container: {
     backgroundColor: "#F5F9FC",
     minHeight: "100vh",
-    position: "relative",
   },
   date: {
     marginTop: "26px",

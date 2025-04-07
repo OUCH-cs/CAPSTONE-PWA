@@ -18,7 +18,6 @@ import HealthStatusAdd from "@/pages/records/healthStatusAdd"; // 올바른 impo
 
 import NotFoundPage from "@/pages/not-found/not-found";
 
-import TestPage from "@/pages/test/test";
 
 export default function AppRoutes() {
   return (

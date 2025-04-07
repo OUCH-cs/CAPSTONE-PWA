@@ -1,5 +1,3 @@
-// import React from 'react';
-
 // 기존의 medicalDetail 배열은 그대로 사용
 const medicalDetail = [
   { title: "Date of visit", value: "2024.11.24" },
@@ -36,11 +34,8 @@ const styles = {
   recordItemTop: {
     backgroundColor: "#FFFFFF",
     paddingLeft: 16,
-    justifyContent: "space-between",
     height:78,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    borderBottomStyle: "solid",
+    borderBottom: "1px solid #E5E7EB",
     width:"100%",
   },
   labelTop: {
@@ -57,12 +52,6 @@ const styles = {
     marginBottom: 9,
   },
   cornerRadiusTop: {
-    backgroundColor: "#FFFFFF",
-    paddingLeft: 16,
-    justifyContent: "space-between",
-    paddingVertical: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     marginBottom:-14,

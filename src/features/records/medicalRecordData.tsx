@@ -1,5 +1,3 @@
-import React from "react";
-
 const medicalData = [
   { title: "Date of visit", value: "2024.11.24" },
   { title: "Visiting Hospital", value: "Hanyang Hospital" },

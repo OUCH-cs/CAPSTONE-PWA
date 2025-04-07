@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-export default function BloodSugarPart({ onClose, onSave }) {
+type Props = {
+  onClose: () => void;
+  onSave: (data: { fasting: string; postprandial: string }) => void;
+};
+
+export default function BloodSugarPart({ onClose, onSave }: Props) {
   const [fasting, setFasting] = useState("");
   const [postprandial, setPostPrandial] = useState("");
-  const [focusedIndex, setFocusedIndex] = useState<null | number>(null);
 
   const handleSave = () => {
     if (fasting && postprandial) {
@@ -11,152 +15,137 @@ export default function BloodSugarPart({ onClose, onSave }) {
       onClose();
     }
   };
+
   return (
     <div style={styles.overlay}>
-    <div style={styles.container}>
-      <div style={styles.sectionTitle}>Blood Sugar</div>
-      <div style={styles.card}>
-        {/* fasting */}
-        <div style={styles.box}>
-          <div style={styles.inputContainer}>
-            <input
-              type="number"
-              value={fasting}
-              onFocus={() => setFocusedIndex(0)}
-              onBlur={() => setFocusedIndex(null)}
-              onChange={(e) => setFasting(e.target.value)}
-              style={styles.input}
-            />
-            <label
-              style={{
-                ...styles.floatingLabelLeft
-              }}
-            >
-              Fasting
-            </label>
+      <div style={styles.container}>
+        <div style={styles.sectionTitle}>Blood Sugar</div>
+
+        <div style={styles.card}>
+          {/* Fasting Input */}
+          <div style={styles.box}>
+            <div style={styles.inputContainer}>
+              <input
+                type="number"
+                value={fasting}
+                onChange={(e) => setFasting(e.target.value)}
+                style={styles.input}
+              />
+              <label style={styles.labelLeft}>Fasting</label>
+            </div>
+          </div>
+
+          {/* Postprandial Input */}
+          <div style={styles.box}>
+            <div style={styles.inputContainer}>
+              <input
+                type="number"
+                value={postprandial}
+                onChange={(e) => setPostPrandial(e.target.value)}
+                style={styles.input}
+              />
+              <label style={styles.labelRight}>Postprandial</label>
+            </div>
           </div>
         </div>
 
-        {/* postprandial */}
-        <div style={styles.box}>
-          <div style={styles.inputContainer}>
-            <input
-              type="number"
-              value={postprandial}
-              onFocus={() => setFocusedIndex(1)}
-              onBlur={() => setFocusedIndex(null)}
-              onChange={(e) => setPostPrandial(e.target.value)}
-              style={styles.input}
-            />
-            <label
-              style={{
-                ...styles.floatingLabelRight
-              }}
-            >
-              Postprandial
-            </label>
-          </div>
-        </div>
+        <div style={styles.unitText}>mg/dL</div>
+
+        <button style={styles.saveButton} onClick={handleSave}>
+          Save
+        </button>
       </div>
-      <h2 style = {styles.bottomText}>mg/dL</h2>
-      <button style={styles.saveButton} onClick={handleSave}>Save</button>
-    </div>
     </div>
   );
 }
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   overlay: {
     position: "fixed",
-    top:0,
-    left:0,
+    top: 0,
+    left: 0,
     width: "100%",
     height: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.4)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1000, // 최상위 레벨
+    zIndex: 1000,
   },
   container: {
     backgroundColor: "rgba(245, 249, 252, 1)",
-    borderRadius: "20px",
-    paddingLeft: "24px",
+    borderRadius: 20,
+    padding: 24,
     width: "100%",
-    height:700,
-    marginTop:140,
-    overflowY: "auto",
-    position: "relative",
+    maxWidth: 400,
+    height: 710,
+    top:75,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "flex-start",
+    position: "relative",
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: 400,
-    marginTop: 48,
+    marginTop:48,
+    fontWeight: 500,
+    marginBottom: 12,
   },
   card: {
     display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
-    height: "100%",
-    // backgroundColor: "#F5F9FC",
-    padding: 10,
-    borderRadius: 10,
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
+    gap: 16,
   },
   box: {
+    flex: 1,
     display: "flex",
-    marginTop: 21,
     flexDirection: "column",
     alignItems: "center",
-    flex: 1,
   },
   inputContainer: {
+    marginTop:21,
     position: "relative",
     width: "100%",
-    marginBottom: 20,
-    marginLeft:8,
   },
   input: {
-    width: 140,
-    padding: "18px 10px 6px 10px",
+    width: 160,
+    height: 160,
     fontSize: 32,
     textAlign: "center",
-    borderRadius: 10,
     border: "1px solid #ccc",
-    outline: "none",
+    borderRadius: 10,
     boxSizing: "border-box",
-    height:140,
   },
-  floatingLabelLeft: {
+  labelLeft: {
     position: "absolute",
-    left:45,
-    top:16,
+    top: 10,
+    left: "49%",
+    transform: "translateX(-50%)",
+    fontSize: 14,
+    color: "#555",
   },
-  floatingLabelRight: {
+  labelRight: {
     position: "absolute",
-    left:35,
-    top:16,
+    top: 10,
+    left: "50%",
+    transform: "translateX(-50%)",
+    fontSize: 14,
+    color: "#555",
+  },
+  unitText: {
+    textAlign: "right",
+    fontSize: 16,
+    fontWeight: 400,
+    color: "rgba(0,0,0,1)",
+    marginTop: 5,
   },
   saveButton: {
-    position:"absolute",
-    marginTop: 300,
-    // marginLeft:24,
-    padding: "13px 156px",
+    alignSelf: "center",
+    padding: "13px 80px",
     backgroundColor: "#0097A7",
     color: "white",
     border: "none",
-    borderRadius: 5,
+    borderRadius: 8,
+    fontSize: 16,
     cursor: "pointer",
+    marginTop:60,
   },
-  bottomText:{
-    position:"absolute",
-    top:254,
-    right: 30,
-    fontSize:16,
-    fontWeight:400,
-    color:"rgba(0,0,0,1)",
-  }
 };
