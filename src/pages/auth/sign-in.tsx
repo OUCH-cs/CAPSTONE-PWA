@@ -15,7 +15,7 @@ function SignInPage() {
 
       <ForgotIDPWWrapper>
         <span>Forgot ID</span>
-        <span>l</span>
+        <span>|</span>
         <span>Forgot PW</span>
       </ForgotIDPWWrapper>
 
