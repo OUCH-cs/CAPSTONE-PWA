@@ -4,10 +4,11 @@ import {
   Mypage,
   RecordsPage,
   SearchPage,
-  SelfDiagnosisPage,
+  DiagnosisFaqPage,
   SignInPage,
   SignUpPage,
   TranslatePage,
+  SelfDiagnosisPage,
 } from "@/pages";
 import NotFoundPage from "@/pages/not-found/not-found";
 import TestPage from "@/pages/test/test";
@@ -24,8 +25,12 @@ export default function AppRoutes() {
 
       {/* 메인 페이지 */}
       <Route path="/" element={<MainPage />} />
+
+      {/* 자가진단 FAQ 페이지 */}
+      <Route path="/self-diagnosisFAQ" element={<DiagnosisFaqPage />} />
+
       {/* 자가진단 페이지 */}
-      <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
+      <Route path="/self-diagnosis" element={<SelfDiagnosisPage/>} />
 
       {/* 검색 페이지 */}
       <Route path="/search" element={<SearchPage />} />
