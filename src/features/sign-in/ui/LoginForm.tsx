@@ -15,8 +15,8 @@ export default function LoginForm() {
   return (
     <FormContainer onSubmit={handleSubmit}>
       <InputWrapper>
-        <InputField placeholder="ID" />
-        <InputField placeholder="PW" />
+        <InputField placeholder="ID" type="text" />
+        <InputField placeholder="PW" type="password" />
       </InputWrapper>
 
       <Button type="submit">Log In</Button>
