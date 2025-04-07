@@ -61,6 +61,7 @@ export {SelfDiagnosisPage}
 const Container = styled.div`
   background-color: ${theme.colors.background};
   padding: 0 16px;
+  overflow-y: auto;
 `;
 
 const Title = styled.p`

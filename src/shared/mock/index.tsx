@@ -14,7 +14,7 @@ export const FAQ_DATA = [
     {
       id: "2",
       question: "How it works?",
-      answer: `1. Choose your destination\n2. Select your symptoms\n3. Indicate how long you've had these symptoms\n4. Rate the severity of your discomfort\n5. Add any additional concerns you'd like to share with the healthcare provider`,
+      answer: `1. Choose your destination\n\n2. Select your symptoms\n\n3. Indicate how long you've had these symptoms\n\n4. Rate the severity of your discomfort\n\n5. Add any additional concerns you'd like to share with the healthcare provider`,
     },
     {
       id: "3",
@@ -33,5 +33,13 @@ export const FAQ_DATA = [
     "MORE_THAN_WEEK",
     "MORE_THAN_MONTH",
   ];
+
+  export const DURATION_LABELS: Record<string, string> = {
+    LESS_THAN_DAY: "Less than a day",
+    ONE_TO_THREE_DAYS: "1-3 days",
+    MORE_THAN_THREE_DAYS: "More than 3 days",
+    MORE_THAN_WEEK: "More than a week",
+    MORE_THAN_MONTH: "More than a month",
+  };
   
   export const ITEMS_PER_ROW = 5;

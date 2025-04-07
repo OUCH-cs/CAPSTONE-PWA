@@ -6,7 +6,7 @@ import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import { useFormContext } from "react-hook-form";
 import SelectedSymptoms from "../SelectedSymptoms";
 import { StepProps } from "../../diagnosis.type";
-import { DURATION_OPTIONS } from "@/shared/mock";
+import { DURATION_OPTIONS, DURATION_LABELS} from "@/shared/mock";
 
 
 const StepThree = ({ onNext }: StepProps) => {
@@ -21,7 +21,7 @@ const StepThree = ({ onNext }: StepProps) => {
         {/* 아코디언 헤더 */}
         <Accordion.Header>
           <AccordionHeaderWrapper>
-            {duration ? duration : "Duration of symptoms"}
+            {duration ? DURATION_LABELS[duration] : "Duration of symptoms"}
             {/* 아코디언 아이콘 컨테이너 */}
             <Accordion.Trigger>
               <ArrowIcon />
@@ -39,7 +39,7 @@ const StepThree = ({ onNext }: StepProps) => {
                   selected={duration === item}
                   onClick={() => {setValue("duration", item);}}
                   >
-                  {item}
+                  {DURATION_LABELS[item]}
                 </ItemWrapper>
               </Accordion.Item>
             ))}
@@ -68,6 +68,7 @@ const AccordionHeaderWrapper = styled.div`
   color: ${ theme.colors.gray_7};
   justify-content: space-between;
   align-items: center;
+  font-size: 1.1rem;
   width: inherit;
   height: 60px;
   padding: 9px 15px;
@@ -89,6 +90,7 @@ const ItemWrapper = styled.div<{ selected: boolean }>`
   height: 60px;
   padding: 18px;
   align-items: center; 
+  font-size: 1.1rem;
   border-radius: 6px;
   background-color: ${({ selected }) =>
     selected ? theme.colors.tertiary : "transparent"};

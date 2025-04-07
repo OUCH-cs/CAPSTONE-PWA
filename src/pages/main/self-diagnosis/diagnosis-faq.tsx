@@ -53,6 +53,7 @@ export { DiagnosisFaqPage }
 const Container = styled.div`
   background-color: ${theme.colors.background};
   padding: 0 1rem;
+  overflow-y: auto;
 `;
 
 const Title = styled.p`
@@ -94,5 +95,6 @@ const ItemWrapper = styled.div`
   border: none;
   text-align: left;
   cursor: pointer;
+  color:${theme.colors.gray_7};
   white-space: pre-line;
 `;

@@ -3,7 +3,7 @@ export * from "./auth/sign-up";
 export * from "./auth/sign-in";
 
 // 메인
-export * from "./main/main";
+export * from "./main/mainpage";
 export * from "./main/self-diagnosis/diagnosis-faq";
 export * from "./main/self-diagnosis/self-diagnosis";
 
