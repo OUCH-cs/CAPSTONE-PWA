@@ -214,6 +214,7 @@ const styles = {
     outline: "none",
     border: "none",
     backgroundColor: "transparent",
+    marginTop:-10,
     width: "100%",
   },
   saveButton: {

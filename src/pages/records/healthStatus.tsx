@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
 import HealthStatusData from "@/features/records/healthStatusData";
-import StatusBar from "@/shared/assets/common/StatusBar";
 
 export default function HealthStatus() {
   const navigate = useNavigate();
@@ -13,7 +12,6 @@ export default function HealthStatus() {
 
   return (
     <div style={styles.container}>
-      <StatusBar />
 
       {/* 헤더 */}
       <div style={styles.header}>
@@ -35,14 +33,13 @@ export default function HealthStatus() {
 const styles: Record<string, React.CSSProperties> = {
   container: {
     backgroundColor: "#F5F9FC",
-    minHeight: "100vh",
+    // minHeight: "100vh",
     paddingBottom: "40px",
-    marginTop: 14,
+    paddingTop:10,
     marginLeft: 16,
     marginRight: 16,
   },
   header: {
-    marginTop: 23,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",

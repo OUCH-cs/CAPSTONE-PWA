@@ -106,8 +106,12 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: "12px",
     borderRadius: "8px",
     border: "1px solid #ccc",
-    fontSize: "14px",
+    fontSize: "14px", 
+    zoom: 1.0, // 일부 브라우저에서 scale 유사하게 보이게 함
+    WebkitTextSizeAdjust: "100%",
+    
   },
+
   addButton: {
     position: "absolute",
     right: 4,
@@ -142,12 +146,13 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   saveButton: {
     position: "absolute",
-    marginTop: 340,
-    padding: "13px 156px",
+    marginTop:200,
+    padding: "13px 150px",
     backgroundColor: "#0097A7",
     color: "white",
     border: "none",
     borderRadius: 5,
+    fontSize:16,
     cursor: "pointer",
   },
 };

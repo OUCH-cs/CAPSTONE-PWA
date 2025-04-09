@@ -2,14 +2,12 @@ import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import { useNavigate } from "react-router-dom";
 import { diseases } from "@/features/records/diseases";
 // 질병 목록 import
-import StatusBar from "@/shared/assets/common/StatusBar";
 
 export default function HealthStatusRecordList() {
   const navigate = useNavigate();
 
   return (
     <div style={styles.container}>
-      <StatusBar />
 
       {/* 헤더 */}
       <div style={styles.header}>
@@ -63,7 +61,7 @@ const styles: Record<string, React.CSSProperties> = {
     cursor: "pointer",
   },
   header: {
-    marginTop: 16,
+    marginTop: -13,
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",

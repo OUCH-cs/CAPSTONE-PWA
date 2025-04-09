@@ -134,5 +134,6 @@ const styles = {
     border: "none",
     backgroundColor: "transparent",
     width: "100%",
+    marginTop:-10,
   },
 };

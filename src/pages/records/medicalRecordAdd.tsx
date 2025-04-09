@@ -1,14 +1,13 @@
 import ArrowIcon  from "@/shared/assets/common/backarrow.svg?react";
 import { useNavigate } from "react-router-dom";
 import MedicalAddData from "@/features/records/medicalAddData";
-import StatusBar from "@/shared/assets/common/StatusBar";
 
 export default function MedicalRecordAdd() {
     const navigate = useNavigate();
   
     return (
       <div style={styles.container}>
-        <StatusBar />
+
   
         {/* 헤더 */}
         <div style={styles.header}>
@@ -46,7 +45,7 @@ export default function MedicalRecordAdd() {
       cursor: "pointer",
     },
     header: {
-      marginTop: 16,
+      marginTop: -13,
       display: "flex",
       flexDirection: "row",
       justifyContent: "center",
@@ -64,7 +63,7 @@ export default function MedicalRecordAdd() {
     },
     saveButton: {
         position:"absolute",
-        marginTop: "-260px",
+        marginTop: "-200px",
         padding: "13px",
         fontSize: "18px",
         fontWeight: 400,

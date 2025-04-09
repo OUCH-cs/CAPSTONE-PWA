@@ -48,7 +48,8 @@ export default function DateSelection({ isOpen, onClose, onDateSelect }: DateSel
   };
 
   const handleSave = () => {
-    const formattedDate = `${selectedYear}.${selectedMonth}.${selectedDay}`;
+    const fullYear = `20${selectedYear}`; // 두 자리 연도 앞에 '20' 붙이기
+    const formattedDate = `${fullYear}.${selectedMonth}.${selectedDay}`;
     onDateSelect(formattedDate);
     onClose(); // 모달 닫기
   };
@@ -132,14 +133,14 @@ const styles: Record<string, React.CSSProperties> = {
     width: "60%",
   },
   title: {
-    marginTop: 28,
+    marginTop: 18,
     fontSize: "18px",
     fontWeight: 400,
     marginBottom: "10px",
     marginLeft: 24,
   },
   pickerContainer: {
-    marginTop: 32,
+    marginTop: 22,
     display: "flex",
     justifyContent: "center",
     height: "150px",
@@ -163,7 +164,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: "rgba(0,0,0,1)", // 기본 검은색 유지
   },
   saveButton: {
-    marginTop: "70px",
+    marginTop: 20,
     marginLeft: 44,
     padding: "10px",
     fontSize: "18px",
@@ -183,15 +184,24 @@ const styles: Record<string, React.CSSProperties> = {
   },
 };
 
-const modalStyles = {
+const modalStyles: {
+  overlay: React.CSSProperties;
+  content: React.CSSProperties;
+} = {
   overlay: {
+    position: "fixed",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: 1000,
   },
   content: {
     backgroundColor: "#F5F9FC",
     width: "390px",
-    height: 472,
-    marginTop: 328,
+    height: 600,
+    marginTop: 278,
     marginLeft: -40,
     borderRadius: "10px",
     padding: "20px",

@@ -146,6 +146,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: 8,
     fontSize: 16,
     cursor: "pointer",
-    marginTop:60,
+    marginTop:40,
   },
 };

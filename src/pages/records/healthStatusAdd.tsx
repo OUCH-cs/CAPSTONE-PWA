@@ -1,27 +1,22 @@
 import ArrowIcon  from "@/shared/assets/common/backarrow.svg?react";
 import { useNavigate } from "react-router-dom";
 import HealthStatusAddData from "@/features/records/healthStatusAddData";
-import StatusBar from "@/shared/assets/common/StatusBar";
 
 export default function HealthStatusAdd() {
     const navigate = useNavigate();
   
     return (
       <div style={styles.container}>
-        <StatusBar />
   
         {/* 헤더 */}
         <div style={styles.header}>
           <button onClick={() => navigate("/records/healthStatusRecordList")} style={styles.backButton}>
             <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
           </button>
-          <h2 style={styles.headerTitle}>health Status</h2>
+          <h2 style={styles.headerTitle}>Health Status</h2>
         </div>
          <HealthStatusAddData />
 
-      <button style={styles.saveButton}>
-      Save
-    </button>
     </div> 
       
     );
@@ -46,7 +41,7 @@ export default function HealthStatusAdd() {
       cursor: "pointer",
     },
     header: {
-      marginTop: 16,
+      marginTop: -13,
       display: "flex",
       flexDirection: "row",
       justifyContent: "center",

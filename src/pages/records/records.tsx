@@ -1,8 +1,6 @@
 import { useNavigate } from 'react-router-dom'; // react-router-dom의 useNavigate 훅을 사용
 import MedicalRecordDetails from '@/features/records/medicalRecordDetails';
 import HealthStatusDetails from '@/features/records/healthStatusDetails';
-import StatusBar from"@/shared/assets/common/StatusBar"
-// status bar 수정해야함
 
 
 function RecordsPage() {
@@ -11,7 +9,6 @@ function RecordsPage() {
   return (
     
     <div style={styles.container}>
-      <StatusBar />
       {/* Medical Record Section */}
       <div
         style={styles.section}
@@ -42,9 +39,9 @@ const styles = {
     marginRight:16,
   },
   section: {
+    marginTop:-13,
     backgroundColor: '#EEF6F9',
     borderRadius: 10,
-    marginTop:30,
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.04)", 
     marginBottom: 20,
     borderBottomLeftRadius: 10,

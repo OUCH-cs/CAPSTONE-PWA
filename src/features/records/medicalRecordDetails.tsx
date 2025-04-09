@@ -29,7 +29,6 @@ export default function MedicalRecordDetails() {
 const styles = {
   container: {
     backgroundColor: "#F5F9FC",
-    marginTop: 14,
   },
   recordItemTop: {
     backgroundColor: "#FFFFFF",
