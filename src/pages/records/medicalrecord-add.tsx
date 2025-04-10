@@ -1,59 +1,57 @@
-/** MedicalRecord.tsx */
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
-import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
-import MedicalRecordData from "@/features/records/ui/MedicalRecordData";
+import MedicalAddData from "@/features/records/ui/MedicalAddData";
 
-export default function MedicalRecord() {
+export default function MedicalRecordAdd() {
   const navigate = useNavigate();
-
-  const handleEditIconPress = () => {
-    // 수정 아이콘 클릭 시 로직 작성
-  };
 
   return (
     <Container>
       {/* 헤더 */}
       <Header>
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
-          <ArrowIcon width="25px" height="25px" stroke="black" />
+          <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
         <HeaderTitle>Medical Record</HeaderTitle>
-        <EditIconWrapper onClick={handleEditIconPress}>
-          <EditIcon width={20} height={20} />
-        </EditIconWrapper>
       </Header>
 
-      {/* 의료 기록 리스트 */}
-      <MedicalRecordData />
+      <MedicalAddData />
+
+      <SaveButton>Save</SaveButton>
     </Container>
   );
 }
 
-// Emotion 스타일 컴포넌트 정의
+// ==========================
+// ✅ Emotion styled-components
+// ==========================
+
 const Container = styled.div`
   background-color: #f5f9fc;
   min-height: 100vh;
   padding-bottom: 40px;
-  padding-top: 10px;
+  position: relative;
+  margin-top: 14px;
   margin-left: 16px;
   margin-right: 16px;
 `;
 
 const Header = styled.div`
+  margin-top: -13px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   position: relative;
+  align-items: center;
 `;
 
 const BackButton = styled.button`
+  position: absolute;
+  left: 7px;
   background: none;
   border: none;
   cursor: pointer;
-  margin-left: -13px;
 `;
 
 const HeaderTitle = styled.h2`
@@ -61,15 +59,21 @@ const HeaderTitle = styled.h2`
   font-weight: 500;
   color: #000;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-family: Pretendard;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
 `;
 
-const EditIconWrapper = styled.button`
-  background: none;
+const SaveButton = styled.button`
+  position: absolute;
+  margin-top: -200px;
+  padding: 13px;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: #0097a7;
+  color: #fff;
   border: none;
+  border-radius: 10px;
   cursor: pointer;
-  margin-right: -8px;
+  width: 100%;
 `;

@@ -1,10 +1,4 @@
-const medicalData = [
-  { title: "Date of visit", value: "2024.11.24" },
-  { title: "Visiting Hospital", value: "Hanyang Hospital" },
-  { title: "Medical Subjects", value: "Internal Medicine" },
-  { title: "Symptoms", value: "Fever, Cough" },
-  { title: "Treatment Summary", value: "Prescribed antibiotics and rest" },
-];
+import {medicalData} from "../consts/MedicalConstants"
 
 export default function MedicalRecordData() {
   return (

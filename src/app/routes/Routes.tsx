@@ -9,12 +9,12 @@ import {
   SignUpPage,
   TranslatePage,
 } from "@/pages";
-import MedicalRecordList from "@/pages/records/medicalRecordList"; // 올바른 import 추가
-import HealthStatusRecordList from "@/pages/records/healthStatusRecordList"; // 올바른 import 추가
-import MedicalRecord from "@/pages/records/medicalRecord"; // 올바른 import 추가
-import HealthStatus from "@/pages/records/healthStatus"; // 올바른 import 추가
-import MedicalRecordAdd from "@/pages/records/medicalRecordAdd"; // 올바른 import 추가
-import HealthStatusAdd from "@/pages/records/healthStatusAdd"; // 올바른 import 추가
+import MedicalRecordList from "@/pages/records/medicalrecord-list"; // 올바른 import 추가
+import HealthStatusRecordList from "@/pages/records/healthstatus-record-list"; // 올바른 import 추가
+import MedicalRecord from "@/pages/records/medicalrecord"; // 올바른 import 추가
+import HealthStatus from "@/pages/records/healthstatus"; // 올바른 import 추가
+import MedicalRecordAdd from "@/pages/records/medicalrecord-add"; // 올바른 import 추가
+import HealthStatusAdd from "@/pages/records/healthstatus-add"; // 올바른 import 추가
 
 import NotFoundPage from "@/pages/not-found/not-found";
 
@@ -38,12 +38,12 @@ export default function AppRoutes() {
 
       {/* 의료 기록관리 페이지 */}
       <Route path="/records" element={<RecordsPage />} />
-      <Route path="/records/medicalRecordList" element={<MedicalRecordList />} />
-      <Route path="/records/healthStatusRecordList" element={<HealthStatusRecordList />} />
-      <Route path="/records/medicalRecord" element={<MedicalRecord />} />
-      <Route path="/records/healthStatus" element={<HealthStatus />} />
-      <Route path="/records/medicalRecordAdd" element={<MedicalRecordAdd />} />
-      <Route path="/records/healthStatusAdd" element={<HealthStatusAdd />} />
+      <Route path="/records/medicalrecord-list" element={<MedicalRecordList />} />
+      <Route path="/records/healthstatus-record-list" element={<HealthStatusRecordList />} />
+      <Route path="/records/medicalrecord" element={<MedicalRecord />} />
+      <Route path="/records/healthstatus" element={<HealthStatus />} />
+      <Route path="/records/medicalrecord-add" element={<MedicalRecordAdd />} />
+      <Route path="/records/healthstatus-add" element={<HealthStatusAdd />} />
 
       {/* 통역 페이지 */}
       <Route path="/translate" element={<TranslatePage />} />
