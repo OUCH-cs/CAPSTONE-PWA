@@ -1,59 +1,49 @@
-import { useNavigate } from 'react-router-dom'; // react-router-dom의 useNavigate 훅을 사용
-import MedicalRecordDetails from '@/features/records/medicalRecordDetails';
-import HealthStatusDetails from '@/features/records/healthStatusDetails';
-
+// RecordsPage.tsx
+import { useNavigate } from 'react-router-dom';
+import MedicalData from '@/features/records/ui/MedicalRecordDetails';
+import HealthStatusDetails from '@/features/records/ui/HealthStatusDetails';
+import styled from '@emotion/styled';
 
 function RecordsPage() {
   const navigate = useNavigate();
 
   return (
-    
-    <div style={styles.container}>
-      {/* Medical Record Section */}
-      <div
-        style={styles.section}
-        onClick={() => navigate('/records/medicalRecordList')} // 페이지 이동
-      >
-        <h2 style={styles.sectionTitle}>Medical Record</h2>
-        
-        <MedicalRecordDetails />
-      </div>
+    <Container>
+      <Section onClick={() => navigate('/records/medicalrecord-list')}>
+        <SectionTitle>Medical Record</SectionTitle>
+        <MedicalData />
+      </Section>
 
-      {/* Health Status SSection */}
-      <div
-        style={styles.section}
-        onClick={() => navigate('/records/healthStatusRecordList')} // 페이지 이동
-      >
-        <h2 style={styles.sectionTitle}>Health Status</h2>
+      <Section onClick={() => navigate('/records/healthstatus-record-list')}>
+        <SectionTitle>Health Status</SectionTitle>
         <HealthStatusDetails />
-      </div>
-    </div>
+      </Section>
+    </Container>
   );
 }
 
-const styles = {
-  container: {
-    backgroundColor: '#F5F9FC',
-    marginTop: 14,
-    marginLeft:16,
-    marginRight:16,
-  },
-  section: {
-    marginTop:-13,
-    backgroundColor: '#EEF6F9',
-    borderRadius: 10,
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.04)", 
-    marginBottom: 20,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    cursor: 'pointer', // 클릭 가능하게 만듦
-  },
-  sectionTitle: {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    margin: "13px 165px 14px 16px", 
-    paddingTop:13,
-  },
-};
+// 💡 Emotion 스타일 정의
+const Container = styled.div`
+  background-color: #f5f9fc;
+  margin: 14px 16px 0 16px;
+`;
+
+const Section = styled.div`
+  margin-top: -13px;
+  background-color: #eef6f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 18px;
+  font-weight: bold;
+  margin: 13px 165px 14px 16px;
+  padding-top: 13px;
+`;
 
 export { RecordsPage };
