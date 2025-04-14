@@ -26,9 +26,9 @@ function Header({
 
   return (
     <Container>
-      <BackwradIcon onClick={handlePrevClick}>
+      <BackwardIconWrapper onClick={handlePrevClick}>
         <BackArrowIcon width={28} height={28} />
-      </BackwradIcon>
+      </BackwardIconWrapper>
       <Title>Sign Up</Title>
     </Container>
   );
@@ -53,7 +53,7 @@ const Title = styled.h1`
   color: ${theme.colors.black};
 `;
 
-const BackwradIcon = styled.div`
+const BackwardIconWrapper = styled.div`
   position: absolute;
   //   top: 50%;
   left: 16px;

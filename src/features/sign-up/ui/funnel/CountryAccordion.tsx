@@ -16,7 +16,7 @@ export default function CountryAccordion() {
       </Accordion.Header>
 
       <Accordion.Body>
-        <AccorionBodyWrapper>
+        <AccordionBodyWrapper>
           {COUNTRY_LIST.map((country) => (
             <Accordion.Item key={country}>
               <AccordionItemWrapper $isSelected={false}>
@@ -24,7 +24,7 @@ export default function CountryAccordion() {
               </AccordionItemWrapper>
             </Accordion.Item>
           ))}
-        </AccorionBodyWrapper>
+        </AccordionBodyWrapper>
       </Accordion.Body>
     </Accordion>
   );
@@ -42,7 +42,7 @@ const AccordionHeaderWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-const AccorionBodyWrapper = styled.div`
+const AccordionBodyWrapper = styled.div`
   max-height: 280px;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.white};
