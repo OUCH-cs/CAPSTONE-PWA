@@ -9,8 +9,9 @@ import {
   SignUpPage,
   TranslatePage,
   SelfDiagnosisPage,
+  SignupSuccessPage,
+  NotFoundPage,
 } from "@/pages";
-import NotFoundPage from "@/pages/not-found/not-found";
 import TestPage from "@/pages/test/test";
 import { AuthGuard } from "@/app/providers";
 
@@ -20,6 +21,7 @@ export default function AppRoutes() {
       {/* 회원가입, 로그인 */}
       <Route element={<AuthGuard />}>
         <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-up/success" element={<SignupSuccessPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
       </Route>
 
@@ -30,7 +32,7 @@ export default function AppRoutes() {
       <Route path="/self-diagnosisFAQ" element={<DiagnosisFaqPage />} />
 
       {/* 자가진단 페이지 */}
-      <Route path="/self-diagnosis" element={<SelfDiagnosisPage/>} />
+      <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
 
       {/* 검색 페이지 */}
       <Route path="/search" element={<SearchPage />} />
