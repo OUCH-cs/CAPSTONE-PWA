@@ -16,6 +16,8 @@ import HealthStatus from "@/pages/records/healthstatus"; // 올바른 import 추
 import MedicalRecordAdd from "@/pages/records/medicalrecord-add"; // 올바른 import 추가
 import HealthStatusAdd from "@/pages/records/healthstatus-add"; // 올바른 import 추가
 
+import { AuthGuard } from "@/app/providers/AuthGuard";
+
 import NotFoundPage from "@/pages/not-found/not-found";
 
 
@@ -23,9 +25,9 @@ export default function AppRoutes() {
   return (
     <Routes>
       {/* 회원가입, 로그인 */}
-      <Route path="/auth">
-        <Route path="/auth/sign-up" element={<SignUpPage />} />
-        <Route path="/auth/sign-in" element={<SignInPage />} />
+      <Route element={<AuthGuard />}>
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
       </Route>
 
       {/* 메인 페이지 */}
