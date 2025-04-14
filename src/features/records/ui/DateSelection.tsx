@@ -150,7 +150,6 @@ export default function DateSelection({ isOpen, onClose, onDateSelect }: DateSel
   );
 }
 
-// ---------------- Styled Components ----------------
 
 const ModalContent = styled.div`
   border-radius: 10px;

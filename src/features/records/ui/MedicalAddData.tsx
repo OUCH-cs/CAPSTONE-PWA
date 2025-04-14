@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import DateSelection from "./DateSelection";
-import {initialMedicalFormData} from "../consts/MedicalConstants"
+import {initialMedicalFormData} from "../consts/medicalConstants"
 
 
 
@@ -68,7 +68,6 @@ export default function MedicalAddData() {
   );
 }
 
-// styled-components
 const Container = styled.div`
   background-color: #f5f9fc;
   min-height: 100vh;

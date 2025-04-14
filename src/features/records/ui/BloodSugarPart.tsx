@@ -54,7 +54,6 @@ export default function BloodSugarPart({ onClose, onSave }: Props) {
   );
 }
 
-// ------------------- styled components -------------------
 
 const Overlay = styled.div`
   position: fixed;

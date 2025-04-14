@@ -59,7 +59,6 @@ export default function MedicineHistoryPart({ onClose, onSave }: Props) {
   );
 }
 
-// Emotion styled components
 
 const Overlay = styled.div`
   position: fixed;

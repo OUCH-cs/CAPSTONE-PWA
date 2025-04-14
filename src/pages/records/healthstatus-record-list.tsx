@@ -1,6 +1,6 @@
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import { useNavigate } from "react-router-dom";
-import { diseases } from "@/features/records/consts/HealthConstants";
+import { diseases } from "@/features/records/consts/healthConstants";
 import styled from "@emotion/styled";
 
 export default function HealthStatusRecordList() {
@@ -40,9 +40,6 @@ export default function HealthStatusRecordList() {
   );
 }
 
-// ==========================
-// ✅ Emotion Styled Components
-// ==========================
 
 const Container = styled.div`
   background-color: #f5f9fc;

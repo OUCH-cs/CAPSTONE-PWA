@@ -1,4 +1,4 @@
-import {medicalData} from "../consts/MedicalConstants"
+import {medicalData} from "../consts/medicalConstants"
 
 export default function MedicalRecordData() {
   return (

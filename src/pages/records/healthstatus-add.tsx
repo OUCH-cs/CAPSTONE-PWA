@@ -21,9 +21,7 @@ export default function HealthStatusAdd() {
   );
 }
 
-// ==========================
-// ✅ Emotion Styled Components
-// ==========================
+
 
 const Container = styled.div`
   background-color: #f5f9fc;

@@ -56,9 +56,6 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
   );
 }
 
-// ==========================
-// ✅ Emotion Styled Components
-// ==========================
 
 const Overlay = styled.div`
   position: fixed;

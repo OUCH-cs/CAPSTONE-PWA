@@ -31,7 +31,6 @@ export default function MedicalRecord() {
   );
 }
 
-// Emotion 스타일 컴포넌트 정의
 const Container = styled.div`
   background-color: #f5f9fc;
   min-height: 100vh;

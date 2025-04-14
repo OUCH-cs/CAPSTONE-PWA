@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import {medicalDetail} from "../consts/MedicalConstants"
+import {medicalDetail} from "../consts/medicalConstants"
 
 export default function MedicalRecordDetails() {
   return (
@@ -17,7 +17,6 @@ export default function MedicalRecordDetails() {
   );
 }
 
-// styled components
 const Container = styled.div`
   background-color: #f5f9fc;
 `;

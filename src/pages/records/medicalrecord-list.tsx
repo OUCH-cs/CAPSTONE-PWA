@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
-import {hospitals} from "@/features/records/consts/MedicalConstants";
+import {hospitals} from "@/features/records/consts/medicalConstants";
 
 export default function MedicalRecordList() {
   const navigate = useNavigate();
@@ -40,9 +40,6 @@ export default function MedicalRecordList() {
   );
 }
 
-// ==========================
-// ✅ Emotion styled-components
-// ==========================
 
 const Container = styled.div`
   background-color: #f5f9fc;

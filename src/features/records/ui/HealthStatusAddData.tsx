@@ -3,7 +3,7 @@ import { useState } from "react";
 import BloodPressurePart from "./BloodPressurePart";
 import BloodSugarPart from "./BloodSugarPart";
 import MedicineHistoryPart from "./MedicineHistoryPart";
-import {initialHealthFormData} from "../consts/HealthConstants"
+import {initialHealthFormData} from "../consts/healthConstants"
 
 
 export default function HealthStatusAddData() {
@@ -131,7 +131,6 @@ export default function HealthStatusAddData() {
   );
 }
 
-// 🔻 styled-components
 const Container = styled.div`
   background-color: #5f9fc;
   min-height: 100vh;
