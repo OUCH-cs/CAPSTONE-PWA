@@ -9,16 +9,16 @@ import {
   SignUpPage,
   TranslatePage,
 } from "@/pages";
-import MedicalRecordList from "@/pages/records/medicalrecord-list"; // 올바른 import 추가
-import HealthStatusRecordList from "@/pages/records/healthstatus-record-list"; // 올바른 import 추가
-import MedicalRecord from "@/pages/records/medicalrecord"; // 올바른 import 추가
-import HealthStatus from "@/pages/records/healthstatus"; // 올바른 import 추가
-import MedicalRecordAdd from "@/pages/records/medicalrecord-add"; // 올바른 import 추가
-import HealthStatusAdd from "@/pages/records/healthstatus-add"; // 올바른 import 추가
-
-import { AuthGuard } from "@/app/providers/AuthGuard";
+import MedicalRecordList from "@/pages/records/medicalrecord-list"; 
+import HealthStatusRecordList from "@/pages/records/healthstatus-record-list";
+import MedicalRecord from "@/pages/records/medicalrecord";
+import HealthStatus from "@/pages/records/healthstatus"; 
+import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
+import HealthStatusAdd from "@/pages/records/healthstatus-add";
 
 import NotFoundPage from "@/pages/not-found/not-found";
+import TestPage from "@/pages/test/test";
+import { AuthGuard } from "@/app/providers";
 
 
 export default function AppRoutes() {
