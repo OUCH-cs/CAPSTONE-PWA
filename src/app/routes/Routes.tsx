@@ -17,8 +17,7 @@ import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusAdd from "@/pages/records/healthstatus-add";
 
 import NotFoundPage from "@/pages/not-found/not-found";
-import TestPage from "@/pages/test/test";
-import { AuthGuard } from "@/app/providers";
+import { AuthGuard } from "@/app/providers/AuthGuard";
 
 
 export default function AppRoutes() {
