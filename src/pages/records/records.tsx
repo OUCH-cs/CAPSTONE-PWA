@@ -22,7 +22,6 @@ function RecordsPage() {
   );
 }
 
-// 💡 Emotion 스타일 정의
 const Container = styled.div`
   background-color: #f5f9fc;
   margin: 14px 16px 0 16px;
