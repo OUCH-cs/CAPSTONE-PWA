@@ -22,7 +22,7 @@ import HealthStatusAdd from "@/pages/records/healthstatus-add";
 
 import NotFoundPage from "@/pages/not-found/not-found";
 
-import { AuthGuard } from "@/app/providers/AuthGuard";
+import { AuthGuard, RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
 
 
