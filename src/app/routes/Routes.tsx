@@ -19,9 +19,6 @@ import MedicalRecord from "@/pages/records/medicalrecord";
 import HealthStatus from "@/pages/records/healthstatus"; 
 import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusAdd from "@/pages/records/healthstatus-add";
-
-import NotFoundPage from "@/pages/not-found/not-found";
-
 import { AuthGuard, RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
 
