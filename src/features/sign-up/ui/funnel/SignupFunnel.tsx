@@ -1,5 +1,5 @@
 import { ClassPostProps } from "@/features/diagnosis/ui/Funnel";
-import { FunnelStepPlate } from "./FunnelStepPlate";
+import { FunnelStepPlate } from "@/shared/components/funnel/FunnelStepPlate";
 import { InputField } from "@/entities/auth/ui";
 import GenderSelection from "./GenderSelection";
 import CountryAccordion from "./CountryAccordion";
