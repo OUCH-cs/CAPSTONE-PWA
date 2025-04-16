@@ -1,19 +1,19 @@
-import Modal from "@/shared/components/modal/Modal";
-import useToggle from "@/shared/lib/useToggle";
+import { isAuthAtom } from "@/features/sign-in/services/atoms";
 import styled from "@emotion/styled";
+import { useSetAtom } from "jotai";
 
 function Mypage() {
-  const { isOpen, toggle } = useToggle();
+  const setIsAuth = useSetAtom(isAuthAtom);
 
   return (
     <Container>
-      <button onClick={toggle}>trigger</button>
-
-      <Modal isOpen={isOpen} toggle={toggle}>
-        <ModalWrapper>
-          <h1>hi</h1>
-        </ModalWrapper>
-      </Modal>
+      <button
+        onClick={() => {
+          setIsAuth(false);
+        }}
+      >
+        로그아웃
+      </button>
     </Container>
   );
 }
@@ -21,9 +21,3 @@ function Mypage() {
 export { Mypage };
 
 const Container = styled.div``;
-
-const ModalWrapper = styled.div`
-  width: 300px;
-  height: 300px;
-  background-color: white;
-`;
