@@ -1,10 +1,7 @@
 import styled from "@emotion/styled";
 import { IInputFieldProps } from "../auth.types";
 
-export default function InputField({
-  errorMessage,
-  ...props
-}: IInputFieldProps) {
+function InputField({ errorMessage, ...props }: IInputFieldProps) {
   return (
     <Container>
       <Input {...props} />
@@ -12,6 +9,8 @@ export default function InputField({
     </Container>
   );
 }
+
+export { InputField };
 
 const Container = styled.div``;
 
