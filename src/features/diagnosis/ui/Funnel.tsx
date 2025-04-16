@@ -1,10 +1,10 @@
-import React from 'react';
-import { FunnelProps, StepProps } from '../lib/useFunnel';
-import StepOne from './pages/StepOne';
-import StepTwo from './pages/StepTwo';
-import StepThree from './pages/StepThree';
-import StepFour from './pages/StepFour';
-import StepFive from './pages/StepFive';
+import React from "react";
+import { FunnelProps, StepProps } from "../../../shared/lib/funnel/useFunnel";
+import StepOne from "./pages/StepOne";
+import StepTwo from "./pages/StepTwo";
+import StepThree from "./pages/StepThree";
+import StepFour from "./pages/StepFour";
+import StepFive from "./pages/StepFive";
 
 export interface ClassPostProps {
   steps: string[];
@@ -13,7 +13,12 @@ export interface ClassPostProps {
   Step: React.ComponentType<StepProps>;
 }
 
-const DiagnosisPost = ({ steps, nextClickHandler, Funnel, Step }: ClassPostProps) => {
+const DiagnosisPost = ({
+  steps,
+  nextClickHandler,
+  Funnel,
+  Step,
+}: ClassPostProps) => {
   return (
     <Funnel>
       <Step name={steps[0]}>
@@ -29,7 +34,7 @@ const DiagnosisPost = ({ steps, nextClickHandler, Funnel, Step }: ClassPostProps
         <StepFour onNext={() => nextClickHandler(steps[4])} />
       </Step>
       <Step name={steps[4]}>
-        <StepFive/>
+        <StepFive />
       </Step>
     </Funnel>
   );

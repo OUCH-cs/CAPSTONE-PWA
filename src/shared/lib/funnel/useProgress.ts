@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 type UseProgressReturnType = {
   currentStep: string;
@@ -16,7 +16,7 @@ const useProgress = (steps: string[]): UseProgressReturnType => {
     return steps.indexOf(currentStep);
   };
 
-  // 전체 스텝의 수 반환 
+  // 전체 스텝의 수 반환
   const getTotalSteps = (): number => {
     return steps.length;
   };
@@ -41,4 +41,4 @@ const useProgress = (steps: string[]): UseProgressReturnType => {
   };
 };
 
-export default useProgress;
+export { useProgress };

@@ -1,22 +1,21 @@
 import styled from "@emotion/styled";
 import DiagnosisPost from "@/features/diagnosis/ui/Funnel";
-import { useFunnel } from "@/features/diagnosis/lib/useFunnel";
 import { useState } from "react";
 import ProgressBar from "@/features/diagnosis/ui/ProgressBar";
-import useProgress from "@/features/diagnosis/lib/useProgress";
-import { handleNextClick } from "@/features/diagnosis/service/updateProgress";
 import theme from "@/shared/styles/theme";
 import { useForm, FormProvider } from "react-hook-form";
 import { useAtom } from "jotai";
 import { currentPageAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
 import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
+import { handleNextClick, useFunnel, useProgress } from "@/shared/lib/funnel";
 
 const steps = ["1", "2", "3", "4", "5"];
 
-function SelfDiagnosisPage () {
+function SelfDiagnosisPage() {
   const [currentPage] = useAtom(currentPageAtom);
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
-  const { currentStep, setCurrentStep, initialProgress, getCurrentStepIndex } = useProgress(steps);
+  const { currentStep, setCurrentStep, initialProgress, getCurrentStepIndex } =
+    useProgress(steps);
   const [progress, setProgress] = useState<number>(initialProgress);
 
   const methods = useForm<DiagnosisFormData>({
@@ -54,9 +53,9 @@ function SelfDiagnosisPage () {
       </FormProvider>
     </Container>
   );
-};
+}
 
-export {SelfDiagnosisPage}
+export { SelfDiagnosisPage };
 
 const Container = styled.div`
   background-color: ${theme.colors.background};

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useAtom } from "jotai";
-import InputField from "@/entities/auth/ui/InputField";
+import { InputField } from "@/entities/auth/ui";
 import { Button } from "@/shared/components/button/Button";
 import { isAuthAtom } from "@/features/sign-in/services/atoms";
 
