@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
-import { AccordionProvider } from "@/shared/services/AccordionContext.tsx";
 import { AccordionHeader } from "./Header.tsx";
 import { AccordionBody } from "./Body.tsx";
 import { AccordionTrigger } from "./Trigger.tsx";
 import { AccordionItem } from "./Item.tsx";
+import { AccordionProvider } from "@/app/providers/AccordionContext.tsx";
 
 /**
  * Accordion 컴포넌트는 아코디언의 구성요소(Header, Body, Trigger, Item)를 감싸는 컨테이너 컴포넌트입니다.

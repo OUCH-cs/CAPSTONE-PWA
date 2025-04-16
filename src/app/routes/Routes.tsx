@@ -4,10 +4,11 @@ import {
   Mypage,
   RecordsPage,
   SearchPage,
-  SelfDiagnosisPage,
+  DiagnosisFaqPage,
   SignInPage,
   SignUpPage,
   TranslatePage,
+  SelfDiagnosisPage,
 } from "@/pages";
 import MedicalRecordList from "@/pages/records/medicalrecord-list"; 
 import HealthStatusRecordList from "@/pages/records/healthstatus-record-list";
@@ -17,6 +18,7 @@ import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusAdd from "@/pages/records/healthstatus-add";
 
 import NotFoundPage from "@/pages/not-found/not-found";
+
 import { AuthGuard } from "@/app/providers/AuthGuard";
 
 
@@ -31,8 +33,12 @@ export default function AppRoutes() {
 
       {/* 메인 페이지 */}
       <Route path="/" element={<MainPage />} />
+
+      {/* 자가진단 FAQ 페이지 */}
+      <Route path="/self-diagnosisFAQ" element={<DiagnosisFaqPage />} />
+
       {/* 자가진단 페이지 */}
-      <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
+      <Route path="/self-diagnosis" element={<SelfDiagnosisPage/>} />
 
       {/* 검색 페이지 */}
       <Route path="/search" element={<SearchPage />} />

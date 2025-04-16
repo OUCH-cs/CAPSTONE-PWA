@@ -1,5 +1,5 @@
 // 버튼
-interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   width?: number;
   height?: number;
