@@ -12,8 +12,16 @@ import {
   SignupSuccessPage,
   NotFoundPage,
 } from "@/pages";
-import TestPage from "@/pages/test/test";
+
+import MedicalRecordList from "@/pages/records/medicalrecord-list"; 
+import HealthStatusRecordList from "@/pages/records/healthstatus-record-list";
+import MedicalRecord from "@/pages/records/medicalrecord";
+import HealthStatus from "@/pages/records/healthstatus"; 
+import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
+import HealthStatusAdd from "@/pages/records/healthstatus-add";
 import { AuthGuard, RedirectIfAuth } from "@/app/providers";
+import TestPage from "@/pages/test/test";
+
 
 export default function AppRoutes() {
   return (
@@ -38,8 +46,15 @@ export default function AppRoutes() {
         {/* 검색 페이지 */}
         <Route path="/search" element={<SearchPage />} />
 
-        {/* 의료 기록관리 페이지 */}
-        <Route path="/records" element={<RecordsPage />} />
+
+
+      <Route path="/records" element={<RecordsPage />} />
+      <Route path="/records/medicalrecord-list" element={<MedicalRecordList />} />
+      <Route path="/records/healthstatus-record-list" element={<HealthStatusRecordList />} />
+      <Route path="/records/medicalrecord" element={<MedicalRecord />} />
+      <Route path="/records/healthstatus" element={<HealthStatus />} />
+      <Route path="/records/medicalrecord-add" element={<MedicalRecordAdd />} />
+      <Route path="/records/healthstatus-add" element={<HealthStatusAdd />} />
 
         {/* 통역 페이지 */}
         <Route path="/translate" element={<TranslatePage />} />
@@ -47,9 +62,11 @@ export default function AppRoutes() {
         {/* 마이 페이지 */}
         <Route path="/mypage" element={<Mypage />} />
 
+
         {/* 테스트 페이지 */}
         <Route path="/test" element={<TestPage />} />
       </Route>
+
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
