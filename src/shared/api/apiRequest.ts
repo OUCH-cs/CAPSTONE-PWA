@@ -1,6 +1,6 @@
 import axios from "axios";
 import { axiosInstance } from "./axiosInstance";
-import { IAPIRequestConfig } from "@/shared/types/api.types";
+import { IAPIRequestConfig } from "@/shared/types";
 
 /**
  * API 호출 시 사용하는 공용 유틸 함수

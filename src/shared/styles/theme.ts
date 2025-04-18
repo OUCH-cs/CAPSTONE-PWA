@@ -5,12 +5,15 @@ const theme = {
     secondary: "#B9D6D9",
     tertiary: "#E3F5F6",
     red: "DC0000",
+    yellow: "#FDCF18",
+    
 
     white: "#FFFFFF",
     white_f8: "#F8F8F8",
     white_f1: "#F1F1F5",
     white_f5: "#F5F5F5",
     white_e5: "#E5E5EC",
+    white_ec: "#ECF9FA",
 
     gray_de: "#DEDEDE",
     gray_d1: "#D1D1D1",
