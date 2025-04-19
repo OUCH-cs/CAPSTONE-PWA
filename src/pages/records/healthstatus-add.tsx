@@ -1,3 +1,4 @@
+import  { useEffect } from 'react';
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import { useNavigate } from "react-router-dom";
 import HealthStatusAddData from "@/features/records/ui/HealthStatusAddData";
@@ -5,7 +6,12 @@ import styled from "@emotion/styled";
 
 export default function HealthStatusAdd() {
   const navigate = useNavigate();
-
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';  // 페이지에서 스크롤 숨기기
+    return () => {
+      document.body.style.overflow = '';  
+    };
+  }, []);
   return (
     <Container>
       {/* 헤더 */}
@@ -28,7 +34,7 @@ const Container = styled.div`
   min-height: 100vh;
   padding-bottom: 40px;
   position: relative;
-  margin: 14px 16px 0 16px;
+  margin: 28px 16px 0 16px;
 `;
 
 const Header = styled.div`

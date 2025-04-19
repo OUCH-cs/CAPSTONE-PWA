@@ -1,4 +1,5 @@
 /** MedicalRecord.tsx */
+import  { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -10,7 +11,16 @@ export default function MedicalRecord() {
 
   const handleEditIconPress = () => {
     // 수정 아이콘 클릭 시 로직 작성
+    
   };
+   useEffect(() => {
+      document.body.style.overflow = 'hidden';  // 페이지에서 스크롤 숨기기
+      return () => {
+        document.body.style.overflow = '';  
+      };
+    }, []);
+  
+  
 
   return (
     <Container>
@@ -38,6 +48,7 @@ const Container = styled.div`
   padding-top: 10px;
   margin-left: 16px;
   margin-right: 16px;
+  margin-top:14px;
 `;
 
 const Header = styled.div`

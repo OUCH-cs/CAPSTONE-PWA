@@ -1,3 +1,4 @@
+import  { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -10,6 +11,12 @@ export default function HealthStatus() {
   const handleEditIconPress = () => {
     // 추후 편집 기능 구현 예정
   };
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';  // 페이지에서 스크롤 숨기기
+    return () => {
+      document.body.style.overflow = '';  
+    };
+  }, []);
 
   return (
     <Container>
@@ -37,6 +44,7 @@ const Container = styled.div`
   padding-top: 10px;
   margin-left: 16px;
   margin-right: 16px;
+  margin-top: 14px;
 `;
 
 const Header = styled.div`

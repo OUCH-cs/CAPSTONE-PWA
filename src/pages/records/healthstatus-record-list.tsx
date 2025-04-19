@@ -1,3 +1,4 @@
+import  { useEffect } from 'react';
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import { useNavigate } from "react-router-dom";
 import { diseases } from "@/features/records/consts/healthConstants";
@@ -5,6 +6,12 @@ import styled from "@emotion/styled";
 
 export default function HealthStatusRecordList() {
   const navigate = useNavigate();
+  useEffect(() => {
+      document.body.style.overflow = 'hidden';  // 페이지에서 스크롤 숨기기
+      return () => {
+        document.body.style.overflow = '';  
+      };
+    }, []);
 
   return (
     <Container>
@@ -46,7 +53,7 @@ const Container = styled.div`
   min-height: 100vh;
   padding-bottom: 40px;
   position: relative;
-  margin: 14px 16px 0 16px;
+  margin: 28px 16px 0 16px;
 `;
 
 const Header = styled.div`
@@ -109,8 +116,8 @@ const ListText = styled.span`
 `;
 
 const FabButton = styled.button`
-  position: fixed;
-  bottom: 75px;
+  position: absolute;
+  bottom: 95px;
   right: 20px;
   background-color: #0097a7;
   border-radius: 24px;

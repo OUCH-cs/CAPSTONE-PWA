@@ -1,3 +1,4 @@
+import  { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -6,6 +7,13 @@ import MedicalAddData from "@/features/records/ui/MedicalAddData";
 export default function MedicalRecordAdd() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';  // 페이지에서 스크롤 숨기기
+    return () => {
+      document.body.style.overflow = '';  
+    };
+  }, []);
+  
   return (
     <Container>
       {/* 헤더 */}
@@ -29,7 +37,7 @@ const Container = styled.div`
   min-height: 100vh;
   padding-bottom: 40px;
   position: relative;
-  margin-top: 14px;
+  margin-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
 `;

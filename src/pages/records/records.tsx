@@ -1,4 +1,5 @@
 // RecordsPage.tsx
+import  { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MedicalData from '@/features/records/ui/MedicalRecordDetails';
 import HealthStatusDetails from '@/features/records/ui/HealthStatusDetails';
@@ -6,6 +7,13 @@ import styled from '@emotion/styled';
 
 function RecordsPage() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';  // 페이지에서 스크롤 숨기기
+    return () => {
+      document.body.style.overflow = '';  
+    };
+  }, []);
 
   return (
     <Container>
@@ -24,7 +32,7 @@ function RecordsPage() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  margin: 14px 16px 0 16px;
+  margin: 28px 16px 0 16px;
 `;
 
 const Section = styled.div`
@@ -35,7 +43,7 @@ const Section = styled.div`
   margin-bottom: 20px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  cursor: pointer;
+  cursor: pointer; 
 `;
 
 const SectionTitle = styled.h2`
