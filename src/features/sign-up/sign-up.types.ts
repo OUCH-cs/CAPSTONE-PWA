@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { ClassPostProps } from "../diagnosis/ui/Funnel";
-import { schema } from "./lib/schema";
+import { schema } from "./lib/form.schema";
 import { COUNTRY_LIST } from "./sign-up.constants";
 
 type FormFields = z.infer<typeof schema>;

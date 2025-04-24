@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { FormFields } from "../sign-up.types";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Please enter your name" }),
@@ -25,4 +26,19 @@ const schema = z.object({
   languageId: z.number(),
 });
 
-export { schema };
+const defaultSignupValues: FormFields = {
+  name: "",
+  gender: "MALE",
+  nationId: -1,
+  phoneNumber: "",
+  email: "",
+  loginId: "",
+  password: "",
+  nickname: "",
+  birthday: "2025-04-24",
+  address: "Seoul",
+  status: "ACTIVE",
+  languageId: 0,
+};
+
+export { schema, defaultSignupValues };

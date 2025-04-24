@@ -11,26 +11,14 @@ import GenderSelection from "./GenderSelection";
 import CountryAccordion from "./CountryAccordion";
 import { useNavigate } from "react-router-dom";
 import { FormFields, SignupFunnelProps } from "../../sign-up.types";
-import { schema } from "../../lib/schema";
+import { defaultSignupValues, schema } from "../../lib/form.schema";
+import apiRequest from "@/shared/api/apiRequest";
 
 function SignupFunnel({ steps, setStep, Funnel, Step }: SignupFunnelProps) {
   const navigate = useNavigate();
 
   const methods = useForm<FormFields>({
-    defaultValues: {
-      name: "",
-      gender: "MALE",
-      nationId: -1,
-      phoneNumber: "",
-      email: "",
-      loginId: "",
-      password: "",
-      nickname: "",
-      birthday: "2025-04-24",
-      address: "Seoul",
-      status: "ACTIVE",
-      languageId: 0,
-    },
+    defaultValues: defaultSignupValues,
     resolver: zodResolver(schema),
   });
 
@@ -44,7 +32,13 @@ function SignupFunnel({ steps, setStep, Funnel, Step }: SignupFunnelProps) {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     console.log(data);
-    navigate("/sign-up/success");
+    // navigate("/sign-up/success");
+    const res = await apiRequest({
+      url: "/users/signup",
+      method: "POST",
+      data,
+    });
+    console.log(res);
   };
 
   return (
