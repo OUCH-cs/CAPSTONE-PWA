@@ -78,7 +78,7 @@ function SignupFunnel({ steps, setStep, Funnel, Step }: SignupFunnelProps) {
             <InputField
               {...register("phoneNumber")}
               placeholder="010-0000-0000"
-              type="string"
+              type="tel"
               error={errors.phoneNumber}
             />
           </FunnelStepPlate>
