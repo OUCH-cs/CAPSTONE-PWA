@@ -38,7 +38,7 @@ const defaultSignupValues: FormFields = {
   birthday: "2025-04-24",
   address: "Seoul",
   status: "ACTIVE",
-  languageId: 0,
+  languageId: 1,
 };
 
 export { schema, defaultSignupValues };

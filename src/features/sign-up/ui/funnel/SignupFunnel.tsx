@@ -1,45 +1,14 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Controller,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form";
+import { Controller, FormProvider } from "react-hook-form";
 import { FunnelStepPlate } from "@/features/sign-up/ui/funnel/FunnelStepPlate";
 import { InputField } from "@/entities/auth/ui";
 import GenderSelection from "./GenderSelection";
 import CountryAccordion from "./CountryAccordion";
-import { useNavigate } from "react-router-dom";
-import { FormFields, SignupFunnelProps } from "../../sign-up.types";
-import { defaultSignupValues, schema } from "../../lib/form.schema";
-import apiRequest from "@/shared/api/apiRequest";
+import { SignupFunnelProps } from "../../sign-up.types";
+import { useSignupForm } from "../../lib/useSignupForm";
 
 function SignupFunnel({ steps, setStep, Funnel, Step }: SignupFunnelProps) {
-  const navigate = useNavigate();
-
-  const methods = useForm<FormFields>({
-    defaultValues: defaultSignupValues,
-    resolver: zodResolver(schema),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    control,
-    watch,
-    formState: { errors },
-  } = methods;
-
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    console.log(data);
-    // navigate("/sign-up/success");
-    const res = await apiRequest({
-      url: "/users/signup",
-      method: "POST",
-      data,
-    });
-    console.log(res);
-  };
+  const { methods, register, control, errors, watch, handleSubmit, onSubmit } =
+    useSignupForm();
 
   return (
     <FormProvider {...methods}>
