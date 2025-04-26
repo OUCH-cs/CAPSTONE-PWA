@@ -1,22 +1,26 @@
 import styled from "@emotion/styled";
-import { useAtom } from "jotai";
 import { InputField } from "@/entities/auth/ui";
 import { Button } from "@/shared/components/button/Button";
-import { isAuthAtom } from "@/features/sign-in/services/atoms";
+import { useSigninForm } from "../lib/useSigninForm";
 
 export default function LoginForm() {
-  const [isAuth, setIsAuth] = useAtom(isAuthAtom);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsAuth(!isAuth);
-  };
+  const { register, handleSubmit, onSubmit, errors } = useSigninForm();
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <InputWrapper>
-        <InputField placeholder="ID" type="text" />
-        <InputField placeholder="PW" type="password" />
+        <InputField
+          placeholder="ID"
+          type="text"
+          {...register("loginId")}
+          error={errors.loginId}
+        />
+        <InputField
+          placeholder="PW"
+          type="password"
+          {...register("password")}
+          error={errors.password}
+        />
       </InputWrapper>
 
       <Button type="submit">Log In</Button>
