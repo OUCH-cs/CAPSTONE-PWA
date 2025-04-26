@@ -1,13 +1,23 @@
 import styled from "@emotion/styled";
 import { GenderSelectionItem } from "@/entities/auth/ui";
+import { ControllerProps } from "../../sign-up.types";
 
-export default function GenderSelection() {
+export default function GenderSelection({
+  value,
+  onChange,
+}: ControllerProps<"MALE" | "FEMALE">) {
   return (
     <GenderSelectionWrapper>
-      <GenderSelectionItem isSelected={true} onClick={() => {}}>
+      <GenderSelectionItem
+        isSelected={value === "MALE"}
+        onClick={() => onChange("MALE")}
+      >
         Male
       </GenderSelectionItem>
-      <GenderSelectionItem isSelected={false} onClick={() => {}}>
+      <GenderSelectionItem
+        isSelected={value === "FEMALE"}
+        onClick={() => onChange("FEMALE")}
+      >
         Female
       </GenderSelectionItem>
     </GenderSelectionWrapper>
