@@ -8,8 +8,8 @@ const getAccessToken = (): string | null => {
   return localStorage.getItem(ACCESS_TOKEN);
 };
 
-const remooveAccessToken = () => {
+const removeAccessToken = () => {
   localStorage.removeItem(ACCESS_TOKEN);
 };
 
-export { setAccessToken, getAccessToken, remooveAccessToken };
+export { setAccessToken, getAccessToken, removeAccessToken };

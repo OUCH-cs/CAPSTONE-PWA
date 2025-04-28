@@ -1,3 +1,3 @@
-const ACCESS_TOKEN = "accessToken;";
+const ACCESS_TOKEN = "accessToken";
 
 export { ACCESS_TOKEN };
