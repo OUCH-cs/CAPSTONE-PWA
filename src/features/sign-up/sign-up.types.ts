@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { ClassPostProps } from "../diagnosis/ui/Funnel";
-import { schema } from "./lib/form.schema";
+import { SignupSchema } from "@/entities/auth/lib/form.schema";
 import { COUNTRY_LIST } from "./sign-up.constants";
 
-type FormFields = z.infer<typeof schema>;
+type SignupFormFields = z.infer<typeof SignupSchema>;
 
 // COUNTRY_LIST에서 name 필드만 추출하여 리터럴 타입으로 정의
 type Country = (typeof COUNTRY_LIST)[number]["name"];
@@ -14,7 +14,7 @@ interface SignupFunnelProps extends Omit<ClassPostProps, "nextClickHandler"> {
 }
 
 interface FunnelStepPlateProps {
-  label: keyof FormFields;
+  label: keyof SignupFormFields;
   children: React.ReactNode;
   onNext: () => void;
   value?: string | number;
@@ -26,7 +26,7 @@ interface ControllerProps<T> {
 }
 
 export type {
-  FormFields,
+  SignupFormFields,
   Country,
   SignupFunnelProps,
   FunnelStepPlateProps,

@@ -2,15 +2,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import apiRequest from "@/shared/api/apiRequest";
 import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FormFields } from "../sign-up.types";
-import { defaultSignupValues, schema } from "./form.schema";
+import { SignupFormFields } from "../sign-up.types";
+import {
+  defaultSignupValues,
+  SignupSchema,
+} from "@/entities/auth/lib/form.schema";
 
 export const useSignupForm = () => {
   const navigate = useNavigate();
 
-  const methods = useForm<FormFields>({
+  const methods = useForm<SignupFormFields>({
     defaultValues: defaultSignupValues,
-    resolver: zodResolver(schema),
+    resolver: zodResolver(SignupSchema),
   });
 
   const {
@@ -21,7 +24,7 @@ export const useSignupForm = () => {
     formState: { errors },
   } = methods;
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<SignupFormFields> = async (data) => {
     try {
       await apiRequest({
         url: "/users/signup",
@@ -30,7 +33,7 @@ export const useSignupForm = () => {
       });
       navigate("/sign-up/success");
     } catch (error) {
-      alert(`오류가 발생했습니다: ${error}`);
+      alert(`An error occurred during sign-up. Please try again.`);
     }
   };
 

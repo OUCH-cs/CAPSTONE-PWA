@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { FormFields } from "../sign-up.types";
+import { SignupFormFields } from "@/features/sign-up/sign-up.types";
+import { SigninFormFields } from "@/features/sign-in/sign-in.types";
 
-const schema = z.object({
+const SignupSchema = z.object({
   name: z.string().min(1, { message: "Please enter your name" }),
   gender: z.enum(["MALE", "FEMALE"]),
   nationId: z.number().min(0),
@@ -26,7 +27,14 @@ const schema = z.object({
   languageId: z.number(),
 });
 
-const defaultSignupValues: FormFields = {
+const SigninSchema = z.object({
+  loginId: z.string().min(1, { message: "Please enter your ID" }),
+  password: z.string().regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
+    message: "Password is not valid",
+  }),
+});
+
+const defaultSignupValues: SignupFormFields = {
   name: "",
   gender: "MALE",
   nationId: -1,
@@ -41,4 +49,9 @@ const defaultSignupValues: FormFields = {
   languageId: 1,
 };
 
-export { schema, defaultSignupValues };
+const defaultSigninValues: SigninFormFields = {
+  loginId: "",
+  password: "",
+};
+
+export { SignupSchema, SigninSchema, defaultSignupValues, defaultSigninValues };
