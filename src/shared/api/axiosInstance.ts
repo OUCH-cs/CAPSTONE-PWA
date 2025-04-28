@@ -26,8 +26,6 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use((response) => {
   const token = response.headers["authorization"];
-  console.log(response.headers);
-  console.log("token", token);
   if (token) {
     const accessToken = token.replace("Bearer ", "");
     setAccessToken(accessToken);
