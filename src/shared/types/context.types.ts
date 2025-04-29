@@ -1,6 +1,6 @@
 interface IAccordionContext {
   isOpen: boolean;
-  toggleAccordion: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  toggleAccordion: () => void;
   parentRef: React.RefObject<HTMLDivElement | null>;
   childRef: React.RefObject<HTMLDivElement | null>;
 }
