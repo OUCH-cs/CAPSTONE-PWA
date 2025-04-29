@@ -27,7 +27,7 @@ export const FAQ_DATA = [
 
 
   export const DURATION_OPTIONS = [
-    "LESS_THAN_DAY",
+    "LESS_THAN_1_DAY",
     "ONE_TO_THREE_DAYS",
     "MORE_THAN_THREE_DAYS",
     "MORE_THAN_WEEK",
@@ -35,7 +35,7 @@ export const FAQ_DATA = [
   ];
 
   export const DURATION_LABELS: Record<string, string> = {
-    LESS_THAN_DAY: "Less than a day",
+    LESS_THAN_1_DAY: "Less than a day",
     ONE_TO_THREE_DAYS: "1-3 days",
     MORE_THAN_THREE_DAYS: "More than 3 days",
     MORE_THAN_WEEK: "More than a week",

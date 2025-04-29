@@ -15,6 +15,7 @@ const SymptomsList = () => {
         <SymptomList key={`group-${index}`}>
           {group.map((item) => (
             <SymptomButton
+              type="button"
               key={item}
               selected={selectedSymptoms.includes(item)}
               onClick={() => toggleSymptom(item)}

@@ -8,6 +8,7 @@ import { useAtom } from "jotai";
 import { currentPageAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
 import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
 import { handleNextClick, useFunnel, useProgress } from "@/shared/lib/funnel";
+import { useSubmitDiagnosis } from "@/features/diagnosis/lib/useDiagnosis";
 
 const steps = ["1", "2", "3", "4", "5"];
 
@@ -20,7 +21,6 @@ function SelfDiagnosisPage() {
 
   const methods = useForm<DiagnosisFormData>({
     defaultValues: {
-      userId: 1,
       visitType: "HOSPITAL",
       symptoms: [],
       duration: "ONE_TO_THREE_DAYS",
@@ -37,10 +37,29 @@ function SelfDiagnosisPage() {
     setProgress
   );
 
+
+  const { submit } = useSubmitDiagnosis();
+
+  const onSubmit = async (formData:DiagnosisFormData) => {
+    try {
+      const response = await submit(formData); 
+      alert("Successfully submitted!");
+      console.log(response.data)
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        alert(`Submission failed: ${e.message}`);
+      } else {
+        alert("Submission failed due to an unknown error.");
+      }
+    }
+  };
+
+
   return (
     <Container>
       <Title>Self-diagnosis</Title>
       <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
         {currentPage === "main" && (
           <ProgressBar progress={progress} currentStep={currentStep} />
         )}
@@ -50,10 +69,11 @@ function SelfDiagnosisPage() {
           Funnel={Funnel}
           Step={Step}
         />
+        </form>
       </FormProvider>
     </Container>
   );
-}
+};
 
 export { SelfDiagnosisPage };
 

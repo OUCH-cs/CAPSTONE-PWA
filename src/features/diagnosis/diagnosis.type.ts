@@ -9,7 +9,7 @@ export type DiagnosisFormData = {
   
   
   export interface DiagnosisResponse {
-    id: number;
+    userId: number;
     visitType: "HOSPITAL" | "PHARMACY";
     symptoms: string[];
     duration: "LESS_THAN_DAY" | "ONE_TO_THREE_DAYS" | "MORE_THAN_THREE_DAYS" | "MORE_THAN_WEEK" | "MORE_THAN_MONTH";
