@@ -33,7 +33,7 @@ const AddSymptoms = ({ onClose }: AddSymptomsProps) => {
           onChange={(e) => setInputText(e.target.value)}
           placeholder="Add symptoms"
         />
-        <AddButton onClick={handleAddSymptom}>
+        <AddButton type="button" onClick={handleAddSymptom}>
           <PlusButton width={16} height={16} />
         </AddButton>
       </InputContainer>
@@ -42,13 +42,13 @@ const AddSymptoms = ({ onClose }: AddSymptomsProps) => {
         {customSymptoms.map((item, index) => (
           <SymptomItem key={index}>
             <p css={symptomText}>{item}</p>
-            <RemoveButton onClick={() => removeSymptom(item)}>
+            <RemoveButton type="button" onClick={() => removeSymptom(item)}>
               <MinusButton width={16} height={16} />
             </RemoveButton>
           </SymptomItem>
         ))}
       </SymptomList>
-      <CloseButton onClick={onClose}>
+      <CloseButton type="button" onClick={onClose}>
         <CloseButtonText>Close</CloseButtonText>
       </CloseButton>
     </Container>

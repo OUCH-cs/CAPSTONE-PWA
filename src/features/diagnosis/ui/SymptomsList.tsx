@@ -5,8 +5,12 @@ import { useSymptomsList } from "../lib/useSymptomsList";
 import { ITEMS_PER_ROW } from "@/shared/mock";
 
 const SymptomsList = () => {
-  const { selectedSymptoms, allSymptoms, toggleSymptom } = useSymptomsList();
+  const { selectedSymptoms, allSymptoms, toggleSymptom, isLoading } = useSymptomsList();
   const groupedSymptoms = chunkArray(allSymptoms, ITEMS_PER_ROW);
+
+  if (isLoading) {
+    return <div>Loading symptoms...</div>; // ✅ 로딩 중이면 로딩 표시
+  }
   
 
   return (
