@@ -8,11 +8,11 @@ import { ControllerProps, Country } from "../../sign-up.types";
 export default function CountryAccordion({
   value,
   onChange,
-}: ControllerProps<number>) {
+}: ControllerProps<string>) {
   const [selectedItem, setSelectedItem] = useState<Country | "">("");
 
   useEffect(() => {
-    const matchedItem = COUNTRY_LIST.find((item) => item.id === value);
+    const matchedItem = COUNTRY_LIST.find((item) => item.code === value);
     setSelectedItem(matchedItem?.name ?? "");
   }, [value]);
 
@@ -31,9 +31,9 @@ export default function CountryAccordion({
 
       <Accordion.Body>
         <AccordionBodyWrapper>
-          {COUNTRY_LIST.map(({ id, name }) => (
-            <Accordion.Item key={id} onClick={() => onChange(id)}>
-              <AccordionItemWrapper $isSelected={value === id}>
+          {COUNTRY_LIST.map(({ code, name }) => (
+            <Accordion.Item key={code} onClick={() => onChange(code)}>
+              <AccordionItemWrapper $isSelected={value === code}>
                 {name}
               </AccordionItemWrapper>
             </Accordion.Item>
