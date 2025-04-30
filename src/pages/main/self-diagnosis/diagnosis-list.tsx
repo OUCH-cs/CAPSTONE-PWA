@@ -2,53 +2,18 @@ import styled from "@emotion/styled";
 import { Accordion } from "@/shared/components/accordion";
 import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import theme from "@/shared/styles/theme";
+import { useDiagnosisList } from "@/features/main/lib/useDiagnosisList";
 
 
 function DiagnosisListPage() {
-    const value = [{
-        userId: 0,
-        visitType: "HOSPITAL",
-        symptoms: ["감기", "몸살"],
-        duration: "LESS_THAN_1_DAY",
-        painSeverity: 5,
-        additionalNote: "ㅁㅁ",
-        createdAt: "2024-11-20"
-      },
-      {
-        userId: 1,
-        visitType: "HOSPITAL",
-        symptoms: ["감기", "몸살"],
-        duration: "LESS_THAN_1_DAY",
-        painSeverity: 5,
-        additionalNote: "ㅁㅁ",
-        createdAt: "2024-11-20"
-      },
-      {
-        userId: 2,
-        visitType: "HOSPITAL",
-        symptoms: ["감기", "몸살"],
-        duration: "LESS_THAN_1_DAY",
-        painSeverity: 5,
-        additionalNote: "ㅁㅁ",
-        createdAt: "2024-11-20"
-        
-      },
-      {
-        userId: 0,
-        visitType: "HOSPITAL",
-        symptoms: ["감기", "몸살"],
-        duration: "LESS_THAN_1_DAY",
-        painSeverity: 5,
-        additionalNote: "ㅁㅁ",
-        createdAt: "2024-11-20"
-      }     
-    ]
+
+    const {diagnosisList = []} = useDiagnosisList()
 
     return (
         <Container>
           <Title>Self-diagnosis</Title>
           {/* 아코디언 루트 컨테이너 */}
-          {value.map((item) => (
+          {diagnosisList.map((item) => (
             <div key={item.userId} style={{ marginBottom: "30px" }}>
               <Text style={{ marginLeft: "6px" }}>{item.createdAt}</Text>
               <Accordion>
@@ -69,7 +34,7 @@ function DiagnosisListPage() {
                   <Accordion.Item>
                     <ItemWrapper>
                         <Label>{"Symptoms"}</Label>
-                        <Text>{item.symptoms}</Text>
+                        <Text>{item.symptoms.join(" ")}</Text>
                     </ItemWrapper>
                   </Accordion.Item>
                   <Accordion.Item>
@@ -106,6 +71,7 @@ const Container = styled.div`
   background-color: ${theme.colors.background};
   padding: 0 1rem;
   overflow-y: auto;
+  padding-bottom: 8rem;
 `;
 
 const Title = styled.p`
