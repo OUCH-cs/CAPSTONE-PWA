@@ -21,6 +21,8 @@ import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusAdd from "@/pages/records/healthstatus-add";
 import { AuthGuard, RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
+import { DiagnosisListPage } from "@/pages/main/self-diagnosis/diagnosis-list";
+
 
 
 export default function AppRoutes() {
@@ -36,6 +38,7 @@ export default function AppRoutes() {
       <Route element={<AuthGuard />}>
         {/* 메인 페이지 */}
         <Route path="/" element={<MainPage />} />
+        <Route path="/diagnosis-list" element={<DiagnosisListPage/>} />
 
         {/* 자가진단 FAQ 페이지 */}
         <Route path="/self-diagnosisFAQ" element={<DiagnosisFaqPage />} />

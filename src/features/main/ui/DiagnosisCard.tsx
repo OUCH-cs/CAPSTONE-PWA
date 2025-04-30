@@ -6,7 +6,7 @@ import HomeDiagnosis from "@/shared/assets/home/HomeDiagnosis";
 
 const HomeDiagnosisCard = () => {
   return (
-    <StyledLink to="/self-diagnosisFAQ">
+    <StyledLink to="/diagnosis-list">
       <Card>
         <HomeDiagnosis/>
         <ResponsiveText>
