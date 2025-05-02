@@ -11,12 +11,12 @@ import { useSymptoms } from "./useSymptoms";
  * - 커스텀 증상은 jotai atom 상태에서 관리
  * - 선택된 증상은 react-hook-form과 연결되어 저장
  *
- * @returns {{
+ * @returns 
 *   selectedSymptoms: string[],
 *   allSymptoms: string[],
 *   toggleSymptom: (symptom: string) => void,
 *   isLoading: boolean
-* }} 증상 목록, 선택 상태, 선택 토글 함수, 로딩 상태 반환
+*   증상 목록, 선택 상태, 선택 토글 함수, 로딩 상태 반환
 */
 
 export const useSymptomsList = () => {

@@ -11,23 +11,34 @@ export const setPageAtom = atom(
   }
 );
 
-// 사용자 커스텀 증상 배열 상태
-export const customSymptomsAtom = atom<string[]>([]);
+const STORAGE_KEY = "customSymptoms";
 
-// 증상 추가 로직 atom (기존 배열에 추가)
+const getInitialSymptoms = (): string[] => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch {
+    return [];
+  }
+};
+
+// 사용자 커스텀 증상 배열 상태
+export const customSymptomsAtom = atom<string[]>(getInitialSymptoms());
+
 export const addSymptomAtom = atom(
   null,
   (get, set, symptom: string) => {
-    const prev = get(customSymptomsAtom);
-    set(customSymptomsAtom, [...prev, symptom]);
+    const updated = [...get(customSymptomsAtom), symptom];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    set(customSymptomsAtom, updated);
   }
 );
 
-// 증상 제거 로직 atom (특정 항목 제거)
 export const removeSymptomAtom = atom(
   null,
   (get, set, symptom: string) => {
-    const prev = get(customSymptomsAtom);
-    set(customSymptomsAtom, prev.filter((s) => s !== symptom));
+    const updated = get(customSymptomsAtom).filter((s) => s !== symptom);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    set(customSymptomsAtom, updated);
   }
 );
