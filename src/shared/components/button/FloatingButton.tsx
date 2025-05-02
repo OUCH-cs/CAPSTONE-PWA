@@ -20,7 +20,7 @@ interface ConfigItem {
   }
 
 const configMap: {[key: string]:ConfigItem} = {
-    "/": {
+    "/diagnosis-list": {
       text: "New",
       icon: <CreateDiagnosis/>,
       to: "/self-diagnosisFAQ",
@@ -73,6 +73,12 @@ const Container = styled.div`
     right: calc(50% - 240px + 30px); 
   }
 `;
+
+/**
+ * @styled ActionButton
+ * @param {string} pathname - 현재 경로에 따라 크기 조절
+ * @description 아이콘과 텍스트가 포함된 플로팅 버튼
+ */
 
 const ActionButton = styled.button<{ pathname: string }>`
   border: none;
