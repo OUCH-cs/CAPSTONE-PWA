@@ -51,12 +51,12 @@ function SignupFunnel({ steps, setStep, Funnel, Step }: SignupFunnelProps) {
         {/* 국적 */}
         <Step name={steps[2]}>
           <FunnelStepPlate
-            label="nationId"
+            label="nationCode"
             onNext={() => setStep(steps[3])}
-            value={watch("nationId")}
+            value={watch("nationCode")}
           >
             <Controller
-              name="nationId"
+              name="nationCode"
               control={control}
               render={({ field }) => (
                 <CountryAccordion

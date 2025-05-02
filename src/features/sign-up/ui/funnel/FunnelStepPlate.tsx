@@ -39,7 +39,7 @@ function FunnelStepPlate({
 
   const isStringValid = typeof value === "string" && value.trim().length > 0; // 입력 중인지 확인
   const isNumberValid =
-    typeof value === "number" && label === "nationId" && value >= 0; // 숫자형 필드 유효성 검사
+    typeof value === "number" && label === "nationCode" && value >= 0; // 숫자형 필드 유효성 검사
 
   const isValid = isStringValid || isNumberValid;
 

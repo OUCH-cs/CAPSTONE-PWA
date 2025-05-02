@@ -5,7 +5,7 @@ import { SigninFormFields } from "@/features/sign-in/sign-in.types";
 const SignupSchema = z.object({
   name: z.string().min(1, { message: "Please enter your name" }),
   gender: z.enum(["MALE", "FEMALE"]),
-  nationId: z.number().min(0),
+  nationCode: z.string().min(1),
   phoneNumber: z.string().regex(/^\d{3}-\d{4}-\d{4}$/, {
     message: "Invalid phone number format",
   }),
@@ -24,7 +24,7 @@ const SignupSchema = z.object({
   birthday: z.string(),
   address: z.string(),
   status: z.string(),
-  languageId: z.number(),
+  languageCode: z.string(),
 });
 
 const SigninSchema = z.object({
@@ -37,7 +37,7 @@ const SigninSchema = z.object({
 const defaultSignupValues: SignupFormFields = {
   name: "",
   gender: "MALE",
-  nationId: -1,
+  nationCode: "",
   phoneNumber: "",
   email: "",
   loginId: "",
@@ -46,7 +46,7 @@ const defaultSignupValues: SignupFormFields = {
   birthday: "2025-04-24",
   address: "Seoul",
   status: "ACTIVE",
-  languageId: 1,
+  languageCode: "en",
 };
 
 const defaultSigninValues: SigninFormFields = {
