@@ -6,8 +6,6 @@ export interface Symptom {
     name: string;
   }
 
-
-  //무조건 캐싱
 export const useSymptoms = () => {
     const { data, error, isLoading, mutate } = useSWR<Symptom[]>(
         "/symptoms",

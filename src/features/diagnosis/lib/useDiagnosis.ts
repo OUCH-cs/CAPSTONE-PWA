@@ -1,8 +1,9 @@
 import useSWR from "swr";
-import useSWRMutation from "swr/mutation";
 import { getUserDiagnosis, postDiagnosis } from "../service/api";
 import { DiagnosisResponse } from "../diagnosis.type";
-  
+import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
+import { useNavigate } from "react-router-dom";
+
 export const useUserDiagnosis = (userId: number) => {
     const { data, error, isLoading, mutate } = useSWR<DiagnosisResponse[]>(
       userId ? `/self-diagnosis/get-all/${userId}` : null,
@@ -18,18 +19,29 @@ export const useUserDiagnosis = (userId: number) => {
   };
 
 
-
-
 export const useSubmitDiagnosis = () => {
-    const { trigger, isMutating, data, error } = useSWRMutation(
-      "/self-diagnosis",
-      postDiagnosis
-    );
-  
-    return {
-      submit: trigger,
-      isLoading: isMutating,
-      result: data,
-      error,
+    const navigate = useNavigate();
+
+    const onSubmit = async (formData:DiagnosisFormData) => {
+      try {
+        const response = await postDiagnosis(formData); 
+        alert("Successfully submitted!");
+        navigate('/')
+        console.log(response.data)
+      } catch (e: unknown) {
+        if (e instanceof Error) {
+          alert(`Submission failed: ${e.message}`);
+        } else {
+          alert("Submission failed due to an unknown error.");
+        }
+      }
     };
+
+  return {
+    onSubmit
+  }
+
   };
+
+
+  

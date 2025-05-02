@@ -15,9 +15,9 @@ const steps = ["1", "2", "3", "4", "5"];
 function SelfDiagnosisPage() {
   const [currentPage] = useAtom(currentPageAtom);
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
-  const { currentStep, setCurrentStep, initialProgress, getCurrentStepIndex } =
-    useProgress(steps);
+  const { currentStep, setCurrentStep, initialProgress, getCurrentStepIndex } = useProgress(steps);
   const [progress, setProgress] = useState<number>(initialProgress);
+  const {onSubmit} = useSubmitDiagnosis()
 
   const methods = useForm<DiagnosisFormData>({
     defaultValues: {
@@ -36,24 +36,6 @@ function SelfDiagnosisPage() {
     setCurrentStep,
     setProgress
   );
-
-
-  const { submit } = useSubmitDiagnosis();
-
-  const onSubmit = async (formData:DiagnosisFormData) => {
-    try {
-      const response = await submit(formData); 
-      alert("Successfully submitted!");
-      console.log(response.data)
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        alert(`Submission failed: ${e.message}`);
-      } else {
-        alert("Submission failed due to an unknown error.");
-      }
-    }
-  };
-
 
   return (
     <Container>

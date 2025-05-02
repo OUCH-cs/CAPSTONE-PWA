@@ -1,8 +1,6 @@
 import apiRequest from "@/shared/api/apiRequest";
 import { DiagnosisResponse, DiagnosisFormData} from "../../diagnosis.type";
 
-
-// 이 함수 방식이 옳다. 
 export const getUserDiagnosis = async (userId: number): Promise<DiagnosisResponse[]> => {
   const response = await apiRequest({
     url: `/self-diagnosis/get-all/${userId}`,
@@ -12,14 +10,11 @@ export const getUserDiagnosis = async (userId: number): Promise<DiagnosisRespons
   return response.data;
 };
 
-export const postDiagnosis = async (
-  _: string,
-  { arg }: { arg: DiagnosisFormData }
-) => {
+export const postDiagnosis = async ( formData : DiagnosisFormData ) => {
   return apiRequest({
     url: "self-diagnosis",
     method: "POST",
-    data: arg,
+    data: formData,
   });
 };
 
