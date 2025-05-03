@@ -5,6 +5,8 @@ import { Navigate, Outlet } from "react-router-dom";
 function AuthGuard() {
   const [isAuth] = useAtom(isAuthAtom);
 
+  if (isAuth === null) return null;
+
   return <>{isAuth ? <Outlet /> : <Navigate to="/sign-in" replace />}</>;
 }
 export { AuthGuard };
