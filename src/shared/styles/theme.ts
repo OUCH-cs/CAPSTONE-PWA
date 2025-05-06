@@ -4,9 +4,8 @@ const theme = {
     background: "#F5F9FC",
     secondary: "#B9D6D9",
     tertiary: "#E3F5F6",
-    red: "DC0000",
+    red: "#DC0000",
     yellow: "#FDCF18",
-    
 
     white: "#FFFFFF",
     white_f8: "#F8F8F8",

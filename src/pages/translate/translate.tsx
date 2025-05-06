@@ -14,7 +14,7 @@ function TranslatePage() {
     setIsTranslating(true);
     const data = await apiRequest({ url: "/session", method: "POST" });
 
-    const EPHEMERAL_KEY = data.client_secret.value; //임시 키 발급
+    const EPHEMERAL_KEY = data.data.client_secret.value; //임시 키 발급
 
     // PeerConnection 생성
     const pc = new RTCPeerConnection();

@@ -1,14 +1,28 @@
-import { Accordion } from "@/shared/components/accordion";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
+import { Accordion } from "@/shared/components/accordion";
 import { COUNTRY_LIST } from "../../sign-up.constants";
 import ArrowChevronIcon from "@/shared/assets/common/arrow.svg?react";
+import { ControllerProps, Country } from "../../sign-up.types";
 
-export default function CountryAccordion() {
+export default function CountryAccordion({
+  value,
+  onChange,
+}: ControllerProps<string>) {
+  const [selectedItem, setSelectedItem] = useState<Country | "">("");
+
+  useEffect(() => {
+    const matchedItem = COUNTRY_LIST.find((item) => item.code === value);
+    setSelectedItem(matchedItem?.name ?? "");
+  }, [value]);
+
   return (
     <Accordion>
       <Accordion.Header>
         <AccordionHeaderWrapper>
-          <div>{"Country"}</div>
+          <AccordionHeaderTitle $isSelected={!!selectedItem}>
+            {selectedItem || "Country"}
+          </AccordionHeaderTitle>
           <Accordion.Trigger>
             <ArrowChevronIcon />
           </Accordion.Trigger>
@@ -17,10 +31,10 @@ export default function CountryAccordion() {
 
       <Accordion.Body>
         <AccordionBodyWrapper>
-          {COUNTRY_LIST.map((country) => (
-            <Accordion.Item key={country}>
-              <AccordionItemWrapper $isSelected={false}>
-                {country}
+          {COUNTRY_LIST.map(({ code, name }) => (
+            <Accordion.Item key={code} onClick={() => onChange(code)}>
+              <AccordionItemWrapper $isSelected={value === code}>
+                {name}
               </AccordionItemWrapper>
             </Accordion.Item>
           ))}
@@ -40,6 +54,13 @@ const AccordionHeaderWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.white_e5};
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const AccordionHeaderTitle = styled.div<{ $isSelected: boolean }>`
+  font-size: 16px;
+  font-weight: 400;
+  color: ${({ $isSelected, theme }) =>
+    $isSelected ? theme.colors.black : theme.colors.gray_7};
 `;
 
 const AccordionBodyWrapper = styled.div`
