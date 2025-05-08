@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
+import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals } from "@/features/records/service/medicalDataApi";  // ✅ API 호출
 
 type HospitalRecord = {
@@ -15,6 +16,11 @@ export default function MedicalRecordList() {
   const [hospitalList, setHospitalList] = useState<HospitalRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDeleteMode, setIsDeleteMode] = useState(false);  // 삭제 모드 상태 추가
+
+  const handleDeleteIconPress = () => {
+    setIsDeleteMode((prev) => !prev);  // Delete 아이콘 클릭 시 삭제 모드 상태 토글
+  };
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -54,6 +60,18 @@ export default function MedicalRecordList() {
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
         <HeaderTitle>Medical Record</HeaderTitle>
+        <DeleteIconWrapper onClick={handleDeleteIconPress}>
+          <DeleteIcon
+            width="30px"
+            height="30px"
+            stroke="black"
+            style={{ 
+              bottom: 7,
+              right: 0,
+              position: "absolute",
+            }}
+          />
+        </DeleteIconWrapper>
       </Header>
 
       {loading ? (
@@ -69,7 +87,14 @@ export default function MedicalRecordList() {
 
             <ListItem onClick={() => navigate(`/records/medicalrecord/${hospital.id}`)}>
               <ListText>{hospital.hospital}</ListText>
-              <ArrowIcon width="25px" height="25px" stroke="black" style={{ transform: "rotate(180deg)" }} />
+              {/* 여기서 isDeleteMode 상태를 기반으로 화살표 아이콘을 X로 바꾸기 */}
+                {isDeleteMode ? (
+                  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 5L20 20M20 5L5 20" stroke="black" strokeWidth="2" />
+                  </svg>
+                ) : (
+                <ArrowIcon width="25px" height="25px" stroke="black" style={{ transform: "rotate(180deg)" }} />
+              )}
             </ListItem>
           </div>
         ))
@@ -172,4 +197,13 @@ const ErrorText = styled.p`
   font-weight: 500;
   text-align: center;
   margin-top: 20px;
+`;
+
+const DeleteIconWrapper = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 `;
