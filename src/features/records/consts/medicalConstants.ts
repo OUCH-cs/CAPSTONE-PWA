@@ -9,11 +9,11 @@ const hospitals = [
 
 // 초기 입력 양식
 const initialMedicalFormData = [
-  { title: "Date of Visit", value: "", editable: true },
-  { title: "Visiting Hospital", value: "", editable: true },
-  { title: "Medical Subjects", value: "", editable: true },
-  { title: "Symptoms", value: "", editable: true },
-  { title: "Treatment Summary", value: "", editable: true },
+  { title: "Date of Visit", value: "", editable: false },
+  { title: "Visiting Hospital", value: "", editable: false },
+  { title: "Medical Subjects", value: "", editable: false },
+  { title: "Symptoms", value: "", editable: false },
+  { title: "Treatment Summary", value: "", editable: false },
 ];
 
 // 의학 정보 (예시용)

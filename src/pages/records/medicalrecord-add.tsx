@@ -1,22 +1,66 @@
-import  { useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import MedicalAddData from "@/features/records/ui/MedicalAddData";
+import { initialMedicalFormData } from "@/features/records/consts/medicalConstants";
+import { addHospital } from "@/features/records/service/medicalDataApi";  // API import
+
+// HospitalRecord 타입 정의
+type HospitalRecord = {
+  visitDate: string;
+  visitingHospital: string;
+  medicalSubject: string;
+  symptoms: string;
+  treatmentSummary: string;
+};
+
+// 날짜 형식 변환 함수
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 export default function MedicalRecordAdd() {
   const navigate = useNavigate();
+  const [medicalData, setMedicalData] = useState(initialMedicalFormData);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';  // 페이지에서 스크롤 숨기기
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = '';  
+      document.body.style.overflow = '';
     };
   }, []);
-  
+
+  const handleSave = async () => {
+    try {
+      const record: HospitalRecord = {
+        visitDate: formatDate(medicalData.find(item => item.title === "Date of Visit")?.value || ""),
+        visitingHospital: medicalData.find(item => item.title === "Visiting Hospital")?.value || "",
+        medicalSubject: medicalData.find(item => item.title === "Medical Subjects")?.value || "",
+        symptoms: medicalData.find(item => item.title === "Symptoms")?.value || "",
+        treatmentSummary: medicalData.find(item => item.title === "Treatment Summary")?.value || "",
+      };
+
+      console.log(record); // 데이터 구조 확인
+
+      const response = await addHospital(record);
+
+      if (response) {
+        alert("저장 완료!");
+        navigate("/records/medicalrecord-list"); // 저장 후 목록 페이지로 이동
+      }
+    } catch (err) {
+      alert("저장 중 오류가 발생했습니다.");
+      console.error(err);
+    }
+  };
+
   return (
     <Container>
-      {/* 헤더 */}
       <Header>
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
@@ -24,13 +68,12 @@ export default function MedicalRecordAdd() {
         <HeaderTitle>Medical Record</HeaderTitle>
       </Header>
 
-      <MedicalAddData />
+      <MedicalAddData onDataChange={setMedicalData} />
 
-      <SaveButton>Save</SaveButton>
+      <SaveButton onClick={handleSave}>Save</SaveButton>
     </Container>
   );
 }
-
 
 const Container = styled.div`
   background-color: #f5f9fc;

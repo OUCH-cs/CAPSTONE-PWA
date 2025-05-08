@@ -1,22 +1,32 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import DateSelection from "./DateSelection";
-import {initialMedicalFormData} from "../consts/medicalConstants"
+import { initialMedicalFormData } from "../consts/medicalConstants";
 
+interface MedicalAddDataProps {
+  onDataChange: (data: any) => void; // 상위 컴포넌트로 데이터 전달
+}
 
-
-export default function MedicalAddData() {
+export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
   const [dateModalOpen, setDateModalOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleDateSelect = (selectedDate: string) => {
-    setMedicalData((prevData) =>
-      prevData.map((item) =>
-        item.title === "Date of Visit" ? { ...item, value: selectedDate } : item
-      )
+    const updatedData = medicalData.map((item) =>
+      item.title === "Date of Visit" ? { ...item, value: selectedDate } : item
     );
+    setMedicalData(updatedData);
+    onDataChange(updatedData); // 상위 컴포넌트로 변경된 데이터 전달
     setDateModalOpen(false);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const updatedData = medicalData.map((data, i) =>
+      i === index ? { ...data, value: e.target.value } : data
+    );
+    setMedicalData(updatedData);
+    onDataChange(updatedData); // 상위 컴포넌트로 변경된 데이터 전달
   };
 
   return (
@@ -36,22 +46,14 @@ export default function MedicalAddData() {
                   setDateModalOpen(true);
                 }}
               >
-                <DateText isFilled={!!item.value}>
-                  {item.value}
-                </DateText>
+                <DateText isFilled={!!item.value}>{item.value}</DateText>
               </List>
             ) : (
               <List isSelected={isSelected} onClick={() => setSelectedIndex(index)}>
                 <Input
                   type="text"
                   value={item.value}
-                  onChange={(e) =>
-                    setMedicalData((prev) =>
-                      prev.map((data, i) =>
-                        i === index ? { ...data, value: e.target.value } : data
-                      )
-                    )
-                  }
+                  onChange={(e) => handleInputChange(e, index)}
                 />
               </List>
             )}

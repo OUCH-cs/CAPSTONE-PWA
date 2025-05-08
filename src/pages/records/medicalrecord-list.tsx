@@ -1,22 +1,54 @@
-import  { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
-import {hospitals} from "@/features/records/consts/medicalConstants";
+import { getHospitals } from "@/features/records/service/medicalDataApi";  // ✅ API 호출
+
+type HospitalRecord = {
+  id: number;
+  date: string;
+  hospital: string;
+};
 
 export default function MedicalRecordList() {
   const navigate = useNavigate();
+  const [hospitalList, setHospitalList] = useState<HospitalRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';  // 페이지에서 스크롤 숨기기
+    document.body.style.overflow = 'hidden';
+    fetchHospitalData();
     return () => {
-      document.body.style.overflow = '';  
+      document.body.style.overflow = '';
     };
   }, []);
-  
+
+  const fetchHospitalData = async () => {
+    try {
+      const res = await getHospitals();
+      console.log("응답 데이터:", res);  // 응답 데이터 확인
+      if (res.data) {
+        setHospitalList(res.data);
+        setError(null);  // 데이터가 잘 로드되면 에러 초기화
+      } else {
+        throw new Error("응답 데이터가 없습니다.");
+      }
+    } catch (error: any) {
+      console.error("의료기록 불러오기 실패:", error);
+      // 에러 메시지 업데이트
+      if (error.response) {
+        setError(`서버 오류: ${error.response.status} - ${error.response.data.message || "의료기록을 불러오는 데 실패했습니다."}`);
+      } else {
+        setError("네트워크 오류 또는 서버와 연결할 수 없습니다.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Container>
-      {/* 헤더 */}
       <Header>
         <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
@@ -24,30 +56,29 @@ export default function MedicalRecordList() {
         <HeaderTitle>Medical Record</HeaderTitle>
       </Header>
 
-      {/* 병원 목록 렌더링 */}
-      {hospitals.map((hospital, index) => (
-        <div key={index}>
-          <DateWrapper>
-            <DateText>{hospital.date}</DateText>
-          </DateWrapper>
+      {loading ? (
+        <p>불러오는 중...</p>
+      ) : error ? (
+        <ErrorText>{error}</ErrorText>  // 에러 발생 시 사용자에게 메시지 표시
+      ) : (
+        hospitalList.map((hospital) => (
+          <div key={hospital.id}>
+            <DateWrapper>
+              <DateText>{hospital.date.slice(0, 10)}</DateText>
+            </DateWrapper>
 
-          <ListItem
-            onClick={() =>
-              navigate(index === 0 ? "/records/medicalrecord" : "#")
-      }
-    >
-            <ListText>{hospital.name}</ListText>
-            <ArrowIcon width="25px" height="25px" stroke="black" style={{ transform: "rotate(180deg)" }} />
-          </ListItem>
-        </div>
-      ))}
+            <ListItem onClick={() => navigate(`/records/medicalrecord/${hospital.id}`)}>
+              <ListText>{hospital.hospital}</ListText>
+              <ArrowIcon width="25px" height="25px" stroke="black" style={{ transform: "rotate(180deg)" }} />
+            </ListItem>
+          </div>
+        ))
+      )}
 
-      {/* + New 버튼 */}
       <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>
     </Container>
   );
 }
-
 
 const Container = styled.div`
   background-color: #f5f9fc;
@@ -133,4 +164,12 @@ const FabButton = styled.button`
   border: none;
   cursor: pointer;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
 `;
