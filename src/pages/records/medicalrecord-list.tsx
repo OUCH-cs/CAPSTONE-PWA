@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
-import { getHospitals } from "@/features/records/service/medicalDataApi";
+import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
 import MedicalRecordDelete from "@/features/records/ui/MedicalRecordDelete"; // 모달 import
 
 type HospitalRecord = {
@@ -53,17 +53,26 @@ export default function MedicalRecordList() {
     }
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     if (selectedDeleteId !== null) {
-      setHospitalList((prev) => prev.filter(item => item.id !== selectedDeleteId));
-      setSelectedDeleteId(null);
+      try {
+        await deleteHospitals(selectedDeleteId.toString()); // 삭제 요청
+        setHospitalList((prevList) =>
+          prevList.filter((hospital) => hospital.id !== selectedDeleteId)
+        ); // 삭제된 항목을 제거한 새로운 목록으로 상태 업데이트
+        setSelectedDeleteId(null); // 모달 닫기
+      } catch (error:any) {
+        console.error("삭제 실패:", error.response ? error.response.data : error);
+        setError('삭제 중 오류가 발생했습니다.');
+      }
     }
   };
 
   return (
     <Container>
       <Header>
-        <BackButton onClick={() => navigate("/records")}>         <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
+        <BackButton onClick={() => navigate("/records")}>         
+          <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
         <HeaderTitle>Medical Record</HeaderTitle>
         <DeleteIconWrapper onClick={handleDeleteIconPress}>
@@ -120,11 +129,11 @@ export default function MedicalRecordList() {
 
       {selectedDeleteId !== null && (
         <MedicalRecordDelete
-        message={
-          <>
-            Do you want to delete <br /> a medical record?
-          </>
-        }
+          message={
+            <>
+              Do you want to delete <br /> a medical record?
+            </>
+          }
           onCancel={() => setSelectedDeleteId(null)}
           onConfirm={handleConfirmDelete}
         />
