@@ -57,17 +57,16 @@ export const addHospital = async (hospitalData: HospitalRecord) => {
   }
 };
 
-// ✅ 의료기록 수정하기 (업데이트)
-export const editHospitals = async (id: string, updatedData: HospitalRecord) => {
+// ✅ 의료기록 삭제하기 
+export const deleteHospitals = async (medicalRecordId: string) => {
   try {
     const response = await apiRequest({
-      url: `${BASE_URL}/${id}`, // id를 URL에 포함하여 업데이트
-      method: "PUT",
-      data: updatedData, // 수정할 데이터 전송
+      url: `${BASE_URL}/${medicalRecordId}`,
+      method: "DELETE",
     });
     return response.data;
   } catch (error: any) {
-    console.error("의료기록 수정 중 오류:", error?.response || error);
-    throw new Error(error?.response?.data?.message || "의료기록을 수정하지 못했습니다.");
+    console.error("의료기록 삭제 중 오류:", error?.response || error);
+    throw error?.response?.data || new Error("의료기록을 삭제하지 못했습니다.");
   }
 };
