@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
-import { getHospitals } from "@/features/records/service/medicalDataApi";  // ✅ API 호출
+import { getHospitals } from "@/features/records/service/medicalDataApi";
+import MedicalRecordDelete from "@/features/records/ui/MedicalRecordDelete"; // 모달 import
 
 type HospitalRecord = {
   id: number;
@@ -16,10 +17,11 @@ export default function MedicalRecordList() {
   const [hospitalList, setHospitalList] = useState<HospitalRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isDeleteMode, setIsDeleteMode] = useState(false);  // 삭제 모드 상태 추가
+  const [isDeleteMode, setIsDeleteMode] = useState(false);
+  const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
 
   const handleDeleteIconPress = () => {
-    setIsDeleteMode((prev) => !prev);  // Delete 아이콘 클릭 시 삭제 모드 상태 토글
+    setIsDeleteMode((prev) => !prev);
   };
 
   useEffect(() => {
@@ -33,16 +35,14 @@ export default function MedicalRecordList() {
   const fetchHospitalData = async () => {
     try {
       const res = await getHospitals();
-      console.log("응답 데이터:", res);  // 응답 데이터 확인
       if (res.data) {
         setHospitalList(res.data);
-        setError(null);  // 데이터가 잘 로드되면 에러 초기화
+        setError(null);
       } else {
         throw new Error("응답 데이터가 없습니다.");
       }
     } catch (error: any) {
       console.error("의료기록 불러오기 실패:", error);
-      // 에러 메시지 업데이트
       if (error.response) {
         setError(`서버 오류: ${error.response.status} - ${error.response.data.message || "의료기록을 불러오는 데 실패했습니다."}`);
       } else {
@@ -53,11 +53,17 @@ export default function MedicalRecordList() {
     }
   };
 
+  const handleConfirmDelete = () => {
+    if (selectedDeleteId !== null) {
+      setHospitalList((prev) => prev.filter(item => item.id !== selectedDeleteId));
+      setSelectedDeleteId(null);
+    }
+  };
+
   return (
     <Container>
       <Header>
-        <BackButton onClick={() => navigate("/records")}>
-          <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
+        <BackButton onClick={() => navigate("/records")}>         <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
         <HeaderTitle>Medical Record</HeaderTitle>
         <DeleteIconWrapper onClick={handleDeleteIconPress}>
@@ -65,7 +71,7 @@ export default function MedicalRecordList() {
             width="30px"
             height="30px"
             stroke="black"
-            style={{ 
+            style={{
               bottom: 7,
               right: 0,
               position: "absolute",
@@ -77,7 +83,7 @@ export default function MedicalRecordList() {
       {loading ? (
         <p>불러오는 중...</p>
       ) : error ? (
-        <ErrorText>{error}</ErrorText>  // 에러 발생 시 사용자에게 메시지 표시
+        <ErrorText>{error}</ErrorText>
       ) : (
         hospitalList.map((hospital) => (
           <div key={hospital.id}>
@@ -87,12 +93,22 @@ export default function MedicalRecordList() {
 
             <ListItem onClick={() => navigate(`/records/medicalrecord/${hospital.id}`)}>
               <ListText>{hospital.hospital}</ListText>
-              {/* 여기서 isDeleteMode 상태를 기반으로 화살표 아이콘을 X로 바꾸기 */}
-                {isDeleteMode ? (
-                  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 5L20 20M20 5L5 20" stroke="black" strokeWidth="2" />
-                  </svg>
-                ) : (
+              {isDeleteMode ? (
+                <svg
+                  width="25"
+                  height="25"
+                  viewBox="0 0 25 25"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedDeleteId(hospital.id);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  <path d="M5 5L20 20M20 5L5 20" stroke="black" strokeWidth="2" />
+                </svg>
+              ) : (
                 <ArrowIcon width="25px" height="25px" stroke="black" style={{ transform: "rotate(180deg)" }} />
               )}
             </ListItem>
@@ -101,6 +117,18 @@ export default function MedicalRecordList() {
       )}
 
       <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>
+
+      {selectedDeleteId !== null && (
+        <MedicalRecordDelete
+        message={
+          <>
+            Do you want to delete <br /> a medical record?
+          </>
+        }
+          onCancel={() => setSelectedDeleteId(null)}
+          onConfirm={handleConfirmDelete}
+        />
+      )}
     </Container>
   );
 }
