@@ -61,7 +61,7 @@ export const addHospital = async (hospitalData: HospitalRecord) => {
 export const deleteHospitals = async (medicalRecordId: string) => {
   try {
     const response = await apiRequest({
-      url: `${BASE_URL}/${medicalRecordId}`,
+      url: `/medical-record/${medicalRecordId}`,
       method: "DELETE",
     });
     return response.data;
