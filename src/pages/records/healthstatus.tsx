@@ -1,9 +1,9 @@
-import  { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
-import HealthStatusData from "@/features/records/ui/HealthStatusData";
+import HealthStatusData from "@/features/records/ui/HealthStatusData"; // id 없이 사용
 
 export default function HealthStatus() {
   const navigate = useNavigate();
@@ -11,10 +11,11 @@ export default function HealthStatus() {
   const handleEditIconPress = () => {
     // 추후 편집 기능 구현 예정
   };
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';  // 페이지에서 스크롤 숨기기
     return () => {
-      document.body.style.overflow = '';  
+      document.body.style.overflow = '';
     };
   }, []);
 
@@ -22,7 +23,7 @@ export default function HealthStatus() {
     <Container>
       {/* 헤더 */}
       <Header>
-        <BackButton onClick={() => navigate("/records/healthstatus-record-list")}>
+        <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
         <HeaderTitle>Health Status</HeaderTitle>
@@ -31,12 +32,13 @@ export default function HealthStatus() {
         </EditIconWrapper>
       </Header>
 
-      {/* 의료 기록 리스트 */}
+      {/* 의료 기록 단일 조회 */}
       <HealthStatusData />
     </Container>
   );
 }
 
+// Styled Components
 
 const Container = styled.div`
   background-color: #f5f9fc;

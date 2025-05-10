@@ -114,7 +114,7 @@ const HeaderTitle = styled.h2`
 
 const SaveButton = styled.button`
   position: absolute;
-  margin-top: -200px;
+  margin-top: -230px;
   padding: 13px;
   font-size: 18px;
   font-weight: 400;

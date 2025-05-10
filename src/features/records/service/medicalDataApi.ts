@@ -70,3 +70,18 @@ export const deleteHospitals = async (medicalRecordId: string) => {
     throw error?.response?.data || new Error("의료기록을 삭제하지 못했습니다.");
   }
 };
+
+// ✅ 수정된 editHospitals 함수
+export const editHospitals = async (id: string, data: HospitalRecord) => {
+  try {
+    const response = await apiRequest({
+      url: `/medical-record/${id}`,
+      method: "PUT",
+      data,
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error("의료기록 수정 중 오류:", error?.response || error);
+    throw error?.response?.data || new Error("의료기록을 수정하지 못했습니다.");
+  }
+};

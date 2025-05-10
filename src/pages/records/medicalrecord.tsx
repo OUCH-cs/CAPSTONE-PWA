@@ -5,13 +5,14 @@ import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
 import MedicalRecordData from "@/features/records/ui/MedicalRecordData";
 
+
 export default function MedicalRecord() {
   const navigate = useNavigate();
   const { id } = useParams(); // 동적 라우팅 파라미터 가져오기
 
   const handleEditIconPress = () => {
     // 수정 아이콘 클릭 시 로직
-    navigate(`/records/medicalrecord-edit?id=${id}`);
+    navigate(`/records/medicalrecord-edit/${id}`);
   };
 
   useEffect(() => {

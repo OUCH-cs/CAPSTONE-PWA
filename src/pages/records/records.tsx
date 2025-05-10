@@ -22,7 +22,7 @@ function RecordsPage() {
         <MedicalData />
       </Section>
 
-      <Section onClick={() => navigate('/records/healthstatus-record-list')}>
+      <Section onClick={() => navigate('/records/healthstatus')}>
         <SectionTitle>Health Status</SectionTitle>
         <HealthStatusDetails />
       </Section>
