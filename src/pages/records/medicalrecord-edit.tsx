@@ -35,14 +35,14 @@ const MedicalRecordEdit: React.FC = () => {
   const handleSave = async (updatedData: HospitalRecord) => {
     try {
       if (!updatedData.id) throw new Error("ID가 없습니다.");
-      await editHospitals(updatedData.id, updatedData); // ✅ id 전달
-      navigate(`/records/medicalrecord/${updatedData.id}`); // 템플릿 리터럴로 경로 설정
+      await editHospitals(updatedData.id, updatedData); // id 전달
+      navigate(`/records/medicalrecord/${updatedData.id}`);
     } catch (e) {
       setError("의료 기록 저장 중 오류가 발생했습니다.");
     }
   };
 
-  // 로딩 중 또는 오류 발생 시 UI
+  
   if (loading) return <p>로딩 중...</p>;
   if (error) return <p>{error}</p>;
   if (!hospitalRecord) return <p>의료 기록을 찾을 수 없습니다.</p>;
@@ -58,7 +58,6 @@ const MedicalRecordEdit: React.FC = () => {
       </Header>
 
       <div>
-        {/* 조건부 렌더링으로 hospitalRecord가 있을 때만 MedicalEditData 렌더링 */}
         {hospitalRecord && (
           <MedicalEditData initialData={hospitalRecord} onSave={handleSave} />
         )}

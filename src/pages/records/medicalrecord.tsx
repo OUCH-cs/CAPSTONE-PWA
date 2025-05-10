@@ -8,10 +8,9 @@ import MedicalRecordData from "@/features/records/ui/MedicalRecordData";
 
 export default function MedicalRecord() {
   const navigate = useNavigate();
-  const { id } = useParams(); // 동적 라우팅 파라미터 가져오기
+  const { id } = useParams(); 
 
   const handleEditIconPress = () => {
-    // 수정 아이콘 클릭 시 로직
     navigate(`/records/medicalrecord-edit/${id}`);
   };
 
@@ -22,14 +21,14 @@ export default function MedicalRecord() {
     };
   }, []);  
 
-  // id가 없는 경우 예외 처리 (옵션)
+  // id가 없는 경우 예외 처리 
   if (!id) {
     return <p>잘못된 접근입니다. 목록으로 돌아가주세요.</p>;
   }
 
   return (
     <Container>
-      {/* 헤더 */}
+      
       <Header>
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
@@ -40,8 +39,7 @@ export default function MedicalRecord() {
         </EditIconWrapper>
       </Header>
 
-      {/* 의료 기록 상세 데이터 */}
-      <MedicalRecordData id={id} /> {/* 여기서 id를 전달 */}
+      <MedicalRecordData id={id} />
     </Container>
   );
 }

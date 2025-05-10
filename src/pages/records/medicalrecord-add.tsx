@@ -6,7 +6,6 @@ import MedicalAddData from "@/features/records/ui/MedicalAddData";
 import { initialMedicalFormData } from "@/features/records/consts/medicalConstants";
 import { addHospital } from "@/features/records/service/medicalDataApi";  // API import
 
-// HospitalRecord 타입 정의
 type HospitalRecord = {
   visitDate: string;
   visitingHospital: string;
@@ -45,13 +44,12 @@ export default function MedicalRecordAdd() {
         treatmentSummary: medicalData.find(item => item.title === "Treatment Summary")?.value || "",
       };
 
-      console.log(record); // 데이터 구조 확인
+      
 
       const response = await addHospital(record);
 
       if (response) {
-        alert("저장 완료!");
-        navigate("/records/medicalrecord-list"); // 저장 후 목록 페이지로 이동
+        navigate("/records/medicalrecord-list"); 
       }
     } catch (err) {
       alert("저장 중 오류가 발생했습니다.");

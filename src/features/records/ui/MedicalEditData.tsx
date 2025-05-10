@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { HospitalRecord } from "@/features/records/service/medicalDataApi";
-import DateSelection from "./DateSelection";  // 수정된 DateSelection 임포트
+import DateSelection from "./DateSelection";  
 
 interface MedicalEditDataProps {
   initialData: HospitalRecord;
@@ -10,7 +10,7 @@ interface MedicalEditDataProps {
 
 const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }) => {
   const [formData, setFormData] = useState<HospitalRecord>(initialData);
-  const [isDateSelectionOpen, setDateSelectionOpen] = useState(false);  // 날짜 선택 모달 상태
+  const [isDateSelectionOpen, setDateSelectionOpen] = useState(false);  
 
   useEffect(() => {
     setFormData(initialData); // prop 변경 시 반영
@@ -27,13 +27,13 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
     onSave(formData);
   };
 
-  // 날짜 선택 모달 열기
+  
   const handleDateChange = (date: string) => {
     setFormData((prevData) => ({
       ...prevData,
       visitDate: date,  // visitDate 값 변경
     }));
-    setDateSelectionOpen(false);  // 모달 닫기
+    setDateSelectionOpen(false);  
   };
 
   return (
@@ -45,13 +45,13 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
             type="text" 
             value={formData.visitDate} 
             readOnly 
-            onClick={() => setDateSelectionOpen(true)}  // 날짜 선택 모달 열기
+            onClick={() => setDateSelectionOpen(true)}  
           />
           {isDateSelectionOpen && (
             <DateSelection
               isOpen={isDateSelectionOpen}
               onClose={() => setDateSelectionOpen(false)}
-              onDateSelect={handleDateChange}  // 날짜 선택 후 처리
+              onDateSelect={handleDateChange}  
             />
           )}
         </ListBox>

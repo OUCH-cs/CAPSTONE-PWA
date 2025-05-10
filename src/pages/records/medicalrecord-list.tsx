@@ -42,7 +42,6 @@ export default function MedicalRecordList() {
         throw new Error("응답 데이터가 없습니다.");
       }
     } catch (error: any) {
-      console.error("의료기록 불러오기 실패:", error);
       if (error.response) {
         setError(`서버 오류: ${error.response.status} - ${error.response.data.message || "의료기록을 불러오는 데 실패했습니다."}`);
       } else {
@@ -56,13 +55,12 @@ export default function MedicalRecordList() {
   const handleConfirmDelete = async () => {
     if (selectedDeleteId !== null) {
       try {
-        await deleteHospitals(selectedDeleteId.toString()); // 삭제 요청
+        await deleteHospitals(selectedDeleteId.toString()); 
         setHospitalList((prevList) =>
           prevList.filter((hospital) => hospital.id !== selectedDeleteId)
-        ); // 삭제된 항목을 제거한 새로운 목록으로 상태 업데이트
-        setSelectedDeleteId(null); // 모달 닫기
+        ); 
+        setSelectedDeleteId(null); 
       } catch (error:any) {
-        console.error("삭제 실패:", error.response ? error.response.data : error);
         setError('삭제 중 오류가 발생했습니다.');
       }
     }

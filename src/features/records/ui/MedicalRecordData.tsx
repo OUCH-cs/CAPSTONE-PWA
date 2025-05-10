@@ -24,7 +24,6 @@ const MedicalRecordData: React.FC<MedicalRecordDataProps> = ({ id }) => {
     const fetchMedicalRecord = async () => {
       try {
         const response = await getMedicalRecordById(id);
-        console.log("API 응답:", response);
         setHospitalRecord(response.data);
       } catch (error) {
         setError("의료기록을 불러오는데 실패했습니다.");
@@ -75,7 +74,6 @@ const MedicalRecordData: React.FC<MedicalRecordDataProps> = ({ id }) => {
   );
 };
 
-// 스타일 컴포넌트
 const Container = styled.div`
   background-color: #f5f9fc;
   min-height: 100vh;

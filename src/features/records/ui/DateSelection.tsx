@@ -1,7 +1,7 @@
 import  { useRef, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import Modal from "@/shared/components/modal/Modal"; // 사용자 정의 모달 경로
+import Modal from "@/shared/components/modal/Modal"; 
 
 const years = Array.from({ length: 100 }, (_, i) => (2000 + i).toString().slice(2));
 const months = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, "0"));
