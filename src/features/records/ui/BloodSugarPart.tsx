@@ -114,6 +114,15 @@ const StyledInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 10px;
   box-sizing: border-box;
+   /* 🔽 스핀 버튼 제거 (크롬, 사파리) */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* 🔽 스핀 버튼 제거 (파이어폭스) */
+  -moz-appearance: textfield;
 `;
 
 const LabelLeft = styled.label`

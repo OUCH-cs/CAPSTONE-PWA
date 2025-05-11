@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { getHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi";  // API 파일 경로 맞게 수정
-
+import { getHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi"; 
 export default function HealthStatusData() {
   const [healthStatusData, setHealthStatusData] = useState<HealthStatus | null>(null);  // 상태 저장
   const [loading, setLoading] = useState<boolean>(true);  // 로딩 상태
@@ -11,11 +10,10 @@ export default function HealthStatusData() {
   const fetchHealthStatusData = async () => {
     try {
       setLoading(true);
-      const data = await getHealthStatus();  // getHealthStatus API 호출
-      setHealthStatusData(data);  // 데이터 상태 업데이트
+      const data = await getHealthStatus(); 
+      setHealthStatusData(data.data);  // 데이터 상태 업데이트
     } catch (error: any) {
-      setError("건강기록을 불러오는 데 실패했습니다.");  // 오류 처리
-      console.error("API 호출 중 오류 발생:", error);
+      setError("건강기록을 불러오는 데 실패했습니다."); 
     } finally {
       setLoading(false);
     }
@@ -34,10 +32,23 @@ export default function HealthStatusData() {
   if (error) {
     return <ErrorText>{error}</ErrorText>;
   }
+  const formatBloodPressure = (bloodPressure: number) => {
+    if (!bloodPressure) return " / "; 
+    const contraction = Math.floor(bloodPressure / 1000); // 수축기
+    const relaxation = bloodPressure % 1000; // 이완기
+    return `${contraction} / ${relaxation}`;
+  };
+  const formatBloodSugar = (bloodSugar: number) => {
+    if (!bloodSugar) return " / ";
+    const fasting = Math.floor(bloodSugar / 1000); // 공복 혈당
+    const postprandial = bloodSugar % 1000; // 식후 혈당
+    return `${fasting} / ${postprandial}`;
+  };
+
+
 
   return (
     <Container>
-      {/* 데이터가 있을 때만 렌더링 */}
       {healthStatusData ? (
         <>
           <DataLabel>
@@ -49,12 +60,12 @@ export default function HealthStatusData() {
             <List>{healthStatusData.allergy}</List>
           </DataLabel>
           <DataLabel>
-            <LabelText>BloodPressure</LabelText>
-            <List>{healthStatusData.bloodPressure} mmHg</List>
+            <LabelText>Blood Pressure</LabelText>
+            <List>{formatBloodPressure(healthStatusData.bloodPressure)} <Unit>mmHg</Unit></List>
           </DataLabel>
           <DataLabel>
             <LabelText>BloodSugar</LabelText>
-            <List>{healthStatusData.bloodSugar} mg/dL</List>
+            <List>{formatBloodSugar(healthStatusData.bloodSugar)} <Unit>mg/dL</Unit></List>
           </DataLabel>
           <DataLabel>
             <LabelText>MedicineHistory</LabelText>
@@ -68,7 +79,6 @@ export default function HealthStatusData() {
   );
 }
 
-// 스타일 컴포넌트
 
 const Container = styled.div`
   background-color: #f5f9fc;
@@ -97,8 +107,16 @@ const List = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   height: 60px;
   margin-bottom: -10px;
+   font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  font-family: Pretendard;
 `;
-  
+  const Unit = styled.span`
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 4px;
+`;
 const LoadingText = styled.p`
   text-align: center;
   font-size: 16px;
