@@ -18,7 +18,7 @@ import MedicalRecord from "@/pages/records/medicalrecord";
 import MedicalRecordEdit from "@/pages/records/medicalrecord-edit";
 import HealthStatus from "@/pages/records/healthstatus"; 
 import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
-import HealthStatusAdd from "@/pages/records/healthstatus-add";
+import HealthStatusEdit from "@/pages/records/healthstatus-edit";
 import { AuthGuard, RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
 
@@ -54,7 +54,7 @@ export default function AppRoutes() {
       <Route path="/records/medicalrecord-edit/:id" element={<MedicalRecordEdit />} />
       <Route path="/records/healthstatus" element={<HealthStatus />} />
       <Route path="/records/medicalrecord-add" element={<MedicalRecordAdd />} />
-      <Route path="/records/healthstatus-add" element={<HealthStatusAdd />} />
+      <Route path="/records/healthstatus-edit" element={<HealthStatusEdit />} />
 
         {/* 통역 페이지 */}
         <Route path="/translate" element={<TranslatePage />} />
