@@ -10,14 +10,14 @@ interface Props {
   onSave: (updatedData: HealthStatus) => void;
 }
 
-const HealthEditData: React.FC<Props> = ({ initialData, onSave }) => {
+const HealthEditData: React.FC<Props> = ({ onSave }) => {
   const [disease, setDisease] = useState("");
   const [allergy, setAllergy] = useState("");
   const [medicineHistory, setMedicineHistory] = useState("");
   const [bloodPressure, setBloodPressure] = useState({ contraction: "", relaxation: "" });
   const [bloodSugar, setBloodSugar] = useState({ fasting: "", postprandial: "" });
   const [loading, setLoading] = useState(false); 
-  const [error, setError] = useState<string | null>(null); 
+  const [error] = useState<string | null>(null); 
 
   const [bpModalOpen, setBpModalOpen] = useState(false);
   const [bsModalOpen, setBsModalOpen] = useState(false);
@@ -49,9 +49,6 @@ const HealthEditData: React.FC<Props> = ({ initialData, onSave }) => {
         setDisease(data.disease || "");
         setAllergy(data.allergy || "");
         setMedicineHistory(data.medicineHistory || "");
-      })
-      .catch((error) => {
-        setError("데이터를 불러오는 데 실패했습니다.");
       })
       .finally(() => {
         setLoading(false);

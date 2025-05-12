@@ -12,6 +12,12 @@ const MedicalRecordEdit: React.FC = () => {
   const [hospitalRecord, setHospitalRecord] = useState<HospitalRecord | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);  
 
   // id로 기존 데이터 불러오기
   useEffect(() => {

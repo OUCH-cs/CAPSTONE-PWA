@@ -72,7 +72,8 @@ export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
+  
+  
 `;
 
 const Label = styled.div`

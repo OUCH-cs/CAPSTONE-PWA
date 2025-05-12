@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -27,13 +27,6 @@ export default function MedicalRecordAdd() {
   const navigate = useNavigate();
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
 
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
-
   const handleSave = async () => {
     try {
       const record: HospitalRecord = {
@@ -56,7 +49,7 @@ export default function MedicalRecordAdd() {
       console.error(err);
     }
   };
-
+  
   return (
     <Container>
       <Header>
@@ -75,7 +68,6 @@ export default function MedicalRecordAdd() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
   padding-bottom: 40px;
   position: relative;
   margin-top: 28px;
@@ -111,8 +103,7 @@ const HeaderTitle = styled.h2`
 `;
 
 const SaveButton = styled.button`
-  position: absolute;
-  margin-top: -230px;
+  margin-top:100px;
   padding: 13px;
   font-size: 18px;
   font-weight: 400;
