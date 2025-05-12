@@ -4,7 +4,7 @@ import DateSelection from "./DateSelection";
 import { initialMedicalFormData } from "../consts/medicalConstants";
 
 interface MedicalAddDataProps {
-  onDataChange: (data: any) => void; // 상위 컴포넌트로 데이터 전달
+  onDataChange: (data: any) => void; 
 }
 
 export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
@@ -17,7 +17,7 @@ export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
       item.title === "Date of Visit" ? { ...item, value: selectedDate } : item
     );
     setMedicalData(updatedData);
-    onDataChange(updatedData); // 상위 컴포넌트로 변경된 데이터 전달
+    onDataChange(updatedData); 
     setDateModalOpen(false);
   };
 
@@ -36,7 +36,7 @@ export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
 
         return (
           <div key={index}>
-            <Label isSelected={isSelected}>{item.title}</Label>
+            <Label>{item.title}</Label>
 
             {item.title === "Date of Visit" ? (
               <List
@@ -75,14 +75,13 @@ const Container = styled.div`
   min-height: 100vh;
 `;
 
-const Label = styled.div<{ isSelected: boolean }>`
+const Label = styled.div`
   margin-top: 26px;
   margin-bottom: 6px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   font-family: Pretendard;
-  color: ${(props) =>
-    props.isSelected ? "rgba(0, 151, 167, 1)" : "rgba(67, 67, 67, 1)"};
+  color: #000};
 `;
 
 const List = styled.div<{ isSelected: boolean }>`
@@ -91,8 +90,9 @@ const List = styled.div<{ isSelected: boolean }>`
   background-color: #fff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   height: 60px;
+  border-radius:12px;
   margin-bottom: 0;
-  border-bottom: ${(props) =>
+  border: ${(props) =>
     props.isSelected ? "1px solid rgba(0, 151, 167, 1)" : "1px solid #f5f5f5"};
   cursor: pointer;
 `;
@@ -101,13 +101,13 @@ const DateText = styled.span<{ isFilled: boolean }>`
   font-size: 16px;
   font-weight: 400;
   font-family: Pretendard;
-  color: ${(props) => (props.isFilled ? "rgba(0, 0, 0, 1)" : "#767676")};
+  color: ${(props) => (props.isFilled ? "#434343" : "#767676")};
 `;
 
 const Input = styled.input`
   font-size: 16px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 1);
+  color: #434343;
   font-family: Pretendard;
   outline: none;
   border: none;

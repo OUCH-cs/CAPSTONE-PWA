@@ -86,8 +86,8 @@ const DataBlock = styled.div`
 `;
 
 const Label = styled.p`
-  color: #767676;
-  font-size: 14px;
+  color: #000;
+  font-size: 18px;
   font-weight: 400;
   font-family: Pretendard;
 `;
@@ -96,7 +96,8 @@ const ListBox = styled.div`
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
-  border-bottom: 1px solid #f5f5f5;
+  border: 1px solid #E5E5EC;
+  border-radius:12px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   height: 60px;
   margin-top:10px;
@@ -104,7 +105,7 @@ const ListBox = styled.div`
 `;
 
 const ListText = styled.span`
-  color: #000;
+  color: #434343;
   margin-left: -5px;
   font-size: 16px;
   font-weight: 400;

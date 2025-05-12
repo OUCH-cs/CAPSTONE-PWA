@@ -92,8 +92,8 @@ const DataLabel = styled.div`
 `;
 
 const LabelText = styled.p`
-  color: #767676;
-  font-size: 14px;
+  color: #000;
+  font-size: 18px;
   font-weight: 400;
   font-family: Pretendard;
   margin-bottom:10px;
@@ -103,19 +103,20 @@ const List = styled.div`
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
-  border-bottom: 1px solid #f5f5f5;
+  border: 1px solid #E5E5EC;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   height: 60px;
   margin-bottom: -10px;
    font-size: 16px;
   font-weight: 400;
-  color: #000;
+  color: #434343;
   font-family: Pretendard;
 `;
   const Unit = styled.span`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   margin-left: 4px;
+  color: #434343;
 `;
 const LoadingText = styled.p`
   text-align: center;

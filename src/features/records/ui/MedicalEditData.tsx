@@ -11,27 +11,32 @@ interface MedicalEditDataProps {
 const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }) => {
   const [formData, setFormData] = useState<HospitalRecord>(initialData);
   const [isDateSelectionOpen, setDateSelectionOpen] = useState(false);  
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);  // ✅ 선택된 인덱스 상태
 
   useEffect(() => {
-    setFormData(initialData); // prop 변경 시 반영
+    setFormData(initialData);
   }, [initialData]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: keyof HospitalRecord) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof HospitalRecord,
+    index: number
+  ) => {
     setFormData({
       ...formData,
       [field]: e.target.value,
     });
+    setSelectedIndex(index);  // ✅ 선택 시 상태 업데이트
   };
 
   const handleSave = () => {
     onSave(formData);
   };
 
-  
   const handleDateChange = (date: string) => {
     setFormData((prevData) => ({
       ...prevData,
-      visitDate: date,  // visitDate 값 변경
+      visitDate: date,
     }));
     setDateSelectionOpen(false);  
   };
@@ -40,37 +45,67 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
     <Container>
       <DataBlock>
         <Label>Date of Visit</Label>
-        <ListBox>
-          <Input 
-            type="text" 
-            value={formData.visitDate} 
-            readOnly 
-            onClick={() => setDateSelectionOpen(true)}  
+        <ListBox
+          isSelected={selectedIndex === 0}
+          onClick={() => setDateSelectionOpen(true)}
+        >
+          <Input
+            type="text"
+            value={formData.visitDate}
+            readOnly
           />
           {isDateSelectionOpen && (
             <DateSelection
               isOpen={isDateSelectionOpen}
               onClose={() => setDateSelectionOpen(false)}
-              onDateSelect={handleDateChange}  
+              onDateSelect={handleDateChange}
             />
           )}
         </ListBox>
       </DataBlock>
+
       <DataBlock>
         <Label>Visiting Hospital</Label>
-        <ListBox><Input value={formData.visitingHospital} onChange={(e) => handleChange(e, "visitingHospital")} /></ListBox>
+        <ListBox isSelected={selectedIndex === 1}>
+          <Input
+            value={formData.visitingHospital}
+            onFocus={() => setSelectedIndex(1)}
+            onChange={(e) => handleChange(e, "visitingHospital", 1)}
+          />
+        </ListBox>
       </DataBlock>
+
       <DataBlock>
         <Label>Medical Subject</Label>
-        <ListBox><Input value={formData.medicalSubject} onChange={(e) => handleChange(e, "medicalSubject")} /></ListBox>
+        <ListBox isSelected={selectedIndex === 2}>
+          <Input
+            value={formData.medicalSubject}
+            onFocus={() => setSelectedIndex(2)}
+            onChange={(e) => handleChange(e, "medicalSubject", 2)}
+          />
+        </ListBox>
       </DataBlock>
+
       <DataBlock>
         <Label>Symptoms</Label>
-        <ListBox><Input value={formData.symptoms} onChange={(e) => handleChange(e, "symptoms")} /></ListBox>
+        <ListBox isSelected={selectedIndex === 3}>
+          <Input
+            value={formData.symptoms}
+            onFocus={() => setSelectedIndex(3)}
+            onChange={(e) => handleChange(e, "symptoms", 3)}
+          />
+        </ListBox>
       </DataBlock>
+
       <DataBlock>
         <Label>Treatment Summary</Label>
-        <ListBox><Input value={formData.treatmentSummary} onChange={(e) => handleChange(e, "treatmentSummary")} /></ListBox>
+        <ListBox isSelected={selectedIndex === 4}>
+          <Input
+            value={formData.treatmentSummary}
+            onFocus={() => setSelectedIndex(4)}
+            onChange={(e) => handleChange(e, "treatmentSummary", 4)}
+          />
+        </ListBox>
       </DataBlock>
 
       <SaveButton onClick={handleSave}>Save</SaveButton>
@@ -90,29 +125,35 @@ const DataBlock = styled.div`
 `;
 
 const Label = styled.p`
-  color: #767676;
-  font-size: 14px;
+  color: #000;
+  font-size: 18px;
   font-weight: 400;
   font-family: Pretendard;
 `;
-const ListBox = styled.div`
+
+const ListBox = styled.div<{ isSelected: boolean }>`
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
-  border-bottom: 1px solid #f5f5f5;
+  border: 1px solid
+    ${(props) => (props.isSelected ? "#0097A7" : "#E5E5EC")};  // ✅ 조건부 border
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   height: 60px;
-  margin-top:10px;
+  margin-top: 10px;
   margin-bottom: -10px;
+  cursor: text;
 `;
 
-
 const Input = styled.input`
-  color: #000;
+  color: #434343;
   margin-left: -5px;
   font-size: 16px;
   font-weight: 400;
   font-family: Pretendard;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
 `;
 
 const SaveButton = styled.button`

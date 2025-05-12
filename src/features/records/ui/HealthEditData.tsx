@@ -23,42 +23,40 @@ const HealthEditData: React.FC<Props> = ({ initialData, onSave }) => {
   const [bsModalOpen, setBsModalOpen] = useState(false);
   const [medicineModalOpen, setMedicineModalOpen] = useState(false);
 
-useEffect(() => {
-  setLoading(true);
-  getHealthStatus()
-    .then((response) => {
-      const data = response.data; // 핵심 데이터만 추출
-      if (data.bloodPressure !== undefined && data.bloodPressure !== null) {
-        if (typeof data.bloodPressure === "number" && !isNaN(data.bloodPressure)) {
-          const contraction = Math.floor(data.bloodPressure / 1000);
-          const relaxation = data.bloodPressure % 1000;
-          setBloodPressure({ contraction: String(contraction), relaxation: String(relaxation) });
-        } else {
+  const [selectedField, setSelectedField] = useState<string | null>(null); // 선택된 필드 추적
+
+  useEffect(() => {
+    setLoading(true);
+    getHealthStatus()
+      .then((response) => {
+        const data = response.data; // 핵심 데이터만 추출
+        if (data.bloodPressure !== undefined && data.bloodPressure !== null) {
+          if (typeof data.bloodPressure === "number" && !isNaN(data.bloodPressure)) {
+            const contraction = Math.floor(data.bloodPressure / 1000);
+            const relaxation = data.bloodPressure % 1000;
+            setBloodPressure({ contraction: String(contraction), relaxation: String(relaxation) });
+          }
         }
-      } else {
-      }
 
-      if (data.bloodSugar !== undefined && data.bloodSugar !== null) {
-        if (typeof data.bloodSugar === "number" && !isNaN(data.bloodSugar)) {
-          const fasting = Math.floor(data.bloodSugar / 1000);
-          const postprandial = data.bloodSugar % 1000;
-          setBloodSugar({ fasting: String(fasting), postprandial: String(postprandial) });
-        } 
-      } 
-      setDisease(data.disease || "");
-      setAllergy(data.allergy || "");
-      setMedicineHistory(data.medicineHistory || "");
-    })
-    .catch((error) => {
-      setError("데이터를 불러오는 데 실패했습니다.");
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-}, []);
+        if (data.bloodSugar !== undefined && data.bloodSugar !== null) {
+          if (typeof data.bloodSugar === "number" && !isNaN(data.bloodSugar)) {
+            const fasting = Math.floor(data.bloodSugar / 1000);
+            const postprandial = data.bloodSugar % 1000;
+            setBloodSugar({ fasting: String(fasting), postprandial: String(postprandial) });
+          }
+        }
 
-
-
+        setDisease(data.disease || "");
+        setAllergy(data.allergy || "");
+        setMedicineHistory(data.medicineHistory || "");
+      })
+      .catch((error) => {
+        setError("데이터를 불러오는 데 실패했습니다.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const handleSave = () => {
     const bloodPressureNumber = Number(`${bloodPressure.contraction}${bloodPressure.relaxation}`);
@@ -82,21 +80,33 @@ useEffect(() => {
     <Container>
       <DataBlock>
         <Label>Disease</Label>
-        <ListBox>
+        <ListBox
+          isSelected={selectedField === "disease"}
+          onClick={() => setSelectedField("disease")}
+        >
           <Input value={disease} onChange={(e) => setDisease(e.target.value)} />
         </ListBox>
       </DataBlock>
 
       <DataBlock>
         <Label>Allergy</Label>
-        <ListBox>
+        <ListBox
+          isSelected={selectedField === "allergy"}
+          onClick={() => setSelectedField("allergy")}
+        >
           <Input value={allergy} onChange={(e) => setAllergy(e.target.value)} />
         </ListBox>
       </DataBlock>
 
       <DataBlock>
         <Label>Blood Pressure</Label>
-        <ListBox onClick={() => setBpModalOpen(true)}>
+        <ListBox
+          isSelected={selectedField === "bloodPressure"}
+          onClick={() => {
+            setSelectedField("bloodPressure");
+            setBpModalOpen(true);
+          }}
+        >
           <Text>
             {bloodPressure.contraction} / {bloodPressure.relaxation}
             <Unit> mmHg</Unit>
@@ -106,7 +116,13 @@ useEffect(() => {
 
       <DataBlock>
         <Label>Blood Sugar</Label>
-        <ListBox onClick={() => setBsModalOpen(true)}>
+        <ListBox
+          isSelected={selectedField === "bloodSugar"}
+          onClick={() => {
+            setSelectedField("bloodSugar");
+            setBsModalOpen(true);
+          }}
+        >
           <Text>
             {bloodSugar.fasting} / {bloodSugar.postprandial}
             <Unit> mg/dL</Unit>
@@ -116,7 +132,13 @@ useEffect(() => {
 
       <DataBlock>
         <Label>Medicine History</Label>
-        <ListBox onClick={() => setMedicineModalOpen(true)}>
+        <ListBox
+          isSelected={selectedField === "medicineHistory"}
+          onClick={() => {
+            setSelectedField("medicineHistory");
+            setMedicineModalOpen(true);
+          }}
+        >
           <Text>{medicineHistory}</Text>
         </ListBox>
       </DataBlock>
@@ -166,17 +188,17 @@ const DataBlock = styled.div`
 `;
 
 const Label = styled.p`
-  color: #767676;
-  font-size: 14px;
+  color: #000;
+  font-size: 18px;
   font-weight: 400;
   font-family: Pretendard;
 `;
 
-const ListBox = styled.div`
+const ListBox = styled.div<{ isSelected?: boolean }>`
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
-  border-bottom: 1px solid #f5f5f5;
+  border: ${(props) => (props.isSelected ? "1px solid #0097A7" : "1px solid #f5f5f5")};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   height: 60px;
   margin-top: 10px;
@@ -185,7 +207,7 @@ const ListBox = styled.div`
 `;
 
 const Input = styled.input`
-  color: #000;
+  color: #434343;
   margin-left: -5px;
   font-size: 16px;
   font-weight: 400;
@@ -201,13 +223,14 @@ const Text = styled.span`
   font-size: 16px;
   font-weight: 400;
   font-family: Pretendard;
-  color: #000;
+  color: #434343;
 `;
 
 const Unit = styled.span`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   margin-left: 4px;
+  color: #434343;
 `;
 
 const SaveButton = styled.button`
