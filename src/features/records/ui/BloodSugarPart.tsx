@@ -25,7 +25,7 @@ export default function BloodSugarPart({ onClose, onSave }: Props) {
         <Card>
           <Box>
             <InputContainer>
-              <StyledInput
+              <StyledInputFasting
                 type="number"
                 value={fasting}
                 onChange={(e) => setFasting(e.target.value)}
@@ -105,7 +105,25 @@ const InputContainer = styled.div`
   position: relative;
   width: 100%;
 `;
+const StyledInputFasting = styled.input`
+  width: 160px;
+  height: 160px;
+  color:#767676;
+  font-size: 32px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+   /* 🔽 스핀 버튼 제거 (크롬, 사파리) */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
+  /* 🔽 스핀 버튼 제거 (파이어폭스) */
+  -moz-appearance: textfield;
+`;
 const StyledInput = styled.input`
   width: 160px;
   height: 160px;

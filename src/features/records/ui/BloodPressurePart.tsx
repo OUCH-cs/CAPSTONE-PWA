@@ -26,7 +26,7 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
           {/* Contraction */}
           <Box>
             <InputContainer>
-              <Input
+              <InputContraction
                 type="number"
                 value={contraction}
                 onChange={(e) => setContraction(e.target.value)}
@@ -38,7 +38,7 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
           {/* Relaxation */}
           <Box>
             <InputContainer>
-              <Input
+              <InputRelaxation
                 type="number"
                 value={relaxation}
                 onChange={(e) => setRelaxation(e.target.value)}
@@ -108,7 +108,25 @@ const InputContainer = styled.div`
   width: 100%;
 `;
 
-const Input = styled.input`
+const InputContraction = styled.input`
+  width: 160px;
+  height: 160px;
+  font-size: 32px;
+  text-align: center;
+  color: #767676;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* 🔽 스핀 버튼 제거 (파이어폭스) */
+  -moz-appearance: textfield;
+`;
+const InputRelaxation = styled.input`
   width: 160px;
   height: 160px;
   font-size: 32px;
@@ -116,7 +134,6 @@ const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 10px;
   box-sizing: border-box;
-   /* 🔽 스핀 버튼 제거 (크롬, 사파리) */
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
