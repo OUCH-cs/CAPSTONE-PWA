@@ -25,12 +25,10 @@ function SearchPreviewCard({
   return (
     <Container>
       <Title>{place.displayName.text}</Title>
-
       <OperatingHours>
         <Open>{place.currentOpeningHours?.openNow ? "Open / " : ""}</Open>
         <Closed>{closedDay ? `Closed every ${closedDay}` : ""}</Closed>
       </OperatingHours>
-
       <PlaceMetrics>
         {place.rating && (
           <RatingWrapper>
@@ -40,8 +38,9 @@ function SearchPreviewCard({
         )}
         <Distance> {distanceLabel}</Distance>
       </PlaceMetrics>
-
-      <CategoryTag>{place?.primaryTypeDisplayName.text}</CategoryTag>
+      {place.primaryTypeDisplayName && (
+        <CategoryTag>{place.primaryTypeDisplayName.text}</CategoryTag>
+      )}
     </Container>
   );
 }
