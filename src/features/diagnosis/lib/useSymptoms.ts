@@ -1,13 +1,8 @@
 import useSWR from "swr";
 import { getSymptoms } from "../service/api"
 
-export interface Symptom {
-    id: number;
-    name: string;
-  }
-
 export const useSymptoms = () => {
-    const { data, error, isLoading, mutate } = useSWR<Symptom[]>(
+    const { data, error, isLoading, mutate } = useSWR<string[]>(
         "/symptoms",
         getSymptoms
     );    

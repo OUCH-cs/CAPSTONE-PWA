@@ -1,14 +1,11 @@
 import { useFormContext } from "react-hook-form";
-import { useAtom } from "jotai";
 import { useState } from "react";
-import { customSymptomsAtom } from "../service/selfDiagnosisAtoms";
 import { useSymptoms } from "./useSymptoms";
 
 /**
  * 자가진단 입력 시 사용할 증상 목록과 선택된 증상 상태를 관리하는 커스텀 훅
  * 
  * - 기본 증상은 API에서 받아오며
- * - 커스텀 증상은 jotai atom 상태에서 관리
  * - 선택된 증상은 react-hook-form과 연결되어 저장
  *
  * @returns 
@@ -25,14 +22,9 @@ export const useSymptomsList = () => {
 
   const [selectedSymptoms, setSelectedSymptoms] = useState(() => getValues("symptoms") || []);
 
-  const [customSymptoms] = useAtom(customSymptomsAtom);
-
   const { symptoms = [], isLoading} = useSymptoms();
 
-  const allSymptoms: string[] = [
-    ...symptoms.map((s) => s.name), 
-    ...customSymptoms,              
-  ];
+  const allSymptoms: string[] = symptoms;
 
   const toggleSymptom = (symptom: string) => {
     const updatedSymptoms = selectedSymptoms.includes(symptom)

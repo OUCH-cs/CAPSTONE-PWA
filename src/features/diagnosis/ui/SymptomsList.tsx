@@ -9,12 +9,11 @@ const SymptomsList = () => {
   const groupedSymptoms = chunkArray(allSymptoms, ITEMS_PER_ROW);
 
   if (isLoading) {
-    return <div>Loading symptoms...</div>; // ✅ 로딩 중이면 로딩 표시
+    return <div>Loading symptoms...</div>; 
   }
-  
 
   return (
-    <>
+    <SymptomsContaniner>
       {groupedSymptoms.map((group, index) => (
         <SymptomList key={`group-${index}`}>
           {group.map((item) => (
@@ -31,11 +30,15 @@ const SymptomsList = () => {
           ))}
         </SymptomList>
       ))}
-    </>
+    </SymptomsContaniner>
   );
 };
 
 export default SymptomsList;
+const SymptomsContaniner = styled.div`
+  margin-bottom: 8rem;
+
+`
 
 const SymptomList = styled.div`
   display: flex;
