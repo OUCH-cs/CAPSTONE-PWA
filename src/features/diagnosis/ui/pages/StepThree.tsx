@@ -3,26 +3,14 @@ import styled from "@emotion/styled";
 import theme from '@/shared/styles/theme';
 import { Accordion } from "@/shared/components/accordion";
 import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
-import {  StepProps } from "../../diagnosis.type";
-import { useSymptoms } from '../../lib/useSymptoms';
-import { useFormContext } from "react-hook-form";
+import { StepProps } from "../../diagnosis.type";
+import { useSymptomsList } from '../../lib/useSymptomsList';
+
 
 
 const StepThree = ({ onNext, onPrev }: StepProps) => {
-   const { setValue, getValues } = useFormContext<{ systems: string; symptoms: string[]}>();
-   
-   const selectedSystem = getValues("systems");           
-   const selectedSymptoms = getValues("symptoms");        
-   const { symptoms = [] } = useSymptoms(selectedSystem);
+  const { selectedSymptoms,selectedSystem, allSymptoms, toggleSymptom } =useSymptomsList()
 
-   const toggleSymptom = (symptom: string) => {
-    const isSelected = selectedSymptoms.includes(symptom);
-    const updated = isSelected
-      ? selectedSymptoms.filter((s) => s !== symptom)
-      : [...selectedSymptoms, symptom];
-
-    setValue("symptoms", updated);
-  };
   return (
     <S.Container>
       <S.Question>What symptom are you experiencing?</S.Question>
@@ -43,7 +31,7 @@ const StepThree = ({ onNext, onPrev }: StepProps) => {
             {/* 아코디언 콘텐츠 */}
             {/* 리렌더링 되고 있다. */}
             <BodyWrapper>
-              {symptoms.map((item)=>(
+              {allSymptoms.map((item)=>(
                 <div key={item}>
                   <ItemWrapper
                     selected={selectedSymptoms.includes(item)}

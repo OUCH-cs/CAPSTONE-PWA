@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import { chunkArray } from "../lib/chunkArray";
-import { useSymptomsList } from "../lib/useSymptomsList";
+import { useSystemsList } from "../lib/useSymptomsList";
 import { ITEMS_PER_ROW } from "@/shared/mock";
 
 const SymptomsList = () => {
-  const { selectedSymptoms, allSymptoms, toggleSymptom, isLoading } = useSymptomsList();
+  const { selectedSymptoms, allSymptoms, toggleSymptom, isLoading } = useSystemsList();
   const groupedSymptoms = chunkArray(allSymptoms, ITEMS_PER_ROW);
 
   if (isLoading) {
