@@ -15,7 +15,7 @@ export { RootLayout };
 const Container = styled.div`
   min-width: 360px;
   max-width: 450px;
-  height: 100vh;
+  min-height: 100vh;
   padding-bottom: 52px;
   margin: 0 auto;
   background: ${({ theme }) => theme.colors.background};
