@@ -10,11 +10,11 @@ export const getSystems = async () : Promise<string[]> => {
 
 
 export const getSymptoms = async (
-    systems: string,
+    system: string,
     languageCode: string = "en"
 ) : Promise<string[]> => {
     const response = await apiRequest({
-        url: `/diagnosis-algorithm/symptoms?system=${systems}&languageCode=${languageCode}`,
+        url: `/diagnosis-algorithm/symptoms?system=${system}&languageCode=${languageCode}`,
         method: "GET",
     })
     return response.data;

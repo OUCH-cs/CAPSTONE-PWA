@@ -65,6 +65,7 @@ const StepThree = ({ onNext, onPrev }: StepProps) => {
 };
 
 export default StepThree;
+
 const AccordionContaniner = styled.div`
   margin-bottom: 8rem;
 `

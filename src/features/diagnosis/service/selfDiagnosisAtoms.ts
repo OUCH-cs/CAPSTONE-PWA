@@ -42,3 +42,5 @@ export const removeSymptomAtom = atom(
     set(customSymptomsAtom, updated);
   }
 );
+
+export const selectedSystemAtom = atom<string>("");

@@ -24,7 +24,7 @@ function SelfDiagnosisPage() {
   const methods = useForm<DiagnosisFormData>({
     defaultValues: {
       visitType: "HOSPITAL",
-      symptoms: [],
+      symptom: "",
       duration: "LESS_THAN_1_DAY",
       painSeverity: 5,
       additionalNote: "",

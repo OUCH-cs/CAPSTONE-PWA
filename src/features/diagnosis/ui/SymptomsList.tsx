@@ -5,8 +5,8 @@ import { useSystemsList } from "../lib/useSymptomsList";
 import { ITEMS_PER_ROW } from "@/shared/mock";
 
 const SymptomsList = () => {
-  const { selectedSymptoms, allSymptoms, toggleSymptom, isLoading } = useSystemsList();
-  const groupedSymptoms = chunkArray(allSymptoms, ITEMS_PER_ROW);
+  const { selectedSystem, allSystems, toggleSystem, isLoading } = useSystemsList();
+  const groupedSymptoms = chunkArray(allSystems, ITEMS_PER_ROW);
 
   if (isLoading) {
     return <div>Loading symptoms...</div>; 
@@ -20,10 +20,10 @@ const SymptomsList = () => {
             <SymptomButton
               type="button"
               key={item}
-              selected={selectedSymptoms.includes(item)}
-              onClick={() => toggleSymptom(item)}
+              selected={selectedSystem.includes(item)}
+              onClick={() => toggleSystem(item)}
             >
-              <SymptomText selected={selectedSymptoms.includes(item)}>
+              <SymptomText selected={selectedSystem.includes(item)}>
                 {item}
               </SymptomText>
             </SymptomButton>

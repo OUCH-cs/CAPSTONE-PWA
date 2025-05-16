@@ -2,12 +2,13 @@ import * as S from "../common"
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import { useFormContext, Controller } from "react-hook-form";
-import SelectedSymptoms from "../SelectedSymptoms";
 import { DiagnosisFormData } from "../../diagnosis.type";
 import { StepProps } from "../../diagnosis.type";
+import { useNavigate } from "react-router-dom";
 
 
 const StepSix = ({ onPrev }: StepProps) => {
+  const navigate = useNavigate()
   const { control } = useFormContext<DiagnosisFormData>();
 
   return (
@@ -15,7 +16,6 @@ const StepSix = ({ onPrev }: StepProps) => {
       <S.Question>
         Please write down what you would like to tell the doctor additionally
       </S.Question>
-      <SelectedSymptoms />
       <Controller
         name="additionalNote"
         control={control}
@@ -35,6 +35,8 @@ const StepSix = ({ onPrev }: StepProps) => {
               <S.ButtonText>Prev</S.ButtonText>
             </S.NavigateButton>
             <S.NavigateButton
+              type='submit'
+              onClick={() => {navigate("/recommend")}}
             >
               <S.ButtonText>Save</S.ButtonText>
             </S.NavigateButton>
