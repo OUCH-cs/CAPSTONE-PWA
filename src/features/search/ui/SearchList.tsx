@@ -27,5 +27,6 @@ const Container = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: 50px;
   overflow-y: auto;
 `;

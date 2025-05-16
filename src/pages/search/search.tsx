@@ -5,6 +5,7 @@ import { Searchbar, SearchList } from "@/features/search/ui";
 import { fallbackLocaton } from "@/shared/consts/common";
 import SortDropdown from "@/features/search/ui/SortDropdown";
 import useToggle from "@/shared/lib/useToggle";
+import Skeleton from "@/shared/components/skeleton/Skeleton";
 // import { useCurrLocation } from "@/shared/services/useCurrLocation";
 
 function SearchPage() {
@@ -49,7 +50,13 @@ function SearchPage() {
         />
       </SortDropdownWrapper>
 
-      {(isNearbyPending || isTextSearchPending) && <div>Loading...</div>}
+      {(isNearbyPending || isTextSearchPending) && (
+        <SkeletonList>
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <Skeleton key={`notice-skeleton-${idx}`} width={328} height={170} />
+          ))}
+        </SkeletonList>
+      )}
 
       {(isNearbyError || isTextSearchError) && <div>Error!!</div>}
 
@@ -77,4 +84,12 @@ const SortDropdownWrapper = styled.div`
   justify-content: flex-end;
   width: 328px;
   margin-bottom: 16px;
+`;
+
+const SkeletonList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 50px;
+  overflow-y: auto;
 `;
