@@ -4,10 +4,10 @@ export function getDistanceInMeters(from: LatLng, to: LatLng): number {
   const toRad = (value: number) => (value * Math.PI) / 180;
 
   const R = 6371e3; // 지구 반지름 (m)
-  const φ1 = toRad(from.latitude);
-  const φ2 = toRad(to.latitude);
-  const Δφ = toRad(to.latitude - from.latitude);
-  const Δλ = toRad(to.longitude - from.longitude);
+  const φ1 = toRad(from.latitude ?? 0);
+  const φ2 = toRad(to.latitude ?? 0);
+  const Δφ = toRad((to.latitude ?? 0) - (from.latitude ?? 0));
+  const Δλ = toRad((to.longitude ?? 0) - (from.longitude ?? 0));
 
   const a =
     Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +

@@ -14,11 +14,7 @@ function SearchList({ currLocation, places }: SearchListProps) {
     <Container>
       {places?.map((place) => (
         <Link to={`/search/${place.id}`} key={place.id}>
-          <SearchPreviewCard
-            key={place.id}
-            currLocation={currLocation}
-            {...place}
-          />
+          <SearchPreviewCard currLocation={currLocation} {...place} />
         </Link>
       ))}
     </Container>

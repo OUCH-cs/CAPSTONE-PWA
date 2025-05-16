@@ -44,14 +44,15 @@ const Input = styled.input`
   padding-left: 14px;
   border-radius: 10px;
   font-size: 18px;
-  font-wieght: 500;
+  font-weight: 500;
   color: ${theme.colors.gray_4};
   background-color: #f4f8fa;
 
   &::placeholder {
-  font-size: 16px;
-  font-weight: 400;
-  color: ${theme.colors.gray_7};
+    font-size: 16px;
+    font-weight: 400;
+    color: ${theme.colors.gray_7};
+  }
 `;
 
 const IconWrapper = styled.button`
