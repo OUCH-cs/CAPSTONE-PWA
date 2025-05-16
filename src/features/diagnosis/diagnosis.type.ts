@@ -23,7 +23,8 @@ export type DiagnosisFormData = {
   }
   
   export interface StepProps {
-    onNext: () => void;
+    onNext?: () => void;
+    onPrev?: () => void;
   }
 
   export interface ProgressBarProps {

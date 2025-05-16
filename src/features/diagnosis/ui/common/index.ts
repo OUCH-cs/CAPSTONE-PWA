@@ -12,12 +12,20 @@ const Question = styled.p`
   margin-bottom: 3.5rem;
 `;
 
-const NextButtonText = styled.p`
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+
+`
+
+const ButtonText = styled.p`
   color: ${theme.colors.white};
   font-size: 1.5rem;
 `;
 
-const NextButton = styled(Button)`
+const NavigateButton = styled(Button)`
   height: 4rem;
   width: 100%;
   text-align: center;
@@ -30,6 +38,7 @@ const NextButton = styled(Button)`
 export {
   Container,
   Question,
-  NextButton,
-  NextButtonText,
+  ButtonContainer ,
+  ButtonText,
+  NavigateButton
 };

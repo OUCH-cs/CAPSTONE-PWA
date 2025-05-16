@@ -3,7 +3,7 @@ import SelectDestination from "../SelectDestination";
 import { useFormContext } from "react-hook-form";
 import { DestinationType, StepProps } from "../../diagnosis.type";
 
-const StepOne = ({ onNext }: StepProps) => {
+const StepOne = ({ onNext, onPrev }: StepProps) => {
   const { watch } = useFormContext<{ visitType: DestinationType }>();
   const selectedDestination = watch("visitType") ?? undefined;
 
@@ -11,13 +11,21 @@ const StepOne = ({ onNext }: StepProps) => {
     <S.Container>
       <S.Question>Where do you want to go?</S.Question>
       <SelectDestination selectedDestination={selectedDestination} />
-      <S.NextButton
-        disabled={!selectedDestination}
-        onClick={onNext}
-      >
-        <S.NextButtonText>Next</S.NextButtonText>
-      </S.NextButton>
+      <S.ButtonContainer>
+        <S.NavigateButton
+          onClick={onPrev}
+        >
+          <S.ButtonText>Prev</S.ButtonText>
+        </S.NavigateButton>
+        <S.NavigateButton
+          disabled={!selectedDestination}
+          onClick={onNext}
+        >
+          <S.ButtonText>Next</S.ButtonText>
+        </S.NavigateButton>
+      </S.ButtonContainer>
     </S.Container>
+
   );
 };
 

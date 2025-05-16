@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useNavigate } from 'react-router-dom';
 import DiagnosisPost from "@/features/diagnosis/ui/Funnel";
 import { useState } from "react";
 import ProgressBar from "@/features/diagnosis/ui/ProgressBar";
@@ -7,12 +8,13 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useAtom } from "jotai";
 import { currentPageAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
 import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
-import { handleNextClick, useFunnel, useProgress } from "@/shared/lib/funnel";
+import { handleNextClick, handlePrevClick, useFunnel, useProgress } from "@/shared/lib/funnel";
 import { useSubmitDiagnosis } from "@/features/diagnosis/lib/useDiagnosis";
 
 const steps = ["1", "2", "3", "4", "5"];
 
 function SelfDiagnosisPage() {
+  const navigate = useNavigate();
   const [currentPage] = useAtom(currentPageAtom);
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
   const { currentStep, setCurrentStep, initialProgress, getCurrentStepIndex } = useProgress(steps);
@@ -37,6 +39,15 @@ function SelfDiagnosisPage() {
     setProgress
   );
 
+  const prevClickHandler = handlePrevClick(
+    getCurrentStepIndex,
+    steps,
+    setStep,
+    setCurrentStep,
+    setProgress,
+    navigate,
+  );
+
   return (
     <Container>
       <Title>Self-diagnosis</Title>
@@ -48,6 +59,7 @@ function SelfDiagnosisPage() {
         <DiagnosisPost
           steps={steps}
           nextClickHandler={nextClickHandler}
+          prevClickHandler={prevClickHandler}
           Funnel={Funnel}
           Step={Step}
         />

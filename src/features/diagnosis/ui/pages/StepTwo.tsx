@@ -7,7 +7,7 @@ import { useAtom } from "jotai";
 import { currentPageAtom, setPageAtom } from "../../service/selfDiagnosisAtoms";
 import AddSymptoms from "./AddSymptomsPage";
 
-const StepTwo = ({ onNext }: StepProps) => {
+const StepTwo = ({ onNext, onPrev }: StepProps) => {
   const [currentPage] = useAtom(currentPageAtom);
   const [, setPage] = useAtom(setPageAtom);
 
@@ -20,9 +20,18 @@ const StepTwo = ({ onNext }: StepProps) => {
           <AddButton onClick={() => setPage("add")}>
             <PlusButton width={16} height={16}/>
           </AddButton>
-          <S.NextButton onClick={onNext}>
-            <S.NextButtonText>Next</S.NextButtonText>
-          </S.NextButton>
+          <S.ButtonContainer>
+            <S.NavigateButton
+              onClick={onPrev}
+            >
+              <S.ButtonText>Prev</S.ButtonText>
+            </S.NavigateButton>
+            <S.NavigateButton
+              onClick={onNext}
+            >
+              <S.ButtonText>Next</S.ButtonText>
+            </S.NavigateButton>
+          </S.ButtonContainer>
         </>
       ) : (
         <AddSymptoms onClose={() => setPage("main")} />

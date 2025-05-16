@@ -9,7 +9,7 @@ import { StepProps } from "../../diagnosis.type";
 import { DURATION_OPTIONS, DURATION_LABELS} from "@/shared/mock";
 
 
-const StepThree = ({ onNext }: StepProps) => {
+const StepThree = ({ onNext, onPrev }: StepProps) => {
   const { setValue, watch } = useFormContext<{ duration: string }>();
   const duration: string = watch("duration") || "";
 
@@ -46,14 +46,20 @@ const StepThree = ({ onNext }: StepProps) => {
           </BodyWrapper>
         </Accordion.Body>
       </Accordion>
-
-      <S.NextButton
-        disabled={!duration}
-        onClick={onNext}
-        style={{ marginTop: "2rem"}}
-      >
-        <S.NextButtonText>Next</S.NextButtonText>
-      </S.NextButton>
+            <S.ButtonContainer>
+              <S.NavigateButton
+                onClick={onPrev}
+              >
+                <S.ButtonText>Prev</S.ButtonText>
+              </S.NavigateButton>
+              <S.NavigateButton
+                disabled={!duration}
+                onClick={onNext}
+                style={{ marginTop: "2rem"}}
+              >
+                <S.ButtonText>Next</S.ButtonText>
+              </S.NavigateButton>
+            </S.ButtonContainer>
     </S.Container>
   );
 };

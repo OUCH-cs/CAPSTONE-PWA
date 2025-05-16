@@ -4,8 +4,10 @@ import theme from "@/shared/styles/theme";
 import { useFormContext, Controller } from "react-hook-form";
 import SelectedSymptoms from "../SelectedSymptoms";
 import { DiagnosisFormData } from "../../diagnosis.type";
+import { StepProps } from "../../diagnosis.type";
 
-const StepFive = () => {
+
+const StepFive = ({ onPrev }: StepProps) => {
   const { control } = useFormContext<DiagnosisFormData>();
 
   return (
@@ -26,9 +28,17 @@ const StepFive = () => {
           />
         )}
       />
-      <S.NextButton>
-        <S.NextButtonText>Save</S.NextButtonText>
-      </S.NextButton>
+          <S.ButtonContainer>
+            <S.NavigateButton
+              onClick={onPrev}
+            >
+              <S.ButtonText>Prev</S.ButtonText>
+            </S.NavigateButton>
+            <S.NavigateButton
+            >
+              <S.ButtonText>Save</S.ButtonText>
+            </S.NavigateButton>
+          </S.ButtonContainer>
     </S.Container>
   );
 };

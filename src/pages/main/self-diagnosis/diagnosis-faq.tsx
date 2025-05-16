@@ -41,9 +41,9 @@ function DiagnosisFaqPage() {
         </Accordion>
       </div>
       ))}
-      <S.NextButton onClick={() => navigate("/self-diagnosis")}>
-        <S.NextButtonText>Next</S.NextButtonText>
-      </S.NextButton>
+      <S.NavigateButton onClick={() => navigate("/self-diagnosis")}>
+        <S.ButtonText>Next</S.ButtonText>
+      </S.NavigateButton>
     </Container>
   );
 }
