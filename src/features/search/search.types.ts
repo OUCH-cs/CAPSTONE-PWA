@@ -26,11 +26,8 @@ type TextSearchRequest = SearchRequestBase & {
   includedType?: string;
 };
 
-interface Place {
-  currentOpeningHours: {
-    openNow: boolean;
-    weekdayDescriptions: string[];
-  };
+// 장소 기본 정보 타입
+interface PlaceBase {
   displayName: {
     text: string;
     languageCode: string;
@@ -41,8 +38,21 @@ interface Place {
     languageCode: string;
     text: string;
   };
+}
+
+interface Place extends PlaceBase {
+  currentOpeningHours: {
+    openNow: boolean;
+    weekdayDescriptions: string[];
+  };
   types: string[];
   rating: number;
 }
 
-export type { NearbyRequest, TextSearchRequest, Place };
+interface PlaceDetail extends PlaceBase {
+  formattedAddress: string;
+  nationalPhoneNumber: string;
+  primaryType: string;
+}
+
+export type { NearbyRequest, TextSearchRequest, Place, PlaceDetail };

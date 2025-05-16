@@ -26,7 +26,7 @@ const useTextSearch = () => {
 
     const requestData: TextSearchRequest = {
       textQuery,
-      languageCode: "ko",
+      languageCode: "en",
     };
 
     try {

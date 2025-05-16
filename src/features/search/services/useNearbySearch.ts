@@ -40,7 +40,6 @@ const useNearbySearch = (currLocation: LatLng | null) => {
       setPlaces(data.places);
       setIsSuccess(true);
       setIsError(false);
-      console.log("data", data);
     } catch (error) {
       console.error(error);
       setIsError(true);

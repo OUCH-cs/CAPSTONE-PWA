@@ -26,8 +26,8 @@ function SearchPreviewCard({
     <Container>
       <Title>{place.displayName.text}</Title>
       <OperatingHours>
-        <Open>{place.currentOpeningHours?.openNow ? "Open / " : ""}</Open>
-        <Closed>{closedDay ? `Closed every ${closedDay}` : ""}</Closed>
+        <Open>{place.currentOpeningHours?.openNow ? "Open " : "- "}</Open>
+        <Closed>{closedDay ? `/ Closed every ${closedDay}` : "-"}</Closed>
       </OperatingHours>
       <PlaceMetrics>
         {place.rating && (

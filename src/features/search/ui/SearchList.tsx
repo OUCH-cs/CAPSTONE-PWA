@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { SearchPreviewCard } from "./SearchPreviewCard";
 import { Place } from "../search.types";
 import { LatLng } from "@/features/map/map.types";
+import { Link } from "react-router-dom";
 
 interface SearchListProps {
   currLocation: LatLng | null;
@@ -12,11 +13,13 @@ function SearchList({ currLocation, places }: SearchListProps) {
   return (
     <Container>
       {places?.map((place) => (
-        <SearchPreviewCard
-          key={place.id}
-          currLocation={currLocation}
-          {...place}
-        />
+        <Link to={`/search/${place.id}`} key={place.id}>
+          <SearchPreviewCard
+            key={place.id}
+            currLocation={currLocation}
+            {...place}
+          />
+        </Link>
       ))}
     </Container>
   );
