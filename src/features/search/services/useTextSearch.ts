@@ -1,6 +1,5 @@
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { TextSearchRequest } from "../search.types";
-import searchQuery from "../services/api/searchQuery";
 import {
   isTextQueryError,
   isTextQueryPending,
@@ -9,13 +8,26 @@ import {
   textQueryAtom,
 } from "./store/searchQueryAtom";
 import { useEffect } from "react";
+import { departmentFilterAtom, sortFilterAtom } from "./store/filterAtom";
+import {
+  fetchMergedTextSearchResults,
+  fetchTextSearchByType,
+} from "./api/textSearchApi";
 
 const useTextSearch = () => {
+  const department = useAtomValue(departmentFilterAtom); // department 필터링
+  const sort = useAtomValue(sortFilterAtom); // sort 필터링
+
   const [data, setData] = useAtom(searchQueryAtomResults);
   const [textQuery, setTextQuery] = useAtom(textQueryAtom); // 입력 검색어
   const [isPending, setIsPending] = useAtom(isTextQueryPending);
   const [isSuccess, setIsSuccess] = useAtom(isTextQuerySuccess);
   const [isError, setIsError] = useAtom(isTextQueryError);
+
+  const requestData: TextSearchRequest = {
+    textQuery,
+    languageCode: "en",
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextQuery(e.target.value);
@@ -24,35 +36,12 @@ const useTextSearch = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const requestData: TextSearchRequest = {
-      textQuery,
-      languageCode: "en",
-    };
-
     try {
       setIsPending(true);
 
-      // 검색어 요청 API 호출
-      const [hospitalResults, pharmacyResults] = await Promise.all([
-        searchQuery({
-          url: ":searchText",
-          method: "POST",
-          data: { ...requestData, includedType: "hospital" }, // 병원 검색
-        }),
-        searchQuery({
-          url: ":searchText",
-          method: "POST",
-          data: { ...requestData, includedType: "pharmacy" }, // 약국 검색
-        }),
-      ]);
+      const results = await fetchMergedTextSearchResults(requestData);
 
-      // 병원과 약국 검색 결과 병합
-      const mergedResults = [
-        ...(hospitalResults.data.places || []),
-        ...(pharmacyResults.data.places || []),
-      ];
-
-      setData(mergedResults || []);
+      setData(results);
 
       setIsSuccess(true);
       setIsError(false);
@@ -73,6 +62,27 @@ const useTextSearch = () => {
     setIsSuccess(false);
     setIsError(false);
   }, []);
+
+  // 추천순, 거리순 필터링
+  useEffect(() => {
+    if (!textQuery) return;
+
+    const rankPreference = sort === "Recommended" ? "RELEVANCE" : "DISTANCE";
+
+    fetchMergedTextSearchResults({ ...requestData, rankPreference }, setData);
+  }, [sort]);
+
+  // 병원, 약국 필터링
+  useEffect(() => {
+    if (!textQuery) return;
+
+    if (department === "Hospital") {
+      fetchTextSearchByType(requestData, "hospital", setData);
+      console.log(data);
+    } else if (department === "Pharmacy") {
+      fetchTextSearchByType(requestData, "pharmacy", setData);
+    }
+  }, [department]);
 
   return {
     textQuery,

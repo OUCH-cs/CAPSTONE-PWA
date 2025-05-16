@@ -3,11 +3,15 @@ import { useNearbySearch } from "@/features/search/services/useNearbySearch";
 import { useTextSearch } from "@/features/search/services/useTextSearch";
 import { Searchbar, SearchList } from "@/features/search/ui";
 import { fallbackLocaton } from "@/shared/consts/common";
+import SortDropdown from "@/features/search/ui/SortDropdown";
+import useToggle from "@/shared/lib/useToggle";
 // import { useCurrLocation } from "@/shared/services/useCurrLocation";
 
 function SearchPage() {
   // const currLocation = useCurrLocation(); // 현재 위치 가져오기 버그로 인한..
   const currLocation = fallbackLocaton; // 임시 위치 설정 하드코딩
+
+  const { isOpen, setIsOpen, toggle } = useToggle(); // 필터 드롭다운 토글
 
   const {
     isPending: isNearbyPending,
@@ -36,6 +40,15 @@ function SearchPage() {
     <Container>
       <Searchbar />
 
+      <SortDropdownWrapper>
+        <SortDropdown
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          toggle={toggle}
+          menus={["Recommended", "Distance"]}
+        />
+      </SortDropdownWrapper>
+
       {(isNearbyPending || isTextSearchPending) && <div>Loading...</div>}
 
       {(isNearbyError || isTextSearchError) && <div>Error!!</div>}
@@ -57,4 +70,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const SortDropdownWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 328px;
+  margin-bottom: 16px;
 `;

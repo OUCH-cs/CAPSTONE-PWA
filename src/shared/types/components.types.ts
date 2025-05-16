@@ -1,5 +1,3 @@
-import { Department } from "@/features/search/search.types";
-
 // 버튼
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -36,18 +34,10 @@ interface IDropdownTrigger {
   onClick: () => void;
 }
 
-interface DepartmentFilterDropdownProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  toggle: () => void;
-  menus: Department[];
-}
-
 export type {
   IButtonProps,
   IModalProps,
   IDropdown,
   IDropdownMenu,
   IDropdownTrigger,
-  DepartmentFilterDropdownProps,
 };
