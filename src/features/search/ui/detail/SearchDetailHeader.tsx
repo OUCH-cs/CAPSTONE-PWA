@@ -7,7 +7,7 @@ function SearchDetailHeader({ children }: PropsWithChildren) {
   return (
     <Container>
       <IconWrapper to="/search">
-        <PrevBtn width="28" height="28" />
+        <PrevBtn width="28" height="28" stroke="#000" />
       </IconWrapper>
       <Title>{children}</Title>
     </Container>

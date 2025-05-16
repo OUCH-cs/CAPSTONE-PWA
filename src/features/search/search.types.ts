@@ -1,6 +1,19 @@
 import { LanguageCode } from "@/shared/types/common";
 import { LatLng } from "../map/map.types";
 
+type Department = "Hospital" | "Pharmacy";
+type Sort = "Recommended" | "Distance";
+
+interface DropdownPropsBase<T> {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  toggle: () => void;
+  menus: T;
+}
+
+interface DepartmentDropdownProps extends DropdownPropsBase<Department[]> {}
+interface SortDropdownProps extends DropdownPropsBase<Sort[]> {}
+
 type Location = {
   circle: {
     center: LatLng;
@@ -24,6 +37,7 @@ type NearbyRequest = SearchRequestBase & {
 type TextSearchRequest = SearchRequestBase & {
   textQuery: string;
   includedType?: string;
+  rankPreference?: "DISTANCE" | "RELEVANCE";
 };
 
 // 장소 기본 정보 타입
@@ -55,4 +69,13 @@ interface PlaceDetail extends PlaceBase {
   primaryType: string;
 }
 
-export type { NearbyRequest, TextSearchRequest, Place, PlaceDetail };
+export type {
+  Department,
+  Sort,
+  DepartmentDropdownProps,
+  SortDropdownProps,
+  NearbyRequest,
+  TextSearchRequest,
+  Place,
+  PlaceDetail,
+};
