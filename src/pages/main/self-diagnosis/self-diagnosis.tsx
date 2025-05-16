@@ -11,7 +11,7 @@ import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
 import { handleNextClick, handlePrevClick, useFunnel, useProgress } from "@/shared/lib/funnel";
 import { useSubmitDiagnosis } from "@/features/diagnosis/lib/useDiagnosis";
 
-const steps = ["1", "2", "3", "4", "5"];
+const steps = ["1", "2", "3", "4", "5", "6"];
 
 function SelfDiagnosisPage() {
   const navigate = useNavigate();

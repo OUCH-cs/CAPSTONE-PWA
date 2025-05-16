@@ -1,10 +1,30 @@
 import useSWR from "swr";
-import { getSymptoms } from "../service/api"
+import { getSystems,getSymptoms } from "../service/api"
 
-export const useSymptoms = () => {
+export const useSystems = () => {
     const { data, error, isLoading, mutate } = useSWR<string[]>(
-        "/symptoms",
-        getSymptoms
+        "/systems",
+        getSystems
+    );    
+
+    console.log(data)
+    
+    return {
+        systems: data,
+        isLoading,
+        isError: error,
+        mutate,
+      };
+
+}
+
+
+export const useSymptoms = (
+    systems: string, languageCode: string = "en"
+) => {
+    const { data, error, isLoading, mutate } = useSWR<string[]>(
+        ['/symptoms', systems, languageCode], 
+        () => getSymptoms(systems, languageCode) 
     );    
 
     console.log(data)

@@ -5,6 +5,7 @@ import StepTwo from "./pages/StepTwo";
 import StepThree from "./pages/StepThree";
 import StepFour from "./pages/StepFour";
 import StepFive from "./pages/StepFive";
+import StepSix from "./pages/StepSix";
 
 export interface ClassPostProps {
   steps: string[];
@@ -36,7 +37,10 @@ const DiagnosisPost = ({
         <StepFour onNext={() => nextClickHandler(steps[4])} onPrev ={() => prevClickHandler()} />
       </Step>
       <Step name={steps[4]}>
-        <StepFive onPrev ={() => prevClickHandler()}/>
+        <StepFive onNext={() => nextClickHandler(steps[4])} onPrev ={() => prevClickHandler()} />
+      </Step>
+      <Step name={steps[5]}>
+        <StepSix onPrev ={() => prevClickHandler()}/>
       </Step>
     </Funnel>
   );
