@@ -64,7 +64,7 @@ const useNearbySearch = (currLocation: LatLng | null) => {
     };
 
     fetchNearbyPlaces(requestData);
-  }, [department, sort]);
+  }, [department, sort, currLocation]);
 
   return { isPending, isSuccess, isError, places };
 };

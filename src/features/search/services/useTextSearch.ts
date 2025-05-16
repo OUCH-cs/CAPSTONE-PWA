@@ -78,7 +78,6 @@ const useTextSearch = () => {
 
     if (department === "Hospital") {
       fetchTextSearchByType(requestData, "hospital", setData);
-      console.log(data);
     } else if (department === "Pharmacy") {
       fetchTextSearchByType(requestData, "pharmacy", setData);
     }
