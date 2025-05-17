@@ -4,6 +4,7 @@ import apiRequest from "@/shared/api/apiRequest";
 import { Button } from "@/shared/components/button/Button";
 import styled from "@emotion/styled";
 import { MODEL } from "@/features/translate/translate.consts";
+import GuideRoutingButton from "@/entities/translate/ui/GuideRoutingButton";
 
 function TranslatePage() {
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
@@ -93,6 +94,7 @@ function TranslatePage() {
 
   return (
     <Container>
+      <GuideRoutingButton />
       <RecordingIndicator>Recording...</RecordingIndicator>
       <ButtonWrapper>
         <Button
@@ -124,7 +126,7 @@ const Container = styled.div`
   align-items: center;
   gap: 100px;
   height: 100vh;
-  padding-top: 50%;
+  padding-top: 100px;
 `;
 
 const ButtonWrapper = styled.div`
