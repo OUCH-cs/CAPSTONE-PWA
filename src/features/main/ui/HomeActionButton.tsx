@@ -6,11 +6,12 @@ interface HomeActionButtonProps {
   icon: ReactNode;
   label: string;
   selected?: boolean;
+  onClick?: () => void;
 }
 
-const HomeActionButton = ({ icon, label, selected = false }: HomeActionButtonProps) => {
+const HomeActionButton = ({ icon, label, selected = false, onClick }: HomeActionButtonProps) => {
   return (
-    <Wrapper selected={selected}>
+    <Wrapper selected={selected} onClick={onClick}>
       {icon}
       <Label selected={selected}>{label}</Label>
     </Wrapper>

@@ -24,25 +24,23 @@ function GuideQuestions() {
             <Accordion key={`${item.question.en}-${idx}`}>
             <Accordion.Header>
                 <AccordionHeaderWrapper>
-                {item.question.en}
+                    {`Q. ${item.question.en}`}
                 <Accordion.Trigger>
                     <ArrowIcon />
                 </Accordion.Trigger>
                 </AccordionHeaderWrapper>
             </Accordion.Header>
-
             <Accordion.Body>
                 <BodyWrapper>
                 <Accordion.Item>
                     <ItemWrapper>
-                    <Label>Answer</Label>
-                    <Text>{item.answer.en}</Text>
+                        <Text>{`A. ${item.answer.en}`}</Text>
                     </ItemWrapper>
                 </Accordion.Item>
                 </BodyWrapper>
             </Accordion.Body>
             </Accordion>
-        ))}
+            ))}
         </Container>
       );
     }
@@ -51,10 +49,13 @@ export {GuideQuestions}
 
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   background-color: ${theme.colors.background};
-  padding: 0 1rem;
   overflow-y: auto;
   padding-bottom: 8rem;
+
 `;
 
 const AccordionHeaderWrapper = styled.div`
@@ -73,7 +74,7 @@ const AccordionHeaderWrapper = styled.div`
 
 const BodyWrapper = styled.div`
   display: flex;
-  background-color: ${theme.colors.white};
+  background-color: ${theme.colors.white_f1};
   flex-direction: column;
   border-radius: 10px;
 `;
@@ -89,16 +90,10 @@ const ItemWrapper = styled.div`
   border: none;
   text-align: left;
   cursor: pointer;
-  color:${theme.colors.gray_7};
   white-space: pre-line;
 `;
 const Text = styled.p`
-  font-size: 1.0rem;
-  color: ${theme.colors.gray_7};
   margin-bottom:10px;
-
-`;
-const Label = styled.p`
-  font-size: 1.2rem; 
-  color: ${theme.colors.black};
+  font-size: 16px;
+  font-weight: 600;
 `;

@@ -13,7 +13,7 @@ const GuideCategories = () => {
   }
 
   return (
-    <>
+    <Container>
       {categories.map((group, index) => (
         <GuideList key={`group-${index}`}>
           {group.map((item) => (
@@ -29,11 +29,15 @@ const GuideCategories = () => {
           ))}
         </GuideList>
       ))}
-    </>
+    </Container>
   );
 };
 
 export default GuideCategories;
+
+const Container = styled.div`
+  margin-bottom:3rem;
+`
 
 const GuideList = styled.div`
   display: flex;
