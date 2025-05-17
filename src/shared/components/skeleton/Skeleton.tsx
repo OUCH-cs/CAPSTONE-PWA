@@ -26,7 +26,7 @@ export default function Skeleton({
 }
 
 const Container = styled.div<{ $width: number; $height: number }>`
-  flex-shrink: 0; // 축소되지 않도록
+  flex-shrink: 0; /* 축소되지 않도록 */
   width: ${({ $width }) => $width}px;
   height: ${({ $height }) => $height}px;
   border-radius: 10px;

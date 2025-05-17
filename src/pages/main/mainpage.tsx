@@ -59,7 +59,6 @@ export { MainPage };
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   background-color: ${theme.colors.background};
   padding: 0 1rem;
 `;
@@ -75,7 +74,7 @@ const RecommendationTitle = styled.h2`
   font-size: 18px;
   font-weight: 400;
   margin-bottom: 1rem;
-  color:'#000;
+  color: "#000";
 `;
 
 const SkeletonWrapper = styled.div`
