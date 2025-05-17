@@ -12,6 +12,8 @@ import {
   SignupSuccessPage,
   NotFoundPage,
   MapPage,
+  GuideListPage,
+  GuidePage
 } from "@/pages";
 
 import MedicalRecordList from "@/pages/records/medicalrecord-list";
@@ -43,6 +45,9 @@ export default function AppRoutes() {
 
         {/* 자가진단 페이지 */}
         <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
+
+        <Route path="guide-list" element={<GuideListPage/>}/>
+        <Route path="guide" element={<GuidePage/>}/>
 
         {/* 검색 페이지 */}
         <Route path="/search" element={<SearchPage />} />

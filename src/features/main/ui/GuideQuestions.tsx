@@ -1,0 +1,104 @@
+import styled from "@emotion/styled";
+import { Accordion } from "@/shared/components/accordion";
+import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
+import theme from "@/shared/styles/theme";
+import { useAtom } from "jotai";
+import { selectedCategoriesAtom } from "../service/guideAtoms";
+import { useGetGuideQustion } from "../lib/useGuideCategories";
+
+
+function GuideQuestions() {
+    const [selectedCategories] = useAtom(selectedCategoriesAtom);
+    const selectedCategory = selectedCategories || ""; // 첫 번째 선택된 카테고리
+  
+    const { data = [], isLoading } = useGetGuideQustion(selectedCategory, "en");
+    
+    if (isLoading) {
+        return <div>Loading guide questions...</div>;
+      }
+
+    return (
+        <Container>
+          {/* 아코디언 루트 컨테이너 */}
+          {data.map((item, idx) => (
+            <Accordion key={`${item.question.en}-${idx}`}>
+            <Accordion.Header>
+                <AccordionHeaderWrapper>
+                {item.question.en}
+                <Accordion.Trigger>
+                    <ArrowIcon />
+                </Accordion.Trigger>
+                </AccordionHeaderWrapper>
+            </Accordion.Header>
+
+            <Accordion.Body>
+                <BodyWrapper>
+                <Accordion.Item>
+                    <ItemWrapper>
+                    <Label>Answer</Label>
+                    <Text>{item.answer.en}</Text>
+                    </ItemWrapper>
+                </Accordion.Item>
+                </BodyWrapper>
+            </Accordion.Body>
+            </Accordion>
+        ))}
+        </Container>
+      );
+    }
+
+export {GuideQuestions}
+
+
+const Container = styled.div`
+  background-color: ${theme.colors.background};
+  padding: 0 1rem;
+  overflow-y: auto;
+  padding-bottom: 8rem;
+`;
+
+const AccordionHeaderWrapper = styled.div`
+  display: flex;
+  background-color: ${theme.colors.white};
+  font-size: 16px;
+  justify-content: space-between;
+  align-items: center;
+  width: inherit;
+  height: 63px;
+  padding: 9px 15px;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  cursor: pointer;
+`;
+
+const BodyWrapper = styled.div`
+  display: flex;
+  background-color: ${theme.colors.white};
+  flex-direction: column;
+  border-radius: 10px;
+`;
+
+const ItemWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: auto;
+  padding: 18px;
+  gap:10px;
+  flex-direction: column;
+  border-radius: 6px;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color:${theme.colors.gray_7};
+  white-space: pre-line;
+`;
+const Text = styled.p`
+  font-size: 1.0rem;
+  color: ${theme.colors.gray_7};
+  margin-bottom:10px;
+
+`;
+const Label = styled.p`
+  font-size: 1.2rem; 
+  color: ${theme.colors.black};
+`;
