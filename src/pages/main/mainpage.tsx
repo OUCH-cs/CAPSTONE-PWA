@@ -31,6 +31,16 @@ function MainPage() {
       </ButtonContainer>
 
       {isPending && (
+        <SkeletonWrapper>
+          <Skeleton width={185} height={21} />
+        </SkeletonWrapper>
+      )}
+
+      {isSuccess && (
+        <RecommendationTitle>Recommended Hospital</RecommendationTitle>
+      )}
+
+      {isPending && (
         <SkeletonList>
           {Array.from({ length: 5 }).map((_, idx) => (
             <Skeleton key={`notice-skeleton-${idx}`} width={236} height={152} />
@@ -59,6 +69,17 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
   gap: 0.6rem;
   margin-bottom: 4.3rem;
+`;
+
+const RecommendationTitle = styled.h2`
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color:'#000;
+`;
+
+const SkeletonWrapper = styled.div`
+  margin-bottom: 1rem;
 `;
 
 const SkeletonList = styled.div`
