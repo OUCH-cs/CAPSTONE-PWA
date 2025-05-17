@@ -4,7 +4,8 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import MedicalAddData from "@/features/records/ui/MedicalAddData";
 import { initialMedicalFormData } from "@/features/records/consts/medicalConstants";
-import { addHospital } from "@/features/records/service/medicalDataApi";  // API import
+import { addHospital } from "@/features/records/service/medicalDataApi";
+import CheckBox from "@/features/records/ui/CheckBox"; // 삭제 모달 재사용
 
 type HospitalRecord = {
   visitDate: string;
@@ -14,54 +15,87 @@ type HospitalRecord = {
   treatmentSummary: string;
 };
 
-// 날짜 형식 변환 함수
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
   const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
   return `${year}-${month}-${day}`;
 };
 
 export default function MedicalRecordAdd() {
   const navigate = useNavigate();
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
-  const handleSave = async () => {
+  const handleConfirmSave = () => {
+    setIsConfirmOpen(true);
+  };
+
+  const handleRealSave = async () => {
     try {
       const record: HospitalRecord = {
-        visitDate: formatDate(medicalData.find(item => item.title === "Date of Visit")?.value || ""),
-        visitingHospital: medicalData.find(item => item.title === "Visiting Hospital")?.value || "",
-        medicalSubject: medicalData.find(item => item.title === "Medical Subjects")?.value || "",
-        symptoms: medicalData.find(item => item.title === "Symptoms")?.value || "",
-        treatmentSummary: medicalData.find(item => item.title === "Treatment Summary")?.value || "",
+        visitDate:
+          formatDate(
+            medicalData.find((item) => item.title === "Date of Visit")?.value ||
+              ""
+          ),
+        visitingHospital:
+          medicalData.find((item) => item.title === "Visiting Hospital")
+            ?.value || "",
+        medicalSubject:
+          medicalData.find((item) => item.title === "Medical Subjects")
+            ?.value || "",
+        symptoms:
+          medicalData.find((item) => item.title === "Symptoms")?.value || "",
+        treatmentSummary:
+          medicalData.find((item) => item.title === "Treatment Summary")
+            ?.value || "",
       };
-
-      
 
       const response = await addHospital(record);
 
       if (response) {
-        navigate("/records/medicalrecord-list"); 
+        setIsConfirmOpen(false);
+        navigate("/records/medicalrecord-list");
       }
     } catch (err) {
       alert("저장 중 오류가 발생했습니다.");
       console.error(err);
     }
   };
-  
+
   return (
     <Container>
       <Header>
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
-          <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
+          <ArrowIcon
+            width="25px"
+            height="25px"
+            stroke="black"
+            style={{ marginLeft: -20 }}
+          />
         </BackButton>
         <HeaderTitle>Medical Record</HeaderTitle>
       </Header>
 
       <MedicalAddData onDataChange={setMedicalData} />
 
-      <SaveButton onClick={handleSave}>Save</SaveButton>
+      <SaveButton onClick={handleConfirmSave}>Save</SaveButton>
+
+      {isConfirmOpen && (
+        <CheckBox
+          message={
+            <>
+              Do you want to save your <br />
+              changes before exiting?
+            </>
+          }
+          confirmText="Save"
+          onCancel={() => setIsConfirmOpen(false)}
+          onConfirm={handleRealSave}
+        />
+      )}
     </Container>
   );
 }
@@ -103,7 +137,7 @@ const HeaderTitle = styled.h2`
 `;
 
 const SaveButton = styled.button`
-  margin-top:100px;
+  margin-top: 100px;
   padding: 13px;
   font-size: 18px;
   font-weight: 400;

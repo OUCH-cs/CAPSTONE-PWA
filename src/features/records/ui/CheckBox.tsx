@@ -3,12 +3,14 @@ import styled from "@emotion/styled";
 interface MedicalRecordDeleteProps {
   onCancel: () => void;
   onConfirm: () => void;
+  confirmText?: string;
   message?: React.ReactNode;
 }
 
-export default function MedicalRecordDelete({
+export default function CheckBox({
   onCancel,
   onConfirm,
+  confirmText = "Delete",
   message = "Do you want to delete a medical record?",
 }: MedicalRecordDeleteProps) {
   return (
@@ -17,7 +19,7 @@ export default function MedicalRecordDelete({
       <MessageText>{message}</MessageText>
         <ButtonWrapper>
           <CancelButton onClick={onCancel}>Cancel</CancelButton>
-          <DeleteButton onClick={onConfirm}>Delete</DeleteButton>
+          <DeleteButton onClick={onConfirm}>{confirmText}</DeleteButton>
         </ButtonWrapper>
       </ModalContent>
     </ModalOverlay>
@@ -30,7 +32,7 @@ const ModalOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;

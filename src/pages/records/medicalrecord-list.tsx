@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
-import MedicalRecordDelete from "@/features/records/ui/MedicalRecordDelete"; // 모달 import
+import CheckBox from "@/features/records/ui/CheckBox";
 
 type HospitalRecord = {
   id: number;
@@ -17,12 +17,7 @@ export default function MedicalRecordList() {
   const [hospitalList, setHospitalList] = useState<HospitalRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isDeleteMode, setIsDeleteMode] = useState(false);
   const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
-
-  const handleDeleteIconPress = () => {
-    setIsDeleteMode((prev) => !prev);
-  };
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -55,12 +50,12 @@ export default function MedicalRecordList() {
   const handleConfirmDelete = async () => {
     if (selectedDeleteId !== null) {
       try {
-        await deleteHospitals(selectedDeleteId.toString()); 
+        await deleteHospitals(selectedDeleteId.toString());
         setHospitalList((prevList) =>
           prevList.filter((hospital) => hospital.id !== selectedDeleteId)
-        ); 
-        setSelectedDeleteId(null); 
-      } catch (error:any) {
+        );
+        setSelectedDeleteId(null);
+      } catch (error: any) {
         setError('삭제 중 오류가 발생했습니다.');
       }
     }
@@ -69,22 +64,10 @@ export default function MedicalRecordList() {
   return (
     <Container>
       <Header>
-        <BackButton onClick={() => navigate("/records")}>         
+        <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
         <HeaderTitle>Medical Record</HeaderTitle>
-        <DeleteIconWrapper onClick={handleDeleteIconPress}>
-          <DeleteIcon
-            width="30px"
-            height="30px"
-            stroke="black"
-            style={{
-              bottom: 7,
-              right: 0,
-              position: "absolute",
-            }}
-          />
-        </DeleteIconWrapper>
       </Header>
 
       {loading ? (
@@ -100,24 +83,15 @@ export default function MedicalRecordList() {
 
             <ListItem onClick={() => navigate(`/records/medicalrecord/${hospital.id}`)}>
               <ListText>{hospital.hospital}</ListText>
-              {isDeleteMode ? (
-                <svg
-                  width="25"
-                  height="25"
-                  viewBox="0 0 25 25"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedDeleteId(hospital.id);
-                  }}
-                  style={{ cursor: "pointer" }}
-                >
-                  <path d="M5 5L20 20M20 5L5 20" stroke="black" strokeWidth="2" />
-                </svg>
-              ) : (
-                <ArrowIcon width="25px" height="25px" stroke="black" style={{ transform: "rotate(180deg)" }} />
-              )}
+              <DeleteIcon
+                width="16px"
+                height="18px"
+                style={{ cursor: "pointer" }}
+                onClick={(e) => {
+                  e.stopPropagation(); 
+                  setSelectedDeleteId(hospital.id);
+                }}
+              />
             </ListItem>
           </div>
         ))
@@ -126,12 +100,13 @@ export default function MedicalRecordList() {
       <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>
 
       {selectedDeleteId !== null && (
-        <MedicalRecordDelete
+        <CheckBox
           message={
             <>
               Do you want to delete <br /> a medical record?
             </>
           }
+            confirmText="Delete"
           onCancel={() => setSelectedDeleteId(null)}
           onConfirm={handleConfirmDelete}
         />
@@ -139,6 +114,7 @@ export default function MedicalRecordList() {
     </Container>
   );
 }
+
 
 const Container = styled.div`
   background-color: #f5f9fc;
@@ -232,13 +208,4 @@ const ErrorText = styled.p`
   font-weight: 500;
   text-align: center;
   margin-top: 20px;
-`;
-
-const DeleteIconWrapper = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  bottom: 0;
-  right: 0;
 `;
