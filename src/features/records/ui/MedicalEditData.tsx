@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { HospitalRecord } from "@/features/records/service/medicalDataApi";
-import DateSelection from "./DateSelection";  
+import DateSelection from "./DateSelection";
+import CheckBox from "./CheckBox"; 
 
 interface MedicalEditDataProps {
   initialData: HospitalRecord;
@@ -10,8 +11,9 @@ interface MedicalEditDataProps {
 
 const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }) => {
   const [formData, setFormData] = useState<HospitalRecord>(initialData);
-  const [isDateSelectionOpen, setDateSelectionOpen] = useState(false);  
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);  // ✅ 선택된 인덱스 상태
+  const [isDateSelectionOpen, setDateSelectionOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false); // ✅ 모달 상태
 
   useEffect(() => {
     setFormData(initialData);
@@ -26,19 +28,29 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       ...formData,
       [field]: e.target.value,
     });
-    setSelectedIndex(index);  // ✅ 선택 시 상태 업데이트
+    setSelectedIndex(index);
   };
 
   const handleSave = () => {
-    onSave(formData);
+    setConfirmModalOpen(true); // ✅ 모달 열기
   };
 
   const handleDateChange = (date: string) => {
+    const formattedDate = date.replace(/\./g, "-");
     setFormData((prevData) => ({
       ...prevData,
-      visitDate: date,
+      visitDate: formattedDate,
     }));
-    setDateSelectionOpen(false);  
+    setDateSelectionOpen(false);
+  };
+
+  const handleConfirmSave = () => {
+    onSave(formData); 
+    setConfirmModalOpen(false); 
+  };
+
+  const handleCancelSave = () => {
+    setConfirmModalOpen(false); 
   };
 
   return (
@@ -49,19 +61,15 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
           isSelected={selectedIndex === 0}
           onClick={() => setDateSelectionOpen(true)}
         >
-          <Input
-            type="text"
-            value={formData.visitDate}
-            readOnly
-          />
-          {isDateSelectionOpen && (
-            <DateSelection
-              isOpen={isDateSelectionOpen}
-              onClose={() => setDateSelectionOpen(false)}
-              onDateSelect={handleDateChange}
-            />
-          )}
+          <Input type="text" value={formData.visitDate} readOnly />
         </ListBox>
+        {isDateSelectionOpen && (
+          <DateSelection
+            isOpen={isDateSelectionOpen}
+            onClose={() => setDateSelectionOpen(false)}
+            onDateSelect={handleDateChange}
+          />
+        )}
       </DataBlock>
 
       <DataBlock>
@@ -109,9 +117,23 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       </DataBlock>
 
       <SaveButton onClick={handleSave}>Save</SaveButton>
+
+      {isConfirmModalOpen && (
+        <CheckBox
+          onCancel={handleCancelSave}
+          onConfirm={handleConfirmSave}
+          confirmText="Save"
+          message={
+            <>
+              Do you want to save your <br /> changes before exiting?
+            </>
+          }
+        />
+      )}
     </Container>
   );
 };
+
 
 const Container = styled.div`
   background-color: #f5f9fc;
@@ -135,8 +157,7 @@ const ListBox = styled.div<{ isSelected: boolean }>`
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
-  border: 1px solid
-    ${(props) => (props.isSelected ? "#0097A7" : "#E5E5EC")};  // ✅ 조건부 border
+  border: 1px solid ${(props) => (props.isSelected ? "#0097A7" : "#E5E5EC")};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   height: 60px;
   margin-top: 10px;

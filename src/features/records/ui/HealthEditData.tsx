@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { getHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi"; 
 import BloodPressurePart from "./BloodPressurePart";
 import BloodSugarPart from "./BloodSugarPart";
-import MedicineHistoryPart from "./MedicineHistoryPart";
+import CheckBox from "./CheckBox"; 
 
 interface Props {
   initialData?: HealthStatus;
@@ -21,15 +21,14 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
 
   const [bpModalOpen, setBpModalOpen] = useState(false);
   const [bsModalOpen, setBsModalOpen] = useState(false);
-  const [medicineModalOpen, setMedicineModalOpen] = useState(false);
-
-  const [selectedField, setSelectedField] = useState<string | null>(null); // 선택된 필드 추적
+  const [selectedField, setSelectedField] = useState<string | null>(null); 
+  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false); 
 
   useEffect(() => {
     setLoading(true);
     getHealthStatus()
       .then((response) => {
-        const data = response.data; // 핵심 데이터만 추출
+        const data = response.data; 
         if (data.bloodPressure !== undefined && data.bloodPressure !== null) {
           if (typeof data.bloodPressure === "number" && !isNaN(data.bloodPressure)) {
             const contraction = Math.floor(data.bloodPressure / 1000);
@@ -56,6 +55,10 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
   }, []);
 
   const handleSave = () => {
+    setConfirmModalOpen(true); 
+  };
+
+  const handleConfirmSave = () => {
     const bloodPressureNumber = Number(`${bloodPressure.contraction}${bloodPressure.relaxation}`);
     const bloodSugarNumber = Number(`${bloodSugar.fasting}${bloodSugar.postprandial}`);
 
@@ -68,6 +71,10 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
     };
 
     onSave(updatedData);
+  };
+
+  const handleCancelSave = () => {
+    setConfirmModalOpen(false); 
   };
 
   if (loading) return <p>데이터를 불러오는 중...</p>;
@@ -131,16 +138,13 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
         <Label>Medicine History</Label>
         <ListBox
           isSelected={selectedField === "medicineHistory"}
-          onClick={() => {
-            setSelectedField("medicineHistory");
-            setMedicineModalOpen(true);
-          }}
+          onClick={() => setSelectedField("medicineHistory")}
         >
-          <Text>{medicineHistory}</Text>
+          <Input value={medicineHistory} onChange={(e) => setMedicineHistory(e.target.value)} />
         </ListBox>
       </DataBlock>
 
-      <SaveButton onClick={handleSave}>Save</SaveButton>
+       <SaveButton onClick={handleSave}>Save</SaveButton>
 
       {bpModalOpen && (
         <BloodPressurePart
@@ -160,15 +164,19 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
           }}
         />
       )}
-      {medicineModalOpen && (
-        <MedicineHistoryPart
-          onClose={() => setMedicineModalOpen(false)}
-          onSave={(data) => {
-            setMedicineHistory(data);
-            setMedicineModalOpen(false);
-          }}
-        />
-      )}
+      {isConfirmModalOpen && (
+              <CheckBox
+                onCancel={handleCancelSave}
+                onConfirm={handleConfirmSave}
+                confirmText="Save"
+                message={
+                  <>
+                    Do you want to save your <br /> changes before exiting?
+                  </>
+                }
+              />
+            )}
+      
     </Container>
   );
 };
