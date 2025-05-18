@@ -9,6 +9,7 @@ type Props = {
 export default function BloodPressurePart({ onClose, onSave }: Props) {
   const [contraction, setContraction] = useState("");
   const [relaxation, setRelaxation] = useState("");
+  const [focusedInput, setFocusedInput] = useState<"contraction" | "relaxation" | null>(null);
 
   const handleSave = () => {
     if (contraction && relaxation) {
@@ -30,6 +31,9 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
                 type="number"
                 value={contraction}
                 onChange={(e) => setContraction(e.target.value)}
+                onFocus={() => setFocusedInput("contraction")}
+                onBlur={() => setFocusedInput(null)}
+                isFocused={focusedInput === "contraction"}
               />
               <Label>Contraction</Label>
             </InputContainer>
@@ -42,6 +46,9 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
                 type="number"
                 value={relaxation}
                 onChange={(e) => setRelaxation(e.target.value)}
+                onFocus={() => setFocusedInput("relaxation")}
+                onBlur={() => setFocusedInput(null)}
+                isFocused={focusedInput === "relaxation"}
               />
               <Label>Relaxation</Label>
             </InputContainer>
@@ -56,7 +63,7 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
   );
 }
 
-
+// Styled Components
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -108,39 +115,39 @@ const InputContainer = styled.div`
   width: 100%;
 `;
 
-const InputContraction = styled.input`
+const InputContraction = styled.input<{ isFocused: boolean }>`
   width: 160px;
   height: 160px;
   font-size: 32px;
   text-align: center;
   color: #767676;
-  border: 1px solid #ccc;
+  border: ${({ isFocused }) => (isFocused ? "1px solid #000" : "1px solid #ccc")};
   border-radius: 10px;
   box-sizing: border-box;
+
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-
-  /* 🔽 스핀 버튼 제거 (파이어폭스) */
   -moz-appearance: textfield;
 `;
-const InputRelaxation = styled.input`
+
+const InputRelaxation = styled.input<{ isFocused: boolean }>`
   width: 160px;
   height: 160px;
   font-size: 32px;
   text-align: center;
-  border: 1px solid #ccc;
+  color: #000;
+  border: ${({ isFocused }) => (isFocused ? "1px solid #000" : "1px solid #ccc")};
   border-radius: 10px;
   box-sizing: border-box;
+
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-
-  /* 🔽 스핀 버튼 제거 (파이어폭스) */
   -moz-appearance: textfield;
 `;
 

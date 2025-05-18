@@ -9,6 +9,7 @@ type Props = {
 export default function BloodSugarPart({ onClose, onSave }: Props) {
   const [fasting, setFasting] = useState("");
   const [postprandial, setPostPrandial] = useState("");
+  const [focusedInput, setFocusedInput] = useState<"fasting" | "postprandial" | null>(null);
 
   const handleSave = () => {
     if (fasting && postprandial) {
@@ -29,6 +30,9 @@ export default function BloodSugarPart({ onClose, onSave }: Props) {
                 type="number"
                 value={fasting}
                 onChange={(e) => setFasting(e.target.value)}
+                onFocus={() => setFocusedInput("fasting")}
+                onBlur={() => setFocusedInput(null)}
+                isFocused={focusedInput === "fasting"}
               />
               <LabelLeft>Fasting</LabelLeft>
             </InputContainer>
@@ -40,6 +44,9 @@ export default function BloodSugarPart({ onClose, onSave }: Props) {
                 type="number"
                 value={postprandial}
                 onChange={(e) => setPostPrandial(e.target.value)}
+                onFocus={() => setFocusedInput("postprandial")}
+                onBlur={() => setFocusedInput(null)}
+                isFocused={focusedInput === "postprandial"}
               />
               <LabelRight>Postprandial</LabelRight>
             </InputContainer>
@@ -53,7 +60,6 @@ export default function BloodSugarPart({ onClose, onSave }: Props) {
     </Overlay>
   );
 }
-
 
 const Overlay = styled.div`
   position: fixed;
@@ -105,41 +111,45 @@ const InputContainer = styled.div`
   position: relative;
   width: 100%;
 `;
-const StyledInputFasting = styled.input`
+
+const StyledInputFasting = styled.input<{ isFocused: boolean }>`
   width: 160px;
   height: 160px;
-  color:#767676;
+  color: #767676;
   font-size: 32px;
   text-align: center;
-  border: 1px solid #ccc;
+  border: ${({ isFocused }) => (isFocused ? "1px solid #000" : "1px solid #ccc")};
   border-radius: 10px;
   box-sizing: border-box;
-   /* 🔽 스핀 버튼 제거 (크롬, 사파리) */
+
+  /* 스핀 버튼 제거 (크롬, 사파리) */
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  /* 🔽 스핀 버튼 제거 (파이어폭스) */
+  /* 스핀 버튼 제거 (파이어폭스) */
   -moz-appearance: textfield;
 `;
-const StyledInput = styled.input`
+
+const StyledInput = styled.input<{ isFocused: boolean }>`
   width: 160px;
   height: 160px;
   font-size: 32px;
   text-align: center;
-  border: 1px solid #ccc;
+  border: ${({ isFocused }) => (isFocused ? "1px solid #000" : "1px solid #ccc")};
   border-radius: 10px;
   box-sizing: border-box;
-   /* 🔽 스핀 버튼 제거 (크롬, 사파리) */
+
+  /* 스핀 버튼 제거 (크롬, 사파리) */
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  /* 🔽 스핀 버튼 제거 (파이어폭스) */
+  /* 스핀 버튼 제거 (파이어폭스) */
   -moz-appearance: textfield;
 `;
 
