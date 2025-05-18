@@ -4,7 +4,7 @@ const BASE_URL = "/medical-record";
 
 
 export interface HospitalRecord {
-  id?: string; // 수정 시를 고려해 optional
+  id?: string; 
   visitDate: string;
   visitingHospital: string;
   medicalSubject: string;
@@ -62,7 +62,7 @@ export const deleteHospitals = async (medicalRecordId: string) => {
   }
 };
 
-// 의료기혹 수정하기
+// 의료기록 수정하기
 export const editHospitals = async (id: string, data: HospitalRecord) => {
   try {
     const response = await apiRequest({

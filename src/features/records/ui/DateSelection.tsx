@@ -14,6 +14,7 @@ interface DateSelectionProps {
 }
 
 export default function DateSelection({ isOpen, onClose, onDateSelect }: DateSelectionProps) {
+
   const today = dayjs();
   const [centerItem, setCenterItem] = useState({
     year: today.format("YY"),
@@ -206,6 +207,14 @@ const PickerColumn = styled.div`
   border-radius: 5px;
   text-align: center;
   z-index: 1;
+
+  /* 스크롤바 숨김 (크로스 브라우징) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
 
 const StickyLabel = styled.p`
