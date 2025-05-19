@@ -7,7 +7,6 @@ type SignupFormFields = z.infer<typeof SignupSchema>;
 
 // COUNTRY_LIST에서 name 필드만 추출하여 리터럴 타입으로 정의
 type Country = (typeof COUNTRY_LIST)[number]["name"];
-// 결과: "South Korea" | "China" | "Russia" | "Japan" | "France" | "England" | "Germany" | "Italy" | "Spain" | "Portugal"
 
 interface SignupFunnelProps extends Omit<ClassPostProps, "nextClickHandler"> {
   setStep: React.Dispatch<React.SetStateAction<string>>;

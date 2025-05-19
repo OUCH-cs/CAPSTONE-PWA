@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import micIcon from "@/shared/assets/common/mic.svg";
-import { IRecordingIndicatorProps } from "../\btranslate.types";
+import { IRecordingIndicatorProps } from "../translate.types";
 
 export default function RecordingIndicator({
   children,
