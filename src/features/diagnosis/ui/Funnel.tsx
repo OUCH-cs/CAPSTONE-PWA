@@ -37,7 +37,7 @@ const DiagnosisPost = ({
         <StepFour onNext={() => nextClickHandler(steps[4])} onPrev ={() => prevClickHandler()} />
       </Step>
       <Step name={steps[4]}>
-        <StepFive onNext={() => nextClickHandler(steps[4])} onPrev ={() => prevClickHandler()} />
+        <StepFive onNext={() => nextClickHandler(steps[5])} onPrev ={() => prevClickHandler()} />
       </Step>
       <Step name={steps[5]}>
         <StepSix onPrev ={() => prevClickHandler()}/>

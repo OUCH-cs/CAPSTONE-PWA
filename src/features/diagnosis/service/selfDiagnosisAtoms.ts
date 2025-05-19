@@ -44,3 +44,5 @@ export const removeSymptomAtom = atom(
 );
 
 export const selectedSystemAtom = atom<string>("");
+
+export const selectedConditionAtom = atom<string>("");

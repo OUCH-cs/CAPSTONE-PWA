@@ -48,6 +48,8 @@ function SelfDiagnosisPage() {
     navigate,
   );
 
+  
+
   return (
     <Container>
       <Title>Self-diagnosis</Title>
