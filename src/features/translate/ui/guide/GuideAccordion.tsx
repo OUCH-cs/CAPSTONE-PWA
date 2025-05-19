@@ -38,7 +38,7 @@ const AccordionHeaderWrapper = styled.div`
   width: 328px;
   height: 56px;
   padding: 0 18px;
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px;
   background-color: ${theme.colors.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
 `;

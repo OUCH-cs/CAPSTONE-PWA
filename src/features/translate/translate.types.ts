@@ -32,6 +32,8 @@ interface GuideAccoridoinProps {
 export type {
   IRecordingIndicatorProps,
   GuideFunnelProps,
+  Locale,
+  LocalizedText,
   Guide,
   GuideAccoridoinProps,
 };

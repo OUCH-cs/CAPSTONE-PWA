@@ -4,6 +4,7 @@ import theme from "@/shared/styles/theme";
 import { Guide } from "../../translate.types";
 import GuideAccordion from "./GuideAccordion";
 import { useNavigate } from "react-router-dom";
+import GuideProgressBar from "@/entities/translate/ui/GuideProgressBar";
 
 interface FunnelStepPlateProps {
   data: Guide;
@@ -39,8 +40,10 @@ function FunnelStepPlate({ data, currentStep, setStep }: FunnelStepPlateProps) {
 
   return (
     <Container>
+      <GuideProgressBar currentStep={currentStep} title={data.title} />
+
       <TitleWrapper>
-        <Title>{data.title.en}</Title>
+        <Title>Purpose</Title>
         <Description>"{data.purpose.en}"</Description>
       </TitleWrapper>
 
