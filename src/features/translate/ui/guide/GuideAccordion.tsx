@@ -2,12 +2,12 @@ import { Accordion } from "@/shared/components/accordion";
 import styled from "@emotion/styled";
 import ArrowChevronIcon from "@/shared/assets/common/arrow.svg?react";
 import theme from "@/shared/styles/theme";
-import { GuideAccoridoinProps } from "../../translate.types";
+import { GuideAccordionProps } from "../../translate.types";
 
 export default function GuideAccordion({
   data,
 }: {
-  data: GuideAccoridoinProps;
+  data: GuideAccordionProps;
 }) {
   return (
     <Accordion>

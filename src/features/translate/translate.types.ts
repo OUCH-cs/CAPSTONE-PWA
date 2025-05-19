@@ -24,7 +24,7 @@ interface Guide {
   tips: LocalizedText[];
 }
 
-interface GuideAccoridoinProps {
+interface GuideAccordionProps {
   title: string;
   text: LocalizedText[];
 }
@@ -35,5 +35,5 @@ export type {
   Locale,
   LocalizedText,
   Guide,
-  GuideAccoridoinProps,
+  GuideAccordionProps,
 };
