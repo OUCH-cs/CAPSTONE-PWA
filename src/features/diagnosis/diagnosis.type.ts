@@ -31,13 +31,18 @@ export type DiagnosisFormData = {
   
   export interface StepProps {
     data?: DiagnosisAlgorithm[];
-    onNext?: () => void;
+    onNext: () => void;
     onPrev?: () => void;
   }
+  export interface ConditionsProps {
+    system: string;
+    symptom: string;
+  }
+
   export interface StepConditionsProps {
     data?: DiagnosisAlgorithm[];
-    system?: string;
-    symptom?: string;
+    system: string;
+    symptom: string;
     languageCode?: string;
     onNext: () => void;
     onPrev: () => void;

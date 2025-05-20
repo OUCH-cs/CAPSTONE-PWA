@@ -20,12 +20,13 @@ const ButtonContainer = styled.div`
 
 `
 
-const ButtonText = styled.p`
-  color: ${theme.colors.white};
+const ButtonText = styled.p<{ variant?: "prev" }>`
+  color: ${({ variant }) =>
+    variant === "prev" ? theme.colors.black : theme.colors.white};
   font-size: 1.5rem;
 `;
 
-const NavigateButton = styled(Button)`
+const NavigateButton = styled(Button)<{ variant?: "prev"}>`
   height: 4rem;
   width: 100%;
   text-align: center;
@@ -33,6 +34,13 @@ const NavigateButton = styled(Button)`
   align-items: center;
   justify-content: center;
   margin-bottom: 7rem;
+  ${({ variant }) =>
+  variant === "prev" &&
+  `
+    background-color: ${theme.colors.background};
+    border: 1px solid ${theme.colors.white_e5}; 
+  `}
+
 `;
 
 export {

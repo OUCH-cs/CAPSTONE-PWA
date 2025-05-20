@@ -13,9 +13,10 @@ const StepOne = ({ onNext, onPrev }: StepProps) => {
       <SelectDestination selectedDestination={selectedDestination} />
       <S.ButtonContainer>
         <S.NavigateButton
-          onClick={onPrev}
+          variant = "prev"
+          onClick={onPrev} 
         >
-          <S.ButtonText>Prev</S.ButtonText>
+          <S.ButtonText variant = "prev">Prev</S.ButtonText>
         </S.NavigateButton>
         <S.NavigateButton
           disabled={!selectedDestination}

@@ -9,7 +9,7 @@ import { useSymptomsList } from '../../lib/useSymptomsList';
 
 
 const StepThree = ({ onNext, onPrev }: StepProps) => {
-  const { selectedSymptoms,selectedSystem, allSymptoms, toggleSymptom } =useSymptomsList()
+  const { selectedSymptom, allSymptoms, toggleSymptom } = useSymptomsList()
 
   return (
     <S.Container>
@@ -19,7 +19,7 @@ const StepThree = ({ onNext, onPrev }: StepProps) => {
           {/* 아코디언 헤더 */}
           <Accordion.Header>
             <AccordionHeaderWrapper>
-              {selectedSystem?.length ? selectedSystem: "symptoms"}
+              {selectedSymptom?.length ? selectedSymptom: "symptoms"}
               {/* 아코디언 아이콘 컨테이너 */}
               <Accordion.Trigger>
                 <ArrowIcon />
@@ -32,14 +32,14 @@ const StepThree = ({ onNext, onPrev }: StepProps) => {
             {/* 리렌더링 되고 있다. */}
             <BodyWrapper>
               {allSymptoms.map((item)=>(
-                <div key={item}>
+                <Accordion.Item key={item}>
                   <ItemWrapper
-                    selected={selectedSymptoms.includes(item)}
+                    selected={selectedSymptom.includes(item)}
                     onClick={() => toggleSymptom(item)}
                     >
                     {item}
                   </ItemWrapper>
-                </div>
+                </Accordion.Item >
               ))}
             </BodyWrapper>
           </Accordion.Body>
@@ -48,12 +48,13 @@ const StepThree = ({ onNext, onPrev }: StepProps) => {
       
       <S.ButtonContainer>
         <S.NavigateButton
+          variant = "prev"
           onClick={onPrev}
         >
-          <S.ButtonText>Prev</S.ButtonText>
+          <S.ButtonText variant = "prev">Prev</S.ButtonText>
         </S.NavigateButton>
         <S.NavigateButton
-          disabled={!selectedSymptoms}
+          disabled={!selectedSymptom}
           onClick={onNext}
         >
           <S.ButtonText>Next</S.ButtonText>

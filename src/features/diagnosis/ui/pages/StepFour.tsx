@@ -1,6 +1,7 @@
 import * as S from '../common'
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
+import { useState } from 'react';
 import { Accordion } from "@/shared/components/accordion";
 import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import { useFormContext } from "react-hook-form";
@@ -9,8 +10,14 @@ import { DURATION_OPTIONS, DURATION_LABELS} from "@/shared/mock";
 
 
 const StepFour = ({ onNext, onPrev }: StepProps) => {
-  const { setValue, watch } = useFormContext<{ duration: string }>();
-  const duration: string = watch("duration") || "";
+  const { setValue, getValues } = useFormContext<{ duration: string }>();
+  const [duration, setDuration] = useState(() => getValues("duration") || "");
+
+  const toogletDuration = (value: string) => {
+    setValue("duration", value);
+    setDuration(value);          
+  };
+
 
   return (
     <S.Container>
@@ -36,7 +43,7 @@ const StepFour = ({ onNext, onPrev }: StepProps) => {
                 <Accordion.Item key={item}>
                   <ItemWrapper
                     selected={duration === item}
-                    onClick={() => {setValue("duration", item);}}
+                    onClick={() => {toogletDuration(item)}}
                     >
                     {DURATION_LABELS[item]}
                   </ItemWrapper>
@@ -48,9 +55,10 @@ const StepFour = ({ onNext, onPrev }: StepProps) => {
       </AccordionContaniner>
             <S.ButtonContainer>
               <S.NavigateButton
+                variant = "prev"
                 onClick={onPrev}
               >
-                <S.ButtonText>Prev</S.ButtonText>
+                <S.ButtonText variant = "prev">Prev</S.ButtonText>
               </S.NavigateButton>
               <S.NavigateButton
                 disabled={!duration}

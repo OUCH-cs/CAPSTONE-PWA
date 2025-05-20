@@ -39,7 +39,6 @@ const SymptomsContaniner = styled.div`
   margin-bottom: 8rem;
 
 `
-
 const SymptomList = styled.div`
   display: flex;
   gap: 0.29rem;

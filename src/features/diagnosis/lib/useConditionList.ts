@@ -2,20 +2,10 @@ import { useEffect } from "react";
 import { useConditions } from "./useConditions";
 import { useAtom } from "jotai";
 import { selectedConditionAtom } from "../service/selfDiagnosisAtoms";
+import { ConditionsProps } from "../diagnosis.type";
 
-
-/**
- * 자가진단 입력 시 사용할 증상 목록과 선택된 증상 상태를 관리하는 커스텀 훅 (단일 선택 버전)
- *
- * @returns {
- *   selectedSymptom: string;
- *   allSymptoms: string[];
- *   toggleSymptom: (symptom: string) => void;
- *   isLoading: boolean;
- * }
- */
-export const useConditionList = () => {
-  const { conditions = [], isLoading } = useConditions();
+export const useConditionList = ({system, symptom} : ConditionsProps ) => {
+  const { conditions = [], isLoading } = useConditions(system,symptom);
 
   const [selectedCondition, setSelectedCondition] = useAtom(selectedConditionAtom);
 
@@ -25,8 +15,8 @@ export const useConditionList = () => {
     }
   }, [conditions, selectedCondition, setSelectedCondition]);
 
-  const toggleCondition = (system: string) => {
-    setSelectedCondition(system);
+  const toggleCondition = (condition: string) => {
+    setSelectedCondition(condition);
   };
 
   return {

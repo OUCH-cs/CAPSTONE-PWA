@@ -5,9 +5,8 @@ export * from "./auth/sign-in";
 
 // 메인
 export * from "./main/mainpage";
-export * from "./main/self-diagnosis/diagnosis-faq";
 export * from "./main/self-diagnosis/self-diagnosis";
-export * from "./main/self-diagnosis/RecommendPage"
+export * from "./main/self-diagnosis/RecommendPage";
 
 
 // 검색 (지도)

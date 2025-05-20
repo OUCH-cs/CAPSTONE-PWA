@@ -6,16 +6,16 @@ import { AxiosResponse } from "axios";
 export const useRecommend = (data: RecommendRequest | null) => {
   const [response, setResponse] = useState<AxiosResponse | null>(null);
   const [error, setError] = useState<Error | null>(null);
+  const [isLoading, setIsLoading] = useState(false); 
 
   useEffect(() => {
     if (!data) return;
 
     const fetch = async () => {
+      setIsLoading(true);
       try {
         const res = await postRecommend(data);
-        alert("Successfully submitted!");
-        console.log(res.data);
-        setResponse(res); // ✅ 리스폰스 저장
+        setResponse(res); 
       } catch (e) {
         if (e instanceof Error) {
           alert(`Submission failed: ${e.message}`);
@@ -23,11 +23,13 @@ export const useRecommend = (data: RecommendRequest | null) => {
         } else {
           alert("Submission failed due to an unknown error.");
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetch();
   }, [data]);
 
-  return { response, error };
+  return { response, isLoading, error };
 };

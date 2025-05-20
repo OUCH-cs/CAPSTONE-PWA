@@ -1,9 +1,9 @@
 import { useFormContext } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSystems } from "./useSymptoms";
 import { useSymptoms } from "./useSymptoms";
 import { useAtom } from "jotai";
-import { selectedSystemAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
+import { selectedSystemAtom, selectedSymptomAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
 
 
 /**
@@ -41,8 +41,8 @@ export const useSystemsList = () => {
 
 export const useSymptomsList = () => {
   const [selectedSystem] = useAtom(selectedSystemAtom);
-  const { setValue, getValues } = useFormContext<{ symptom: string }>();
-  const [selectedSymptoms, setSelectedSymptoms] = useState(() => getValues("symptom") || "");
+  const [selectedSymptom, setSelectedSymptom] = useAtom(selectedSymptomAtom);
+  const { setValue } = useFormContext<{ symptom: string }>();
 
   const { symptoms = [] } = useSymptoms(selectedSystem);
 
@@ -51,11 +51,11 @@ export const useSymptomsList = () => {
   const toggleSymptom = (symptom: string) => {
 
     setValue("symptom", symptom);
-    setSelectedSymptoms(symptom);
+    setSelectedSymptom(symptom);
   };
 
   return {
-    selectedSymptoms,
+    selectedSymptom,
     selectedSystem,
     allSymptoms,
     toggleSymptom,

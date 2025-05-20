@@ -19,7 +19,7 @@ function SelfDiagnosisPage() {
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
   const { currentStep, setCurrentStep, initialProgress, getCurrentStepIndex } = useProgress(steps);
   const [progress, setProgress] = useState<number>(initialProgress);
-  const {onSubmit} = useSubmitDiagnosis()
+  const { onSubmit } = useSubmitDiagnosis()
 
   const methods = useForm<DiagnosisFormData>({
     defaultValues: {
