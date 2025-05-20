@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import GenderSelect from "@/features/mypage/ui/GenderSelect";
 import CountryAccordionEdit from "@/features/mypage/ui/CountryAccordionEdit";
-import CheckBox from "@/features/records/ui/CheckBox";
+import Modal from "@/shared/components/modal/Modal";
 import { useState } from "react";
 
 const EditForm = () => {
@@ -48,18 +48,18 @@ const EditForm = () => {
         <SaveButton type="submit">Save</SaveButton>
       </FormWrapper>
 
-      {showModal && (
-        <CheckBox
-          onCancel={() => setShowModal(false)}
-          onConfirm={handleConfirmSave}
-          confirmText="Save"
-          message={
-            <>
-              Do you want to save your <br /> changes before exiting?
-            </>
-          }
-        />
-      )}
+      
+      <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
+        <ModalBox>
+          <MessageText>
+            Do you want to save your <br /> changes before exiting?
+          </MessageText>
+          <ButtonWrapper>
+            <CancelButton onClick={() => setShowModal(false)}>Cancel</CancelButton>
+            <ConfirmButton onClick={handleConfirmSave}>Save</ConfirmButton>
+          </ButtonWrapper>
+        </ModalBox>
+      </Modal>
     </>
   );
 };
@@ -92,4 +92,49 @@ const SaveButton = styled.button`
   border: none;
   border-radius: 10px;
   cursor: pointer;
+`;
+
+
+
+const ModalBox = styled.div`
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  text-align: center;
+  width: 316px;
+  font-family: Pretendard;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  padding: 66px 0 0 0;
+`;
+
+const MessageText = styled.p`
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+  text-align: center;
+  line-height: normal;
+  margin-bottom: 46px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CancelButton = styled.button`
+  flex: 1;
+  background-color: #F1F1F5;
+  border: none;
+   border-radius: 0 0 0 10px;
+  font-weight: 500;
+  padding: 16px;
+`;
+
+const ConfirmButton = styled.button`
+  flex: 1;
+  background-color: #0097a7;
+  color: white;
+  border: none;
+   border-radius: 0 0 10px 0;
+  font-weight: 500;
+  padding: 16px;
 `;
