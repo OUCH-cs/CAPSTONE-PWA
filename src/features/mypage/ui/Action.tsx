@@ -17,9 +17,7 @@ export default Action;
 
 
 const Header = styled.div`
-  margin-top:26px;
-  margin-left:16px;
-  margin-right:16px;
+  margin : 26px 16px 0 16px;
   height:80px;
   border-radius: 10px;
   background-color: #FFF;
