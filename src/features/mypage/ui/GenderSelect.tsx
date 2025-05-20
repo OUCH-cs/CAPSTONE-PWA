@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
-import { ControllerProps } from "@/features/sign-up/sign-up.types";
+interface ControllerProps<T> {
+  value: T;
+  onChange: (value: T) => void;
+}
+
 
 export default function GenderSelect({
   value,
