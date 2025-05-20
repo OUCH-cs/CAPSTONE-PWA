@@ -11,7 +11,10 @@ import {
   SelfDiagnosisPage,
   SignupSuccessPage,
   NotFoundPage,
+  MapPage,
+  TranslateGuidePage,
 } from "@/pages";
+
 
 import MedicalRecordList from "@/pages/records/medicalrecord-list"; 
 import MedicalRecord from "@/pages/records/medicalrecord";
@@ -21,7 +24,7 @@ import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusEdit from "@/pages/records/healthstatus-edit";
 import { AuthGuard, RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
-
+import SearchDetailPage from "@/pages/search/search-detail";
 
 export default function AppRoutes() {
   return (
@@ -48,6 +51,7 @@ export default function AppRoutes() {
 
 
 
+      {/* 기록 페이지 */}
       <Route path="/records" element={<RecordsPage />} />
       <Route path="/records/medicalrecord-list" element={<MedicalRecordList />} />
       <Route path="/records/medicalrecord/:id" element={<MedicalRecord />} />
@@ -56,17 +60,23 @@ export default function AppRoutes() {
       <Route path="/records/medicalrecord-add" element={<MedicalRecordAdd />} />
       <Route path="/records/healthstatus-edit" element={<HealthStatusEdit />} />
 
+        <Route path="/search/:id" element={<SearchDetailPage />} />
+
+        {/* 지도 페이지 */}
+        <Route path="/map" element={<MapPage />} />
+
+        
+
         {/* 통역 페이지 */}
         <Route path="/translate" element={<TranslatePage />} />
+        <Route path="/translate/guide" element={<TranslateGuidePage />} />
 
         {/* 마이 페이지 */}
         <Route path="/mypage" element={<Mypage />} />
 
-
         {/* 테스트 페이지 */}
         <Route path="/test" element={<TestPage />} />
       </Route>
-
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
