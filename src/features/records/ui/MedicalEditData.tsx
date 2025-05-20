@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { HospitalRecord } from "@/features/records/service/medicalDataApi";
 import DateSelection from "./DateSelection";
-import CheckBox from "./CheckBox"; 
+import Modal from "@/shared/components/modal/Modal";
 
 interface MedicalEditDataProps {
   initialData: HospitalRecord;
@@ -13,7 +13,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
   const [formData, setFormData] = useState<HospitalRecord>(initialData);
   const [isDateSelectionOpen, setDateSelectionOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false); // ✅ 모달 상태
+   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setFormData(initialData);
@@ -32,7 +32,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
   };
 
   const handleSave = () => {
-    setConfirmModalOpen(true); // ✅ 모달 열기
+    setShowModal(true);
   };
 
   const handleDateChange = (date: string) => {
@@ -46,11 +46,11 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
 
   const handleConfirmSave = () => {
     onSave(formData); 
-    setConfirmModalOpen(false); 
+      setShowModal(false);
   };
 
   const handleCancelSave = () => {
-    setConfirmModalOpen(false); 
+    setShowModal(false);
   };
 
   return (
@@ -118,18 +118,17 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
 
       <SaveButton onClick={handleSave}>Save</SaveButton>
 
-      {isConfirmModalOpen && (
-        <CheckBox
-          onCancel={handleCancelSave}
-          onConfirm={handleConfirmSave}
-          confirmText="Save"
-          message={
-            <>
-              Do you want to save your <br /> changes before exiting?
-            </>
-          }
-        />
-      )}
+       <Modal isOpen={showModal} toggle={handleCancelSave}>
+        <ModalBox>
+          <MessageText>
+            Do you want to save your <br /> changes before exiting?
+          </MessageText>
+          <ButtonWrapper>
+            <CancelButton onClick={handleCancelSave}>Cancel</CancelButton>
+            <ConfirmButton onClick={handleConfirmSave}>Save</ConfirmButton>
+          </ButtonWrapper>
+        </ModalBox>
+      </Modal>
     </Container>
   );
 };
@@ -191,4 +190,48 @@ const SaveButton = styled.button`
   width: 100%;
 `;
 
+const ModalBox = styled.div`
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  text-align: center;
+  width: 316px;
+  font-family: Pretendard;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  padding: 66px 0 0 0;
+`;
+
+const MessageText = styled.p`
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+  text-align: center;
+  line-height: normal;
+  margin-bottom: 46px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CancelButton = styled.button`
+  flex: 1;
+  background-color: #F1F1F5;
+  border: none;
+  border-radius: 0 0 0 10px;
+  font-weight: 500;
+  padding: 16px;
+  cursor: pointer;
+`;
+
+const ConfirmButton = styled.button`
+  flex: 1;
+  background-color: #0097a7;
+  color: white;
+  border: none;
+  border-radius: 0 0 10px 0;
+  font-weight: 500;
+  padding: 16px;
+  cursor: pointer;
+`;
 export default MedicalEditData;

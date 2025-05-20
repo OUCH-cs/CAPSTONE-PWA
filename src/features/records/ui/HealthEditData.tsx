@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { getHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi"; 
 import BloodPressurePart from "./BloodPressurePart";
 import BloodSugarPart from "./BloodSugarPart";
-import CheckBox from "./CheckBox"; 
+import Modal from "@/shared/components/modal/Modal";  // Modal import
 
 interface Props {
   initialData?: HealthStatus;
@@ -71,6 +71,7 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
     };
 
     onSave(updatedData);
+    setConfirmModalOpen(false);
   };
 
   const handleCancelSave = () => {
@@ -164,18 +165,19 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
           }}
         />
       )}
-      {isConfirmModalOpen && (
-              <CheckBox
-                onCancel={handleCancelSave}
-                onConfirm={handleConfirmSave}
-                confirmText="Save"
-                message={
-                  <>
-                    Do you want to save your <br /> changes before exiting?
-                  </>
-                }
-              />
-            )}
+
+      {/* Modal을 사용한 저장 확인 */}
+      <Modal isOpen={isConfirmModalOpen} toggle={handleCancelSave}>
+        <ModalBox>
+          <MessageText>
+            Do you want to save your <br /> changes before exiting?
+          </MessageText>
+          <ButtonWrapper>
+            <CancelButton onClick={handleCancelSave}>Cancel</CancelButton>
+            <ConfirmButton onClick={handleConfirmSave}>Save</ConfirmButton>
+          </ButtonWrapper>
+        </ModalBox>
+      </Modal>
       
     </Container>
   );
@@ -212,7 +214,7 @@ const ListBox = styled.div<{ isSelected?: boolean }>`
 `;
 
 const Input = styled.input`
-  color: #434343;
+  color: #434343;  
   margin-left: -5px;
   font-size: 16px;
   font-weight: 400;
@@ -250,6 +252,49 @@ const SaveButton = styled.button`
   border-radius: 10px;
   cursor: pointer;
   width: 100%;
+`;
+
+const ModalBox = styled.div`
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  text-align: center;
+  width: 316px;
+  font-family: Pretendard;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  padding: 66px 0 0 0;
+`;
+
+const MessageText = styled.p`
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+  text-align: center;
+  line-height: normal;
+  margin-bottom: 46px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CancelButton = styled.button`
+  flex: 1;
+  background-color: #F1F1F5;
+  border: none;
+  border-radius: 0 0 0 10px;
+  font-weight: 500;
+  padding: 16px;
+`;
+
+const ConfirmButton = styled.button`
+  flex: 1;
+  background-color: #0097a7;
+  color: white;
+  border: none;
+  border-radius: 0 0 10px 0;
+  font-weight: 500;
+  padding: 16px;
 `;
 
 export default HealthEditData;

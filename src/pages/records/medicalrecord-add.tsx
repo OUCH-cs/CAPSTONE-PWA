@@ -5,7 +5,7 @@ import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import MedicalAddData from "@/features/records/ui/MedicalAddData";
 import { initialMedicalFormData } from "@/features/records/consts/medicalConstants";
 import { addHospital } from "@/features/records/service/medicalDataApi";
-import CheckBox from "@/features/records/ui/CheckBox"; // 삭제 모달 재사용
+import Modal from "@/shared/components/modal/Modal";  // 새로 추가
 import { formatDate } from "@/features/records/lib/DateForm";
 
 type HospitalRecord = {
@@ -19,10 +19,10 @@ type HospitalRecord = {
 export default function MedicalRecordAdd() {
   const navigate = useNavigate();
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleConfirmSave = () => {
-    setIsConfirmOpen(true);
+    setShowModal(true);
   };
 
   const handleRealSave = async () => {
@@ -30,26 +30,22 @@ export default function MedicalRecordAdd() {
       const record: HospitalRecord = {
         visitDate:
           formatDate(
-            medicalData.find((item) => item.title === "Date of Visit")?.value ||
-              ""
+            medicalData.find((item) => item.title === "Date of Visit")?.value || ""
           ),
         visitingHospital:
-          medicalData.find((item) => item.title === "Visiting Hospital")
-            ?.value || "",
+          medicalData.find((item) => item.title === "Visiting Hospital")?.value || "",
         medicalSubject:
-          medicalData.find((item) => item.title === "Medical Subjects")
-            ?.value || "",
+          medicalData.find((item) => item.title === "Medical Subjects")?.value || "",
         symptoms:
           medicalData.find((item) => item.title === "Symptoms")?.value || "",
         treatmentSummary:
-          medicalData.find((item) => item.title === "Treatment Summary")
-            ?.value || "",
+          medicalData.find((item) => item.title === "Treatment Summary")?.value || "",
       };
 
       const response = await addHospital(record);
 
       if (response) {
-        setIsConfirmOpen(false);
+        setShowModal(false);
         navigate("/records/medicalrecord-list");
       }
     } catch (err) {
@@ -62,12 +58,7 @@ export default function MedicalRecordAdd() {
     <Container>
       <Header>
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
-          <ArrowIcon
-            width="25px"
-            height="25px"
-            stroke="black"
-            style={{ marginLeft: -20 }}
-          />
+          <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
         <HeaderTitle>Medical Record</HeaderTitle>
       </Header>
@@ -76,19 +67,19 @@ export default function MedicalRecordAdd() {
 
       <SaveButton onClick={handleConfirmSave}>Save</SaveButton>
 
-      {isConfirmOpen && (
-        <CheckBox
-          message={
-            <>
-              Do you want to save your <br />
-              changes before exiting?
-            </>
-          }
-          confirmText="Save"
-          onCancel={() => setIsConfirmOpen(false)}
-          onConfirm={handleRealSave}
-        />
-      )}
+      {/* Modal 컴포넌트 사용 */}
+      <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
+        <ModalBox>
+          <MessageText>
+            Do you want to save your <br />
+            changes before exiting?
+          </MessageText>
+          <ButtonWrapper>
+            <CancelButton onClick={() => setShowModal(false)}>Cancel</CancelButton>
+            <ConfirmButton onClick={handleRealSave}>Save</ConfirmButton>
+          </ButtonWrapper>
+        </ModalBox>
+      </Modal>
     </Container>
   );
 }
@@ -140,4 +131,49 @@ const SaveButton = styled.button`
   border-radius: 10px;
   cursor: pointer;
   width: 100%;
+`;
+
+const ModalBox = styled.div`
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  text-align: center;
+  width: 316px;
+  font-family: Pretendard;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  padding: 66px 0 0 0;
+`;
+
+const MessageText = styled.p`
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+  text-align: center;
+  line-height: normal;
+  margin-bottom: 46px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CancelButton = styled.button`
+  flex: 1;
+  background-color: #F1F1F5;
+  border: none;
+  border-radius: 0 0 0 10px;
+  font-weight: 500;
+  padding: 16px;
+  cursor: pointer;
+`;
+
+const ConfirmButton = styled.button`
+  flex: 1;
+  background-color: #0097a7;
+  color: white;
+  border: none;
+  border-radius: 0 0 10px 0;
+  font-weight: 500;
+  padding: 16px;
+  cursor: pointer;
 `;

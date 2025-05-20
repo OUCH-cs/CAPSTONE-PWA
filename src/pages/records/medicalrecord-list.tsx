@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
-import CheckBox from "@/features/records/ui/CheckBox";
+import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
 
 type HospitalRecord = {
   id: number;
@@ -88,7 +88,7 @@ export default function MedicalRecordList() {
                 height="18px"
                 style={{ cursor: "pointer" }}
                 onClick={(e) => {
-                  e.stopPropagation(); 
+                  e.stopPropagation();
                   setSelectedDeleteId(hospital.id);
                 }}
               />
@@ -99,22 +99,23 @@ export default function MedicalRecordList() {
 
       <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>
 
+      {/* Modal 적용 부분 */}
       {selectedDeleteId !== null && (
-        <CheckBox
-          message={
-            <>
-              Do you want to delete <br /> a medical record?
-            </>
-          }
-            confirmText="Delete"
-          onCancel={() => setSelectedDeleteId(null)}
-          onConfirm={handleConfirmDelete}
-        />
+        <Modal isOpen={true} toggle={() => setSelectedDeleteId(null)}>
+          <ModalBox>
+            <MessageText>
+              Do you want to delete <br /> this medical record?
+            </MessageText>
+            <ButtonWrapper>
+              <CancelButton onClick={() => setSelectedDeleteId(null)}>Cancel</CancelButton>
+              <ConfirmButton onClick={handleConfirmDelete}>Delete</ConfirmButton>
+            </ButtonWrapper>
+          </ModalBox>
+        </Modal>
       )}
     </Container>
   );
 }
-
 
 const Container = styled.div`
   background-color: #f5f9fc;
@@ -208,4 +209,49 @@ const ErrorText = styled.p`
   font-weight: 500;
   text-align: center;
   margin-top: 20px;
+`;
+
+const ModalBox = styled.div`
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  text-align: center;
+  width: 316px;
+  font-family: Pretendard;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  padding: 66px 0 0 0;
+`;
+
+const MessageText = styled.p`
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+  text-align: center;
+  line-height: normal;
+  margin-bottom: 46px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CancelButton = styled.button`
+  flex: 1;
+  background-color: #F1F1F5;
+  border: none;
+  border-radius: 0 0 0 10px;
+  font-weight: 500;
+  padding: 16px;
+  cursor: pointer;
+`;
+
+const ConfirmButton = styled.button`
+  flex: 1;
+  background-color: #0097a7;
+  color: white;
+  border: none;
+  border-radius: 0 0 10px 0;
+  font-weight: 500;
+  padding: 16px;
+  cursor: pointer;
 `;
