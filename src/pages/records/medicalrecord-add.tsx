@@ -6,6 +6,7 @@ import MedicalAddData from "@/features/records/ui/MedicalAddData";
 import { initialMedicalFormData } from "@/features/records/consts/medicalConstants";
 import { addHospital } from "@/features/records/service/medicalDataApi";
 import CheckBox from "@/features/records/ui/CheckBox"; // 삭제 모달 재사용
+import { formatDate } from "@/features/records/lib/DateForm";
 
 type HospitalRecord = {
   visitDate: string;
@@ -13,14 +14,6 @@ type HospitalRecord = {
   medicalSubject: string;
   symptoms: string;
   treatmentSummary: string;
-};
-
-const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return `${year}-${month}-${day}`;
 };
 
 export default function MedicalRecordAdd() {

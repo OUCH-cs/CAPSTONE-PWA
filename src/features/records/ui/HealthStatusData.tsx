@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { getHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi"; 
+import { formatMeasurement } from "@/features/records/lib/BloodForm";
 export default function HealthStatusData() {
   const [healthStatusData, setHealthStatusData] = useState<HealthStatus | null>(null);  // 상태 저장
   const [loading, setLoading] = useState<boolean>(true);  // 로딩 상태
@@ -32,18 +33,6 @@ export default function HealthStatusData() {
   if (error) {
     return <ErrorText>{error}</ErrorText>;
   }
-  const formatBloodPressure = (bloodPressure: number) => {
-    if (!bloodPressure) return " / "; 
-    const contraction = Math.floor(bloodPressure / 1000); // 수축기
-    const relaxation = bloodPressure % 1000; // 이완기
-    return `${contraction} / ${relaxation}`;
-  };
-  const formatBloodSugar = (bloodSugar: number) => {
-    if (!bloodSugar) return " / ";
-    const fasting = Math.floor(bloodSugar / 1000); // 공복 혈당
-    const postprandial = bloodSugar % 1000; // 식후 혈당
-    return `${fasting} / ${postprandial}`;
-  };
 
 
 
@@ -61,11 +50,15 @@ export default function HealthStatusData() {
           </DataLabel>
           <DataLabel>
             <LabelText>Blood Pressure</LabelText>
-            <List>{formatBloodPressure(healthStatusData.bloodPressure)} <Unit>mmHg</Unit></List>
+             <List>
+              {formatMeasurement(healthStatusData.bloodPressure)} <Unit>mmHg</Unit>
+            </List>
           </DataLabel>
           <DataLabel>
             <LabelText>BloodSugar</LabelText>
-            <List>{formatBloodSugar(healthStatusData.bloodSugar)} <Unit>mg/dL</Unit></List>
+             <List>
+              {formatMeasurement(healthStatusData.bloodSugar)} <Unit>mg/dL</Unit>
+            </List>
           </DataLabel>
           <DataLabel>
             <LabelText>MedicineHistory</LabelText>
