@@ -12,7 +12,7 @@ const Main = () => {
   
 
   const handleEditIconPress = () => {
-    navigate("/mypage/editprofile");
+    navigate("/mypage/edit-profile");
   };
 
   return (
