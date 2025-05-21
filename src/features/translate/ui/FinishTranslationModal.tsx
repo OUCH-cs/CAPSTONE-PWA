@@ -15,19 +15,19 @@ export default function FinishTranslationModal({
 }: FinishTranslationModalProps) {
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
-      <ModalWarpper>
+      <ModalWrapper>
         <Title>Are you sure you want to finish the interpretation?</Title>
 
         <ButtonWrapper>
           <CancelButton onClick={toggle}>Cancel</CancelButton>
           <FinishButton onClick={finishTranslate}>Finish</FinishButton>
         </ButtonWrapper>
-      </ModalWarpper>
+      </ModalWrapper>
     </Modal>
   );
 }
 
-const ModalWarpper = styled.div`
+const ModalWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
