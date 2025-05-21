@@ -4,43 +4,49 @@ import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import theme from "@/shared/styles/theme";
 import { useAtom } from "jotai";
 import { selectedCategoriesAtom } from "../service/guideAtoms";
+import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import { useGetGuideQustion } from "../lib/useGuideCategories";
-
+import Skeleton from "@/shared/components/skeleton/Skeleton";
 
 function GuideQuestions() {
     const [selectedCategories] = useAtom(selectedCategoriesAtom);
+    const [languageCode] = useAtom(languageCodeAtom)
     const selectedCategory = selectedCategories || ""; // 첫 번째 선택된 카테고리
   
-    const { data = [], isLoading } = useGetGuideQustion(selectedCategory, "en");
+    const { data = [], isLoading } = useGetGuideQustion(selectedCategory, languageCode);
     
-    if (isLoading) {
-        return <div>Loading guide questions...</div>;
-      }
-
     return (
         <Container>
-          {/* 아코디언 루트 컨테이너 */}
-          {data.map((item, idx) => (
-            <Accordion key={`${item.question.en}-${idx}`}>
-            <Accordion.Header>
-                <AccordionHeaderWrapper>
-                    {`Q. ${item.question.en}`}
-                <Accordion.Trigger>
-                    <ArrowIcon />
-                </Accordion.Trigger>
-                </AccordionHeaderWrapper>
-            </Accordion.Header>
-            <Accordion.Body>
-                <BodyWrapper>
-                <Accordion.Item>
-                    <ItemWrapper>
-                        <Text>{`A. ${item.answer.en}`}</Text>
-                    </ItemWrapper>
-                </Accordion.Item>
-                </BodyWrapper>
-            </Accordion.Body>
-            </Accordion>
-            ))}
+          {isLoading && (
+            <SkeletonList>
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <Skeleton key={`notice-skeleton-${idx}`} width={460} height={63} />
+              ))}
+            </SkeletonList>
+          )}
+          {!isLoading && 
+            data.map((item, idx) => (
+              <Accordion key={`${item.question.en}-${idx}`}>
+              <Accordion.Header>
+                  <AccordionHeaderWrapper>
+                      {`Q. ${item.question[languageCode]}`}
+                  <Accordion.Trigger>
+                      <ArrowIcon />
+                  </Accordion.Trigger>
+                  </AccordionHeaderWrapper>
+              </Accordion.Header>
+              <Accordion.Body>
+                  <BodyWrapper>
+                  <Accordion.Item>
+                      <ItemWrapper>
+                          <Text>{`A. ${item.answer[languageCode]}`}</Text>
+                      </ItemWrapper>
+                  </Accordion.Item>
+                  </BodyWrapper>
+              </Accordion.Body>
+              </Accordion>
+              ))
+          }
         </Container>
       );
     }
@@ -96,4 +102,16 @@ const Text = styled.p`
   margin-bottom:10px;
   font-size: 16px;
   font-weight: 600;
+`;
+
+const SkeletonList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 50px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

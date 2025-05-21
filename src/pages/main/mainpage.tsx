@@ -9,12 +9,26 @@ import { fallbackLocaton } from "@/shared/consts/common";
 import { useNearbySearch } from "@/features/search/services/useNearbySearch";
 import { SearchList } from "@/features/search/ui";
 import Skeleton from "@/shared/components/skeleton/Skeleton";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
+import { getLanguage } from "@/shared/api/languageApi";
+import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import { useNavigate } from "react-router-dom";
 
 function MainPage() {
-  const  navigate = useNavigate()
+  const navigate = useNavigate()
+  const [languageCode, setLanguageCode] = useAtom(languageCodeAtom); //전역으로 사용자 언어 관리 
   const currLocation = fallbackLocaton; // 임시 위치 설정 하드코딩
   const { isPending, isSuccess, places } = useNearbySearch(currLocation); // 근처 병원 검색
+
+  // 메인페이지 렌더링 시 사용자 언어 초기화
+  useEffect(() => {
+    if (languageCode) return;
+  
+    getLanguage()
+      .then((code) => setLanguageCode(code))
+      .catch(() => setLanguageCode("en"));
+  }, [languageCode, setLanguageCode]);
 
   return (
     <Container>
@@ -26,7 +40,7 @@ function MainPage() {
           label="Text translation"
         />
         <HomeActionButton
-        onClick={()=> {navigate("guide")}}
+         onClick={() => {navigate("/guide")}}
           icon={<HomeGuide width={29} height={28} />}
           label="OUCH guide"
           selected

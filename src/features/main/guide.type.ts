@@ -1,14 +1,11 @@
 export interface GuideQnA {
-    category: {
-      ko: string;
-      en: string;
-    };
-    question: {
-      ko: string;
-      en: string;
-    };
-    answer: {
-      ko: string;
-      en: string;
-    };
-  }
+  category: {
+    [langCode: string]: string;
+  };
+  question: {
+    [langCode: string]: string;
+  };
+  answer: {
+    [langCode: string]: string;
+  };
+}

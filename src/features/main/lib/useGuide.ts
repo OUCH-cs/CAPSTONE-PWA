@@ -2,9 +2,11 @@ import { useGetGuideCategories } from "./useGuideCategories";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { selectedCategoriesAtom } from "../service/guideAtoms";
+import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 
 export const useGuideCategories = () => {
-    const { guideCategories = [], isLoading } = useGetGuideCategories();
+    const [languageCode] = useAtom(languageCodeAtom)
+    const { guideCategories = [], isLoading } = useGetGuideCategories(languageCode);
   
     const [selectedCategories, setSelectedCategories] = useAtom(selectedCategoriesAtom);
   

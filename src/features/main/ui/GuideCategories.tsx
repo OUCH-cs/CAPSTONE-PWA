@@ -3,32 +3,40 @@ import theme from "@/shared/styles/theme";
 import { chunkArray } from "@/features/diagnosis/lib/chunkArray";
 import { useGuideCategories } from "../lib/useGuide";
 import { ITEMS_PER_ROW } from "@/shared/mock";
+import Skeleton from "@/shared/components/skeleton/Skeleton";
+
 
 const GuideCategories = () => {
   const { selectedCategories, allCategories, toggleCategories, isLoading } = useGuideCategories()
   const categories = chunkArray(allCategories, ITEMS_PER_ROW);
 
-  if (isLoading) {
-    return <div>Loading symptoms...</div>; 
-  }
-
   return (
     <Container>
-      {categories.map((group, index) => (
-        <GuideList key={`group-${index}`}>
-          {group.map((item) => (
-            <GuideButton
-              key={item}
-              selected={selectedCategories.includes(item)}
-              onClick={() => toggleCategories(item)}
-            >
-              <GuideText selected={selectedCategories.includes(item)}>
-                {item}
-              </GuideText>
-            </GuideButton>
+      {isLoading && (
+        <SkeletonList>
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <Skeleton key={`notice-skeleton-${idx}`} width={120} height={36} />
           ))}
-        </GuideList>
-      ))}
+        </SkeletonList>
+      )}
+      {!isLoading&&
+        categories.map((group, index) => (
+          <GuideList key={`group-${index}`}>
+            {group.map((item) => (
+              <GuideButton
+                key={item}
+                selected={selectedCategories.includes(item)}
+                onClick={() => toggleCategories(item)}
+              >
+                <GuideText selected={selectedCategories.includes(item)}>
+                  {item}
+                </GuideText>
+              </GuideButton>
+            ))}
+          </GuideList>
+        ))
+      }
+      
     </Container>
   );
 };
@@ -71,4 +79,16 @@ const GuideText = styled.p<{ selected: boolean }>`
   font-size: 1.4rem;
   color: ${({ selected, theme }) =>
     selected ? theme.colors.white : theme.colors.gray_7};
+`;
+
+const SkeletonList = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 50px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
