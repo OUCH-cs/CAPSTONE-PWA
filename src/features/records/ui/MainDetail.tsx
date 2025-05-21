@@ -11,7 +11,7 @@ export default function MedicalRecordDetails() {
     <>
       <Container>
         <DiagnosisMain width="60px" height="60px" />
-        <SectionTitle>Self-Dianosis</SectionTitle>
+        <SectionTitle>Self-Diagnosis</SectionTitle>
       </Container>
         <Container onClick={() => navigate("/records/medicalrecord-list")}>
         <MedicalMain width="60px" height="60px" />
