@@ -11,7 +11,7 @@ import Skeleton from "@/shared/components/skeleton/Skeleton";
 function GuideQuestions() {
     const [selectedCategories] = useAtom(selectedCategoriesAtom);
     const [languageCode] = useAtom(languageCodeAtom)
-    const selectedCategory = selectedCategories || ""; // 첫 번째 선택된 카테고리
+    const selectedCategory = selectedCategories || "";
   
     const { data = [], isLoading } = useGetGuideQustion(selectedCategory, languageCode);
     
@@ -26,24 +26,24 @@ function GuideQuestions() {
           )}
           {!isLoading && 
             data.map((item, idx) => (
-              <Accordion key={`${item.question.en}-${idx}`}>
-              <Accordion.Header>
-                  <AccordionHeaderWrapper>
-                      {`Q. ${item.question[languageCode]}`}
-                  <Accordion.Trigger>
-                      <ArrowIcon />
-                  </Accordion.Trigger>
-                  </AccordionHeaderWrapper>
-              </Accordion.Header>
-              <Accordion.Body>
-                  <BodyWrapper>
-                  <Accordion.Item>
-                      <ItemWrapper>
-                          <Text>{`A. ${item.answer[languageCode]}`}</Text>
-                      </ItemWrapper>
-                  </Accordion.Item>
-                  </BodyWrapper>
-              </Accordion.Body>
+              <Accordion key={`${item.question[languageCode]}-${idx}`}>
+                <Accordion.Header>
+                    <AccordionHeaderWrapper>
+                        {`Q. ${item.question[languageCode]}`}
+                    <Accordion.Trigger>
+                        <ArrowIcon />
+                    </Accordion.Trigger>
+                    </AccordionHeaderWrapper>
+                </Accordion.Header>
+                <Accordion.Body>
+                    <BodyWrapper>
+                    <Accordion.Item>
+                        <ItemWrapper>
+                            <Text>{`A. ${item.answer[languageCode]}`}</Text>
+                        </ItemWrapper>
+                    </Accordion.Item>
+                    </BodyWrapper>
+                </Accordion.Body>
               </Accordion>
               ))
           }
