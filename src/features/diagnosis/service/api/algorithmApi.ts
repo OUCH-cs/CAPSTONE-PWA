@@ -8,9 +8,9 @@ export const getAlgorithm= async () => {
     return response.data;
 }
 
-export const getSystems = async () : Promise<string[]> => {
+export const getSystems = async (languageCode: string) : Promise<string[]> => {
     const response = await apiRequest({
-        url: "/diagnosis-algorithm/systems?languageCode=en",
+        url: `/diagnosis-algorithm/systems?languageCode=${languageCode}`,
         method: "GET",
     })
     return response.data;
