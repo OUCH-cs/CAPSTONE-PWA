@@ -6,8 +6,11 @@ import { MODEL } from "../translate.consts";
 import TranslateSessionView from "./TranslateSessionView";
 import useToggle from "@/shared/lib/useToggle";
 import FinishTranslationModal from "./FinishTranslationModal";
+import { useNavigate } from "react-router-dom";
 
 export default function TranslateController() {
+  const navigate = useNavigate();
+
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
   const [pc, setPc] = useState<RTCPeerConnection | null>(null);
   const [dc, setDc] = useState<RTCDataChannel | null>(null);
@@ -97,6 +100,7 @@ export default function TranslateController() {
     }
 
     isFinishModalToggle();
+    navigate("/translate/finish", { replace: true });
   };
 
   // 음소거 핸들링
