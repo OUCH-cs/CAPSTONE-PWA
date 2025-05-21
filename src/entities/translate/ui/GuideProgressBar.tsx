@@ -1,8 +1,6 @@
+import styled from "@emotion/styled";
 import { LocalizedText } from "@/features/translate/translate.types";
 import theme from "@/shared/styles/theme";
-import styled from "@emotion/styled";
-import ClosedIcon from "@/shared/assets/common/closed.svg?react";
-import { Link } from "react-router-dom";
 
 export default function GuideProgressBar({
   currentStep,
@@ -16,10 +14,6 @@ export default function GuideProgressBar({
   return (
     <Container>
       <Title>{title.en}</Title>
-
-      <ClosedIconWrapper to="/translate">
-        <ClosedIcon />
-      </ClosedIconWrapper>
 
       <ProgressWrapper>
         <Progress $progressWidth={progressWidth} />
@@ -35,8 +29,6 @@ const Container = styled.div`
   align-items: center;
   gap: 6px;
   height: 31px;
-  border-radius: 100px;
-  background-color: ${theme.colors.white};
   margin-bottom: 32px;
 `;
 
@@ -44,16 +36,6 @@ const Title = styled.h2`
   font-size: 14px;
   font-weight: 400;
   color: #000000;
-`;
-
-const ClosedIconWrapper = styled(Link)`
-  position: absolute;
-  top: 50%;
-  left: -24%;
-  width: 24px;
-  height: 24px;
-  background-color: transparent;
-  cursor: pointer;
 `;
 
 const ProgressWrapper = styled.div`

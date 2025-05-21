@@ -1,12 +1,11 @@
 import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
 import RoutingIcon from "@/shared/assets/translate/guide-routing.svg?react";
 import Arrow from "@/shared/assets/common/arrow.svg?react";
 
-export default function GuideRoutingButton() {
+export default function GuideRoutingButton({ toggle }: { toggle: () => void }) {
   return (
-    <Container to="/translate/guide">
+    <Container onClick={toggle}>
       <TextWrapper>
         <RoutingIcon />
         Situational Guide
@@ -19,7 +18,7 @@ export default function GuideRoutingButton() {
   );
 }
 
-const Container = styled(Link)`
+const Container = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,6 +27,7 @@ const Container = styled(Link)`
   height: 51px;
   border-radius: 12px;
   background-color: ${theme.colors.white};
+  margin-bottom: 181px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 `;
 
