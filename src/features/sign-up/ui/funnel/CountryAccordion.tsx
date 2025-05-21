@@ -24,7 +24,7 @@ export default function CountryAccordion({
             {selectedItem || "Country"}
           </AccordionHeaderTitle>
           <Accordion.Trigger>
-            <ArrowChevronIcon />
+            <ArrowChevronIcon width={20} height={20} stroke="#000" />
           </Accordion.Trigger>
         </AccordionHeaderWrapper>
       </Accordion.Header>

@@ -13,7 +13,8 @@ import {
   NotFoundPage,
   MapPage,
   GuideListPage,
-  GuidePage
+  GuidePage,
+  TranslateGuidePage,
 } from "@/pages";
 
 import MedicalRecordList from "@/pages/records/medicalrecord-list";
@@ -75,6 +76,7 @@ export default function AppRoutes() {
 
         {/* 통역 페이지 */}
         <Route path="/translate" element={<TranslatePage />} />
+        <Route path="/translate/guide" element={<TranslateGuidePage />} />
 
         {/* 마이 페이지 */}
         <Route path="/mypage" element={<Mypage />} />

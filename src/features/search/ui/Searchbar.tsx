@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import SearchIcon from "@/shared/assets/search/search.svg?react";
 import { useTextSearch } from "../services/useTextSearch";
 import useToggle from "@/shared/lib/useToggle";
-import DepartmentFilterDropdown from "./DepartmentFilterDropdown";
+import DepartmentFilterDropdown from "./dropdown/DepartmentFilterDropdown";
 
 function Searchbar() {
   const { textQuery, handleChange, handleSubmit } = useTextSearch();
