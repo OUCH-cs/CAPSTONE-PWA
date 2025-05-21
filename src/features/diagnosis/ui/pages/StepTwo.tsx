@@ -10,12 +10,14 @@ const StepTwo = ({ onNext, onPrev }: StepProps) => {
         <SymptomsList />
         <S.ButtonContainer>
           <S.NavigateButton
+            type='button'
             variant = "prev"
             onClick={onPrev}
           >
             <S.ButtonText variant = "prev">Prev</S.ButtonText>
           </S.NavigateButton>
           <S.NavigateButton
+            type='button'
             onClick={onNext}
           >
             <S.ButtonText>Next</S.ButtonText>

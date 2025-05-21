@@ -6,7 +6,6 @@ import theme from "@/shared/styles/theme";
 
 
 export const StepConditions = ({
-  data,
   system,
   symptom,
   languageCode,
@@ -14,7 +13,7 @@ export const StepConditions = ({
   onPrev,
   }: StepConditionsProps) => {
 
-    const { selectedCondition, allConditions, toggleCondition, } = useConditionList({system, symptom});
+    const { selectedCondition, allConditions, toggleCondition, } = useConditionList({system, symptom,languageCode});
 
     return (
         <S.Container>

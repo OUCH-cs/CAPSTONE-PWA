@@ -4,7 +4,7 @@ import { getAlgorithm } from "../service/api/conditionApi";
 import { DiagnosisAlgorithm } from "../diagnosis.type";
 
 export const useConditions = (
-    systems: string, symptom: string, languageCode: string = "en"
+    systems: string, symptom: string, languageCode: string 
 ) => {
     const { data, error, isLoading, mutate } = useSWR<string[]>(
         ["/conditions",systems,symptom,languageCode],

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSystems } from "./useSymptoms";
 import { useSymptoms } from "./useSymptoms";
 import { useAtom } from "jotai";
-import { selectedSystemAtom, selectedSymptomAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
+import { selectedSystemAtom, selectedSymptomAtom,languageCodeAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
 
 
 /**
@@ -18,7 +18,6 @@ import { selectedSystemAtom, selectedSymptomAtom } from "@/features/diagnosis/se
  */
 export const useSystemsList = () => {
   const { systems = [], isLoading } = useSystems();
-
   const [selectedSystem, setSelectedSystem] = useAtom(selectedSystemAtom);
 
   useEffect(() => {
@@ -40,11 +39,12 @@ export const useSystemsList = () => {
 };
 
 export const useSymptomsList = () => {
+  const [languageCode]=useAtom(languageCodeAtom)
   const [selectedSystem] = useAtom(selectedSystemAtom);
   const [selectedSymptom, setSelectedSymptom] = useAtom(selectedSymptomAtom);
   const { setValue } = useFormContext<{ symptom: string }>();
 
-  const { symptoms = [] } = useSymptoms(selectedSystem);
+  const { symptoms = [] } = useSymptoms(selectedSystem,languageCode);
 
   const allSymptoms: string[] = symptoms;
 

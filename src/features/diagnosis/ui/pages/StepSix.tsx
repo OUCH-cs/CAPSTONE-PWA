@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import { useFormContext, Controller } from "react-hook-form";
 import { DiagnosisFormData } from "../../diagnosis.type";
-import { StepProps } from "../../diagnosis.type";
+import { StepSixProps} from "../../diagnosis.type";
 import { useNavigate } from "react-router-dom";
 
 
-const StepSix = ({ onPrev }: StepProps) => {
+const StepSix = ({ onPrev }: StepSixProps) => {
   const navigate = useNavigate()
   const { control } = useFormContext<DiagnosisFormData>();
 
@@ -30,6 +30,7 @@ const StepSix = ({ onPrev }: StepProps) => {
       />
           <S.ButtonContainer>
             <S.NavigateButton
+              type='button'
               variant = "prev"
               onClick={onPrev}
             >

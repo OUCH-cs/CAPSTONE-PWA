@@ -4,14 +4,13 @@ import { useAtom } from "jotai";
 import { selectedConditionAtom } from "../service/selfDiagnosisAtoms";
 import { ConditionsProps } from "../diagnosis.type";
 
-export const useConditionList = ({system, symptom} : ConditionsProps ) => {
-  const { conditions = [], isLoading } = useConditions(system,symptom);
-
+export const useConditionList = ({system, symptom, languageCode} : ConditionsProps ) => {
+  const { conditions = [], isLoading } = useConditions(system,symptom,languageCode);
   const [selectedCondition, setSelectedCondition] = useAtom(selectedConditionAtom);
 
   useEffect(() => {
     if (conditions.length > 0 && !selectedCondition) {
-        setSelectedCondition(conditions[0]); // 기본 선택
+        setSelectedCondition(conditions[0]);
     }
   }, [conditions, selectedCondition, setSelectedCondition]);
 

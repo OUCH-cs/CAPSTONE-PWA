@@ -48,12 +48,19 @@ const StepThree = ({ onNext, onPrev }: StepProps) => {
       
       <S.ButtonContainer>
         <S.NavigateButton
+          type='button'
           variant = "prev"
-          onClick={onPrev}
+          onClick={()=>{
+            toggleSymptom("")
+            onPrev();
+
+          }
+          }
         >
           <S.ButtonText variant = "prev">Prev</S.ButtonText>
         </S.NavigateButton>
         <S.NavigateButton
+          type='button'
           disabled={!selectedSymptom}
           onClick={onNext}
         >
@@ -81,7 +88,7 @@ const AccordionHeaderWrapper = styled.div`
   width: inherit;
   height: 60px;
   padding: 9px 15px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid ${theme.colors.white_e5};
   border-radius: 6px;
   cursor: pointer;
 `;

@@ -1,14 +1,11 @@
 import { postDiagnosis } from "../service/api";
 import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
 
-
-
 export const useSubmitDiagnosis = () => {
 
     const onSubmit = async (formData:DiagnosisFormData) => {
       try {
         await postDiagnosis(formData); 
-        alert("Successfully submitted!");
       } catch (e: unknown) {
         if (e instanceof Error) {
           alert(`Submission failed: ${e.message}`);

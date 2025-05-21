@@ -6,9 +6,23 @@ import HomeActionButton from "@/features/main/ui/HomeActionButton";
 import {HospitalList} from "@/features/main/ui/HospitalList";
 import HomeDiagnosisCard from "@/features/main/ui/DiagnosisCard";
 import MainHeader from "@/features/main/ui/MainHeader";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
+import { getLanguage } from "@/features/diagnosis/service/api/languageApi";
+import { languageCodeAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
 
 
 function MainPage() {
+  const [languageCode, setLanguageCode] = useAtom(languageCodeAtom);
+
+  useEffect(() => {
+    if (languageCode) return;
+  
+    getLanguage()
+      .then((code) => setLanguageCode(code))
+      .catch(() => setLanguageCode("en"));
+  }, [languageCode, setLanguageCode]);
+
   return (
     <Container>
       <MainHeader/>

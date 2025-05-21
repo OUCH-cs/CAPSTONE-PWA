@@ -9,42 +9,12 @@ export const setPageAtom = atom(
   (_get, set, step: "main" | "add") => {
     set(currentPageAtom, step);
   }
-);
-
-const STORAGE_KEY = "customSymptoms";
-
-const getInitialSymptoms = (): string[] => {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : [];
-  } catch {
-    return [];
-  }
-};
-
-// 사용자 커스텀 증상 배열 상태
-export const customSymptomsAtom = atom<string[]>(getInitialSymptoms());
-
-export const addSymptomAtom = atom(
-  null,
-  (get, set, symptom: string) => {
-    const updated = [...get(customSymptomsAtom), symptom];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    set(customSymptomsAtom, updated);
-  }
-);
-
-export const removeSymptomAtom = atom(
-  null,
-  (get, set, symptom: string) => {
-    const updated = get(customSymptomsAtom).filter((s) => s !== symptom);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    set(customSymptomsAtom, updated);
-  }
-);
+)
 
 export const selectedSystemAtom = atom<string>("");
 
 export const selectedConditionAtom = atom<string | null>(null);
 
 export const selectedSymptomAtom = atom<string>("");
+
+export const languageCodeAtom = atom<string>("en"); 

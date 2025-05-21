@@ -7,14 +7,10 @@ const navigateOrSetStep = (
   setStep: (step: string) => void,
   setCurrentStep: (step: string) => void,
   setProgress?: (progress: number) => void,
-  message?: string,
   navigateFn?: NavigateFunction,
 ) => {
-  if (index < 0 && message && navigateFn) {
-    if (window.confirm(message)) {
+  if (index < 0 && navigateFn) {
       navigateFn(-1);
-    }
-    return;
   }
 
   // 유효한 인덱스인지 검사 (0 이상, 전체 스텝 개수 미만)
@@ -56,14 +52,12 @@ export const handlePrevClick =
   ) =>
   () => {
     const prevIndex = getCurrentStepIndex() - 1;
-    const cancelMessage = '정말로 회원가입을 취소하시겠습니까?';
     navigateOrSetStep(
       prevIndex,
       steps,
       setStep,
       setCurrentStep,
       setProgress,
-      cancelMessage,
       navigate,
     );
   };

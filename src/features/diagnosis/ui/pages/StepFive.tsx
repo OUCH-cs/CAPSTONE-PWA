@@ -34,12 +34,14 @@ const StepFive = ({ onNext, onPrev }: StepProps) => {
       <PainLevelBar />
           <S.ButtonContainer>
             <S.NavigateButton
+              type='button'
               variant = "prev"
               onClick={onPrev}
             >
               <S.ButtonText variant = "prev">Prev</S.ButtonText>
             </S.NavigateButton>
             <S.NavigateButton
+              type='button'
               onClick={checkConditionsAndProceed}
             >
               <S.ButtonText>Next</S.ButtonText>

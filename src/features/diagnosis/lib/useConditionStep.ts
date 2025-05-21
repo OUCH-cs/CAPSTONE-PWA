@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { useFormContext, useWatch } from "react-hook-form";
-import { selectedSystemAtom } from "../service/selfDiagnosisAtoms";
+import { selectedSystemAtom, languageCodeAtom } from "../service/selfDiagnosisAtoms";
 import { useAlgorithm } from "./useConditions";
 import { DiagnosisAlgorithm } from "../diagnosis.type";
 
@@ -9,10 +9,8 @@ export const useConditionStep = (onNext: () => void = () => {}) => {
   const { control } = useFormContext();
   const symptom = useWatch({ control, name: "symptom" });
   const [system] = useAtom(selectedSystemAtom);
-  const languageCode = "en";
-
+  const [languageCode] = useAtom(languageCodeAtom)
   const { algorithms = [] } = useAlgorithm();
-
   const [showConditions, setShowConditions] = useState(false);
   const [conditionData, setConditionData] = useState<DiagnosisAlgorithm[] | null>(null);
 

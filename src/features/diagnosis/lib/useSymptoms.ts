@@ -6,9 +6,6 @@ export const useSystems = () => {
         "/systems",
         getSystems
     );    
-
-    console.log(data)
-    
     return {
         systems: data,
         isLoading,
@@ -18,17 +15,14 @@ export const useSystems = () => {
 
 }
 
-
 export const useSymptoms = (
-    systems: string, languageCode: string = "en"
+    systems: string, languageCode: string
 ) => {
     const { data, error, isLoading, mutate } = useSWR<string[]>(
         ['/symptoms', systems, languageCode], 
         () => getSymptoms(systems, languageCode) 
     );    
 
-    console.log(data)
-    
     return {
         symptoms: data,
         isLoading,

@@ -32,18 +32,24 @@ export type DiagnosisFormData = {
   export interface StepProps {
     data?: DiagnosisAlgorithm[];
     onNext: () => void;
-    onPrev?: () => void;
+    onPrev: () => void;
   }
+
+  export interface StepSixProps {
+    onPrev: () => void;
+  }
+
   export interface ConditionsProps {
     system: string;
     symptom: string;
+    languageCode:string;
   }
 
   export interface StepConditionsProps {
     data?: DiagnosisAlgorithm[];
     system: string;
     symptom: string;
-    languageCode?: string;
+    languageCode: string;
     onNext: () => void;
     onPrev: () => void;
   }
@@ -76,3 +82,17 @@ export type DiagnosisFormData = {
       en: string;
     };
   }
+
+  export interface LanguageResponse<T> {
+    success: boolean;
+    code: string;
+    message: string;
+    data: T;
+  }
+  
+  export interface NameCodeData {
+    name: string;
+    code: string;
+  }
+
+  

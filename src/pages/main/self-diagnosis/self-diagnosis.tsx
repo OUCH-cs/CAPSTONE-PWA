@@ -10,6 +10,7 @@ import { currentPageAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms
 import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
 import { handleNextClick, handlePrevClick, useFunnel, useProgress } from "@/shared/lib/funnel";
 import { useSubmitDiagnosis } from "@/features/diagnosis/lib/useDiagnosis";
+import { Header } from "@/features/diagnosis/ui/Header";
 
 const steps = ["1", "2", "3", "4", "5", "6"];
 
@@ -52,7 +53,7 @@ function SelfDiagnosisPage() {
 
   return (
     <Container>
-      <Title>Self-diagnosis</Title>
+      <Header/>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
         {currentPage === "main" && (
@@ -77,12 +78,4 @@ const Container = styled.div`
   background-color: ${theme.colors.background};
   padding: 0 16px;
   overflow-y: auto;
-`;
-
-const Title = styled.p`
-  font-size: 1.7rem;
-  font-weight: 500;
-  text-align: center;
-  padding: 1.5rem;
-  margin-bottom: 2.3rem;
 `;
