@@ -108,9 +108,11 @@ const Dialog = styled.dialog<{ $isOpen: boolean }>`
   padding: 0;
   margin: 0;
   border: none;
+  border-radius: 10px;
   background-color: transparent;
   animation: ${({ $isOpen }) => ($isOpen ? fadeIn : fadeOut)} 0.4s ease;
   outline: none;
+  box-shadow: 0px 20px 40px 0 rgba(0, 0, 0, 0.1);
 
   &[open] {
     outline: none;

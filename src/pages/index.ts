@@ -20,7 +20,7 @@ export * from "./records/records";
 
 // 번역
 export * from "./translate/translate";
-export * from "./translate/translate-guide";
+export * from "./translate/translate-finish";
 
 // 마이 페이지
 export * from "./mypage/mypage";
