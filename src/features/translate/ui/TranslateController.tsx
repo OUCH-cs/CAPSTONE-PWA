@@ -15,6 +15,7 @@ export default function TranslateController() {
   const [pc, setPc] = useState<RTCPeerConnection | null>(null);
   const [dc, setDc] = useState<RTCDataChannel | null>(null);
   const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [audioTrack, setAudioTrack] = useState<MediaStreamTrack | null>(null);
 
   const { isOpen: isFinishModalOpen, toggle: isFinishModalToggle } =
     useToggle(); // 통역 중지 모달 토글 훅
@@ -33,6 +34,7 @@ export default function TranslateController() {
       audio: true,
     });
     const audioTrack = mediaStream.getAudioTracks()[0];
+    setAudioTrack(audioTrack);
     pc.addTrack(audioTrack);
 
     // 응답 오디오 출력 설정
@@ -104,7 +106,15 @@ export default function TranslateController() {
   };
 
   // 음소거 핸들링
-  const handleToggleMuted = () => setIsMuted((prev) => !prev);
+  const handleToggleMuted = () => {
+    setIsMuted((prev) => {
+      const next = !prev;
+      if (audioTrack) {
+        audioTrack.enabled = !next;
+      }
+      return next;
+    });
+  };
 
   return (
     <>
