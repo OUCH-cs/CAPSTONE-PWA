@@ -75,6 +75,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: fit-content;
 `;
 
 const TitleWrapper = styled.div`
@@ -115,6 +116,7 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+  margin-bottom: 50px;
 `;
 
 const PrevButton = styled.button`
@@ -123,7 +125,7 @@ const PrevButton = styled.button`
   font-size: 16px;
   font-weight: 500;
   color: #000000;
-  background-color: transparent;
+  background-color: ${theme.colors.white};
   border: 1px solid ${theme.colors.white_e5};
   border-radius: 10px;
 `;
