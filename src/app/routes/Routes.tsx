@@ -12,7 +12,6 @@ import {
   SignupSuccessPage,
   NotFoundPage,
   MapPage,
-  TranslateFinishPage,
 } from "@/pages";
 
 import MedicalRecordList from "@/pages/records/medicalrecord-list";
@@ -21,7 +20,7 @@ import MedicalRecord from "@/pages/records/medicalrecord";
 import HealthStatus from "@/pages/records/healthstatus";
 import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusAdd from "@/pages/records/healthstatus-add";
-import { AuthGuard, RedirectIfAuth } from "@/app/providers";
+import { RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
 import SearchDetailPage from "@/pages/search/search-detail";
 
@@ -35,7 +34,7 @@ export default function AppRoutes() {
         <Route path="/sign-in" element={<SignInPage />} />
       </Route>
 
-      <Route element={<AuthGuard />}>
+      <Route>
         {/* 메인 페이지 */}
         <Route path="/" element={<MainPage />} />
 
@@ -71,7 +70,6 @@ export default function AppRoutes() {
 
         {/* 통역 페이지 */}
         <Route path="/translate" element={<TranslatePage />} />
-        <Route path="/translate/finish" element={<TranslateFinishPage />} />
 
         {/* 마이 페이지 */}
         <Route path="/mypage" element={<Mypage />} />
