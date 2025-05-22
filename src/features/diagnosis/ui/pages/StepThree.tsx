@@ -18,11 +18,11 @@ const StepThree = ({ onNext, onPrev }: StepProps) => {
         <Accordion>
           {/* 아코디언 헤더 */}
           <Accordion.Header>
-            <AccordionHeaderWrapper>
+            <AccordionHeaderWrapper selected={!selectedSymptom.length}>
               {selectedSymptom?.length ? selectedSymptom: "symptoms"}
               {/* 아코디언 아이콘 컨테이너 */}
               <Accordion.Trigger>
-                <ArrowIcon />
+                <ArrowIcon stroke="#000"/>
               </Accordion.Trigger>
             </AccordionHeaderWrapper>
           </Accordion.Header>
@@ -77,10 +77,11 @@ const AccordionContaniner = styled.div`
   margin-bottom: 8rem;
 `
 
-const AccordionHeaderWrapper = styled.div`
+const AccordionHeaderWrapper = styled.div<{ selected: boolean }>`
   display: flex;
   background-color: ${theme.colors.white};
-  color: ${ theme.colors.gray_7};
+  color: ${({ selected, theme }) =>
+    selected ? theme.colors.gray_7 : theme.colors.black};
   justify-content: space-between;
   align-items: center;
   font-size: 1.1rem;
