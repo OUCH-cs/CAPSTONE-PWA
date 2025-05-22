@@ -7,6 +7,8 @@ export * from "./auth/sign-in";
 export * from "./main/mainpage";
 export * from "./main/self-diagnosis/diagnosis-faq";
 export * from "./main/self-diagnosis/self-diagnosis";
+export * from "./main/guide/guide-list"
+export * from "./main/guide/guide"
 
 // 검색 (지도)
 export * from "./search/search";
