@@ -1,10 +1,10 @@
 import useSWR from "swr";
 import { getSystems } from "../../service/api";
 
-export const useSystems = () => {
+export const useSystems = (languageCode: string) => {
     const { data, error, isLoading, mutate } = useSWR<string[]>(
-        "/systems",
-        getSystems
+        ["/systems",languageCode],
+        ()=>getSystems(languageCode)
     );    
     return {
         systems: data,
