@@ -10,6 +10,13 @@ import StepSix from "./pages/StepSix";
 export interface ClassPostProps {
   steps: string[];
   nextClickHandler: (nextStep: string) => void;
+  Funnel: React.ComponentType<FunnelProps>;
+  Step: React.ComponentType<StepProps>;
+}
+
+export interface DiagnosisPostProps {
+  steps: string[];
+  nextClickHandler: (nextStep: string) => void;
   prevClickHandler: () => void;
   Funnel: React.ComponentType<FunnelProps>;
   Step: React.ComponentType<StepProps>;
@@ -21,7 +28,7 @@ const DiagnosisPost = ({
   prevClickHandler,
   Funnel,
   Step,
-}: ClassPostProps) => {
+}: DiagnosisPostProps) => {
   return (
     <Funnel>
       <Step name={steps[0]}>
@@ -40,7 +47,7 @@ const DiagnosisPost = ({
         <StepFive onNext={() => nextClickHandler(steps[5])} onPrev ={() => prevClickHandler()} />
       </Step>
       <Step name={steps[5]}>
-        <StepSix onPrev ={() => prevClickHandler()}/>
+        <StepSix onPrev ={prevClickHandler}/>
       </Step>
     </Funnel>
   );

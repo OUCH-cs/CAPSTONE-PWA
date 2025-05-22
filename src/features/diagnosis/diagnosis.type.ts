@@ -1,3 +1,5 @@
+import { FunnelProps } from "@/shared/lib/funnel";
+
 export type DiagnosisFormData = {
   userId: number;
   visitType: "HOSPITAL" | "PHARMACY";
@@ -15,6 +17,15 @@ export interface DiagnosisResponse {
   painSeverity: number;
   additionalNote?: string;
 }
+
+export interface DiagnosisPostProps {
+  steps: string[];
+  nextClickHandler: (nextStep: string) => void;
+  prevClickHandler: () => void;
+  Funnel: React.ComponentType<FunnelProps>;
+  Step: React.ComponentType<StepProps>;
+}
+
 
 export interface RecommendRequest {
   language: string;       
