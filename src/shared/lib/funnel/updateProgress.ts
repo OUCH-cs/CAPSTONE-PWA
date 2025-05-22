@@ -24,7 +24,6 @@ const navigateOrSetStep = (
 };
 
 // 전체 스텝 이동, 진행률 관리 함수
-// 헤더 추가 시 뒤로 이동하는 로직 추가 예정
 const handleNextClick =
   (
     getCurrentStepIndex: () => number,
@@ -40,7 +39,7 @@ const handleNextClick =
 
 export { handleNextClick };
 
-
+// navigate은 첫번째 페이지에서 뒤로 이동하여 페이지 나갈 시 필요
 export const handlePrevClick =
   (
     getCurrentStepIndex: () => number,
