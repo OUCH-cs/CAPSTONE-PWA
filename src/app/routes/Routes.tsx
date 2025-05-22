@@ -4,7 +4,6 @@ import {
   Mypage,
   RecordsPage,
   SearchPage,
-  DiagnosisFaqPage,
   SignInPage,
   SignUpPage,
   TranslatePage,
@@ -40,9 +39,6 @@ export default function AppRoutes() {
       <Route element={<AuthGuard />}>
         {/* 메인 페이지 */}
         <Route path="/" element={<MainPage />} />
-
-        {/* 자가진단 FAQ 페이지 */}
-        <Route path="/self-diagnosisFAQ" element={<DiagnosisFaqPage />} />
 
         {/* 자가진단 페이지 */}
         <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />

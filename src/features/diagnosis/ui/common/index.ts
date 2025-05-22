@@ -12,12 +12,21 @@ const Question = styled.p`
   margin-bottom: 3.5rem;
 `;
 
-const NextButtonText = styled.p`
-  color: ${theme.colors.white};
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:20px;
+
+`
+
+const ButtonText = styled.p<{ variant?: "prev" }>`
+  color: ${({ variant }) =>
+    variant === "prev" ? theme.colors.black : theme.colors.white};
   font-size: 1.5rem;
 `;
 
-const NextButton = styled(Button)`
+const NavigateButton = styled(Button)<{ variant?: "prev"}>`
   height: 4rem;
   width: 100%;
   text-align: center;
@@ -25,11 +34,19 @@ const NextButton = styled(Button)`
   align-items: center;
   justify-content: center;
   margin-bottom: 7rem;
+  ${({ variant }) =>
+  variant === "prev" &&
+  `
+    background-color: ${theme.colors.background};
+    border: 1px solid ${theme.colors.white_e5}; 
+  `}
+
 `;
 
 export {
   Container,
   Question,
-  NextButton,
-  NextButtonText,
+  ButtonContainer ,
+  ButtonText,
+  NavigateButton
 };

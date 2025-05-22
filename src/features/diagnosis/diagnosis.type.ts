@@ -31,8 +31,8 @@ export interface SelectDestinationProps {
 
 export interface StepProps {
   data?: DiagnosisAlgorithm[];
-  onNext?: () => void;
-  onPrev?: () => void;
+  onNext: () => void;
+  onPrev: () => void;
 }
 
 export interface StepSixProps {
