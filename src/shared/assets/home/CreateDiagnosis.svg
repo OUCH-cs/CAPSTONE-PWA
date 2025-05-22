@@ -1,0 +1,19 @@
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    fill="none"
+  >
+    <path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M11.667.667H5.001a1.667 1.667 0 0 0-1.667 1.666v13.334a1.667 1.667 0 0 0 1.667 1.666h10a1.667 1.667 0 0 0 1.666-1.666v-10l-5-5Z"
+    />
+    <path
+      stroke="#fff"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M11.666.667v5h5M13.333 9.834H6.666M13.333 13.166H6.666M8.333 6.5H6.666"
+    />
+  </svg>

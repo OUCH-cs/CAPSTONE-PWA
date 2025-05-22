@@ -20,7 +20,7 @@ import MedicalRecord from "@/pages/records/medicalrecord";
 import HealthStatus from "@/pages/records/healthstatus";
 import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusAdd from "@/pages/records/healthstatus-add";
-import { AuthGuard, RedirectIfAuth } from "@/app/providers";
+import { RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
 import SearchDetailPage from "@/pages/search/search-detail";
 
@@ -34,7 +34,7 @@ export default function AppRoutes() {
         <Route path="/sign-in" element={<SignInPage />} />
       </Route>
 
-      <Route element={<AuthGuard />}>
+      <Route>
         {/* 메인 페이지 */}
         <Route path="/" element={<MainPage />} />
 

@@ -1,46 +1,47 @@
-import { useEffect } from "react";
-import { useAtom } from "jotai";
 import styled from "@emotion/styled";
 import DropdownMenuIcon from "@/shared/assets/common/arrow.svg?react";
-import { sortFilterAtom } from "../services/store/filterAtom";
-import { Sort, SortDropdownProps } from "../search.types";
+import theme from "@/shared/styles/theme";
+import { useAtom } from "jotai";
+import { departmentFilterAtom } from "../../services/store/filterAtom";
+import { Department, DepartmentDropdownProps } from "../../search.types";
+import { useEffect } from "react";
 import Dropdown from "@/shared/components/dropdown/Dropdown";
 
-export default function SortDropdown({
+export default function DepartmentFilterDropdown({
   isOpen,
   setIsOpen,
   toggle,
   menus,
-}: SortDropdownProps) {
-  const [sort, setSort] = useAtom(sortFilterAtom);
+}: DepartmentDropdownProps) {
+  const [department, setDepartment] = useAtom(departmentFilterAtom);
 
-  const handleClick = (sort: Sort) => {
-    setSort(sort);
+  const handleClick = (menu: Department) => {
+    setDepartment(menu);
     toggle();
   };
 
   useEffect(() => {
-    setSort("Recommended");
+    setDepartment(null);
   }, []);
 
   return (
     <Dropdown setIsOpen={setIsOpen}>
       <Dropdown.Trigger onClick={toggle}>
         <TriggerWrapper>
-          {sort}
+          {department || "Medical Department"}
           <IconWrapper>
             <DropdownMenuIcon width="16" height="16" stroke="#767676" />
           </IconWrapper>
         </TriggerWrapper>
       </Dropdown.Trigger>
 
-      <Dropdown.Menu isOpen={isOpen} top="35px" right="10px">
+      <Dropdown.Menu isOpen={isOpen} top="35px" left="0px">
         <MenuWrapper>
           {menus.map((menu, index) => (
             <MenuItem
               key={index}
               onClick={() => handleClick(menu)}
-              $isSelected={menu === sort}
+              $isSelected={menu === department}
             >
               {menu}
             </MenuItem>
@@ -58,6 +59,8 @@ const TriggerWrapper = styled.div`
   gap: 4px;
   height: 31px;
   padding: 0 12px;
+  border: 1px solid ${theme.colors.white_e5};
+  border-radius: 20px;
 `;
 
 const IconWrapper = styled.div`
