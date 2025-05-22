@@ -5,7 +5,7 @@ export const getLanguage = async () => {
         url: "/users/languages",
         method: "GET",
     })
-    console.log(response.data.code)
+    
     return response.data.data.code;
 
 }
