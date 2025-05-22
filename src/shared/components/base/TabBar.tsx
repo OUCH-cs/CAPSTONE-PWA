@@ -1,4 +1,4 @@
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import MainIcon from "@/shared/assets/common/main-tab.svg?react";
@@ -18,7 +18,7 @@ function TabBar() {
     setTab(location.pathname);
   }, [location.pathname]);
 
-  if (!isAuth) return <Navigate to="/sign-in" />;
+  if (!isAuth) return null;
   return (
     <Container>
       <TabItem to="/" $isSelected={tab === "/"} onClick={() => setTab("/")}>
