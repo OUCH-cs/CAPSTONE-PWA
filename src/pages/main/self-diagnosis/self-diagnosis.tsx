@@ -22,8 +22,8 @@ function SelfDiagnosisPage() {
     defaultValues: {
       userId: 1,
       visitType: "HOSPITAL",
-      symptoms: [],
-      duration: "ONE_TO_THREE_DAYS",
+      symptom: "",
+      duration: "LESS_THAN_1_DAY",
       painSeverity: 5,
       additionalNote: "",
     },

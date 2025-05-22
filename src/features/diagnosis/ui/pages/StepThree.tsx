@@ -4,7 +4,6 @@ import theme from "@/shared/styles/theme";
 import { Accordion } from "@/shared/components/accordion";
 import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import { useFormContext } from "react-hook-form";
-import SelectedSymptoms from "../SelectedSymptoms";
 import { StepProps } from "../../diagnosis.type";
 import { DURATION_OPTIONS, DURATION_LABELS} from "@/shared/mock";
 
@@ -16,7 +15,6 @@ const StepThree = ({ onNext }: StepProps) => {
   return (
     <S.Container>
       <S.Question>How long did the symptoms lasted?</S.Question>
-      <SelectedSymptoms />
       <Accordion>
         {/* 아코디언 헤더 */}
         <Accordion.Header>

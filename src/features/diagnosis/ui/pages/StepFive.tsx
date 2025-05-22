@@ -2,7 +2,6 @@ import * as S from "../common"
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import { useFormContext, Controller } from "react-hook-form";
-import SelectedSymptoms from "../SelectedSymptoms";
 import { DiagnosisFormData } from "../../diagnosis.type";
 
 const StepFive = () => {
@@ -13,7 +12,6 @@ const StepFive = () => {
       <S.Question>
         Please write down what you would like to tell the doctor additionally
       </S.Question>
-      <SelectedSymptoms />
       <Controller
         name="additionalNote"
         control={control}
