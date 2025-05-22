@@ -8,8 +8,6 @@ export const useAlgorithm = () => {
         getAlgorithm
     );    
 
-    console.log(data)
-    
     return {
         algorithms: data,
         isLoading,

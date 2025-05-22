@@ -9,8 +9,6 @@ export const useConditions = (
         () => getConditions(systems,symptom,languageCode)
     );    
 
-    console.log(data)
-    
     return {
         conditions: data,
         isLoading,
