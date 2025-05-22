@@ -10,8 +10,6 @@ export const useConditions = (
         ["/conditions",systems,symptom,languageCode],
         () => getConditions(systems,symptom,languageCode)
     );    
-
-    console.log(data)
     
     return {
         conditions: data,
@@ -29,8 +27,6 @@ export const useAlgorithm = () => {
         getAlgorithm
     );    
 
-    console.log(data)
-    
     return {
         algorithms: data,
         isLoading,

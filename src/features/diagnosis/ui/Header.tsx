@@ -17,10 +17,12 @@ function Header() {
 
   return (
     <Container>
-      <BackwardIconWrapper onClick={toggle}>
-        <BackArrowIcon width={28} height={28} />
-      </BackwardIconWrapper>
-      <Title>Self-diagnosis</Title>
+      <HeaderWrapper>
+        <BackwardIconWrapper onClick={toggle}>
+          <BackArrowIcon width={28} height={28} />
+        </BackwardIconWrapper>
+        <Title>Self-diagnosis</Title>
+      </HeaderWrapper>
       <Modal isOpen={isOpen} toggle={toggle}>
         <Wrapper>
           <Message>Do you want to stop<br/>the self-diagnosis?</Message>
@@ -51,12 +53,20 @@ const Container = styled.div`
   width: 100%;
 `;
 
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  margin-bottom: 2.3rem;
+
+`
+
 const Title = styled.p`
   font-size: 1.7rem;
   font-weight: 500;
   text-align: center;
-  padding: 1.5rem;
-  margin-bottom: 2.3rem;
 `;
 
 

@@ -5,8 +5,6 @@ import { useState } from "react";
 import ProgressBar from "@/features/diagnosis/ui/ProgressBar";
 import theme from "@/shared/styles/theme";
 import { useForm, FormProvider } from "react-hook-form";
-import { useAtom } from "jotai";
-import { currentPageAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
 import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
 import { handleNextClick, handlePrevClick, useFunnel, useProgress } from "@/shared/lib/funnel";
 import { useSubmitDiagnosis } from "@/features/diagnosis/lib/useDiagnosis";
@@ -16,7 +14,6 @@ const steps = ["1", "2", "3", "4", "5", "6"];
 
 function SelfDiagnosisPage() {
   const navigate = useNavigate();
-  const [currentPage] = useAtom(currentPageAtom);
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
   const { currentStep, setCurrentStep, initialProgress, getCurrentStepIndex } = useProgress(steps);
   const [progress, setProgress] = useState<number>(initialProgress);
@@ -56,9 +53,7 @@ function SelfDiagnosisPage() {
       <Header/>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-        {currentPage === "main" && (
-          <ProgressBar progress={progress} currentStep={currentStep} />
-        )}
+        <ProgressBar progress={progress} currentStep={currentStep} />
         <DiagnosisPost
           steps={steps}
           nextClickHandler={nextClickHandler}

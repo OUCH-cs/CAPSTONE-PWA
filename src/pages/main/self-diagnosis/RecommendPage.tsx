@@ -4,20 +4,27 @@ import { useRecommend } from '../../../features/diagnosis/lib/useRecommend';
 import { RecommendRequest } from '../../../features/diagnosis/diagnosis.type';
 import { useMemo } from "react";
 import { useAtom } from "jotai";
-import { selectedSystemAtom, selectedConditionAtom ,selectedSymptomAtom} from '@/features/diagnosis/service/selfDiagnosisAtoms';
+import { selectedSystemAtom, selectedConditionAtom ,selectedSymptomAtom, languageCodeAtom, destinationAtom} from '@/features/diagnosis/service/selfDiagnosisAtoms';
 import LoadingOverlay from "@/shared/components/overlay/LoadingOverlay";
+import Location from "@/shared/assets/common/location.svg?react"
+import { Button } from "@/shared/components/button/Button";
+import { useNavigate } from "react-router-dom";
+
 
 function RecommendPage (){
+      const navigate = useNavigate()
       const [symptom] = useAtom(selectedSymptomAtom);
       const [system] = useAtom(selectedSystemAtom);
       const [condition] = useAtom(selectedConditionAtom);
+      const [language] = useAtom(languageCodeAtom)
+      const [destination] = useAtom(destinationAtom)
 
     const input: RecommendRequest = useMemo(() => ({
-        language: "en",
+        language,
         system ,
         symptom,
         condition,
-      }), [system, symptom, condition]); 
+      }), [system, symptom, condition,language]); 
       
       const { response, isLoading } = useRecommend(input);
   
@@ -25,12 +32,31 @@ function RecommendPage (){
     return (
         <Container>
             {isLoading && <LoadingOverlay/>}
-            <Question>Recommended Hospital</Question>
-            <Departments>- {response?.data.departments?.[0]?.en}</Departments>
-            <Description>{response?.data.note?.en}</Description>
-            <div>{response?.data.condition?.en}</div>
-            <div>여기에는 svg</div>
-            <div>여기에는 버튼</div>
+            <Question>{`Recommended ${destination}`}</Question>
+            {response?.data.departments.map((dept: Record<string, string>, index: number) => (
+            <Departments key={index}>
+              - {dept[language]}
+            </Departments>
+            ))}
+            <Description>{response?.data.note[language]}</Description>
+            <Condition>{response?.data.condition}</Condition>
+            <IconContainer>
+              <Location/>
+            </IconContainer>
+            <ButtonGroup>
+              {destination === "HOSPITAL" ? (
+                <Button width={416}>
+                  Find Recommended Hospitals
+                </Button>
+              ) : (
+                <Button width={416}>
+                  Find Recommended pharmacy
+                </Button>
+              )}
+                <FinishButton onClick={() => {navigate("/")}}>
+                  finish
+                </FinishButton>
+            </ButtonGroup>
         </Container>
 
     )
@@ -47,19 +73,45 @@ const Container = styled.div`
 `;
 
 const Question = styled.p`
-  margin-top:10.5rem;
-  font-size: 1.5rem;
-  text-align: center;
-  margin-bottom: 3.5rem;
+  margin-top:6.5rem;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-weight:600;
 `
 const Departments = styled.div`
-  font-size: 16px;
+  font-size: 1.4rem;
   line-height: 1.4;
-
+  font-weight:600;
+`
+const Condition = styled.div`
+  font-size: 1.4rem;
+  line-height: 1.4;
+  font-weight: 600;
 `
 const Description = styled.p`
-  font-size: 14px;
-  color: #555;
-  text-align: center;
+  font-size: 1rem;
+  color: ${theme.colors.gray_4};
   margin: 12px 0 24px;
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4.3rem;
+`;
+
+const FinishButton = styled.button`
+  display: flex;
+  justify-content: center;
+  background-color:${theme.colors.background};
+  height: 48px;
+  font-size: 1rem;
+`
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;         
+  gap: 0.5rem;
 `;

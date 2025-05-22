@@ -17,7 +17,8 @@ import { selectedSystemAtom, selectedSymptomAtom,languageCodeAtom } from "@/feat
  * }
  */
 export const useSystemsList = () => {
-  const { systems = [], isLoading } = useSystems();
+  const [languageCode]=useAtom(languageCodeAtom)
+  const { systems = [], isLoading } = useSystems(languageCode);
   const [selectedSystem, setSelectedSystem] = useAtom(selectedSystemAtom);
 
   useEffect(() => {
