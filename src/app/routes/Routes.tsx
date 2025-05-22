@@ -25,6 +25,7 @@ import HealthStatusAdd from "@/pages/records/healthstatus-add";
 import { AuthGuard, RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
 import SearchDetailPage from "@/pages/search/search-detail";
+import EditProfile from "@/pages/mypage/edit-profile";
 
 export default function AppRoutes() {
   return (
@@ -52,7 +53,7 @@ export default function AppRoutes() {
 
         {/* 지도 페이지 */}
         <Route path="/map" element={<MapPage />} />
-
+      
         <Route path="/records" element={<RecordsPage />} />
         <Route
           path="/records/medicalrecord-list"
@@ -76,6 +77,7 @@ export default function AppRoutes() {
 
         {/* 마이 페이지 */}
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage/edit-profile" element={<EditProfile />} />
 
         {/* 테스트 페이지 */}
         <Route path="/test" element={<TestPage />} />
