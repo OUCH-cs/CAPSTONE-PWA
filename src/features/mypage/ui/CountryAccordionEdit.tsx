@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Accordion } from "@/shared/components/accordion";
-import { COUNTRY_LIST } from "@/features/sign-up/sign-up.constants";
-// 추후 API연동시 countryList부분 동적으로 불러올 예정입니다!
+import { COUNTRY_LIST } from "@/features/mypage/MyPage.constants";
 import ArrowChevronIcon from "@/shared/assets/common/arrow.svg?react";
 interface ControllerProps<T> {
   value: T;

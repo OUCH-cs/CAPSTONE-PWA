@@ -36,7 +36,6 @@ export default function GenderSelect({
 const GenderSelectWrapper = styled.div`
   display: flex;
   border-radius: 10px;
-  overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.white_e5};
   background-color: ${({ theme }) => theme.colors.white};
 `;

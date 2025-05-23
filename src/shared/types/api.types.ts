@@ -1,4 +1,4 @@
-type APIMethodType = "GET" | "POST" | "PATCH" | "DELETE";
+type APIMethodType = "GET" | "POST" | "PATCH" | "DELETE" | "PUT";
 
 interface IAPIRequestConfig {
   url: string;
