@@ -4,7 +4,6 @@ import {
   Mypage,
   RecordsPage,
   SearchPage,
-  DiagnosisFaqPage,
   SignInPage,
   SignUpPage,
   TranslatePage,
@@ -12,7 +11,6 @@ import {
   SignupSuccessPage,
   NotFoundPage,
   MapPage,
-  GuideListPage,
   GuidePage,
   TranslateFinishPage,
 } from "@/pages";
@@ -42,13 +40,9 @@ export default function AppRoutes() {
         {/* 메인 페이지 */}
         <Route path="/" element={<MainPage />} />
 
-        {/* 자가진단 FAQ 페이지 */}
-        <Route path="/self-diagnosisFAQ" element={<DiagnosisFaqPage />} />
-
         {/* 자가진단 페이지 */}
         <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
 
-        <Route path="guide-list" element={<GuideListPage/>}/>
         <Route path="guide" element={<GuidePage/>}/>
 
         {/* 검색 페이지 */}
