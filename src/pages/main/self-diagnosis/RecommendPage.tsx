@@ -18,11 +18,11 @@ import { useNavigate } from "react-router-dom";
 
 function RecommendPage() {
   const navigate = useNavigate();
-  const [symptom] = useAtom(selectedSymptomAtom);
-  const [system] = useAtom(selectedSystemAtom);
-  const [condition] = useAtom(selectedConditionAtom);
+  const [symptom, setSymptom] = useAtom(selectedSymptomAtom);
+  const [system, setSystem] = useAtom(selectedSystemAtom);
+  const [condition, setCondition] = useAtom(selectedConditionAtom);
   const [language] = useAtom(languageCodeAtom);
-  const [destination] = useAtom(destinationAtom);
+  const [destination, setDestination] = useAtom(destinationAtom);
 
   const input: RecommendRequest = useMemo(() => ({
     language,
@@ -31,7 +31,26 @@ function RecommendPage() {
     condition,
   }), [system, symptom, condition, language]);
 
-  const { response, isLoading } = useRecommend(input);
+  const shouldFetch =
+  !!system && !!symptom && !!condition;
+
+  const { response, isLoading } = useRecommend(shouldFetch ? input : null);
+
+  const handleResetAndGoHome = () => {
+    navigate("/");
+    setSymptom("");
+    setSystem("");
+    setCondition("");
+    setDestination("HOSPITAL"); 
+  };
+
+  const handleResetAndSearch = () => {
+    navigate("/search");
+    setSymptom("");
+    setSystem("");
+    setCondition("");
+    setDestination("HOSPITAL");
+  };
 
   return (
     <Container>
@@ -61,10 +80,10 @@ function RecommendPage() {
       </IconContainer>
 
       <ButtonGroup>
-        <Button width={416} onClick={() => navigate("/search")}>
+        <Button width={416} onClick={handleResetAndSearch}>
           {destination === "HOSPITAL" ? "Find Recommended Hospitals" : "Find Pharmacy"}
         </Button>
-        <FinishButton onClick={() => navigate("/")}>Finish</FinishButton>
+        <FinishButton onClick={handleResetAndGoHome}>Finish</FinishButton>
       </ButtonGroup>
     </Container>
   );
