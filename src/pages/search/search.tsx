@@ -3,7 +3,7 @@ import { useNearbySearch } from "@/features/search/services/useNearbySearch";
 import { useTextSearch } from "@/features/search/services/useTextSearch";
 import { Searchbar, SearchList } from "@/features/search/ui";
 import { fallbackLocaton } from "@/shared/consts/common";
-import SortDropdown from "@/features/search/ui/SortDropdown";
+import SortDropdown from "@/features/search/ui/dropdown/SortDropdown";
 import useToggle from "@/shared/lib/useToggle";
 import Skeleton from "@/shared/components/skeleton/Skeleton";
 // import { useCurrLocation } from "@/shared/services/useCurrLocation";
@@ -39,8 +39,10 @@ function SearchPage() {
 
   return (
     <Container>
+      {/* 검색바 */}
       <Searchbar />
 
+      {/* 정렬 드롭다운 */}
       <SortDropdownWrapper>
         <SortDropdown
           isOpen={isOpen}
@@ -64,6 +66,7 @@ function SearchPage() {
         <div>검색 결과가 없습니다.</div>
       )}
 
+      {/* 검색결과 렌더링 */}
       {(shouldRenderNearby || isTextSearchSuccess) && (
         <SearchList currLocation={currLocation} places={renderData} />
       )}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="7.95703" y="0.449219" width="4.04764" height="4" rx="2" fill="#4B4B4B"/>
+  <rect x="6.98047" y="0.449219" width="5.72252" height="20" rx="2.86126" fill="black"/>
+  <rect width="5.67742" height="20.1601" rx="2.83871" transform="matrix(0.578133 -0.815942 0.822323 0.56902 0.140625 7.0127)" fill="black"/>
+  <rect width="5.67742" height="20.1601" rx="2.83871" transform="matrix(0.578133 0.815943 -0.822323 0.56902 16.5781 2.24219)" fill="black"/>
+  <ellipse cx="9.97816" cy="10.3112" rx="7.04847" ry="6.96552" fill="black"/>
+  <ellipse cx="9.84023" cy="10.3113" rx="5.65273" ry="5.58621" fill="white"/>
+  <ellipse cx="9.9789" cy="10.3117" rx="3.83828" ry="3.7931" fill="black"/>
+  <rect x="8.51562" y="1.96631" width="2.6519" height="4" rx="1.32595" fill="white"/>
+  <rect x="8.51562" y="14.6558" width="2.6519" height="4" rx="1.32595" fill="white"/>
+  <rect width="2.631" height="4.03203" rx="1.3155" transform="matrix(0.578133 -0.815942 0.822323 0.56902 2.37109 6.5957)" fill="white"/>
+  <rect width="2.631" height="4.03203" rx="1.3155" transform="matrix(0.578133 -0.815943 0.822323 0.56902 13.1211 14.0444)" fill="white"/>
+  <rect width="2.631" height="4.03203" rx="1.3155" transform="matrix(0.578133 0.815943 -0.822323 0.56902 16.0156 4.44922)" fill="white"/>
+  <rect width="2.631" height="4.03203" rx="1.3155" transform="matrix(0.578133 0.815943 -0.822323 0.56902 5.26953 11.8975)" fill="white"/>
+</svg>

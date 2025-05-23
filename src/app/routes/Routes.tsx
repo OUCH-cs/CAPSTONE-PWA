@@ -12,7 +12,9 @@ import {
   SignupSuccessPage,
   NotFoundPage,
   MapPage,
-  TranslateGuidePage,
+  GuideListPage,
+  GuidePage,
+  TranslateFinishPage,
 } from "@/pages";
 
 
@@ -25,6 +27,7 @@ import HealthStatusEdit from "@/pages/records/healthstatus-edit";
 import { AuthGuard, RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
 import SearchDetailPage from "@/pages/search/search-detail";
+import EditProfile from "@/pages/mypage/edit-profile";
 
 export default function AppRoutes() {
   return (
@@ -46,6 +49,9 @@ export default function AppRoutes() {
         {/* 자가진단 페이지 */}
         <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
 
+        <Route path="guide-list" element={<GuideListPage/>}/>
+        <Route path="guide" element={<GuidePage/>}/>
+
         {/* 검색 페이지 */}
         <Route path="/search" element={<SearchPage />} />
 
@@ -64,15 +70,16 @@ export default function AppRoutes() {
 
         {/* 지도 페이지 */}
         <Route path="/map" element={<MapPage />} />
-
+      
         
 
         {/* 통역 페이지 */}
         <Route path="/translate" element={<TranslatePage />} />
-        <Route path="/translate/guide" element={<TranslateGuidePage />} />
+        <Route path="/translate/finish" element={<TranslateFinishPage />} />
 
         {/* 마이 페이지 */}
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage/edit-profile" element={<EditProfile />} />
 
         {/* 테스트 페이지 */}
         <Route path="/test" element={<TestPage />} />

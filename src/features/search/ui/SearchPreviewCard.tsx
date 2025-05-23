@@ -6,12 +6,14 @@ import { formatDistance } from "../lib/formatDistance";
 import RatingStar from "@/shared/assets/search/star.svg?react";
 import { Place } from "../search.types";
 import CategoryTag from "@/entities/search/ui/CategoryTag";
+import { useLocation } from "react-router-dom";
 
 function SearchPreviewCard({
   currLocation,
   ...place
 }: { currLocation: LatLng | null } & Place) {
-  // 아래 유틸 로직 외부로 분리
+  const location = useLocation();
+  const isSearchPage = location.pathname.includes("/search");
 
   // 휴무일 정보 가져오기
   const closedDay = place.currentOpeningHours?.weekdayDescriptions
@@ -23,7 +25,8 @@ function SearchPreviewCard({
   const distanceLabel = formatDistance(distance); // 거리 포맷팅 (760m, 1.2km 등)
 
   return (
-    <Container>
+    <Container $isSearchPage={isSearchPage}>
+      <OperatingHours />
       <Title>{place.displayName.text}</Title>
       <OperatingHours>
         <Open>{place.currentOpeningHours?.openNow ? "Open " : "- "}</Open>
@@ -38,7 +41,7 @@ function SearchPreviewCard({
         )}
         <Distance> {distanceLabel}</Distance>
       </PlaceMetrics>
-      {place.primaryTypeDisplayName && (
+      {place.primaryTypeDisplayName && isSearchPage && (
         <CategoryTag>{place.primaryTypeDisplayName.text}</CategoryTag>
       )}
     </Container>
@@ -47,12 +50,13 @@ function SearchPreviewCard({
 
 export { SearchPreviewCard };
 
-const Container = styled.li`
+const Container = styled.li<{ $isSearchPage: boolean }>`
   display: flex;
   flex-direction: column;
-  width: 328px;
+  width: ${({ $isSearchPage }) => ($isSearchPage ? "328px" : "236px")};
   height: fit-content;
   padding: 30px 20px;
+  padding: ${({ $isSearchPage }) => ($isSearchPage ? "30px 20px" : "25px")};
   border-radius: 16px;
   background-color: ${theme.colors.white};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
@@ -63,6 +67,9 @@ const Title = styled.strong`
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: ${theme.colors.black};
 `;
 
