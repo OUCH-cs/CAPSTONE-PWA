@@ -51,7 +51,7 @@ const GuideList = styled.div`
   display: flex;
   gap: 0.29rem;
   overflow-x: auto;
-  margin-top: 1.14rem;
+  margin-bottom: 1.14rem;
   width: 100%;
   justify-content: flex-start;
   &::-webkit-scrollbar {
