@@ -120,7 +120,6 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: 90vh;
   overflow: auto;
 `;
 
