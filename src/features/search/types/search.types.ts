@@ -1,15 +1,26 @@
 type Sort = "Recommended" | "Distance";
 
-// NEW
-
-interface NearbyPlacesResponse {
+interface PlacesResponseBase {
+  ykiho: string;
+  name: string;
   address: string;
-  distance: number;
   lat: number;
   lng: number;
-  name: string;
   tel: string;
-  ykiho: string;
 }
 
-export type { Sort, NearbyPlacesResponse };
+// 주변 병원 API 응답 타입
+interface NearbyPlacesResponse extends PlacesResponseBase {
+  distance: number;
+}
+
+interface SearchDetailResponse extends PlacesResponseBase {
+  type: string;
+  zipcode: string;
+  departments: {
+    departmentName: string;
+    specialistCount: number;
+  }[];
+}
+
+export type { Sort, NearbyPlacesResponse, SearchDetailResponse };

@@ -4,7 +4,10 @@ import {
   AllDepartments,
   DepartmentResponse,
 } from "../../types/department.types";
-import { NearbyPlacesResponse } from "../../types/search.types";
+import {
+  NearbyPlacesResponse,
+  SearchDetailResponse,
+} from "../../types/search.types";
 
 // 근처 병원 검색
 export const fetchNearbySearch = async (
@@ -30,6 +33,16 @@ export const fetchNearbySearch = async (
 export const getDepartment = async (
   url: string
 ): Promise<DepartmentResponse[]> => {
+  const res = await apiRequest({
+    url,
+  });
+
+  return res.data;
+};
+
+export const getDetailInfo = async (
+  url: string
+): Promise<SearchDetailResponse> => {
   const res = await apiRequest({
     url,
   });

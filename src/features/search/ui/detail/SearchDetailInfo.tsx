@@ -1,26 +1,26 @@
 import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
-import { PlaceDetail } from "../../types/search.types";
+import { SearchDetailResponse } from "../../types/search.types";
 
-export default function SearchDetailInfo(data: PlaceDetail) {
+export default function SearchDetailInfo(data: SearchDetailResponse) {
   return (
     <Container>
       <MediaclCourseWrapper>
         <Title>Medical Course</Title>
-        <TextContent></TextContent>
+        <TextContent>{data.type}</TextContent>
       </MediaclCourseWrapper>
 
       <Line />
 
       <AddressWrapper>
         <Title>Address</Title>
-        <TextContent>{data.formattedAddress}</TextContent>
+        <TextContent>{data.address}</TextContent>
       </AddressWrapper>
 
       <Line />
 
       <TelWrapper>
-        <Tel>tel : {data.nationalPhoneNumber}</Tel>
+        <Tel>tel : {data.tel}</Tel>
       </TelWrapper>
     </Container>
   );

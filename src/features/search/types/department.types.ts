@@ -11,7 +11,7 @@ type LangDepartmentMap = {
   en: ENDepartment;
 };
 
-// 제너릭 L에 따라 해당 언어의 리터럴 유니언 반환
+// 해당 언어의 리터럴 유니언 반환
 type DepartmentNameByLang<L extends LanguageCode> = LangDepartmentMap[L];
 
 // 모든 언어 유니온

@@ -25,7 +25,7 @@ import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusAdd from "@/pages/records/healthstatus-add";
 import { AuthGuard, RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
-// import SearchDetailPage from "@/pages/search/search-detail";
+import SearchDetailPage from "@/pages/search/search-detail";
 import EditProfile from "@/pages/mypage/edit-profile";
 
 export default function AppRoutes() {
@@ -53,7 +53,7 @@ export default function AppRoutes() {
 
         {/* 검색 페이지 */}
         <Route path="/search" element={<SearchPage />} />
-        {/* <Route path="/search/:id" element={<SearchDetailPage />} /> */}
+        <Route path="/search/:id" element={<SearchDetailPage />} />
 
         {/* 지도 페이지 */}
         <Route path="/map" element={<MapPage />} />
