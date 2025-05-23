@@ -17,7 +17,7 @@ export default function DepartmentFilterDropdown() {
   const [department, setDepartment] = useAtom(departmentFilterAtom); // 선택한 진료과
   const { isOpen, setIsOpen, toggle } = useToggle();
 
-  // 진료과 api 호출
+  // 진료과 필터 리스트 api 호출
   const {
     isLoading,
     error,
@@ -26,8 +26,8 @@ export default function DepartmentFilterDropdown() {
     dedupingInterval: 1000 * 60 * 60, // 1시간
   });
 
-  const handleClick = (menu: DepartmentResponse) => {
-    setDepartment(menu.nameEn);
+  const handleClick = async (menu: DepartmentResponse) => {
+    setDepartment(menu.nameKr);
     toggle();
   };
 
@@ -59,9 +59,9 @@ export default function DepartmentFilterDropdown() {
                 <MenuItem
                   key={index}
                   onClick={() => handleClick(menu)}
-                  $isSelected={menu.nameEn === department}
+                  $isSelected={menu.nameKr === department}
                 >
-                  {menu.nameEn}
+                  {menu.nameKr}
                 </MenuItem>
               ))}
             </MenuWrapper>
