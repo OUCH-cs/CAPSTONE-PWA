@@ -70,6 +70,7 @@ const Wrapper = styled.div`
   align-items: center;
   height: 15rem;
   width: 24rem;
+  overflow: hidden;
 `;
 
 const Message = styled.p`

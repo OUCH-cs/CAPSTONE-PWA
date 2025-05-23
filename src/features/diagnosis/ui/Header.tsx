@@ -1,7 +1,7 @@
 
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
-import BackArrowIcon from "@/shared/assets/common/arrow.svg?react";
+import CloseIcon from "@/shared/assets/common/closed.svg?react";
 import { useNavigate } from "react-router-dom";
 import Modal from '@/shared/components/modal/Modal';
 import useToggle from '@/shared/lib/useToggle';
@@ -19,7 +19,7 @@ function Header() {
     <Container>
       <HeaderWrapper>
         <BackwardIconWrapper onClick={toggle}>
-          <BackArrowIcon width={28} height={28} />
+          <CloseIcon width={28} height={28} />
         </BackwardIconWrapper>
         <Title>Self-diagnosis</Title>
       </HeaderWrapper>

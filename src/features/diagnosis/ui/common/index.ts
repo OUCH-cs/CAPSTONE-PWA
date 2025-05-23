@@ -4,6 +4,7 @@ import { Button } from "@/shared/components/button/Button";
 
 const Container = styled.div`
   padding-top: 3.29rem;
+  overflow: hidden;
 `;
 
 const Question = styled.p`
