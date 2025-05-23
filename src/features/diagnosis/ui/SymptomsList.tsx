@@ -1,37 +1,50 @@
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import { chunkArray } from "../lib/chunkArray";
-import { useSymptomsList } from "../lib/useSymptomsList";
+import { useSystemsList } from "../lib/useSystemList";
 import { ITEMS_PER_ROW } from "@/shared/mock";
+import Skeleton from "@/shared/components/skeleton/Skeleton";
 
 const SymptomsList = () => {
-  const { selectedSymptoms, allSymptoms, toggleSymptom } = useSymptomsList();
-  const groupedSymptoms = chunkArray(allSymptoms, ITEMS_PER_ROW);
-  
+  const { selectedSystem, allSystems, toggleSystem, isLoading } = useSystemsList();
+  const groupedSymptoms = chunkArray(allSystems, ITEMS_PER_ROW);
 
   return (
-    <>
-      {groupedSymptoms.map((group, index) => (
-        <SymptomList key={`group-${index}`}>
-          {group.map((item) => (
-            <SymptomButton
-              key={item}
-              selected={selectedSymptoms.includes(item)}
-              onClick={() => toggleSymptom(item)}
-            >
-              <SymptomText selected={selectedSymptoms.includes(item)}>
-                {item}
-              </SymptomText>
-            </SymptomButton>
+    <SymptomsContaniner>
+      {isLoading && (
+        <SkeletonList>
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <Skeleton key={`notice-skeleton-${idx}`} width={120} height={36} />
           ))}
-        </SymptomList>
-      ))}
-    </>
+        </SkeletonList>
+      )}
+      {!isLoading&&
+        groupedSymptoms.map((group, index) => (
+          <SymptomList key={`group-${index}`}>
+            {group.map((item) => (
+              <SymptomButton
+                type="button"
+                key={item}
+                selected={selectedSystem.includes(item)}
+                onClick={() => toggleSystem(item)}
+              >
+                <SymptomText selected={selectedSystem.includes(item)}>
+                  {item}
+                </SymptomText>
+              </SymptomButton>
+            ))}
+          </SymptomList>
+        ))
+      }
+    </SymptomsContaniner>
   );
 };
 
 export default SymptomsList;
+const SymptomsContaniner = styled.div`
+  margin-bottom: 8rem;
 
+`
 const SymptomList = styled.div`
   display: flex;
   gap: 0.29rem;
@@ -64,4 +77,16 @@ const SymptomText = styled.p<{ selected: boolean }>`
   font-size: 1.4rem;
   color: ${({ selected, theme }) =>
     selected ? theme.colors.primary : theme.colors.gray_7};
+`;
+
+const SkeletonList = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 50px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

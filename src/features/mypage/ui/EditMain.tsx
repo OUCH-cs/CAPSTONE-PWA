@@ -1,21 +1,29 @@
 import styled from "@emotion/styled";
 import Profile from "@/shared/assets/mypage/profile.svg?react";
 import Camera from "@/shared/assets/mypage/camera.svg?react"; 
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { getInformation } from "@/features/mypage/service/MyPageApi";
 
 const EditMain = () => {
-  const [nickname] = useState(""); 
-  const [email] = useState("");
+  const [nickname, setNickname] = useState(""); 
+  const [email, setEmail] = useState("");
 
-
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getInformation();
+      if (response && response.data) {
+        setNickname(response.data.nickname || "");
+        setEmail(response.data.email || "");
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <Container>
       <Header>
         <Profile width="60px" height="60px" />
         <CameraWrapper> 
-          {/* onClick={handleEditIconPress} */}
           <Camera width={12} height={12} />
         </CameraWrapper>
       </Header>

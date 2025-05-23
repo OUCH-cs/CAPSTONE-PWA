@@ -1,8 +1,10 @@
+import { FunnelProps } from "@/shared/lib/funnel";
+
 export type DiagnosisFormData = {
   userId: number;
   visitType: "HOSPITAL" | "PHARMACY";
   symptom: string;
-  duration: "LESS_THAN_1_DAY" | "ONE_TO_3_DAYS" | "MORE_THAN_3_DAYS" | "MORE_THAN_1_WEEK" | "MORE_THAN_1_MONTH";
+  duration: "LESS_THAN_1_DAY" | "ONE_TO_3_DAYS" | "MORE_THAN_3_DAYS" | "MORE_THAN_1_WEEK" | "MORE_THAN_1_MONTH"|"";
   painSeverity: number; // 0 ~ 10
   additionalNote?: string;
 };
@@ -11,10 +13,19 @@ export interface DiagnosisResponse {
   userId: number;
   visitType: "HOSPITAL" | "PHARMACY";
   symptom: string;
-  duration: "LESS_THAN_1_DAY" | "ONE_TO_3_DAYS" | "MORE_THAN_3_DAYS" | "MORE_THAN_1_WEEK" | "MORE_THAN_1_MONTH";
+  duration: "LESS_THAN_1_DAY" | "ONE_TO_3_DAYS" | "MORE_THAN_3_DAYS" | "MORE_THAN_1_WEEK" | "MORE_THAN_1_MONTH" ;
   painSeverity: number;
   additionalNote?: string;
 }
+
+export interface DiagnosisPostProps {
+  steps: string[];
+  nextClickHandler: (nextStep: string) => void;
+  prevClickHandler: () => void;
+  Funnel: React.ComponentType<FunnelProps>;
+  Step: React.ComponentType<StepProps>;
+}
+
 
 export interface RecommendRequest {
   language: string;       
@@ -31,8 +42,8 @@ export interface SelectDestinationProps {
 
 export interface StepProps {
   data?: DiagnosisAlgorithm[];
-  onNext?: () => void;
-  onPrev?: () => void;
+  onNext: () => void;
+  onPrev: () => void;
 }
 
 export interface StepSixProps {

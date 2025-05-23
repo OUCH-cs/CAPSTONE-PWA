@@ -2,23 +2,33 @@ import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import { SelectDestinationProps, DestinationType } from "../diagnosis.type";
 import { useFormContext } from "react-hook-form";
+import { useAtom } from "jotai";
+import { destinationAtom } from "../service/selfDiagnosisAtoms";
 
 const SelectDestination = ({ selectedDestination }: SelectDestinationProps) => {
   const { setValue } = useFormContext<{ visitType: DestinationType }>();
+  const [, setDestination] = useAtom(destinationAtom);
 
   return (
     <ButtonContainer>
       <OptionButton
         selected={selectedDestination === "HOSPITAL"}
-        onClick={() => setValue("visitType", "HOSPITAL")}
+        onClick={() => {
+          setValue("visitType", "HOSPITAL");
+          setDestination("HOSPITAL");
+        }}
       >
         <OptionText selected={selectedDestination === "HOSPITAL"}>
           Hospital
         </OptionText>
       </OptionButton>
+
       <OptionButton
         selected={selectedDestination === "PHARMACY"}
-        onClick={() => setValue("visitType", "PHARMACY")}
+        onClick={() => {
+          setValue("visitType", "PHARMACY");
+          setDestination("PHARMACY");
+        }}
       >
         <OptionText selected={selectedDestination === "PHARMACY"}>
           Pharmacy
@@ -34,7 +44,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 2.3rem; 
+  margin-bottom: 7rem; 
 `;
 
 const OptionButton = styled.button<{ selected: boolean }>`
