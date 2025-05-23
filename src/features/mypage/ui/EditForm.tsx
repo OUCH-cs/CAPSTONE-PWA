@@ -120,8 +120,8 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: 100vh;
-  overflow: hidden;
+  height: 90vh;
+  overflow: auto;
 `;
 
 const FormField = styled.input`
