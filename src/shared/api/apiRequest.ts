@@ -6,7 +6,7 @@ import { IAPIRequestConfig } from "@/shared/types";
  * API 호출 시 사용하는 공용 유틸 함수
  *
  * @param {string} url - 요청할 엔드 포인트 예: '/api/v2/todo/{todoId}'
- * @param {'GET' | 'POST' | 'PATCH' | 'DELETE'} [method='GET'] - HTTP 요청 메서드 (기본 값은 GET)
+ * @param {'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT'} [method='GET'] - HTTP 요청 메서드 (기본 값은 GET)
  * @param {unknown} [data] - 요청에 포함할 데이터
  * @param {Record<string, string>} [headers={}] - // 'Content-Type: multipart/form-data' 등 헤더 설정
  *
