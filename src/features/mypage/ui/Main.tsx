@@ -2,14 +2,25 @@ import styled from "@emotion/styled";
 import Profile from "@/shared/assets/mypage/profile.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {getInformation} from "@/features/mypage/service/MyPageApi"
 
 const Main = () => {
   const navigate = useNavigate();
-  const [nickname] = useState(""); 
-  const [email] = useState("");       
+  const [nickname, setNickname] = useState("");
+  const [email, setEmail] = useState("");   
 
-  
+   useEffect(() => {
+    const fetchData = async () => {
+  const response = await getInformation();
+  if (response && response.data) {
+    setNickname(response.data.nickname || "");
+    setEmail(response.data.email || "");
+  }
+};
+
+    fetchData();
+  }, []);
 
   const handleEditIconPress = () => {
     navigate("/mypage/edit-profile");

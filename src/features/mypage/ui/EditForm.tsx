@@ -1,26 +1,76 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 import GenderSelect from "@/features/mypage/ui/GenderSelect";
 import CountryAccordionEdit from "@/features/mypage/ui/CountryAccordionEdit";
 import Modal from "@/shared/components/modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getInformation } from "@/features/mypage/service/MyPageApi";
+import { editInformation } from "@/features/mypage/service/MyPageApi"; 
+import { COUNTRY_LIST, LANGUAGE_LIST } from "@/features/mypage/MyPage.constants";
 
 const EditForm = () => {
+   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [gender, setGender] = useState<"MALE" | "FEMALE">("MALE");
   const [nation, setNation] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-
+  const [language, setLanguage] = useState("");
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getInformation();
+      if (response && response.data) {
+        const data = response.data;
+        setName(data.nickname || "");
+        setGender(data.gender || "MALE");
+        const matchedCountry = COUNTRY_LIST.find(
+        (item) => item.code.toLowerCase() === (data.nation || "").toLowerCase()
+        );
+        setNation(matchedCountry?.code || "");
+        setPhone(data.phoneNumber || "");
+        setEmail(data.email || "");
+        setLanguage(response.data.language || "");
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     setShowModal(true);
   };
 
-  const handleConfirmSave = () => {
+  const handleConfirmSave = async () => {
+  try {
+    // nationCode로 변환
+    const matchedCountry = COUNTRY_LIST.find(item => item.code === nation);
+    const nationCodeToSend = matchedCountry ? matchedCountry.nationCode : "";
+    // LanguageCode로 변환
+     const matchedLanguage = LANGUAGE_LIST.find(item => item.name === language.toLowerCase());
+    const languageCodeToSend = matchedLanguage ? matchedLanguage.code : "";
+
+    const payload = {
+      nickname: name,
+      gender, // "MALE" | "FEMALE"
+      nationCode: nationCodeToSend, 
+      phoneNumber: phone,
+      email,
+        languageCode: languageCodeToSend,
+    };
+
+    const response = await editInformation(payload);
+    if (response) {
+      navigate("/mypage");  
+    }
+  } catch (error) {
+    alert("저장 중 오류가 발생했습니다.");
+    console.error(error);
+  } finally {
     setShowModal(false);
-  };
+  }
+};
 
   return (
     <>
@@ -48,7 +98,6 @@ const EditForm = () => {
         <SaveButton type="submit">Save</SaveButton>
       </FormWrapper>
 
-      
       <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
         <ModalBox>
           <MessageText>
