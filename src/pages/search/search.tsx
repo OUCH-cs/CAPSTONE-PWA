@@ -1,25 +1,30 @@
 import styled from "@emotion/styled";
-import { useNearbySearch } from "@/features/search/services/useNearbySearch";
 import { useTextSearch } from "@/features/search/services/useTextSearch";
 import { Searchbar, SearchList } from "@/features/search/ui";
 import { fallbackLocaton } from "@/shared/consts/common";
 import SortDropdown from "@/features/search/ui/dropdown/SortDropdown";
-import useToggle from "@/shared/lib/useToggle";
 import Skeleton from "@/shared/components/skeleton/Skeleton";
+import useSWR from "swr";
+import { fetchNearbySearch } from "@/features/search/services/api/searcApi";
+import { NearbyPlacesResponse } from "@/features/search/types/search.types";
 // import { useCurrLocation } from "@/shared/services/useCurrLocation";
 
 function SearchPage() {
   // const currLocation = useCurrLocation(); // 현재 위치 가져오기 버그로 인한..
   const currLocation = fallbackLocaton; // 임시 위치 설정 하드코딩
 
-  const { isOpen, setIsOpen, toggle } = useToggle(); // 필터 드롭다운 토글
-
+  // 근처 병원 검색 API 호출
   const {
-    isPending: isNearbyPending,
-    isSuccess: isNearbySuccess,
-    isError: isNearbyError,
-    places: nearbyData,
-  } = useNearbySearch(currLocation); // 근처 병원 검색
+    isLoading,
+    error,
+    data: nearbyPlaces,
+  } = useSWR(
+    "/hospitals/search",
+    (url) => fetchNearbySearch(url, currLocation, 20),
+    {
+      dedupingInterval: 1000 * 60 * 60, // 1시간
+    }
+  );
 
   const {
     isPending: isTextSearchPending,
@@ -33,9 +38,9 @@ function SearchPage() {
     !isTextSearchPending &&
     !isTextSearchSuccess &&
     !isTextSearchError &&
-    isNearbySuccess;
+    nearbyPlaces;
 
-  const renderData = shouldRenderNearby ? nearbyData : textSearchData;
+  const renderData = shouldRenderNearby ? nearbyPlaces : textSearchData;
 
   return (
     <Container>
@@ -43,16 +48,9 @@ function SearchPage() {
       <Searchbar />
 
       {/* 정렬 드롭다운 */}
-      <SortDropdownWrapper>
-        <SortDropdown
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          toggle={toggle}
-          menus={["Recommended", "Distance"]}
-        />
-      </SortDropdownWrapper>
+      <SortDropdown />
 
-      {(isNearbyPending || isTextSearchPending) && (
+      {(isLoading || isTextSearchPending) && (
         <SkeletonList>
           {Array.from({ length: 5 }).map((_, idx) => (
             <Skeleton key={`notice-skeleton-${idx}`} width={328} height={170} />
@@ -60,7 +58,7 @@ function SearchPage() {
         </SkeletonList>
       )}
 
-      {(isNearbyError || isTextSearchError) && <div>Error!!</div>}
+      {(error || isTextSearchError) && <div>Error!!</div>}
 
       {isTextSearchSuccess && textSearchData.length === 0 && (
         <div>검색 결과가 없습니다.</div>
@@ -68,7 +66,11 @@ function SearchPage() {
 
       {/* 검색결과 렌더링 */}
       {(shouldRenderNearby || isTextSearchSuccess) && (
-        <SearchList currLocation={currLocation} places={renderData} />
+        <SearchList
+          currLocation={currLocation}
+          // 구글 맵 없애기 전까지 임시로 타입 확언
+          places={renderData as NearbyPlacesResponse[]}
+        />
       )}
     </Container>
   );
@@ -80,13 +82,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const SortDropdownWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 328px;
-  margin-bottom: 16px;
 `;
 
 const SkeletonList = styled.div`

@@ -1,6 +1,6 @@
 import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
-import { PlaceDetail } from "../../search.types";
+import { PlaceDetail } from "../../types/search.types";
 
 export default function SearchDetailInfo(data: PlaceDetail) {
   return (

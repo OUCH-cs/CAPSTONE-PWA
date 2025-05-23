@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import { TextSearchRequest } from "../search.types";
+import { TextSearchRequest } from "../types/search.types";
 import {
   isTextQueryError,
   isTextQueryPending,

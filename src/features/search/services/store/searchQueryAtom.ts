@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { Place } from "../../search.types";
+import { Place } from "../../types/search.types";
 
 export const textQueryAtom = atom("");
 export const isTextQueryPending = atom(false);

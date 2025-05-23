@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { getDistanceInMeters } from "../lib/getDistanceInMeters";
 import { formatDistance } from "../lib/formatDistance";
 import RatingStar from "@/shared/assets/search/star.svg?react";
-import { NearbyPlacesResponse } from "../search.types";
+import { NearbyPlacesResponse } from "../types/search.types";
 import CategoryTag from "@/entities/search/ui/CategoryTag";
 import { useLocation } from "react-router-dom";
 import { LatLng } from "@/shared/types/common";

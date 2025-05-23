@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { SearchPreviewCard } from "./SearchPreviewCard";
-import { NearbyPlacesResponse } from "../search.types";
+import { NearbyPlacesResponse } from "../types/search.types";
 import { Link, useLocation } from "react-router-dom";
 import { LatLng } from "@/shared/types/common";
 

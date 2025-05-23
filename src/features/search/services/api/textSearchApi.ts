@@ -1,4 +1,4 @@
-import { Place, TextSearchRequest } from "../../search.types";
+import { Place, TextSearchRequest } from "../../types/search.types";
 import searchQuery from "./searchQuery";
 
 // 단일 타입 텍스트 검색 요청 (병원 또는 약국)

@@ -1,35 +1,9 @@
 import { LanguageCode, LatLng } from "@/shared/types/common";
 
-type Department = "Hospital" | "Pharmacy";
 type Sort = "Recommended" | "Distance";
-
-interface DropdownPropsBase<T> {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  toggle: () => void;
-  menus: T;
-}
-
-interface DepartmentDropdownProps extends DropdownPropsBase<Department[]> {}
-interface SortDropdownProps extends DropdownPropsBase<Sort[]> {}
-
-type Location = {
-  circle: {
-    center: LatLng;
-    radius: number;
-  };
-};
 
 type SearchRequestBase = {
   languageCode: LanguageCode;
-};
-
-// 근처 장소 검색 요청 타입
-type NearbyRequest = SearchRequestBase & {
-  includedTypes: string[];
-  maxResultCount: number;
-  locationRestriction: Location;
-  rankPreference: "DISTANCE" | "POPULARITY";
 };
 
 // 장소 텍스트 검색 요청 타입
@@ -69,6 +43,7 @@ interface PlaceDetail extends PlaceBase {
 }
 
 // NEW
+
 interface NearbyPlacesResponse {
   address: string;
   distance: number;
@@ -80,11 +55,7 @@ interface NearbyPlacesResponse {
 }
 
 export type {
-  Department,
   Sort,
-  DepartmentDropdownProps,
-  SortDropdownProps,
-  NearbyRequest,
   TextSearchRequest,
   Place,
   PlaceDetail,
