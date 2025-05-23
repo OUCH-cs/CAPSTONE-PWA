@@ -1,21 +1,19 @@
 import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
 import SearchIcon from "@/shared/assets/search/search.svg?react";
-import { useTextSearch } from "../services/useTextSearch";
 import DepartmentFilterDropdown from "./dropdown/DepartmentFilterDropdown";
 
 function Searchbar() {
-  const { textQuery, handleChange, handleSubmit } = useTextSearch();
-
   return (
     <>
       <Container>
-        <InputFormWrapper onSubmit={handleSubmit}>
+        {/* <InputFormWrapper onSubmit={handleSubmit}> */}
+        <InputFormWrapper>
           <Input
             type="text"
-            value={textQuery}
+            // value={textQuery}
             placeholder="Search for hospital and pharmacies"
-            onChange={handleChange}
+            // onChange={handleChange}
           />
 
           <IconWrapper type="submit">
