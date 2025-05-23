@@ -6,7 +6,6 @@ export * from "./auth/sign-in";
 // 메인
 export * from "./main/mainpage";
 export * from "./main/self-diagnosis/self-diagnosis";
-export * from "./main/guide/guide-list"
 export * from "./main/guide/guide"
 
 // 검색 (지도)

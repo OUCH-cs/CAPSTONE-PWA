@@ -8,7 +8,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { DiagnosisFormData } from "@/features/diagnosis/diagnosis.type";
 import { handleNextClick, handlePrevClick, useFunnel, useProgress } from "@/shared/lib/funnel";
 import { useSubmitDiagnosis } from "@/features/diagnosis/lib/useDiagnosis";
-import { Header } from "@/features/diagnosis/ui/Header";
+import { Header } from "@/features/diagnosis/ui/DiagnosisHeader";
 
 const steps = ["1", "2", "3", "4", "5", "6"];
 

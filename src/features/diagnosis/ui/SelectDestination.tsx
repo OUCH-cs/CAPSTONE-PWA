@@ -44,7 +44,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 2.3rem; 
+  margin-bottom: 7rem; 
 `;
 
 const OptionButton = styled.button<{ selected: boolean }>`
