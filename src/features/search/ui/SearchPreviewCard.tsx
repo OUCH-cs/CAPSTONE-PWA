@@ -7,6 +7,8 @@ import { NearbyPlacesResponse } from "../types/search.types";
 import CategoryTag from "@/entities/search/ui/CategoryTag";
 import { useLocation } from "react-router-dom";
 import { LatLng } from "@/shared/types/common";
+import UnlikeIcon from "@/shared/assets/search/unlike.svg?react";
+import { useState } from "react";
 
 function SearchPreviewCard({
   currLocation,
@@ -15,10 +17,12 @@ function SearchPreviewCard({
   const location = useLocation();
   const isSearchPage = location.pathname.includes("/search");
 
-  // 휴무일 정보 가져오기
-  // const closedDay = place.currentOpeningHours?.weekdayDescriptions
-  //   .find((day) => day.includes("Closed"))
-  //   ?.split(":")[0];
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+
+  const handleClickLike = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Link 이동 방지
+    setIsLiked((prev) => !prev);
+  };
 
   if (!currLocation) return;
   const distance = getDistanceInMeters(currLocation, {
@@ -29,6 +33,10 @@ function SearchPreviewCard({
 
   return (
     <Container $isSearchPage={isSearchPage}>
+      <LikeActionButton $isLiked={isLiked} onClick={handleClickLike}>
+        <UnlikeIcon />
+      </LikeActionButton>
+
       <OperatingHours />
       <Title>{place.name}</Title>
       <OperatingHours>
@@ -51,6 +59,7 @@ function SearchPreviewCard({
 export { SearchPreviewCard };
 
 const Container = styled.li<{ $isSearchPage: boolean }>`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: ${({ $isSearchPage }) => ($isSearchPage ? "328px" : "236px")};
@@ -60,6 +69,23 @@ const Container = styled.li<{ $isSearchPage: boolean }>`
   border-radius: 16px;
   background-color: ${theme.colors.white};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+`;
+
+const LikeActionButton = styled.button<{ $isLiked: boolean }>`
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px
+  height: 30px;
+  fill: ${({ $isLiked }) => ($isLiked ? "#FF3332" : "none")};
+  stroke: ${({ $isLiked }) => ($isLiked ? "#FF3332" : theme.colors.gray_7)};
+  background-color: transparent;
+  padding: 0;
+  border: none;
   cursor: pointer;
 `;
 
