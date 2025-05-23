@@ -4,8 +4,9 @@ import { LatLng } from "@/features/map/map.types";
 import searchQuery from "./api/searchQuery";
 import { useAtomValue } from "jotai";
 import { departmentFilterAtom, sortFilterAtom } from "./store/filterAtom";
+import apiRequest from "@/shared/api/apiRequest";
 
-const useNearbySearch = (currLocation: LatLng | null) => {
+const useNearbySearch = (currLocation: LatLng | null, size = 20) => {
   const department = useAtomValue(departmentFilterAtom); // department 필터링
   const sort = useAtomValue(sortFilterAtom); // sort 필터링
 
@@ -19,6 +20,17 @@ const useNearbySearch = (currLocation: LatLng | null) => {
 
     try {
       setIsPending(true);
+
+      const res = await apiRequest({
+        url: "/hospitals/search",
+        params: {
+          lat: currLocation.latitude?.toString() || "",
+          lng: currLocation.longitude?.toString() || "",
+          size: size.toString(),
+        },
+      });
+
+      console.log(res);
 
       const { data } = await searchQuery({
         url: ":searchNearby",

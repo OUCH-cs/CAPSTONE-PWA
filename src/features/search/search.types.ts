@@ -69,6 +69,17 @@ interface PlaceDetail extends PlaceBase {
   primaryType: string;
 }
 
+// NEW
+interface NearbyPlacesResponse {
+  address: string;
+  distance: number;
+  lat: number;
+  lng: number;
+  name: string;
+  tel: string;
+  ykiho: string;
+}
+
 export type {
   Department,
   Sort,
@@ -78,4 +89,5 @@ export type {
   TextSearchRequest,
   Place,
   PlaceDetail,
+  NearbyPlacesResponse,
 };

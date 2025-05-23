@@ -5,6 +5,7 @@ interface IAPIRequestConfig {
   method?: APIMethodType;
   data?: unknown;
   headers?: Record<string, string>;
+  params?: Record<string, string>;
 }
 
 export type { IAPIRequestConfig };

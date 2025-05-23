@@ -4,46 +4,46 @@ import styled from "@emotion/styled";
 import { getDistanceInMeters } from "../lib/getDistanceInMeters";
 import { formatDistance } from "../lib/formatDistance";
 import RatingStar from "@/shared/assets/search/star.svg?react";
-import { Place } from "../search.types";
+import { NearbyPlacesResponse } from "../search.types";
 import CategoryTag from "@/entities/search/ui/CategoryTag";
 import { useLocation } from "react-router-dom";
 
 function SearchPreviewCard({
   currLocation,
   ...place
-}: { currLocation: LatLng | null } & Place) {
+}: { currLocation: LatLng | null } & NearbyPlacesResponse) {
   const location = useLocation();
   const isSearchPage = location.pathname.includes("/search");
 
   // 휴무일 정보 가져오기
-  const closedDay = place.currentOpeningHours?.weekdayDescriptions
-    .find((day) => day.includes("Closed"))
-    ?.split(":")[0];
+  // const closedDay = place.currentOpeningHours?.weekdayDescriptions
+  //   .find((day) => day.includes("Closed"))
+  //   ?.split(":")[0];
 
   if (!currLocation) return;
-  const distance = getDistanceInMeters(currLocation, place.location); // 거리 계산
+  const distance = getDistanceInMeters(currLocation, {
+    latitude: place.lat,
+    longitude: place.lng,
+  }); // 거리 계산
   const distanceLabel = formatDistance(distance); // 거리 포맷팅 (760m, 1.2km 등)
 
   return (
     <Container $isSearchPage={isSearchPage}>
       <OperatingHours />
-      <Title>{place.displayName.text}</Title>
+      <Title>{place.name}</Title>
       <OperatingHours>
-        <Open>{place.currentOpeningHours?.openNow ? "Open " : "- "}</Open>
-        <Closed>{closedDay ? `/ Closed every ${closedDay}` : "-"}</Closed>
+        {/* <Open>{place.currentOpeningHours?.openNow ? "Open " : "- "}</Open>
+        <Closed>{closedDay ? `/ Closed every ${closedDay}` : "-"}</Closed> */}
+        <Address>{place.address}</Address>
       </OperatingHours>
       <PlaceMetrics>
-        {place.rating && (
-          <RatingWrapper>
-            <RatingStar />
-            <Rating>{place.rating}</Rating>•
-          </RatingWrapper>
-        )}
+        <RatingWrapper>
+          <RatingStar />
+          <Rating>0</Rating>•
+        </RatingWrapper>
         <Distance> {distanceLabel}</Distance>
       </PlaceMetrics>
-      {place.primaryTypeDisplayName && isSearchPage && (
-        <CategoryTag>{place.primaryTypeDisplayName.text}</CategoryTag>
-      )}
+      {isSearchPage && <CategoryTag>Hospital</CategoryTag>}
     </Container>
   );
 }
@@ -82,8 +82,15 @@ const OperatingHoursText = styled.span`
   font-weight: 400;
   color: ${theme.colors.gray_7};
 `;
-const Open = styled(OperatingHoursText)``;
-const Closed = styled(OperatingHoursText)``;
+const Address = styled(OperatingHoursText)`
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+// const Open = styled(OperatingHoursText)``;
+// const Closed = styled(OperatingHoursText)``;
 
 const PlaceMetrics = styled.div`
   display: flex;
