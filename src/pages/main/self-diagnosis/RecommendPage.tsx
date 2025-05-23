@@ -31,9 +31,8 @@ function RecommendPage() {
     condition,
   }), [system, symptom, condition, language]);
 
-  const shouldFetch =
-  !!system && !!symptom && !!condition;
-
+  const shouldFetch = !!system && !!symptom ;
+ 
   const { response, isLoading } = useRecommend(shouldFetch ? input : null);
 
   const handleResetAndGoHome = () => {
@@ -58,7 +57,6 @@ function RecommendPage() {
       <Question>
         {destination === "HOSPITAL" ? "Recommended Hospital" : "Identified Symptoms"}
       </Question>
-
       {destination === "HOSPITAL" ? (
         <>
           {response?.data.departments.map((dept: Record<string, string>, index: number) => (
@@ -74,15 +72,13 @@ function RecommendPage() {
           )}
         </>
       )}
-
       <IconContainer>
         <LocationIcon />
       </IconContainer>
-
       <ButtonGroup>
-        <Button width={416} onClick={handleResetAndSearch}>
+        <FindButton onClick={handleResetAndSearch}>
           {destination === "HOSPITAL" ? "Find Recommended Hospitals" : "Find Pharmacy"}
-        </Button>
+        </FindButton>
         <FinishButton onClick={handleResetAndGoHome}>Finish</FinishButton>
       </ButtonGroup>
     </Container>
@@ -94,18 +90,18 @@ export { RecommendPage };
 const Container = styled.div`
   background-color: ${theme.colors.background};
   padding: 16px;
-  overflow-y: auto;
+  overflow: hidden;
 `;
 
 const Question = styled.p`
   margin-top: 4.5rem;
   margin-bottom: 1rem;
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 600;
 `;
 
 const Departments = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   line-height: 1.4;
   font-weight: 600;
   margin-bottom:1rem;
@@ -113,7 +109,7 @@ const Departments = styled.div`
 
 
 const Description = styled.p`
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: ${theme.colors.gray_4};
   margin-bottom: 7rem;
 `;
@@ -123,6 +119,10 @@ const IconContainer = styled.div`
   justify-content: center;
   margin-bottom: 6.3rem;
 `;
+
+const FindButton = styled(Button)`
+  width:100%;
+`
 
 const FinishButton = styled.button`
   height: 48px;
