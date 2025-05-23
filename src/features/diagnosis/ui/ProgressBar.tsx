@@ -19,7 +19,7 @@ const ProgressBar = ({ progress, currentStep }: ProgressBarProps) => {
       <ProgressBarContainer>
         <Progress style={{ width: `${animatedProgress}%` }} />
       </ProgressBarContainer>
-      <ProgressText>{currentStep} of 5</ProgressText>
+      <ProgressText>{currentStep} of 6</ProgressText>
     </div>
   );
 };
