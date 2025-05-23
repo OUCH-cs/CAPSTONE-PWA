@@ -9,6 +9,7 @@ type Props = {
 export default function BloodPressurePart({ onClose, onSave }: Props) {
   const [contraction, setContraction] = useState("");
   const [relaxation, setRelaxation] = useState("");
+  const [focusedInput, setFocusedInput] = useState<"contraction" | "relaxation" | null>(null);
 
   const handleSave = () => {
     if (contraction && relaxation) {
@@ -26,10 +27,13 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
           {/* Contraction */}
           <Box>
             <InputContainer>
-              <Input
+              <InputContraction
                 type="number"
                 value={contraction}
                 onChange={(e) => setContraction(e.target.value)}
+                onFocus={() => setFocusedInput("contraction")}
+                onBlur={() => setFocusedInput(null)}
+                isFocused={focusedInput === "contraction"}
               />
               <Label>Contraction</Label>
             </InputContainer>
@@ -38,10 +42,13 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
           {/* Relaxation */}
           <Box>
             <InputContainer>
-              <Input
+              <InputRelaxation
                 type="number"
                 value={relaxation}
                 onChange={(e) => setRelaxation(e.target.value)}
+                onFocus={() => setFocusedInput("relaxation")}
+                onBlur={() => setFocusedInput(null)}
+                isFocused={focusedInput === "relaxation"}
               />
               <Label>Relaxation</Label>
             </InputContainer>
@@ -56,7 +63,7 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
   );
 }
 
-
+// Styled Components
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -108,14 +115,40 @@ const InputContainer = styled.div`
   width: 100%;
 `;
 
-const Input = styled.input`
+const InputContraction = styled.input<{ isFocused: boolean }>`
   width: 160px;
   height: 160px;
   font-size: 32px;
   text-align: center;
-  border: 1px solid #ccc;
+  color: #767676;
+  border: ${({ isFocused }) => (isFocused ? "1px solid #000" : "1px solid #ccc")};
   border-radius: 10px;
   box-sizing: border-box;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
+`;
+
+const InputRelaxation = styled.input<{ isFocused: boolean }>`
+  width: 160px;
+  height: 160px;
+  font-size: 32px;
+  text-align: center;
+  color: #000;
+  border: ${({ isFocused }) => (isFocused ? "1px solid #000" : "1px solid #ccc")};
+  border-radius: 10px;
+  box-sizing: border-box;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
 `;
 
 const Label = styled.label`
