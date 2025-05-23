@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { SearchPreviewCard } from "./SearchPreviewCard";
 import { NearbyPlacesResponse } from "../search.types";
-import { LatLng } from "@/features/map/map.types";
 import { Link, useLocation } from "react-router-dom";
+import { LatLng } from "@/shared/types/common";
 
 interface SearchListProps {
   currLocation: LatLng | null;

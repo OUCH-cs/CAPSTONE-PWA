@@ -1,3 +1,8 @@
 type LanguageCode = "en" | "ko" | "zh";
 
-export type { LanguageCode };
+interface LatLng {
+  latitude: number | undefined;
+  longitude: number | undefined;
+}
+
+export type { LanguageCode, LatLng };

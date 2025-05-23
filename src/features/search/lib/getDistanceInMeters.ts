@@ -1,4 +1,4 @@
-import { LatLng } from "@/features/map/map.types";
+import { LatLng } from "@/shared/types/common";
 
 export function getDistanceInMeters(from: LatLng, to: LatLng): number {
   const toRad = (value: number) => (value * Math.PI) / 180;

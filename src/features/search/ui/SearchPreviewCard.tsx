@@ -1,4 +1,3 @@
-import { LatLng } from "@/features/map/map.types";
 import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
 import { getDistanceInMeters } from "../lib/getDistanceInMeters";
@@ -7,6 +6,7 @@ import RatingStar from "@/shared/assets/search/star.svg?react";
 import { NearbyPlacesResponse } from "../search.types";
 import CategoryTag from "@/entities/search/ui/CategoryTag";
 import { useLocation } from "react-router-dom";
+import { LatLng } from "@/shared/types/common";
 
 function SearchPreviewCard({
   currLocation,

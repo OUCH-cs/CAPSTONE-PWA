@@ -1,4 +1,4 @@
-import { LatLng } from "../../features/map/map.types";
+import { LatLng } from "../types/common";
 
 const getCurrLocation = (): Promise<LatLng> => {
   return new Promise((resolve, reject) => {

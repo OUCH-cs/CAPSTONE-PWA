@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { NearbyRequest, Place } from "../search.types";
-import { LatLng } from "@/features/map/map.types";
 import searchQuery from "./api/searchQuery";
 import { useAtomValue } from "jotai";
 import { departmentFilterAtom, sortFilterAtom } from "./store/filterAtom";
 import apiRequest from "@/shared/api/apiRequest";
+import { LatLng } from "@/shared/types/common";
 
 const useNearbySearch = (currLocation: LatLng | null, size = 20) => {
   const department = useAtomValue(departmentFilterAtom); // department 필터링

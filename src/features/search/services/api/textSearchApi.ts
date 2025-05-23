@@ -1,7 +1,5 @@
-import apiRequest from "@/shared/api/apiRequest";
 import { Place, TextSearchRequest } from "../../search.types";
 import searchQuery from "./searchQuery";
-import { LatLng } from "@/features/map/map.types";
 
 // 단일 타입 텍스트 검색 요청 (병원 또는 약국)
 export const fetchTextSearchByType = async (
@@ -31,21 +29,4 @@ export const fetchMergedTextSearchResults = async (
   ]);
 
   return [...(hospitalResults || []), ...(pharmacyResults || [])];
-};
-
-export const fetchNearbySearch = async (
-  url: string,
-  currLocation: LatLng,
-  size = 20
-) => {
-  const res = await apiRequest({
-    url,
-    params: {
-      lat: currLocation.latitude?.toString() || "",
-      lng: currLocation.longitude?.toString() || "",
-      size: size.toString(),
-    },
-  });
-
-  return res.data;
 };

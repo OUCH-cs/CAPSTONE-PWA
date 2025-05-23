@@ -1,5 +1,4 @@
-import { LanguageCode } from "@/shared/types/common";
-import { LatLng } from "../map/map.types";
+import { LanguageCode, LatLng } from "@/shared/types/common";
 
 type Department = "Hospital" | "Pharmacy";
 type Sort = "Recommended" | "Distance";

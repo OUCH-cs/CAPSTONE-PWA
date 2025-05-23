@@ -14,7 +14,7 @@ import { getLanguage } from "@/shared/api/languageApi";
 import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
-import { fetchNearbySearch } from "@/features/search/services/api/textSearchApi";
+import { fetchNearbySearch } from "@/features/search/services/api/searcApi";
 
 function MainPage() {
   const navigate = useNavigate();
