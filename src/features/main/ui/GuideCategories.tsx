@@ -44,7 +44,7 @@ const GuideCategories = () => {
 export default GuideCategories;
 
 const Container = styled.div`
-  margin-bottom:3rem;
+  margin-bottom:2.5rem;
 `
 
 const GuideList = styled.div`
