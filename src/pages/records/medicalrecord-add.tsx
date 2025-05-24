@@ -86,9 +86,8 @@ export default function MedicalRecordAdd() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  padding-bottom: 40px;
   position: relative;
-  margin-top: 28px;
+  padding-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
 `;

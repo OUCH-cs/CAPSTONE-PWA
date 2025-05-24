@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -14,12 +13,6 @@ export default function MedicalRecord() {
     navigate(`/records/medicalrecord-edit/${id}`);
   };
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);  
 
   // id가 없는 경우 예외 처리 
   if (!id) {
@@ -46,12 +39,10 @@ export default function MedicalRecord() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
   padding-bottom: 40px;
-  padding-top: 10px;
+  padding-top: 24px;
   margin-left: 16px;
   margin-right: 16px;
-  margin-top: 14px;
 `;
 
 const Header = styled.div`

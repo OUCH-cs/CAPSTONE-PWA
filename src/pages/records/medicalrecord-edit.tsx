@@ -12,12 +12,6 @@ const MedicalRecordEdit: React.FC = () => {
   const [hospitalRecord, setHospitalRecord] = useState<HospitalRecord | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);  
 
   // id로 기존 데이터 불러오기
   useEffect(() => {
@@ -74,12 +68,9 @@ const MedicalRecordEdit: React.FC = () => {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
-  padding-bottom: 40px;
-  padding-top: 10px;
+  padding-top: 24px;
   margin-left: 16px;
   margin-right: 16px;
-  margin-top: 14px;
 `;
 
 const Header = styled.div`

@@ -76,7 +76,6 @@ const MedicalRecordData: React.FC<MedicalRecordDataProps> = ({ id }) => {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
   position: relative;
 `;
 

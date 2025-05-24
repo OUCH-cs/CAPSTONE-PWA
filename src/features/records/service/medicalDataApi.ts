@@ -1,6 +1,5 @@
 import apiRequest from "@/shared/api/apiRequest";
 
-const BASE_URL = "/medical-record";
 
 
 export interface HospitalRecord {
@@ -17,7 +16,7 @@ export interface HospitalRecord {
 export const getMedicalRecordById = async (id: string) => {
   try {
     const response = await apiRequest({
-      url: `${BASE_URL}/${id}`,
+      url: `/medical-record/${id}`,
       method: "GET",
     });
     return response.data;
@@ -29,7 +28,7 @@ export const getMedicalRecordById = async (id: string) => {
 export const getHospitals = async () => {
   try {
     const response = await apiRequest({
-      url: BASE_URL,
+      url: "/medical-record",
       method: "GET",
     });
     return response.data;
@@ -41,7 +40,7 @@ export const getHospitals = async () => {
 export const addHospital = async (hospitalData: HospitalRecord) => {
   try {
     const response = await apiRequest({
-      url: BASE_URL, 
+      url: "/medical-record" ,
       method: "POST",
       data: hospitalData,
     });

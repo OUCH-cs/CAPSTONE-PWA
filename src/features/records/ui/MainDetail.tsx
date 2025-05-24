@@ -9,7 +9,7 @@ export default function MedicalRecordDetails() {
     const navigate = useNavigate();
   return (
     <>
-      <Container>
+      <Container onClick={() => navigate("/records/self-diagnosis-list")}>
         <DiagnosisMain width="60px" height="60px" />
         <SectionTitle>Self-Diagnosis</SectionTitle>
       </Container>

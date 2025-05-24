@@ -3,38 +3,49 @@ import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
-import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
-import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
+import { getDiagnosis, deleteDiagnosis } from "@/features/records/service/diagnosisApi";
+import Modal from "@/shared/components/modal/Modal";
+import AddIcon from "@/shared/assets/records/diagnosis-add.svg?react";
+import NoneDiagnosis from "@/features/records/ui/NoneDiagnosis";
 
-type HospitalRecord = {
-  id: number;
-  date: string;
-  hospital: string;
+export type DiagnosisRecord = {
+  diagnosisId: number;
+  visitType: "HOSPITAL" | "PHARMACY" ; 
+  symptoms: string;
+  duration:
+  | "LESS_THAN_A_DAY"
+  | "ONE_TO_3_DAYS"
+  | "MORE_THAN_3_DAYS"
+  | "MORE_THAN_A_WEEK"
+  | "MORE_THAN_A_MONTH";
+  painSeverity: number;
+  additionalNote: string;
+  createdAt: string;
 };
 
-export default function MedicalRecordList() {
+export default function DiagnosisList() {
   const navigate = useNavigate();
-  const [hospitalList, setHospitalList] = useState<HospitalRecord[]>([]);
+  const [diagnosisList, setDiagnosisList] = useState<DiagnosisRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
 
   useEffect(() => {
-    fetchHospitalData();
+    fetchDiagnosisData();
   }, []);
 
-  const fetchHospitalData = async () => {
+  const fetchDiagnosisData = async () => {
     try {
-      const res = await getHospitals();
+      const res = await getDiagnosis();
       if (res.data) {
-        setHospitalList(res.data);
+        setDiagnosisList(res.data);
         setError(null);
       } else {
         throw new Error("응답 데이터가 없습니다.");
       }
     } catch (error: any) {
       if (error.response) {
-        setError(`서버 오류: ${error.response.status} - ${error.response.data.message || "의료기록을 불러오는 데 실패했습니다."}`);
+        setError(`서버 오류: ${error.response.status} - ${error.response.data.message || "진단기록을 불러오는 데 실패했습니다."}`);
       } else {
         setError("네트워크 오류 또는 서버와 연결할 수 없습니다.");
       }
@@ -46,9 +57,9 @@ export default function MedicalRecordList() {
   const handleConfirmDelete = async () => {
     if (selectedDeleteId !== null) {
       try {
-        await deleteHospitals(selectedDeleteId.toString());
-        setHospitalList((prevList) =>
-          prevList.filter((hospital) => hospital.id !== selectedDeleteId)
+        await deleteDiagnosis(selectedDeleteId);
+        setDiagnosisList((prevList) =>
+           prevList.filter((diagnosis) => diagnosis.diagnosisId !== selectedDeleteId)
         );
         setSelectedDeleteId(null);
       } catch (error: any) {
@@ -63,44 +74,51 @@ export default function MedicalRecordList() {
         <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
-        <HeaderTitle>Medical Record</HeaderTitle>
+        <HeaderTitle>Self-Diagnosis</HeaderTitle>
       </Header>
 
       {loading ? (
         <p>불러오는 중...</p>
       ) : error ? (
         <ErrorText>{error}</ErrorText>
-      ) : (
-        hospitalList.map((hospital) => (
-          <div key={hospital.id}>
+      ) : diagnosisList.length === 0 ? (
+        <NoneDiagnosis />  // 데이터 없을 때 NoneDiagnosis 컴포넌트 렌더링
+      ):(
+        diagnosisList.map((diagnosis) => (
+           <div key={diagnosis.diagnosisId}>
             <DateWrapper>
-              <DateText>{hospital.date.slice(0, 10)}</DateText>
+              <DateText>{diagnosis.createdAt.slice(0, 10)}</DateText>
+              {/* 자가진단 생성된 날짜 */}
             </DateWrapper>
 
-            <ListItem onClick={() => navigate(`/records/medicalrecord/${hospital.id}`)}>
-              <ListText>{hospital.hospital}</ListText>
+            <ListItem onClick={() => navigate(`/records/self-diagnosis/${diagnosis.diagnosisId}`)}>
+              <ListText>{diagnosis.symptoms}</ListText>
               <DeleteIcon
                 width="16px"
                 height="18px"
                 style={{ cursor: "pointer" }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setSelectedDeleteId(hospital.id);
+                   setSelectedDeleteId(diagnosis.diagnosisId);
                 }}
               />
             </ListItem>
           </div>
         ))
       )}
+      {/* 자가진단 데이터 없을때 New버튼 안나오게 */}
+      {diagnosisList.length > 0 && (
+  <FabButton onClick={() => navigate("/self-diagnosis")}>
+    <AddIcon style={{ marginRight: "6px", width: "20px", height: "20px" }} />
+    New
+  </FabButton>
+)}
 
-      <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>
-
-      {/* Modal 적용 부분 */}
       {selectedDeleteId !== null && (
         <Modal isOpen={true} toggle={() => setSelectedDeleteId(null)}>
           <ModalBox>
             <MessageText>
-              Do you want to delete <br /> this medical record?
+              Do you want to delete <br /> a Self-Diagnosis
             </MessageText>
             <ButtonWrapper>
               <CancelButton onClick={() => setSelectedDeleteId(null)}>Cancel</CancelButton>
@@ -113,9 +131,9 @@ export default function MedicalRecordList() {
   );
 }
 
+
 const Container = styled.div`
   background-color: #f5f9fc;
-  padding-bottom: 40px;
   position: relative;
   padding-top: 28px;
   margin-left: 16px;
@@ -183,8 +201,9 @@ const ListText = styled.span`
 `;
 
 const FabButton = styled.button`
+  display: flex;
   position: absolute;
-  margin-top: 450px;
+  margin-top:350px;
   right: 24px;
   background-color: #0097a7;
   border-radius: 24px;

@@ -136,7 +136,6 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
   position: relative;
 `;
 
