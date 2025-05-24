@@ -12,7 +12,7 @@ import {
   destinationAtom
 } from '@/features/diagnosis/service/selfDiagnosisAtoms';
 import LoadingOverlay from "@/shared/components/overlay/LoadingOverlay";
-import  LocationIcon from "@/shared/assets/common/location.svg?react";
+import LocationImg from "@/shared/assets/common/location.png"
 import { Button } from "@/shared/components/button/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -73,7 +73,7 @@ function RecommendPage() {
         </>
       )}
       <IconContainer>
-        <LocationIcon />
+        <img src={LocationImg} alt="location-image" />
       </IconContainer>
       <ButtonGroup>
         <FindButton onClick={handleResetAndSearch}>
