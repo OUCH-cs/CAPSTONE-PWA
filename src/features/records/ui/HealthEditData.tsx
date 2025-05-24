@@ -185,7 +185,6 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
   position: relative;
 `;
 

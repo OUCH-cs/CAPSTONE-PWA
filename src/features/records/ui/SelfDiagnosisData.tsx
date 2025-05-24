@@ -104,7 +104,6 @@ const SelfDiagnosisData: React.FC<SelfDiagnosisDataProps> = ({ id }) => {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
   position: relative;
 `;
 

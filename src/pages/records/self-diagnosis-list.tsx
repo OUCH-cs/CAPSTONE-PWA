@@ -31,11 +31,7 @@ export default function DiagnosisList() {
   const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
     fetchDiagnosisData();
-    return () => {
-      document.body.style.overflow = '';
-    };
   }, []);
 
   const fetchDiagnosisData = async () => {
@@ -138,10 +134,8 @@ export default function DiagnosisList() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
-  padding-bottom: 40px;
   position: relative;
-  margin-top: 28px;
+  padding-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
 `;
@@ -209,7 +203,7 @@ const ListText = styled.span`
 const FabButton = styled.button`
   display: flex;
   position: absolute;
-  bottom: 90px;
+  margin-top:350px;
   right: 24px;
   background-color: #0097a7;
   border-radius: 24px;

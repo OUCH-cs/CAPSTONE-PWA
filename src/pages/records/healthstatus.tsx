@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -10,14 +9,6 @@ export default function HealthStatus() {
   const handleEditIconPress = () => {
   navigate("/records/healthstatus-edit");
 };
-
-
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';  
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
 
   return (
     <Container>
@@ -37,11 +28,9 @@ export default function HealthStatus() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  padding-bottom: 40px;
-  padding-top: 10px;
+  padding-top: 24px;
   margin-left: 16px;
   margin-right: 16px;
-  margin-top: 14px;
 `;
 
 const Header = styled.div`

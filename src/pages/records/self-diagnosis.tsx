@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -9,13 +8,6 @@ export default function SelfDiagnosis() {
   const navigate = useNavigate();
   const { id } = useParams(); 
 
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);  
 
  
   if (!id) {
@@ -39,12 +31,9 @@ export default function SelfDiagnosis() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
-  padding-bottom: 40px;
-  padding-top: 10px;
+  padding-top: 24px;
   margin-left: 16px;
   margin-right: 16px;
-  margin-top: 14px;
 `;
 
 const Header = styled.div`

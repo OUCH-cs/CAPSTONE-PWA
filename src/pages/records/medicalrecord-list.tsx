@@ -20,11 +20,7 @@ export default function MedicalRecordList() {
   const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
     fetchHospitalData();
-    return () => {
-      document.body.style.overflow = '';
-    };
   }, []);
 
   const fetchHospitalData = async () => {
@@ -119,10 +115,9 @@ export default function MedicalRecordList() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
   padding-bottom: 40px;
   position: relative;
-  margin-top: 28px;
+  padding-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
 `;
@@ -189,7 +184,7 @@ const ListText = styled.span`
 
 const FabButton = styled.button`
   position: absolute;
-  bottom: 90px;
+  margin-top: 450px;
   right: 24px;
   background-color: #0097a7;
   border-radius: 24px;
