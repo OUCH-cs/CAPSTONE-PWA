@@ -3,18 +3,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import useSWR from "swr";
 import { SearchDetailHeader } from "@/features/search/ui";
 import { useEffect } from "react";
-import { searchDetailPlaceQuery } from "@/features/search/services/searchDetailPlaceQuery";
 import SearchDetailInfo from "@/features/search/ui/detail/SearchDetailInfo";
 import ContactFavoritePanel from "@/features/search/ui/detail/ContactFavoritePanel";
+import { getDetailInfo } from "@/features/search/services/api/searcApi";
 
 export default function SearchDetailPage() {
   const navigate = useNavigate();
 
   const { id } = useParams();
 
-  const { data, error } = useSWR(`/${id}`, searchDetailPlaceQuery, {
+  const { data, error } = useSWR(`/hospitals/${id}`, getDetailInfo, {
     dedupingInterval: 1000 * 60 * 60, // 1시간
   });
+
+  console.log(data);
 
   // 에러 예외 처리
   useEffect(() => {
@@ -28,9 +30,9 @@ export default function SearchDetailPage() {
     <>
       {data && (
         <Container>
-          <SearchDetailHeader>{data.displayName.text}</SearchDetailHeader>
+          <SearchDetailHeader>{data.name}</SearchDetailHeader>
           <SearchDetailInfo {...data} />
-          <ContactFavoritePanel tel={data.nationalPhoneNumber} />
+          <ContactFavoritePanel tel={data.tel} />
         </Container>
       )}
     </>

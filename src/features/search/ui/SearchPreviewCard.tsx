@@ -1,49 +1,59 @@
-import { LatLng } from "@/features/map/map.types";
 import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
 import { getDistanceInMeters } from "../lib/getDistanceInMeters";
 import { formatDistance } from "../lib/formatDistance";
 import RatingStar from "@/shared/assets/search/star.svg?react";
-import { Place } from "../search.types";
+import { NearbyPlacesResponse } from "../types/search.types";
 import CategoryTag from "@/entities/search/ui/CategoryTag";
 import { useLocation } from "react-router-dom";
+import { LatLng } from "@/shared/types/common";
+import FavoriteIcon from "@/shared/assets/search/favorite.svg?react";
+import { useState } from "react";
 
 function SearchPreviewCard({
   currLocation,
   ...place
-}: { currLocation: LatLng | null } & Place) {
+}: { currLocation: LatLng | null } & NearbyPlacesResponse) {
   const location = useLocation();
   const isSearchPage = location.pathname.includes("/search");
 
-  // 휴무일 정보 가져오기
-  const closedDay = place.currentOpeningHours?.weekdayDescriptions
-    .find((day) => day.includes("Closed"))
-    ?.split(":")[0];
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+
+  const handleClickLike = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Link 이동 방지
+    setIsLiked((prev) => !prev);
+  };
 
   if (!currLocation) return;
-  const distance = getDistanceInMeters(currLocation, place.location); // 거리 계산
+  const distance = getDistanceInMeters(currLocation, {
+    latitude: place.lat,
+    longitude: place.lng,
+  }); // 거리 계산
   const distanceLabel = formatDistance(distance); // 거리 포맷팅 (760m, 1.2km 등)
 
   return (
     <Container $isSearchPage={isSearchPage}>
+      {isSearchPage && (
+        <LikeActionButton $isLiked={isLiked} onClick={handleClickLike}>
+          <FavoriteIcon width={20} height={20} strokeWidth={1} />
+        </LikeActionButton>
+      )}
+
       <OperatingHours />
-      <Title>{place.displayName.text}</Title>
+      <Title>{place.name}</Title>
       <OperatingHours>
-        <Open>{place.currentOpeningHours?.openNow ? "Open " : "- "}</Open>
-        <Closed>{closedDay ? `/ Closed every ${closedDay}` : "-"}</Closed>
+        {/* <Open>{place.currentOpeningHours?.openNow ? "Open " : "- "}</Open>
+        <Closed>{closedDay ? `/ Closed every ${closedDay}` : "-"}</Closed> */}
+        <Address>{place.address}</Address>
       </OperatingHours>
       <PlaceMetrics>
-        {place.rating && (
-          <RatingWrapper>
-            <RatingStar />
-            <Rating>{place.rating}</Rating>•
-          </RatingWrapper>
-        )}
+        <RatingWrapper>
+          <RatingStar />
+          <Rating>0</Rating>•
+        </RatingWrapper>
         <Distance> {distanceLabel}</Distance>
       </PlaceMetrics>
-      {place.primaryTypeDisplayName && isSearchPage && (
-        <CategoryTag>{place.primaryTypeDisplayName.text}</CategoryTag>
-      )}
+      {isSearchPage && <CategoryTag>{place.type}</CategoryTag>}
     </Container>
   );
 }
@@ -51,6 +61,7 @@ function SearchPreviewCard({
 export { SearchPreviewCard };
 
 const Container = styled.li<{ $isSearchPage: boolean }>`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: ${({ $isSearchPage }) => ($isSearchPage ? "328px" : "236px")};
@@ -60,6 +71,21 @@ const Container = styled.li<{ $isSearchPage: boolean }>`
   border-radius: 16px;
   background-color: ${theme.colors.white};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+`;
+
+const LikeActionButton = styled.button<{ $isLiked: boolean }>`
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  fill: ${({ $isLiked }) => ($isLiked ? "#FF3332" : "none")};
+  stroke: ${({ $isLiked }) => ($isLiked ? "#FF3332" : theme.colors.gray_7)};
+  background-color: transparent;
+  padding: 0;
+  border: none;
   cursor: pointer;
 `;
 
@@ -82,8 +108,15 @@ const OperatingHoursText = styled.span`
   font-weight: 400;
   color: ${theme.colors.gray_7};
 `;
-const Open = styled(OperatingHoursText)``;
-const Closed = styled(OperatingHoursText)``;
+const Address = styled(OperatingHoursText)`
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+// const Open = styled(OperatingHoursText)``;
+// const Closed = styled(OperatingHoursText)``;
 
 const PlaceMetrics = styled.div`
   display: flex;

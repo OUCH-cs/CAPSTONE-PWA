@@ -59,7 +59,7 @@ const HeaderWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  margin-bottom: 2.3rem;
+  margin-bottom: 1rem;
 
 `
 

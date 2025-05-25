@@ -1,15 +1,11 @@
 import styled from "@emotion/styled";
 import { PropsWithChildren } from "react";
 
-type CategoryTagType = "Hospital" | "Pharmacy";
-
 export default function CategoryTag({ children }: PropsWithChildren) {
-  const type = children as CategoryTagType;
-
-  return <Container $type={type}>{children}</Container>;
+  return <Container $type={children}>{children}</Container>;
 }
 
-const Container = styled.div<{ $type: CategoryTagType }>`
+const Container = styled.div<{ $type: any }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,5 +16,5 @@ const Container = styled.div<{ $type: CategoryTagType }>`
   font-weight: 400;
   color: #111111;
   background-color: ${({ $type }) =>
-    $type === "Hospital" ? "#E1F5EC " : "#E5EEF5"};
+    $type === "약국" ? "#E5EEF5" : "#E1F5EC"};
 `;

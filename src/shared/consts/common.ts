@@ -1,4 +1,4 @@
-import { LatLng } from "@/features/map/map.types";
+import { LatLng } from "../types/common";
 
 const fallbackLocaton: LatLng = {
   // 서울 시청

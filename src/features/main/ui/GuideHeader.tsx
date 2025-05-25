@@ -37,7 +37,7 @@ const HeaderWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  margin-bottom: 2.3rem;
+ 
 
 `
 
@@ -50,7 +50,6 @@ const Title = styled.p`
 
 const BackwardIconWrapper = styled.div`
   position: absolute;
-  //   top: 50%;
   left: 16px;
   display: flex;
   align-items: center;

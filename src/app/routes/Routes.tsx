@@ -13,13 +13,13 @@ import {
   MapPage,
   GuidePage,
   TranslateFinishPage,
+  RecommendPage,
 } from "@/pages";
 
-
-import MedicalRecordList from "@/pages/records/medicalrecord-list"; 
+import MedicalRecordList from "@/pages/records/medicalrecord-list";
 import MedicalRecord from "@/pages/records/medicalrecord";
 import MedicalRecordEdit from "@/pages/records/medicalrecord-edit";
-import HealthStatus from "@/pages/records/healthstatus"; 
+import HealthStatus from "@/pages/records/healthstatus";
 import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusEdit from "@/pages/records/healthstatus-edit";
 import DiagnosisList from "@/pages/records/self-diagnosis-list";
@@ -45,12 +45,12 @@ export default function AppRoutes() {
 
         {/* 자가진단 페이지 */}
         <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
+        <Route path="/recommend" element={<RecommendPage/>} />
 
-        <Route path="guide" element={<GuidePage/>}/>
+        <Route path="guide" element={<GuidePage />} />
 
         {/* 검색 페이지 */}
         <Route path="/search" element={<SearchPage />} />
-
 
 
       {/* 기록 페이지 */}
@@ -68,8 +68,18 @@ export default function AppRoutes() {
 
         {/* 지도 페이지 */}
         <Route path="/map" element={<MapPage />} />
-      
-        
+
+        <Route path="/records" element={<RecordsPage />} />
+        <Route
+          path="/records/medicalrecord-list"
+          element={<MedicalRecordList />}
+        />
+        <Route path="/records/medicalrecord" element={<MedicalRecord />} />
+        <Route path="/records/healthstatus" element={<HealthStatus />} />
+        <Route
+          path="/records/medicalrecord-add"
+          element={<MedicalRecordAdd />}
+        />
 
         {/* 통역 페이지 */}
         <Route path="/translate" element={<TranslatePage />} />
