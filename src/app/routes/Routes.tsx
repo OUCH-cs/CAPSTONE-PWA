@@ -22,6 +22,8 @@ import MedicalRecordEdit from "@/pages/records/medicalrecord-edit";
 import HealthStatus from "@/pages/records/healthstatus";
 import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusEdit from "@/pages/records/healthstatus-edit";
+import DiagnosisList from "@/pages/records/self-diagnosis-list";
+import Diagnosis from "@/pages/records/self-diagnosis";
 import { AuthGuard, RedirectIfAuth } from "@/app/providers";
 import TestPage from "@/pages/test/test";
 import SearchDetailPage from "@/pages/search/search-detail";
@@ -50,26 +52,17 @@ export default function AppRoutes() {
         {/* 검색 페이지 */}
         <Route path="/search" element={<SearchPage />} />
 
-        {/* 기록 페이지 */}
-        <Route path="/records" element={<RecordsPage />} />
-        <Route
-          path="/records/medicalrecord-list"
-          element={<MedicalRecordList />}
-        />
-        <Route path="/records/medicalrecord/:id" element={<MedicalRecord />} />
-        <Route
-          path="/records/medicalrecord-edit/:id"
-          element={<MedicalRecordEdit />}
-        />
-        <Route path="/records/healthstatus" element={<HealthStatus />} />
-        <Route
-          path="/records/medicalrecord-add"
-          element={<MedicalRecordAdd />}
-        />
-        <Route
-          path="/records/healthstatus-edit"
-          element={<HealthStatusEdit />}
-        />
+
+      {/* 기록 페이지 */}
+      <Route path="/records" element={<RecordsPage />} />
+      <Route path="/records/medicalrecord-list" element={<MedicalRecordList />} />
+      <Route path="/records/medicalrecord/:id" element={<MedicalRecord />} />
+      <Route path="/records/medicalrecord-edit/:id" element={<MedicalRecordEdit />} />
+      <Route path="/records/healthstatus" element={<HealthStatus />} />
+      <Route path="/records/medicalrecord-add" element={<MedicalRecordAdd />} />
+      <Route path="/records/healthstatus-edit" element={<HealthStatusEdit />} />
+      <Route path="/records/self-diagnosis-list" element={<DiagnosisList />} />
+      <Route path="/records/self-diagnosis/:id" element={<Diagnosis />} />
 
         <Route path="/search/:id" element={<SearchDetailPage />} />
 

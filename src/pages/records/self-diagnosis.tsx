@@ -1,27 +1,30 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
-import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
-import HealthStatusData from "@/features/records/ui/HealthStatusData"; 
-export default function HealthStatus() {
-  const navigate = useNavigate();
+import DiagnosisData from "@/features/records/ui/SelfDiagnosisData"
 
-  const handleEditIconPress = () => {
-  navigate("/records/healthstatus-edit");
-};
+
+export default function SelfDiagnosis() {
+  const navigate = useNavigate();
+  const { id } = useParams(); 
+
+
+ 
+  if (!id) {
+    return <p>잘못된 접근입니다. 목록으로 돌아가주세요.</p>;
+  }
 
   return (
     <Container>
+      
       <Header>
-        <BackButton onClick={() => navigate("/records")}>
+        <BackButton onClick={() => navigate("/records/self-diagnosis-list")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Health Status</HeaderTitle>
-        <EditIconWrapper onClick={handleEditIconPress}>
-          <EditIcon width={20} height={20} />
-        </EditIconWrapper>
+        <HeaderTitle>Self-Diagnosis</HeaderTitle>
       </Header>
-      <HealthStatusData />
+
+      <DiagnosisData id={id} />
     </Container>
   );
 }
@@ -59,9 +62,3 @@ const HeaderTitle = styled.h2`
   transform: translateX(-50%);
 `;
 
-const EditIconWrapper = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-right: -8px;
-`;
