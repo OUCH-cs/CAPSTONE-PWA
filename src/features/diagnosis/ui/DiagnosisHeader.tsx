@@ -12,7 +12,7 @@ function Header() {
 
   const handlePrevClick = () => {
     toggle();
-    navigate("/")
+    navigate(-1)
   };
 
   return (
