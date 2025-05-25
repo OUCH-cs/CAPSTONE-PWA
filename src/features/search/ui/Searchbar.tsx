@@ -1,38 +1,34 @@
 import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
 import SearchIcon from "@/shared/assets/search/search.svg?react";
-import { useTextSearch } from "../services/useTextSearch";
-import useToggle from "@/shared/lib/useToggle";
 import DepartmentFilterDropdown from "./dropdown/DepartmentFilterDropdown";
+import { useSearch } from "../services/hooks/useSearch";
 
 function Searchbar() {
-  const { textQuery, handleChange, handleSubmit } = useTextSearch();
-  const { isOpen, setIsOpen, toggle } = useToggle();
+  const { searchQuery, setSearchQuery, handleSubmit } = useSearch();
 
   return (
-    <Container>
-      <InputFormWrapper onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          value={textQuery}
-          placeholder="Search for hospital and pharmacies"
-          onChange={handleChange}
-        />
+    <>
+      <Container>
+        <InputFormWrapper onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            value={searchQuery}
+            placeholder="Search for hospital and pharmacies"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
-        <IconWrapper type="submit">
-          <SearchIcon />
-        </IconWrapper>
-      </InputFormWrapper>
+          <IconWrapper type="submit">
+            <SearchIcon />
+          </IconWrapper>
+        </InputFormWrapper>
 
-      <FilterWrapper>
-        <DepartmentFilterDropdown
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          toggle={toggle}
-          menus={["Hospital", "Pharmacy"]}
-        />
-      </FilterWrapper>
-    </Container>
+        {/* 진료과 필터 드롭다운 */}
+        <FilterWrapper>
+          <DepartmentFilterDropdown />
+        </FilterWrapper>
+      </Container>
+    </>
   );
 }
 

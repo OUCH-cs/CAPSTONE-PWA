@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { LatLng } from "@/features/map/map.types";
 import { getCurrLocation } from "../lib/getCurrLocation";
 import { fallbackLocaton } from "../consts/common";
+import { LatLng } from "../types/common";
 
 const useCurrLocation = () => {
   const [location, setLocation] = useState<LatLng | null>(null);

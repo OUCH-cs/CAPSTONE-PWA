@@ -3,52 +3,72 @@ import DropdownMenuIcon from "@/shared/assets/common/arrow.svg?react";
 import theme from "@/shared/styles/theme";
 import { useAtom } from "jotai";
 import { departmentFilterAtom } from "../../services/store/filterAtom";
-import { Department, DepartmentDropdownProps } from "../../search.types";
-import { useEffect } from "react";
 import Dropdown from "@/shared/components/dropdown/Dropdown";
+import { DepartmentResponse } from "../../types/department.types";
+import useToggle from "@/shared/lib/useToggle";
+import useSWR from "swr";
+import Skeleton from "@/shared/components/skeleton/Skeleton";
+import { useEffect } from "react";
+import { getDepartment } from "../../services/api/searcApi";
+import { useNavigate } from "react-router-dom";
 
-export default function DepartmentFilterDropdown({
-  isOpen,
-  setIsOpen,
-  toggle,
-  menus,
-}: DepartmentDropdownProps) {
-  const [department, setDepartment] = useAtom(departmentFilterAtom);
+export default function DepartmentFilterDropdown() {
+  const navigate = useNavigate();
+  const [department, setDepartment] = useAtom(departmentFilterAtom); // 선택한 진료과
+  const { isOpen, setIsOpen, toggle } = useToggle();
 
-  const handleClick = (menu: Department) => {
-    setDepartment(menu);
+  // 진료과 필터 리스트 api 호출
+  const {
+    isLoading,
+    error,
+    data: menus,
+  } = useSWR("/hospitals/departments", getDepartment, {
+    dedupingInterval: 1000 * 60 * 60, // 1시간
+  });
+
+  const handleClick = async (menu: DepartmentResponse) => {
+    setDepartment(menu.nameKr);
     toggle();
   };
 
   useEffect(() => {
-    setDepartment(null);
-  }, []);
+    if (error) {
+      alert("Failed to load department data");
+      navigate("/");
+    }
+  }, [error]);
 
   return (
-    <Dropdown setIsOpen={setIsOpen}>
-      <Dropdown.Trigger onClick={toggle}>
-        <TriggerWrapper>
-          {department || "Medical Department"}
-          <IconWrapper>
-            <DropdownMenuIcon width="16" height="16" stroke="#767676" />
-          </IconWrapper>
-        </TriggerWrapper>
-      </Dropdown.Trigger>
+    <>
+      {isLoading && <Skeleton width={172} height={31} />}
 
-      <Dropdown.Menu isOpen={isOpen} top="35px" left="0px">
-        <MenuWrapper>
-          {menus.map((menu, index) => (
-            <MenuItem
-              key={index}
-              onClick={() => handleClick(menu)}
-              $isSelected={menu === department}
-            >
-              {menu}
-            </MenuItem>
-          ))}
-        </MenuWrapper>
-      </Dropdown.Menu>
-    </Dropdown>
+      {menus && (
+        <Dropdown setIsOpen={setIsOpen}>
+          <Dropdown.Trigger onClick={toggle}>
+            <TriggerWrapper>
+              {department || "Medical Department"}
+              <IconWrapper>
+                <DropdownMenuIcon width="16" height="16" stroke="#767676" />
+              </IconWrapper>
+            </TriggerWrapper>
+          </Dropdown.Trigger>
+
+          <Dropdown.Menu isOpen={isOpen} top="35px" left="0px">
+            <MenuWrapper>
+              {menus.map((menu, index) => (
+                <MenuItem
+                  key={index}
+                  onClick={() => handleClick(menu)}
+                  $isSelected={menu.nameKr === department}
+                >
+                  {menu.nameKr}
+                </MenuItem>
+              ))}
+            </MenuWrapper>
+          </Dropdown.Menu>
+        </Dropdown>
+      )}
+    </>
   );
 }
 
@@ -76,14 +96,15 @@ const MenuWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 172px;
+  max-height: 200px;
   border-radius: 16px;
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.08);
-  overflow: hidden;
+  overflow: auto;
 `;
 
 const MenuItem = styled.button<{ $isSelected: boolean }>`
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   font-size: 15px;
   font-weight: 400;
   color: #000000;

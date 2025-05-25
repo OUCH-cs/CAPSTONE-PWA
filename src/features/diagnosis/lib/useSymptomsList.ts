@@ -1,35 +1,39 @@
 import { useFormContext } from "react-hook-form";
+import { useSymptoms } from "./diagnosis-algorithm/useSymptoms";
 import { useAtom } from "jotai";
-import { useState } from "react";
-import { customSymptomsAtom } from "../service/selfDiagnosisAtoms";
-import { SYMPTOMS } from "@/shared/mock";
+import { selectedSystemAtom, selectedSymptomAtom,languageCodeAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
 
-// 증상 리스트 관리 커스텀 훅
+
+/**
+ * 증상(Symptoms) 리스트를 가져오고 선택 상태를 관리하는 커스텀 훅입니다.
+ *
+ * - 특정 system + languageCode에 따라 증상 목록을 가져옵니다.
+ * - 전역 상태(selectedSymptomAtom)를 기반으로 증상 선택을 관리합니다.
+ * - toggleSymptom을 통해 증상리스트 중 선택
+ * 
+ * 
+
+*/
+
 export const useSymptomsList = () => {
-  // react-hook-form의 폼 상태 접근
-  const { setValue, getValues } = useFormContext<{ symptoms: string[] }>();
+  const [languageCode]=useAtom(languageCodeAtom)
+  const [selectedSystem] = useAtom(selectedSystemAtom);
+  const [selectedSymptom, setSelectedSymptom] = useAtom(selectedSymptomAtom);
+  const { setValue } = useFormContext<{ symptom: string }>();
 
-  // 폼 초기값 기준으로 현재 선택된 증상 상태 관리 (useState로 제어)
-  const [selectedSymptoms, setSelectedSymptoms] = useState(() => getValues("symptoms") || []);
+  const { symptoms = [] } = useSymptoms(selectedSystem,languageCode);
 
-  // 전역 상태에서 사용자 커스텀 증상 목록 가져오기 (jotai)
-  const [customSymptoms] = useAtom(customSymptomsAtom);
+  const allSymptoms: string[] = symptoms;
 
-  // 전체 증상 리스트 구성 (기본 + 커스텀)
-  const allSymptoms = [...SYMPTOMS, ...customSymptoms];
-
-  // 증상 토글 로직 (선택/해제)
   const toggleSymptom = (symptom: string) => {
-    const updatedSymptoms = selectedSymptoms.includes(symptom)
-      ? selectedSymptoms.filter((s) => s !== symptom)
-      : [...selectedSymptoms, symptom];
 
-    setValue("symptoms", updatedSymptoms);
-    setSelectedSymptoms(updatedSymptoms);
+    setValue("symptom", symptom);
+    setSelectedSymptom(symptom);
   };
 
   return {
-    selectedSymptoms,
+    selectedSymptom,
+    selectedSystem,
     allSymptoms,
     toggleSymptom,
   };

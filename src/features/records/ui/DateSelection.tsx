@@ -1,7 +1,7 @@
 import  { useRef, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
-import Modal from "@/shared/components/modal/Modal"; // 사용자 정의 모달 경로
+import Modal from "@/shared/components/modal/Modal"; 
 
 const years = Array.from({ length: 100 }, (_, i) => (2000 + i).toString().slice(2));
 const months = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, "0"));
@@ -14,6 +14,7 @@ interface DateSelectionProps {
 }
 
 export default function DateSelection({ isOpen, onClose, onDateSelect }: DateSelectionProps) {
+
   const today = dayjs();
   const [centerItem, setCenterItem] = useState({
     year: today.format("YY"),
@@ -178,10 +179,11 @@ const CenterLine = styled.div`
   transform: translateX(-50%);
   width: 276px;
   height: 40px;
-  background-color: #ffffff;
-  border-radius: 6px;
+  background-color: #F1F1F5;
+  border-radius: 16px;
+  border: 1px solid #000;
   pointer-events: none;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.04);
   z-index: 0;
 `;
 
@@ -205,6 +207,14 @@ const PickerColumn = styled.div`
   border-radius: 5px;
   text-align: center;
   z-index: 1;
+
+  /* 스크롤바 숨김 (크로스 브라우징) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 `;
 
 const StickyLabel = styled.p`

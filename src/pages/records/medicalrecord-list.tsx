@@ -1,14 +1,68 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
-import {hospitals} from "@/features/records/consts/medicalConstants";
+import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
+import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
+import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
+
+type HospitalRecord = {
+  id: number;
+  date: string;
+  hospital: string;
+};
 
 export default function MedicalRecordList() {
   const navigate = useNavigate();
+  const [hospitalList, setHospitalList] = useState<HospitalRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    fetchHospitalData();
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  const fetchHospitalData = async () => {
+    try {
+      const res = await getHospitals();
+      if (res.data) {
+        setHospitalList(res.data);
+        setError(null);
+      } else {
+        throw new Error("응답 데이터가 없습니다.");
+      }
+    } catch (error: any) {
+      if (error.response) {
+        setError(`서버 오류: ${error.response.status} - ${error.response.data.message || "의료기록을 불러오는 데 실패했습니다."}`);
+      } else {
+        setError("네트워크 오류 또는 서버와 연결할 수 없습니다.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleConfirmDelete = async () => {
+    if (selectedDeleteId !== null) {
+      try {
+        await deleteHospitals(selectedDeleteId.toString());
+        setHospitalList((prevList) =>
+          prevList.filter((hospital) => hospital.id !== selectedDeleteId)
+        );
+        setSelectedDeleteId(null);
+      } catch (error: any) {
+        setError('삭제 중 오류가 발생했습니다.');
+      }
+    }
+  };
 
   return (
     <Container>
-      {/* 헤더 */}
       <Header>
         <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
@@ -16,37 +70,59 @@ export default function MedicalRecordList() {
         <HeaderTitle>Medical Record</HeaderTitle>
       </Header>
 
-      {/* 병원 목록 렌더링 */}
-      {hospitals.map((hospital, index) => (
-        <div key={index}>
-          <DateWrapper>
-            <DateText>{hospital.date}</DateText>
-          </DateWrapper>
+      {loading ? (
+        <p>불러오는 중...</p>
+      ) : error ? (
+        <ErrorText>{error}</ErrorText>
+      ) : (
+        hospitalList.map((hospital) => (
+          <div key={hospital.id}>
+            <DateWrapper>
+              <DateText>{hospital.date.slice(0, 10)}</DateText>
+            </DateWrapper>
 
-          <ListItem
-            onClick={() =>
-              navigate(index === 0 ? "/records/medicalrecord" : "#")
-      }
-    >
-            <ListText>{hospital.name}</ListText>
-            <ArrowIcon width="25px" height="25px" stroke="black" style={{ transform: "rotate(180deg)" }} />
-          </ListItem>
-        </div>
-      ))}
+            <ListItem onClick={() => navigate(`/records/medicalrecord/${hospital.id}`)}>
+              <ListText>{hospital.hospital}</ListText>
+              <DeleteIcon
+                width="16px"
+                height="18px"
+                style={{ cursor: "pointer" }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedDeleteId(hospital.id);
+                }}
+              />
+            </ListItem>
+          </div>
+        ))
+      )}
 
-      {/* + New 버튼 */}
       <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>
+
+      {/* Modal 적용 부분 */}
+      {selectedDeleteId !== null && (
+        <Modal isOpen={true} toggle={() => setSelectedDeleteId(null)}>
+          <ModalBox>
+            <MessageText>
+              Do you want to delete <br /> this medical record?
+            </MessageText>
+            <ButtonWrapper>
+              <CancelButton onClick={() => setSelectedDeleteId(null)}>Cancel</CancelButton>
+              <ConfirmButton onClick={handleConfirmDelete}>Delete</ConfirmButton>
+            </ButtonWrapper>
+          </ModalBox>
+        </Modal>
+      )}
     </Container>
   );
 }
-
 
 const Container = styled.div`
   background-color: #f5f9fc;
   min-height: 100vh;
   padding-bottom: 40px;
   position: relative;
-  margin-top: 14px;
+  margin-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
 `;
@@ -112,9 +188,9 @@ const ListText = styled.span`
 `;
 
 const FabButton = styled.button`
-  position: fixed;
-  bottom: 75px;
-  right: 20px;
+  position: absolute;
+  bottom: 90px;
+  right: 24px;
   background-color: #0097a7;
   border-radius: 24px;
   padding: 12px 16px;
@@ -125,4 +201,57 @@ const FabButton = styled.button`
   border: none;
   cursor: pointer;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
+`;
+
+const ModalBox = styled.div`
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  text-align: center;
+  width: 316px;
+  font-family: Pretendard;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  padding: 66px 0 0 0;
+`;
+
+const MessageText = styled.p`
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+  text-align: center;
+  line-height: normal;
+  margin-bottom: 46px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CancelButton = styled.button`
+  flex: 1;
+  background-color: #F1F1F5;
+  border: none;
+  border-radius: 0 0 0 10px;
+  font-weight: 500;
+  padding: 16px;
+  cursor: pointer;
+`;
+
+const ConfirmButton = styled.button`
+  flex: 1;
+  background-color: #0097a7;
+  color: white;
+  border: none;
+  border-radius: 0 0 10px 0;
+  font-weight: 500;
+  padding: 16px;
+  cursor: pointer;
 `;

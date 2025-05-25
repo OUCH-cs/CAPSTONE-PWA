@@ -1,55 +1,56 @@
-import { useEffect } from "react";
 import { useAtom } from "jotai";
 import styled from "@emotion/styled";
 import DropdownMenuIcon from "@/shared/assets/common/arrow.svg?react";
 import { sortFilterAtom } from "../../services/store/filterAtom";
-import { Sort, SortDropdownProps } from "../../search.types";
+import { Sort } from "../../types/search.types";
 import Dropdown from "@/shared/components/dropdown/Dropdown";
+import useToggle from "@/shared/lib/useToggle";
 
-export default function SortDropdown({
-  isOpen,
-  setIsOpen,
-  toggle,
-  menus,
-}: SortDropdownProps) {
+export default function SortDropdown() {
   const [sort, setSort] = useAtom(sortFilterAtom);
+  const { isOpen, setIsOpen, toggle } = useToggle(); // 필터 드롭다운 토글
 
-  const handleClick = (sort: Sort) => {
-    setSort(sort);
+  const handleClick = (menu: Sort) => {
+    setSort(menu);
     toggle();
   };
 
-  useEffect(() => {
-    setSort("Recommended");
-  }, []);
-
   return (
-    <Dropdown setIsOpen={setIsOpen}>
-      <Dropdown.Trigger onClick={toggle}>
-        <TriggerWrapper>
-          {sort}
-          <IconWrapper>
-            <DropdownMenuIcon width="16" height="16" stroke="#767676" />
-          </IconWrapper>
-        </TriggerWrapper>
-      </Dropdown.Trigger>
+    <DropdownWrapper>
+      <Dropdown setIsOpen={setIsOpen}>
+        <Dropdown.Trigger onClick={toggle}>
+          <TriggerWrapper>
+            {sort}
+            <IconWrapper>
+              <DropdownMenuIcon width="16" height="16" stroke="#767676" />
+            </IconWrapper>
+          </TriggerWrapper>
+        </Dropdown.Trigger>
 
-      <Dropdown.Menu isOpen={isOpen} top="30px" right="10px">
-        <MenuWrapper>
-          {menus.map((menu, index) => (
-            <MenuItem
-              key={index}
-              onClick={() => handleClick(menu)}
-              $isSelected={menu === sort}
-            >
-              {menu}
-            </MenuItem>
-          ))}
-        </MenuWrapper>
-      </Dropdown.Menu>
-    </Dropdown>
+        <Dropdown.Menu isOpen={isOpen} top="30px" right="10px">
+          <MenuWrapper>
+            {(["Recommended", "Distance"] as Sort[]).map((menu, index) => (
+              <MenuItem
+                key={index}
+                onClick={() => handleClick(menu)}
+                $isSelected={menu === sort}
+              >
+                {menu}
+              </MenuItem>
+            ))}
+          </MenuWrapper>
+        </Dropdown.Menu>
+      </Dropdown>
+    </DropdownWrapper>
   );
 }
+
+const DropdownWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 328px;
+  margin-bottom: 16px;
+`;
 
 const TriggerWrapper = styled.div`
   display: flex;
