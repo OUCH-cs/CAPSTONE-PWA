@@ -1,41 +1,37 @@
 import styled from "@emotion/styled";
-import { useNearbySearch } from "@/features/search/services/useNearbySearch";
-import { useTextSearch } from "@/features/search/services/useTextSearch";
 import { Searchbar, SearchList } from "@/features/search/ui";
 import { fallbackLocaton } from "@/shared/consts/common";
 import SortDropdown from "@/features/search/ui/dropdown/SortDropdown";
-import useToggle from "@/shared/lib/useToggle";
 import Skeleton from "@/shared/components/skeleton/Skeleton";
-// import { useCurrLocation } from "@/shared/services/useCurrLocation";
+import useSWR from "swr";
+import { fetchNearbySearch } from "@/features/search/services/api/searcApi";
+import { NearbyPlacesResponse } from "@/features/search/types/search.types";
+import { useAtomValue } from "jotai";
+import {
+  departmentFilterAtom,
+  searchTypeAtom,
+} from "@/features/search/services/store/filterAtom";
+import NoSearchResults from "@/features/search/ui/NoSearchResults";
 
 function SearchPage() {
-  // const currLocation = useCurrLocation(); // 현재 위치 가져오기 버그로 인한..
   const currLocation = fallbackLocaton; // 임시 위치 설정 하드코딩
 
-  const { isOpen, setIsOpen, toggle } = useToggle(); // 필터 드롭다운 토글
+  const department = useAtomValue(departmentFilterAtom); // 진료과 필터 상태
+  const type = useAtomValue(searchTypeAtom); // 진료과 필터 상태
 
+  // 병원 검색 API 호출 (초기 검색 호출은 현재 위치 기준으로 근처 병원 검색)
+  // 진료과나 종별코드명을 검색 입력 시에도 호출
   const {
-    isPending: isNearbyPending,
-    isSuccess: isNearbySuccess,
-    isError: isNearbyError,
-    places: nearbyData,
-  } = useNearbySearch(currLocation); // 근처 병원 검색
-
-  const {
-    isPending: isTextSearchPending,
-    isSuccess: isTextSearchSuccess,
-    isError: isTextSearchError,
-    data: textSearchData,
-  } = useTextSearch(); // 텍스트 검색
-
-  // 근처 검색 결과는 초기 렌더링시에만 (검색시도가 한번도 안된 경우)
-  const shouldRenderNearby =
-    !isTextSearchPending &&
-    !isTextSearchSuccess &&
-    !isTextSearchError &&
-    isNearbySuccess;
-
-  const renderData = shouldRenderNearby ? nearbyData : textSearchData;
+    isLoading,
+    error,
+    data: nearbyPlaces,
+  } = useSWR(
+    ["/hospitals/search", department, type],
+    ([url, dept, type]) => fetchNearbySearch(url, currLocation, 20, dept, type),
+    {
+      dedupingInterval: 1000 * 60 * 60, // 1시간
+    }
+  );
 
   return (
     <Container>
@@ -43,16 +39,9 @@ function SearchPage() {
       <Searchbar />
 
       {/* 정렬 드롭다운 */}
-      <SortDropdownWrapper>
-        <SortDropdown
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          toggle={toggle}
-          menus={["Recommended", "Distance"]}
-        />
-      </SortDropdownWrapper>
+      <SortDropdown />
 
-      {(isNearbyPending || isTextSearchPending) && (
+      {isLoading && (
         <SkeletonList>
           {Array.from({ length: 5 }).map((_, idx) => (
             <Skeleton key={`notice-skeleton-${idx}`} width={328} height={170} />
@@ -60,16 +49,16 @@ function SearchPage() {
         </SkeletonList>
       )}
 
-      {(isNearbyError || isTextSearchError) && <div>Error!!</div>}
+      {error && <div>Error!!</div>}
 
-      {isTextSearchSuccess && textSearchData.length === 0 && (
-        <div>검색 결과가 없습니다.</div>
-      )}
+      {nearbyPlaces && nearbyPlaces.length === 0 && <NoSearchResults />}
 
       {/* 검색결과 렌더링 */}
-      {(shouldRenderNearby || isTextSearchSuccess) && (
-        <SearchList currLocation={currLocation} places={renderData} />
-      )}
+      <SearchList
+        currLocation={currLocation}
+        // 구글 맵 없애기 전까지 임시로 타입 확언
+        places={nearbyPlaces as NearbyPlacesResponse[]}
+      />
     </Container>
   );
 }
@@ -80,13 +69,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const SortDropdownWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 328px;
-  margin-bottom: 16px;
 `;
 
 const SkeletonList = styled.div`

@@ -19,6 +19,8 @@ function SearchDetailHeader({ children }: PropsWithChildren) {
 export { SearchDetailHeader };
 
 const Container = styled.div`
+  display: flex;
+  align-items: center;
   position: relative;
   width: 100%;
   padding-top: 16px;
@@ -26,9 +28,6 @@ const Container = styled.div`
 `;
 
 const IconWrapper = styled.button`
-  position: absolute;
-  top: 15px;
-  left: 16px;
   background-color: transparent;
   transform: rotate(90deg);
 `;
@@ -37,6 +36,8 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: 0 20px;
   font-size: 20px;
   font-weight: 500;
   color: #000000;

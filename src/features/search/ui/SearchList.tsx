@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import { SearchPreviewCard } from "./SearchPreviewCard";
-import { Place } from "../search.types";
-import { LatLng } from "@/features/map/map.types";
+import { NearbyPlacesResponse } from "../types/search.types";
 import { Link, useLocation } from "react-router-dom";
+import { LatLng } from "@/shared/types/common";
 
 interface SearchListProps {
   currLocation: LatLng | null;
-  places: Place[];
+  places: NearbyPlacesResponse[];
 }
 
 function SearchList({ currLocation, places }: SearchListProps) {
@@ -16,7 +16,7 @@ function SearchList({ currLocation, places }: SearchListProps) {
   return (
     <Container $isSearchPage={isSearchPage}>
       {places?.map((place) => (
-        <Link to={`/search/${place.id}`} key={place.id}>
+        <Link to={`/search/${place.ykiho}`} key={place.ykiho}>
           <SearchPreviewCard currLocation={currLocation} {...place} />
         </Link>
       ))}
