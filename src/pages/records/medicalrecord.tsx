@@ -1,20 +1,34 @@
-/** MedicalRecord.tsx */
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
 import MedicalRecordData from "@/features/records/ui/MedicalRecordData";
 
+
 export default function MedicalRecord() {
   const navigate = useNavigate();
+  const { id } = useParams(); 
 
   const handleEditIconPress = () => {
-    // 수정 아이콘 클릭 시 로직 작성
+    navigate(`/records/medicalrecord-edit/${id}`);
   };
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);  
+
+  // id가 없는 경우 예외 처리 
+  if (!id) {
+    return <p>잘못된 접근입니다. 목록으로 돌아가주세요.</p>;
+  }
 
   return (
     <Container>
-      {/* 헤더 */}
+      
       <Header>
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
@@ -25,8 +39,7 @@ export default function MedicalRecord() {
         </EditIconWrapper>
       </Header>
 
-      {/* 의료 기록 리스트 */}
-      <MedicalRecordData />
+      <MedicalRecordData id={id} />
     </Container>
   );
 }
@@ -38,6 +51,7 @@ const Container = styled.div`
   padding-top: 10px;
   margin-left: 16px;
   margin-right: 16px;
+  margin-top: 14px;
 `;
 
 const Header = styled.div`

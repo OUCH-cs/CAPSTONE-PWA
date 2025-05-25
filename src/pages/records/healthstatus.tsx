@@ -1,21 +1,28 @@
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
-import HealthStatusData from "@/features/records/ui/HealthStatusData";
-
+import HealthStatusData from "@/features/records/ui/HealthStatusData"; 
 export default function HealthStatus() {
   const navigate = useNavigate();
 
   const handleEditIconPress = () => {
-    // 추후 편집 기능 구현 예정
-  };
+  navigate("/records/healthstatus-edit");
+};
+
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';  
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   return (
     <Container>
-      {/* 헤더 */}
       <Header>
-        <BackButton onClick={() => navigate("/records/healthstatus-record-list")}>
+        <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
         <HeaderTitle>Health Status</HeaderTitle>
@@ -23,13 +30,10 @@ export default function HealthStatus() {
           <EditIcon width={20} height={20} />
         </EditIconWrapper>
       </Header>
-
-      {/* 의료 기록 리스트 */}
       <HealthStatusData />
     </Container>
   );
 }
-
 
 const Container = styled.div`
   background-color: #f5f9fc;
@@ -37,6 +41,7 @@ const Container = styled.div`
   padding-top: 10px;
   margin-left: 16px;
   margin-right: 16px;
+  margin-top: 14px;
 `;
 
 const Header = styled.div`

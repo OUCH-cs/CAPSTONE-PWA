@@ -1,55 +1,115 @@
-import {medicalData} from "../consts/medicalConstants"
+import React, { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import { getMedicalRecordById } from "@/features/records/service/medicalDataApi";
 
-export default function MedicalRecordData() {
-  return (
-    <div style={styles.container}>
-      {medicalData.map((item, index) => (
-        <div key={index}>
-          {/* 제목 */}
-          <div style={styles.date}>
-            <p style={styles.dateText}>{item.title}</p>
-          </div>
-
-          {/* 내용 */}
-          <div style={styles.list}>
-            <span style={styles.listText}>{item.value}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+interface HospitalRecord {
+  id: string;
+  visitDate: string;
+  visitingHospital: string;
+  medicalSubject: string;
+  symptoms: string;
+  treatmentSummary: string;
 }
 
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    backgroundColor: "#F5F9FC",
-    minHeight: "100vh",
-    position: "relative",
-  },
-  date: {
-    marginTop: "32px",
-    marginBottom: "6px",
-  },
-  dateText: {
-    color: "#767676",
-    fontSize: "14px",
-    fontWeight: 400,
-    fontFamily: "Pretendard",
-  },
-  list: {
-    padding: "20px",
-    borderRadius: "10px",
-    backgroundColor: "#FFF",
-    borderBottom: "1px solid #F5F5F5",
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
-    height:60,
-    marginBottom:-10,
-  },
-  listText: {
-    color: "#000",
-    marginLeft:-5,
-    fontSize: "16px",
-    fontWeight: 400,
-    fontFamily: "Pretendard",
-  },
+interface MedicalRecordDataProps {
+  id: string;
+}
+
+const MedicalRecordData: React.FC<MedicalRecordDataProps> = ({ id }) => {
+  const [hospitalRecord, setHospitalRecord] = useState<HospitalRecord | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchMedicalRecord = async () => {
+      try {
+        const response = await getMedicalRecordById(id);
+        setHospitalRecord(response.data);
+      } catch (error) {
+        setError("의료기록을 불러오는데 실패했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMedicalRecord();
+  }, [id]);
+
+  if (loading) return <p>로딩 중...</p>;
+  if (error) return <p>{error}</p>;
+
+  return (
+    <Container>
+      {hospitalRecord ? (
+        <>
+          <DataBlock>
+            <Label>Date of visit</Label>
+            <ListBox><ListText>{hospitalRecord.visitDate}</ListText></ListBox>
+          </DataBlock>
+
+          <DataBlock>
+            <Label>Visiting Hospital</Label>
+            <ListBox><ListText>{hospitalRecord.visitingHospital}</ListText></ListBox>
+          </DataBlock>
+
+          <DataBlock>
+            <Label>Medical Subjects</Label>
+            <ListBox><ListText>{hospitalRecord.medicalSubject}</ListText></ListBox>
+          </DataBlock>
+
+          <DataBlock>
+            <Label>Symptoms</Label>
+            <ListBox><ListText>{hospitalRecord.symptoms}</ListText></ListBox>
+          </DataBlock>
+
+          <DataBlock>
+            <Label>Treatment Summary</Label>
+            <ListBox><ListText>{hospitalRecord.treatmentSummary}</ListText></ListBox>
+          </DataBlock>
+        </>
+      ) : (
+        <p>의료 기록을 찾을 수 없습니다.</p>
+      )}
+    </Container>
+  );
 };
+
+const Container = styled.div`
+  background-color: #f5f9fc;
+  min-height: 100vh;
+  position: relative;
+`;
+
+const DataBlock = styled.div`
+  margin-top: 32px;
+  margin-bottom: 6px;
+`;
+
+const Label = styled.p`
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: Pretendard;
+`;
+
+const ListBox = styled.div`
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #E5E5EC;
+  border-radius:12px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  height: 60px;
+  margin-top:10px;
+  margin-bottom: -10px;
+`;
+
+const ListText = styled.span`
+  color: #434343;
+  margin-left: -5px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: Pretendard;
+`;
+
+export default MedicalRecordData;
