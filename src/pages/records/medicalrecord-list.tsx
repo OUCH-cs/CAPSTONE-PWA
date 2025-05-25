@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
+import NoneRecord from "@/features/records/ui/NoneRecord";
 import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
 
 type HospitalRecord = {
@@ -70,7 +71,9 @@ export default function MedicalRecordList() {
         <p>불러오는 중...</p>
       ) : error ? (
         <ErrorText>{error}</ErrorText>
-      ) : (
+      ) :  hospitalList.length === 0 ? (
+      <NoneRecord/>
+    ):(
         hospitalList.map((hospital) => (
           <div key={hospital.id}>
             <DateWrapper>
@@ -92,8 +95,9 @@ export default function MedicalRecordList() {
           </div>
         ))
       )}
-
-      <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>
+      {hospitalList.length > 0 && (
+      <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>  
+      )}
 
       {/* Modal 적용 부분 */}
       {selectedDeleteId !== null && (
@@ -120,6 +124,7 @@ const Container = styled.div`
   padding-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
+  height:92vh;
 `;
 
 const Header = styled.div`
@@ -185,7 +190,8 @@ const ListText = styled.span`
 const FabButton = styled.button`
   position: absolute;
   margin-top: 450px;
-  right: 24px;
+  bottom:0;
+  right: 16px;
   background-color: #0097a7;
   border-radius: 24px;
   padding: 12px 16px;
