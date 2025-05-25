@@ -13,6 +13,7 @@ interface PlacesResponseBase {
 // 주변 병원 API 응답 타입
 interface NearbyPlacesResponse extends PlacesResponseBase {
   distance: number;
+  type: SearchParamType;
 }
 
 interface SearchDetailResponse extends PlacesResponseBase {

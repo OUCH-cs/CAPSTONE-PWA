@@ -11,6 +11,7 @@ import {
   departmentFilterAtom,
   searchTypeAtom,
 } from "@/features/search/services/store/filterAtom";
+import NoSearchResults from "@/features/search/ui/NoSearchResults";
 
 function SearchPage() {
   const currLocation = fallbackLocaton; // 임시 위치 설정 하드코딩
@@ -50,9 +51,7 @@ function SearchPage() {
 
       {error && <div>Error!!</div>}
 
-      {nearbyPlaces && nearbyPlaces.length === 0 && (
-        <div>검색 결과가 없습니다.</div>
-      )}
+      {nearbyPlaces && nearbyPlaces.length === 0 && <NoSearchResults />}
 
       {/* 검색결과 렌더링 */}
       <SearchList

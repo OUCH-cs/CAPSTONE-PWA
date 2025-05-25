@@ -53,7 +53,7 @@ function SearchPreviewCard({
         </RatingWrapper>
         <Distance> {distanceLabel}</Distance>
       </PlaceMetrics>
-      {isSearchPage && <CategoryTag>Hospital</CategoryTag>}
+      {isSearchPage && <CategoryTag>{place.type}</CategoryTag>}
     </Container>
   );
 }

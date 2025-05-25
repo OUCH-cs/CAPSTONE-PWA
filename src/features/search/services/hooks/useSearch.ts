@@ -26,6 +26,9 @@ export function useSearch() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery) return;
+    // 이전 입력값 초기화
+    setDepartment(null);
+    setType(null);
 
     if (isValidDepartment(searchQuery))
       setDepartment(searchQuery as AllDepartments);
