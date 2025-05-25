@@ -7,21 +7,26 @@ import useSWR from "swr";
 import { fetchNearbySearch } from "@/features/search/services/api/searcApi";
 import { NearbyPlacesResponse } from "@/features/search/types/search.types";
 import { useAtomValue } from "jotai";
-import { departmentFilterAtom } from "@/features/search/services/store/filterAtom";
+import {
+  departmentFilterAtom,
+  searchTypeAtom,
+} from "@/features/search/services/store/filterAtom";
 
 function SearchPage() {
   const currLocation = fallbackLocaton; // 임시 위치 설정 하드코딩
 
   const department = useAtomValue(departmentFilterAtom); // 진료과 필터 상태
+  const type = useAtomValue(searchTypeAtom); // 진료과 필터 상태
 
-  // 근처 병원 검색 API 호출
+  // 병원 검색 API 호출 (초기 검색 호출은 현재 위치 기준으로 근처 병원 검색)
+  // 진료과나 종별코드명을 검색 입력 시에도 호출
   const {
     isLoading,
     error,
     data: nearbyPlaces,
   } = useSWR(
-    ["/hospitals/search", department],
-    ([url, dept]) => fetchNearbySearch(url, currLocation, 20, dept),
+    ["/hospitals/search", department, type],
+    ([url, dept, type]) => fetchNearbySearch(url, currLocation, 20, dept, type),
     {
       dedupingInterval: 1000 * 60 * 60, // 1시간
     }
@@ -44,6 +49,10 @@ function SearchPage() {
       )}
 
       {error && <div>Error!!</div>}
+
+      {nearbyPlaces && nearbyPlaces.length === 0 && (
+        <div>검색 결과가 없습니다.</div>
+      )}
 
       {/* 검색결과 렌더링 */}
       <SearchList

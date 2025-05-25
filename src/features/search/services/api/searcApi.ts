@@ -7,6 +7,7 @@ import {
 import {
   NearbyPlacesResponse,
   SearchDetailResponse,
+  SearchParamType,
 } from "../../types/search.types";
 
 // 근처 병원 검색
@@ -14,7 +15,8 @@ export const fetchNearbySearch = async (
   url: string,
   currLocation: LatLng,
   size = 20,
-  department?: AllDepartments | null
+  department?: AllDepartments | null,
+  type?: SearchParamType | null
 ): Promise<NearbyPlacesResponse[]> => {
   const res = await apiRequest({
     url,
@@ -23,6 +25,7 @@ export const fetchNearbySearch = async (
       lng: currLocation.longitude!.toString(),
       size: size.toString(),
       ...(department ? { department } : {}),
+      ...(type ? { type } : {}),
     },
   });
 

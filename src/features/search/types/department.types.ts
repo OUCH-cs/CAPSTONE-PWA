@@ -27,6 +27,7 @@ interface DepartmentResponse {
 export type {
   KRDepartment,
   ENDepartment,
+  DepartmentNameByLang,
   DepartmentResponse,
   LangDepartmentMap,
   AllDepartments,

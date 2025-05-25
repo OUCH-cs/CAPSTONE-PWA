@@ -7,7 +7,7 @@ import { NearbyPlacesResponse } from "../types/search.types";
 import CategoryTag from "@/entities/search/ui/CategoryTag";
 import { useLocation } from "react-router-dom";
 import { LatLng } from "@/shared/types/common";
-import UnlikeIcon from "@/shared/assets/search/unlike.svg?react";
+import FavoriteIcon from "@/shared/assets/search/favorite.svg?react";
 import { useState } from "react";
 
 function SearchPreviewCard({
@@ -33,9 +33,11 @@ function SearchPreviewCard({
 
   return (
     <Container $isSearchPage={isSearchPage}>
-      <LikeActionButton $isLiked={isLiked} onClick={handleClickLike}>
-        <UnlikeIcon />
-      </LikeActionButton>
+      {isSearchPage && (
+        <LikeActionButton $isLiked={isLiked} onClick={handleClickLike}>
+          <FavoriteIcon width={20} height={20} strokeWidth={1} />
+        </LikeActionButton>
+      )}
 
       <OperatingHours />
       <Title>{place.name}</Title>
@@ -79,8 +81,6 @@ const LikeActionButton = styled.button<{ $isLiked: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px
-  height: 30px;
   fill: ${({ $isLiked }) => ($isLiked ? "#FF3332" : "none")};
   stroke: ${({ $isLiked }) => ($isLiked ? "#FF3332" : theme.colors.gray_7)};
   background-color: transparent;

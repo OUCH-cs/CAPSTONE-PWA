@@ -1,4 +1,5 @@
 type Sort = "Recommended" | "Distance";
+type SearchParamType = "병원" | "약국";
 
 interface PlacesResponseBase {
   ykiho: string;
@@ -23,4 +24,9 @@ interface SearchDetailResponse extends PlacesResponseBase {
   }[];
 }
 
-export type { Sort, NearbyPlacesResponse, SearchDetailResponse };
+export type {
+  Sort,
+  SearchParamType,
+  NearbyPlacesResponse,
+  SearchDetailResponse,
+};

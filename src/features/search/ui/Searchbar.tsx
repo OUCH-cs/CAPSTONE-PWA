@@ -2,18 +2,20 @@ import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
 import SearchIcon from "@/shared/assets/search/search.svg?react";
 import DepartmentFilterDropdown from "./dropdown/DepartmentFilterDropdown";
+import { useSearch } from "../services/hooks/useSearch";
 
 function Searchbar() {
+  const { searchQuery, setSearchQuery, handleSubmit } = useSearch();
+
   return (
     <>
       <Container>
-        {/* <InputFormWrapper onSubmit={handleSubmit}> */}
-        <InputFormWrapper>
+        <InputFormWrapper onSubmit={handleSubmit}>
           <Input
             type="text"
-            // value={textQuery}
+            value={searchQuery}
             placeholder="Search for hospital and pharmacies"
-            // onChange={handleChange}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
 
           <IconWrapper type="submit">
