@@ -13,6 +13,7 @@ import {
   MapPage,
   GuidePage,
   TranslateFinishPage,
+  RecommendPage,
 } from "@/pages";
 
 import MedicalRecordList from "@/pages/records/medicalrecord-list";
@@ -42,6 +43,7 @@ export default function AppRoutes() {
 
         {/* 자가진단 페이지 */}
         <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
+        <Route path="/recommend" element={<RecommendPage/>} />
 
         <Route path="guide" element={<GuidePage />} />
 
