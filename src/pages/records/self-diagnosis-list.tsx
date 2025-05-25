@@ -108,11 +108,12 @@ export default function DiagnosisList() {
       )}
       {/* 자가진단 데이터 없을때 New버튼 안나오게 */}
       {diagnosisList.length > 0 && (
-  <FabButton onClick={() => navigate("/self-diagnosis")}>
-    <AddIcon style={{ marginRight: "6px", width: "20px", height: "20px" }} />
-    New
-  </FabButton>
+    <FabButton onClick={() => navigate("/self-diagnosis")}>
+      <AddIcon style={{ marginRight: "6px", width: "20px", height: "20px" }} />
+      New
+    </FabButton>
 )}
+
 
       {selectedDeleteId !== null && (
         <Modal isOpen={true} toggle={() => setSelectedDeleteId(null)}>
@@ -136,8 +137,10 @@ const Container = styled.div`
   background-color: #f5f9fc;
   position: relative;
   padding-top: 28px;
+  padding-bottom: 80px;
   margin-left: 16px;
   margin-right: 16px;
+  height:92vh;
 `;
 
 const Header = styled.div`
@@ -202,9 +205,10 @@ const ListText = styled.span`
 
 const FabButton = styled.button`
   display: flex;
-  position: absolute;
-  margin-top:350px;
-  right: 24px;
+  position:absolute;
+  bottom:0;
+  right:16px;
+  align-items: center;
   background-color: #0097a7;
   border-radius: 24px;
   padding: 12px 16px;
@@ -216,6 +220,7 @@ const FabButton = styled.button`
   cursor: pointer;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
 `;
+
 
 const ErrorText = styled.p`
   color: red;
