@@ -37,7 +37,7 @@ const SymptomsList = () => {
 
 export default SymptomsList;
 const SymptomsContaniner = styled.div`
-  margin-bottom: 8rem;
+  margin-bottom: 4rem;
 
 `
 const SymptomList = styled.div`
