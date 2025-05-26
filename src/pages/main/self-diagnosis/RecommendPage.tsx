@@ -87,7 +87,7 @@ function RecommendPage() {
         </>
       )}
       <IconContainer>
-        <img src={LocationImg} alt="location-image" />
+        <img src={LocationImg} alt="location-image" width="180" height="180"/>
       </IconContainer>
       <ButtonGroup>
         <FindButton onClick={handleResetAndSearch}>

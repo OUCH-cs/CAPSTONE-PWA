@@ -1,13 +1,10 @@
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
-import { chunkArray } from "../lib/chunkArray";
 import { useSystemsList } from "../lib/useSystemList";
-import { ITEMS_PER_ROW } from "@/shared/mock";
 import Skeleton from "@/shared/components/skeleton/Skeleton";
 
 const SymptomsList = () => {
   const { selectedSystem, allSystems, toggleSystem, isLoading } = useSystemsList();
-  const groupedSymptoms = chunkArray(allSystems, ITEMS_PER_ROW);
 
   return (
     <SymptomsContaniner>
@@ -19,9 +16,8 @@ const SymptomsList = () => {
         </SkeletonList>
       )}
       {!isLoading&&
-        groupedSymptoms.map((group, index) => (
-          <SymptomList key={`group-${index}`}>
-            {group.map((item) => (
+          <SymptomList key={`group`}>
+            {allSystems.map((item) => (
               <SymptomButton
                 type="button"
                 key={item}
@@ -34,7 +30,6 @@ const SymptomsList = () => {
               </SymptomButton>
             ))}
           </SymptomList>
-        ))
       }
     </SymptomsContaniner>
   );
@@ -42,13 +37,13 @@ const SymptomsList = () => {
 
 export default SymptomsList;
 const SymptomsContaniner = styled.div`
-  margin-bottom: 8rem;
+  margin-bottom: 4rem;
 
 `
 const SymptomList = styled.div`
   display: flex;
-  gap: 0.29rem;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  gap:5px;
   margin-top: 1.14rem;
   width: 100%;
   justify-content: flex-start;
@@ -60,8 +55,9 @@ const SymptomList = styled.div`
 
 const SymptomButton = styled.button<{ selected: boolean }>`
   padding: 0.71rem 1.14rem;
+  margin-bottom:5px;
   height: 3.5rem;
-  border-radius: 400px;
+  border-radius: 8px;
   border: 1px solid
     ${(props) =>
       props.selected ? theme.colors.primary : theme.colors.white_e5};
