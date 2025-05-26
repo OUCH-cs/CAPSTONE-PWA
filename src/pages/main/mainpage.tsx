@@ -44,11 +44,12 @@ function MainPage() { ;
       .then((code) => setLanguageCode(code))
       .catch(() => setLanguageCode("en"));
   }, [languageCode, setLanguageCode]);
+  console.log(languageCode)
 
   return (
     <Container>
       <MainHeader />
-      <button onClick={() => changeLanguage('ko-KR')}>한국어</button>
+      <button onClick={() => {changeLanguage('ko-KR') ; setLanguageCode("ko")}}>한국어</button>
       <button onClick={() => changeLanguage('en-US')}>English</button>
       <button onClick={() => changeLanguage('zh-CN')}>중국어</button>
 
