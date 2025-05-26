@@ -38,6 +38,7 @@ export default function DiagnosisList() {
 
   const fetchDiagnosisData = async () => {
   try {
+    setLoading(true);
     const res = await getDiagnosis();
     if (res.data) {
       setDiagnosisList(res.data);
@@ -46,21 +47,9 @@ export default function DiagnosisList() {
       throw new Error("응답 데이터가 없습니다.");
     }
   } catch (error: any) {
-    if (error.response) {
-      if (error.response.status === 401) {
-        // 토큰 만료 시 처리
-        alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
-        navigate("/sign-up");
-      } else {
-        setError(
-          `서버 오류: ${error.response.status} - ${
-            error.response.data.message || "진단기록을 불러오는 데 실패했습니다."
-          }`
-        );
-      }
-    } else {
-      setError("네트워크 오류 또는 서버와 연결할 수 없습니다.");
-    }
+    // 어떤 에러든 로그인 페이지로 이동
+    alert("로그인이 만료되었거나 오류가 발생했습니다. 다시 로그인해주세요.");
+    navigate("/sign-in");
   } finally {
     setLoading(false);
   }

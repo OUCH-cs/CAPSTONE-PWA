@@ -11,23 +11,21 @@ export default function HealthStatusData() {
 
   // 데이터 fetch 함수
   const fetchHealthStatusData = async () => {
-    try {
-      setLoading(true);
-      const data = await getHealthStatus();
-      setHealthStatusData(data.data);
-      setError(null);
-    } catch (error: any) {
-      // 토큰 만료 혹은 인증 오류 처리 (401)
-      if (error.response?.status === 401) {
-        alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
-        navigate("/sign-in");
-        return;
-      }
-      setError("건강기록을 불러오는 데 실패했습니다.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    setLoading(true);
+    const data = await getHealthStatus();
+    setHealthStatusData(data.data);
+    setError(null);
+  } catch (error: any) {
+    // 어떤 에러든 로그인 페이지로 이동
+    alert("로그인이 만료되었거나 오류가 발생했습니다. 다시 로그인해주세요.");
+    navigate("/sign-in");
+    return;
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     fetchHealthStatusData();  // 컴포넌트가 마운트될 때 데이터 불러오기
