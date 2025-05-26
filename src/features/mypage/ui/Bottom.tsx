@@ -1,24 +1,26 @@
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
+import { useTranslation } from "react-i18next";
 
 
 const Bottom = ({ setIsAuth }: { setIsAuth: (value: boolean) => void }) => {
+  const {t} = useTranslation();
   return (
     <Header>
       <Section>
-        <TitleText>Notice</TitleText>
+        <TitleText>{t("Notice")}</TitleText>
         <StyledArrowIcon width="20px" height="20px" />
       </Section>
       <Section>
-        <TitleText>Feedback</TitleText>
+        <TitleText>{t("Feedback")}</TitleText>
         <StyledArrowIcon width="20px" height="20px" />
       </Section>
       <Section>
-        <TitleText>Customer Service</TitleText>
+        <TitleText>{t("Customer Service")}</TitleText>
         <StyledArrowIcon width="20px" height="20px" />
       </Section>
       <Section>
-        <LogoutButton onClick={() => setIsAuth(false)}>Log out</LogoutButton>
+        <LogoutButton onClick={() => setIsAuth(false)}>{t("Log out")}</LogoutButton>
       </Section>
     </Header>
   );

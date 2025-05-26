@@ -1,10 +1,12 @@
 import { Button } from "@/shared/components/button/Button";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 export default function TranslateStarter({ onStart }: { onStart: () => void }) {
+  const {t} = useTranslation();
   return (
     <Container>
-      <Title>"Would you like to start interpretation?"</Title>
+      <Title>{t("Would you like to start interpretation?")}</Title>
       <Button width={112} height={52} onClick={onStart}>
         Start
       </Button>

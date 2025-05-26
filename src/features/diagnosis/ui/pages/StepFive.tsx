@@ -3,8 +3,10 @@ import PainLevelBar from "../PainLevelBar";
 import { StepProps } from "../../diagnosis.type";
 import { useConditionStep } from '../../lib/useConditionStep';
 import { StepConditions } from './StepConditions';
+import { useTranslation } from "react-i18next";
 
 const StepFive = ({ onNext, onPrev }: StepProps) => {
+  const {t} = useTranslation()
   const {
     showConditions,
     conditionData,
@@ -30,7 +32,7 @@ const StepFive = ({ onNext, onPrev }: StepProps) => {
   
   return (
     <S.Container>
-      <S.Question>How severe is the pain?</S.Question>
+      <S.Question>{t("How severe is the pain?")}</S.Question>
       <PainLevelBar />
           <S.ButtonContainer>
             <S.NavigateButton

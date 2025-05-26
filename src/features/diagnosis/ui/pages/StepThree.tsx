@@ -5,21 +5,22 @@ import { Accordion } from "@/shared/components/accordion";
 import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import { StepProps } from "../../diagnosis.type";
 import { useSymptomsList } from '../../lib/useSymptomsList';
-
+import { useTranslation } from "react-i18next";
 
 
 const StepThree = ({ onNext, onPrev }: StepProps) => {
+  const {t} = useTranslation()
   const { selectedSymptom, allSymptoms, toggleSymptom } = useSymptomsList()
 
   return (
     <S.Container>
-      <S.Question>What symptom are you experiencing?</S.Question>
+      <S.Question>{t("What symptom are you experiencing?")}</S.Question>
       <AccordionContaniner>
         <Accordion>
           {/* 아코디언 헤더 */}
           <Accordion.Header>
             <AccordionHeaderWrapper selected={!selectedSymptom.length}>
-              {selectedSymptom?.length ? selectedSymptom: "symptoms"}
+              {selectedSymptom?.length ? selectedSymptom: t("symptoms")}
               {/* 아코디언 아이콘 컨테이너 */}
               <Accordion.Trigger>
                 <ArrowIcon stroke="#000"/>

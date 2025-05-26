@@ -15,8 +15,10 @@ import LoadingOverlay from "@/shared/components/overlay/LoadingOverlay";
 import LocationImg from "@/shared/assets/common/location.png"
 import { Button } from "@/shared/components/button/Button";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function RecommendPage() {
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const [symptom, setSymptom] = useAtom(selectedSymptomAtom);
   const [system, setSystem] = useAtom(selectedSystemAtom);
@@ -55,7 +57,7 @@ function RecommendPage() {
     <Container>
       {isLoading && <LoadingOverlay />}
       <Question>
-        {destination === "HOSPITAL" ? "Recommended Hospital" : "Identified Symptoms"}
+        {destination === "HOSPITAL" ? t("Recommended Hospital") : t("Identified Symptoms")}
       </Question>
       {destination === "HOSPITAL" ? (
         <>
@@ -77,9 +79,9 @@ function RecommendPage() {
       </IconContainer>
       <ButtonGroup>
         <FindButton onClick={handleResetAndSearch}>
-          {destination === "HOSPITAL" ? "Find Recommended Hospitals" : "Find Pharmacy"}
+          {destination === "HOSPITAL" ? t("Find Recommended Hospitals") : t("Find Pharmacy")}
         </FindButton>
-        <FinishButton onClick={handleResetAndGoHome}>Finish</FinishButton>
+        <FinishButton onClick={handleResetAndGoHome}>{t("Finish")}</FinishButton>
       </ButtonGroup>
     </Container>
   );

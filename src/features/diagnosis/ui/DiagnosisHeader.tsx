@@ -5,8 +5,10 @@ import CloseIcon from "@/shared/assets/common/closed.svg?react";
 import { useNavigate } from "react-router-dom";
 import Modal from '@/shared/components/modal/Modal';
 import useToggle from '@/shared/lib/useToggle';
+import { useTranslation } from "react-i18next";
 
 function Header() {
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const { isOpen, toggle } = useToggle();
 
@@ -21,7 +23,7 @@ function Header() {
         <BackwardIconWrapper onClick={toggle}>
           <CloseIcon width={28} height={28} />
         </BackwardIconWrapper>
-        <Title>Self-diagnosis</Title>
+        <Title>{t("Self-diagnosis")}</Title>
       </HeaderWrapper>
       <Modal isOpen={isOpen} toggle={toggle}>
         <Wrapper>

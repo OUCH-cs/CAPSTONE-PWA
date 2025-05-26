@@ -7,9 +7,10 @@ import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import { useFormContext } from "react-hook-form";
 import { StepProps } from "../../diagnosis.type";
 import { DURATION_OPTIONS, DURATION_LABELS} from "@/shared/mock";
-
+import { useTranslation } from "react-i18next";
 
 const StepFour = ({ onNext, onPrev }: StepProps) => {
+  const {t} = useTranslation()
   const { setValue, getValues } = useFormContext<{ duration: string }>();
   const [duration, setDuration] = useState(() => getValues("duration") || "");
 
@@ -21,13 +22,13 @@ const StepFour = ({ onNext, onPrev }: StepProps) => {
 
   return (
     <S.Container>
-      <S.Question>How long did the symptoms lasted?</S.Question>
+      <S.Question>{t("How long did the symptoms lasted?")}</S.Question>
       <AccordionContaniner>
         <Accordion>
           {/* 아코디언 헤더 */}
           <Accordion.Header>
             <AccordionHeaderWrapper selected={!duration.length}>
-              {duration.length ? DURATION_LABELS[duration] : "Duration of symptoms"}
+              {duration.length ? DURATION_LABELS[duration] : t("Duration of symptoms")}
               {/* 아코디언 아이콘 컨테이너 */}
               <Accordion.Trigger>
                 <ArrowIcon stroke="#000"/>

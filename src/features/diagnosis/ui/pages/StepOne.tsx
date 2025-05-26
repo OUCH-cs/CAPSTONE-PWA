@@ -8,8 +8,10 @@ import useToggle from '@/shared/lib/useToggle';
 import { useNavigate } from 'react-router-dom';
 import theme from '@/shared/styles/theme';
 import { Button } from "@/shared/components/button/Button";
+import { useTranslation } from 'react-i18next';
 
 const StepOne = ({ onNext}: StepProps) => {
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const { watch } = useFormContext<{ visitType: DestinationType }>();
   const selectedDestination = watch("visitType") ?? undefined;
@@ -22,7 +24,7 @@ const StepOne = ({ onNext}: StepProps) => {
 
   return (
     <S.Container>
-      <S.Question>Where do you want to go?</S.Question>
+      <S.Question>{t("Where do you want to go?")}</S.Question>
       <SelectDestination selectedDestination={selectedDestination} />
       <S.ButtonContainer>
         <S.NavigateButton

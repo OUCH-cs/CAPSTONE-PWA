@@ -3,23 +3,25 @@ import MedicalMain from "@/shared/assets/records/medicalMain.svg?react";
 import HealthMain from "@/shared/assets/records/healthMain.svg?react";
 import DiagnosisMain from "@/shared/assets/records/diagnosisMain.svg?react";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 
 export default function MedicalRecordDetails() {
+  const {t} = useTranslation()
     const navigate = useNavigate();
   return (
     <>
       <Container onClick={() => navigate("/records/self-diagnosis-list")}>
         <DiagnosisMain width="60px" height="60px" />
-        <SectionTitle>Self-Diagnosis</SectionTitle>
+        <SectionTitle>{t("Self-Diagnosis")}</SectionTitle>
       </Container>
         <Container onClick={() => navigate("/records/medicalrecord-list")}>
         <MedicalMain width="60px" height="60px" />
-        <SectionTitle>Medical Record</SectionTitle>
+        <SectionTitle>{t("Medical Record")}</SectionTitle>
       </Container>
       <Container onClick={() => navigate("/records/healthstatus")}>
         <HealthMain width="60px" height="60px" />
-        <SectionTitle>Health Status</SectionTitle>
+        <SectionTitle>{t("Health Status")}</SectionTitle>
       </Container>
     </>
   );

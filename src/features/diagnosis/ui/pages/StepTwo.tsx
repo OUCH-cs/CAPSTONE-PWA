@@ -1,12 +1,14 @@
 import * as S from "../common"
 import SymptomsList from "../SymptomsList";
 import { StepProps } from "../../diagnosis.type";
+import { useTranslation } from "react-i18next";
 
 const StepTwo = ({ onNext, onPrev }: StepProps) => {
+  const {t} = useTranslation()
 
   return (
     <S.Container>
-        <S.Question>Where are you feeling uncomfortable?</S.Question>
+        <S.Question>{t("Where are you feeling uncomfortable?")}</S.Question>
         <SymptomsList />
         <S.ButtonContainer>
           <S.NavigateButton

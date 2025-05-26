@@ -5,9 +5,10 @@ import { useFormContext, Controller } from "react-hook-form";
 import { DiagnosisFormData } from "../../diagnosis.type";
 import { StepSixProps} from "../../diagnosis.type";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 
 const StepSix = ({ onPrev }: StepSixProps) => {
+  const {t} = useTranslation()
   const navigate = useNavigate()
   const { control} = useFormContext<DiagnosisFormData>();
 
@@ -15,14 +16,14 @@ const StepSix = ({ onPrev }: StepSixProps) => {
   return (
     <S.Container>
       <S.Question>
-        Please write down what you would like to tell the doctor additionally
+        {t("Please write down what you would like to tell the doctor additionally")}
       </S.Question>
       <Controller
         name="additionalNote"
         control={control}
         render={({ field: { value, onChange, onBlur } }) => (
           <TextArea
-            placeholder="Please write down the relevant symptoms in detail"
+            placeholder={t("Please write down the relevant symptoms in detail")}
             value={value}
             onChange={(e) => onChange(e.target.value)}
             onBlur={onBlur}

@@ -15,11 +15,17 @@ import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import { fetchNearbySearch } from "@/features/search/services/api/searcApi";
+import { useTranslation } from "react-i18next";
 
-function MainPage() {
+function MainPage() { ;
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate();
   const [languageCode, setLanguageCode] = useAtom(languageCodeAtom); //전역으로 사용자 언어 관리
   const currLocation = fallbackLocaton; // 임시 위치 설정 하드코딩
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
 
   // 근처 병원 검색 API 호출
   const { isLoading, data } = useSWR(
@@ -42,18 +48,22 @@ function MainPage() {
   return (
     <Container>
       <MainHeader />
+      <button onClick={() => changeLanguage('ko-KR')}>한국어</button>
+      <button onClick={() => changeLanguage('en-US')}>English</button>
+      <button onClick={() => changeLanguage('zh-CN')}>중국어</button>
+
       <HomeDiagnosisCard />
       <ButtonContainer>
         <HomeActionButton
           icon={<HomeCamera width={29} height={29} />}
-          label="Text translation"
+          label={t("Text translation")}
         />
         <HomeActionButton
           onClick={() => {
             navigate("/guide");
           }}
           icon={<HomeGuide width={29} height={28} />}
-          label="OUCH guide"
+          label={t("OUCH guide")}
           selected
         />
       </ButtonContainer>
@@ -63,7 +73,7 @@ function MainPage() {
           <Skeleton width={185} height={21} />
         </SkeletonWrapper>
       )}
-      {data && <RecommendationTitle>Recommended Hospital</RecommendationTitle>}
+      {data && <RecommendationTitle>{t("Recommended Hospital")}</RecommendationTitle>}
 
       {isLoading && (
         <SkeletonList>

@@ -1,14 +1,16 @@
 // RecordsPage.tsx
 import MainDetail from '@/features/records/ui/MainDetail'
 import styled from '@emotion/styled';
+import { useTranslation } from 'react-i18next';
 
 function RecordsPage() {
+  const {t} = useTranslation();
 
 
 
   return (
     <Container>
-      <Title>Medical Document</Title>
+      <Title>{t("Medical Document")}</Title>
         <MainDetail />
     </Container>
   );
