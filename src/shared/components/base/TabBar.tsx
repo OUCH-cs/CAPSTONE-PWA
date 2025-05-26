@@ -26,28 +26,28 @@ function TabBar() {
       </TabItem>
       <TabItem
         to="/search"
-        $isSelected={tab === "/search"}
+        $isSelected={tab.startsWith("/search") || tab.startsWith("/map")}
         onClick={() => setTab("/search")}
       >
         <SearchIcon />
       </TabItem>
       <TabItem
         to="/translate"
-        $isSelected={tab === "/translate"}
+        $isSelected={tab.startsWith("/translate")}
         onClick={() => setTab("/translate")}
       >
         <TranslateIcon />
       </TabItem>
       <TabItem
         to="/records"
-        $isSelected={tab === "/records"}
+        $isSelected={tab.startsWith("/records")}
         onClick={() => setTab("/records")}
       >
         <RecordsIcon />
       </TabItem>
       <TabItem
         to="/mypage"
-        $isSelected={tab === "/mypage"}
+        $isSelected={tab.startsWith("/mypage")}
         onClick={() => setTab("/mypage")}
       >
         <MyPageIcon />

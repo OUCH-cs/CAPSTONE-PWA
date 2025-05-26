@@ -58,6 +58,7 @@ function RecommendPage() {
     // 검색 페이지로 이동 후 검색 필터링
     navigate("/search");
     setDepartments(response?.data.departments[0].ko);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
