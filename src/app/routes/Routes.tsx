@@ -15,7 +15,6 @@ import {
   TranslateFinishPage,
   RecommendPage,
 } from "@/pages";
-
 import MedicalRecordList from "@/pages/records/medicalrecord-list";
 import MedicalRecord from "@/pages/records/medicalrecord";
 import MedicalRecordEdit from "@/pages/records/medicalrecord-edit";
@@ -24,8 +23,7 @@ import MedicalRecordAdd from "@/pages/records/medicalrecord-add";
 import HealthStatusEdit from "@/pages/records/healthstatus-edit";
 import DiagnosisList from "@/pages/records/self-diagnosis-list";
 import Diagnosis from "@/pages/records/self-diagnosis";
-import { AuthGuard, RedirectIfAuth } from "@/app/providers";
-import TestPage from "@/pages/test/test";
+import { RedirectIfAuth, TabBarLayout } from "@/app/providers";
 import SearchDetailPage from "@/pages/search/search-detail";
 import EditProfile from "@/pages/mypage/edit-profile";
 
@@ -39,47 +37,41 @@ export default function AppRoutes() {
         <Route path="/sign-in" element={<SignInPage />} />
       </Route>
 
-      <Route element={<AuthGuard />}>
+      <Route element={<TabBarLayout />}>
         {/* 메인 페이지 */}
         <Route path="/" element={<MainPage />} />
 
-        {/* 자가진단 페이지 */}
-        <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
-        <Route path="/recommend" element={<RecommendPage/>} />
-
-        <Route path="guide" element={<GuidePage />} />
-
         {/* 검색 페이지 */}
         <Route path="/search" element={<SearchPage />} />
-
-
-      {/* 기록 페이지 */}
-      <Route path="/records" element={<RecordsPage />} />
-      <Route path="/records/medicalrecord-list" element={<MedicalRecordList />} />
-      <Route path="/records/medicalrecord/:id" element={<MedicalRecord />} />
-      <Route path="/records/medicalrecord-edit/:id" element={<MedicalRecordEdit />} />
-      <Route path="/records/healthstatus" element={<HealthStatus />} />
-      <Route path="/records/medicalrecord-add" element={<MedicalRecordAdd />} />
-      <Route path="/records/healthstatus-edit" element={<HealthStatusEdit />} />
-      <Route path="/records/self-diagnosis-list" element={<DiagnosisList />} />
-      <Route path="/records/self-diagnosis/:id" element={<Diagnosis />} />
-
         <Route path="/search/:id" element={<SearchDetailPage />} />
 
-        {/* 지도 페이지 */}
-        <Route path="/map" element={<MapPage />} />
-
+        {/* 기록 페이지 */}
         <Route path="/records" element={<RecordsPage />} />
         <Route
           path="/records/medicalrecord-list"
           element={<MedicalRecordList />}
         />
-        <Route path="/records/medicalrecord" element={<MedicalRecord />} />
+        <Route path="/records/medicalrecord/:id" element={<MedicalRecord />} />
+        <Route
+          path="/records/medicalrecord-edit/:id"
+          element={<MedicalRecordEdit />}
+        />
         <Route path="/records/healthstatus" element={<HealthStatus />} />
         <Route
           path="/records/medicalrecord-add"
           element={<MedicalRecordAdd />}
         />
+        <Route
+          path="/records/healthstatus-edit"
+          element={<HealthStatusEdit />}
+        />
+        <Route
+          path="/records/self-diagnosis-list"
+          element={<DiagnosisList />}
+        />
+
+        {/* 지도 페이지 */}
+        <Route path="/map" element={<MapPage />} />
 
         {/* 통역 페이지 */}
         <Route path="/translate" element={<TranslatePage />} />
@@ -88,10 +80,14 @@ export default function AppRoutes() {
         {/* 마이 페이지 */}
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/edit-profile" element={<EditProfile />} />
-
-        {/* 테스트 페이지 */}
-        <Route path="/test" element={<TestPage />} />
       </Route>
+
+      {/* 자가진단 페이지 */}
+      <Route path="/self-diagnosis" element={<SelfDiagnosisPage />} />
+      <Route path="/recommend" element={<RecommendPage />} />
+      <Route path="/records/self-diagnosis/:id" element={<Diagnosis />} />
+
+      <Route path="guide" element={<GuidePage />} />
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
