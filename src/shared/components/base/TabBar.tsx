@@ -6,19 +6,15 @@ import SearchIcon from "@/shared/assets/common/search-tab.svg?react";
 import TranslateIcon from "@/shared/assets/common/translate-tab.svg?react";
 import RecordsIcon from "@/shared/assets/common/records-tab.svg?react";
 import MyPageIcon from "@/shared/assets/common/mypage-tab.svg?react";
-import { useAtom } from "jotai";
-import { isAuthAtom } from "@/features/sign-in/services/atoms";
 
 function TabBar() {
   const location = useLocation();
   const [tab, setTab] = useState<string>(location.pathname);
-  const [isAuth] = useAtom(isAuthAtom);
 
   useEffect(() => {
     setTab(location.pathname);
   }, [location.pathname]);
 
-  if (!isAuth) return null;
   return (
     <Container>
       <TabItem to="/" $isSelected={tab === "/"} onClick={() => setTab("/")}>
