@@ -7,6 +7,8 @@ import { getDiagnosis, deleteDiagnosis } from "@/features/records/service/diagno
 import Modal from "@/shared/components/modal/Modal";
 import AddIcon from "@/shared/assets/records/diagnosis-add.svg?react";
 import NoneDiagnosis from "@/features/records/ui/NoneDiagnosis";
+import { FloatingButton } from "@/shared/components/button/FloatingButton";
+
 
 export type DiagnosisRecord = {
   diagnosisId: number;
@@ -108,11 +110,13 @@ export default function DiagnosisList() {
       )}
       {/* 자가진단 데이터 없을때 New버튼 안나오게 */}
       {diagnosisList.length > 0 && (
-    <FabButton onClick={() => navigate("/self-diagnosis")}>
-      <AddIcon style={{ marginRight: "6px", width: "20px", height: "20px" }} />
-      New
-    </FabButton>
-)}
+        
+     <FloatingButton
+  text="New"
+  icon={<AddIcon width = "20px" height ="20px" />}
+  to="/self-diagnosis"
+/>
+      )}
 
 
       {selectedDeleteId !== null && (
@@ -134,13 +138,15 @@ export default function DiagnosisList() {
 
 
 const Container = styled.div`
+  flex: 1;
   background-color: #f5f9fc;
+  padding-bottom: 40px;
   position: relative;
   padding-top: 28px;
-  padding-bottom: 80px;
   margin-left: 16px;
   margin-right: 16px;
-  height:92vh;
+  min-height: 90vh; /* 고정 height 삭제하고 최소 높이로 변경 */
+  overflow-y: auto; /* ✅ 세로 스크롤 추가 */
 `;
 
 const Header = styled.div`
@@ -203,23 +209,6 @@ const ListText = styled.span`
   color: #000;
 `;
 
-const FabButton = styled.button`
-  display: flex;
-  position:absolute;
-  bottom:0;
-  right:16px;
-  align-items: center;
-  background-color: #0097a7;
-  border-radius: 24px;
-  padding: 12px 16px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: Pretendard;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
-`;
 
 
 const ErrorText = styled.p`

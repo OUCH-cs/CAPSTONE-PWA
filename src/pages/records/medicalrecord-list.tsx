@@ -6,6 +6,8 @@ import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
 import NoneRecord from "@/features/records/ui/NoneRecord";
 import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
+import { FloatingButton } from "@/shared/components/button/FloatingButton";
+import PlusIcon from "@/shared/assets/records/plus.svg?react";
 
 type HospitalRecord = {
   id: number;
@@ -96,7 +98,11 @@ export default function MedicalRecordList() {
         ))
       )}
       {hospitalList.length > 0 && (
-      <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>  
+        <FloatingButton
+  text="New"
+  icon={<PlusIcon width = "12px" height ="12px"/>}
+  to="/records/medicalrecord-add"
+/>
       )}
 
       {/* Modal 적용 부분 */}
@@ -118,13 +124,15 @@ export default function MedicalRecordList() {
 }
 
 const Container = styled.div`
+flex: 1;
   background-color: #f5f9fc;
   padding-bottom: 40px;
   position: relative;
   padding-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
-  height:92vh;
+  min-height: 100vh; /* 고정 height 삭제하고 최소 높이로 변경 */
+  overflow-y: auto; /* ✅ 세로 스크롤 추가 */
 `;
 
 const Header = styled.div`
@@ -187,22 +195,6 @@ const ListText = styled.span`
   color: #000;
 `;
 
-const FabButton = styled.button`
-  position: absolute;
-  margin-top: 450px;
-  bottom:0;
-  right: 16px;
-  background-color: #0097a7;
-  border-radius: 24px;
-  padding: 12px 16px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: Pretendard;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
-`;
 
 const ErrorText = styled.p`
   color: red;
