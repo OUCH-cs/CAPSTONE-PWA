@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { getHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi"; 
 import { formatMeasurement } from "@/features/records/lib/BloodForm";
@@ -6,15 +7,23 @@ export default function HealthStatusData() {
   const [healthStatusData, setHealthStatusData] = useState<HealthStatus | null>(null);  // 상태 저장
   const [loading, setLoading] = useState<boolean>(true);  // 로딩 상태
   const [error, setError] = useState<string | null>(null);  // 에러 상태
+   const navigate = useNavigate();
 
   // 데이터 fetch 함수
   const fetchHealthStatusData = async () => {
     try {
       setLoading(true);
-      const data = await getHealthStatus(); 
-      setHealthStatusData(data.data);  // 데이터 상태 업데이트
+      const data = await getHealthStatus();
+      setHealthStatusData(data.data);
+      setError(null);
     } catch (error: any) {
-      setError("건강기록을 불러오는 데 실패했습니다."); 
+      // 토큰 만료 혹은 인증 오류 처리 (401)
+      if (error.response?.status === 401) {
+        alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
+        navigate("/sign-in");
+        return;
+      }
+      setError("건강기록을 불러오는 데 실패했습니다.");
     } finally {
       setLoading(false);
     }
