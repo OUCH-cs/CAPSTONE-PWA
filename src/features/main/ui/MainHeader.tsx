@@ -10,7 +10,7 @@ const MainHeader = () => {
   const { i18n } = useTranslation();
   const [languageCode, setLanguageCode] = useAtom(languageCodeAtom);
 
-  const handleLangChange = (e) => {
+  const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value;
     setLanguageCode(lang);
 
