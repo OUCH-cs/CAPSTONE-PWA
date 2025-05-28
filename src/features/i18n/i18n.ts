@@ -5,7 +5,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 
 import en from "./locales/en-US/translation.json"; // locales 폴더내에 생성
 import ko from "./locales/ko-KR/translation.json"; // locales 폴더내에 생성
-import zh from "./locales/zh-CN/translation.json"
+import zh from "./locales/zh-CN/translation.json";
 
 const resources = {
   "ko-KR": { translation: ko },
@@ -21,7 +21,7 @@ i18n
   .init({
     resources,
     fallbackLng: "en-US",
-    debug: true,
+    debug: false,
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

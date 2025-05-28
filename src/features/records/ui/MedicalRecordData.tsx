@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { getMedicalRecordById } from "@/features/records/service/medicalDataApi";
+import { useTranslation } from "react-i18next";
 
 interface HospitalRecord {
   id: string;
@@ -16,6 +17,7 @@ interface MedicalRecordDataProps {
 }
 
 const MedicalRecordData: React.FC<MedicalRecordDataProps> = ({ id }) => {
+  const {t} = useTranslation();
   const [hospitalRecord, setHospitalRecord] = useState<HospitalRecord | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,27 +45,27 @@ const MedicalRecordData: React.FC<MedicalRecordDataProps> = ({ id }) => {
       {hospitalRecord ? (
         <>
           <DataBlock>
-            <Label>Date of visit</Label>
+            <Label>{t("Date of visit")}</Label>
             <ListBox><ListText>{hospitalRecord.visitDate}</ListText></ListBox>
           </DataBlock>
 
           <DataBlock>
-            <Label>Visiting Hospital</Label>
+            <Label>{t("Visiting Hospital")}</Label>
             <ListBox><ListText>{hospitalRecord.visitingHospital}</ListText></ListBox>
           </DataBlock>
 
           <DataBlock>
-            <Label>Medical Subjects</Label>
+            <Label>{t("Medical Subjects")}</Label>
             <ListBox><ListText>{hospitalRecord.medicalSubject}</ListText></ListBox>
           </DataBlock>
 
           <DataBlock>
-            <Label>Symptoms</Label>
+            <Label>{t("Symptoms")}</Label>
             <ListBox><ListText>{hospitalRecord.symptoms}</ListText></ListBox>
           </DataBlock>
 
           <DataBlock>
-            <Label>Treatment Summary</Label>
+            <Label>{t("Treatment Summary")}</Label>
             <ListBox><ListText>{hospitalRecord.treatmentSummary}</ListText></ListBox>
           </DataBlock>
         </>

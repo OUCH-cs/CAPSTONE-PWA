@@ -1,7 +1,9 @@
 {
     "Self-diagnosis": "Self-diagnosis",
     "Hospital": "Hospital",
+    "HOSPITAL": "Hospital",
     "Pharmacy": "Pharmacy",
+    "PHARMACY": "Pharmacy",
     "How severe is the pain?": "How severe is the pain?",
     "How long did the symptoms lasted?": "How long did the symptoms last?",
     "Duration of symptoms": "Duration of symptoms",
@@ -21,6 +23,9 @@
     "Health Status": "Health Status",
     "Are you sure you want to finish the interpretation?": "Are you sure you want to finish the interpretation?",
     "Would you like to start interpretation?": "Would you like to start interpretation?",
+    "Please leave a review.": "Please leave a review.",
+    "Please write a hospital.": "Please write a hospital.",
+    "Your consultation is complete!": "Your consultation is complete!",
     "whatToExpect": "What to Expect",
     "keyPhrases": "Key Phrases",
     "actionGuide": "Action Guide",
@@ -50,5 +55,20 @@
     "Search for hospital and pharmacies": "Search for hospital and pharmacies",
     "Medical Department": "Medical Department",
     "Recommended": "Recommended",
-    "Distance": "Distance"
+    "Distance": "Distance",
+    "Dieases": "Dieases",
+    "Allergy": "Allergy",
+    "Blood Pressure": "Blood Pressure",
+    "BloodSugar": "Blood Sugar",
+    "Blood Sugar": "Blood Sugar",
+    "MedicineHistory": "Medication History",
+    "History": "Medication History",
+    "Date of visit": "Date of visit",
+    "Visiting Hospital / Pharmacy": "Visiting Hospital / Pharmacy",
+    "Symptoms": "Symptoms",
+    "Severity of SymptomsList(0~10)": "Severity of SymptomsList(0~10)",
+    "Additional Notes": "Additional Notes",
+    "Visiting Hospital": "Visiting Hospital",
+    "Treatment Summary": "Treatment Summary"
+    
   }

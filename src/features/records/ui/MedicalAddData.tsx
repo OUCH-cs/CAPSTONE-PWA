@@ -2,12 +2,14 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import DateSelection from "./DateSelection";
 import { initialMedicalFormData } from "../consts/medicalConstants";
+import { useTranslation } from "react-i18next";
 
 interface MedicalAddDataProps {
   onDataChange: (data: any) => void; 
 }
 
 export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
+  const {t} = useTranslation();
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
   const [dateModalOpen, setDateModalOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -36,7 +38,7 @@ export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
 
         return (
           <div key={index}>
-            <Label>{item.title}</Label>
+            <Label>{t(item.title)}</Label>
 
             {item.title === "Date of Visit" ? (
               <List

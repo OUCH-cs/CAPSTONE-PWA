@@ -1,14 +1,45 @@
 import styled from "@emotion/styled";
+import theme from "@/shared/styles/theme";
 import HomeLocation from "@/shared/assets/home/HomeLocation.svg?react";
+import { useTranslation } from "react-i18next";
+import { useAtom } from "jotai";
+import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
+
 
 const MainHeader = () => {
+  const { i18n } = useTranslation();
+  const [languageCode, setLanguageCode] = useAtom(languageCodeAtom);
+
+  const handleLangChange = (e) => {
+    const lang = e.target.value;
+    setLanguageCode(lang);
+
+    switch (lang) {
+      case "ko":
+        i18n.changeLanguage("ko-KR");
+        break;
+      case "en":
+        i18n.changeLanguage("en-US");
+        break;
+      case "zh":
+        i18n.changeLanguage("zh-CN");
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <Header>
       <Location>
         <HomeLocation width={"16px"} height={"21px"} />
         <LocationText>Banseok-dong</LocationText>
       </Location>
-      <LangText>ENG</LangText>
+      <LangSelect value={languageCode} onChange={handleLangChange}>
+        <option value="ko">KO</option>
+        <option value="en">ENG</option>
+        <option value="zh">中文</option>
+      </LangSelect>
     </Header>
   );
 };
@@ -21,7 +52,7 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.3rem;
 `;
 
 const Location = styled.div`
@@ -34,6 +65,8 @@ const LocationText = styled.p`
   margin-left: 0.5rem;
 `;
 
-const LangText = styled.p`
-  font-size: 1.4rem;
+const LangSelect = styled.select`
+  font-size: 1.3rem;
+  background-color: ${theme.colors.background};
+  cursor: pointer;
 `;

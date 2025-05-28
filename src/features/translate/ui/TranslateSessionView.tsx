@@ -5,6 +5,7 @@ import { Button } from "@/shared/components/button/Button";
 import useToggle from "@/shared/lib/useToggle";
 import styled from "@emotion/styled";
 import GuideFunnelModal from "./guide/GuideFunnelModal";
+import { useTranslation } from "react-i18next";
 
 interface TranslateSessionViewProps {
   isMuted: boolean;
@@ -17,6 +18,7 @@ export default function TranslateSessionView({
   toggleMuted,
   toggle,
 }: TranslateSessionViewProps) {
+  const {t} = useTranslation();
   const { isOpen: isFunnelModalOpen, toggle: isFunnelModalToggle } =
     useToggle(); // 통역 가이드 퍼털 모달 토글 훅
 
@@ -38,7 +40,7 @@ export default function TranslateSessionView({
 
         {/* 종료 버튼 */}
         <Button width={112} height={52} onClick={toggle}>
-          Finish
+          {t("Finish")}
         </Button>
       </Container>
 

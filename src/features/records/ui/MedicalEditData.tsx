@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { HospitalRecord } from "@/features/records/service/medicalDataApi";
 import DateSelection from "./DateSelection";
 import Modal from "@/shared/components/modal/Modal";
+import { useTranslation } from "react-i18next";
 
 interface MedicalEditDataProps {
   initialData: HospitalRecord;
@@ -10,6 +11,7 @@ interface MedicalEditDataProps {
 }
 
 const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }) => {
+  const {t} = useTranslation();
   const [formData, setFormData] = useState<HospitalRecord>(initialData);
   const [isDateSelectionOpen, setDateSelectionOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -56,7 +58,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
   return (
     <Container>
       <DataBlock>
-        <Label>Date of Visit</Label>
+        <Label>{t("Date of Visit")}</Label>
         <ListBox
           isSelected={selectedIndex === 0}
           onClick={() => setDateSelectionOpen(true)}
@@ -73,7 +75,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       </DataBlock>
 
       <DataBlock>
-        <Label>Visiting Hospital</Label>
+        <Label>{t("Visiting Hospital")}</Label>
         <ListBox isSelected={selectedIndex === 1}>
           <Input
             value={formData.visitingHospital}
@@ -84,7 +86,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       </DataBlock>
 
       <DataBlock>
-        <Label>Medical Subject</Label>
+        <Label>{t("Medical Subject")}</Label>
         <ListBox isSelected={selectedIndex === 2}>
           <Input
             value={formData.medicalSubject}
@@ -95,7 +97,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       </DataBlock>
 
       <DataBlock>
-        <Label>Symptoms</Label>
+        <Label>{t("Symptoms")}</Label>
         <ListBox isSelected={selectedIndex === 3}>
           <Input
             value={formData.symptoms}
@@ -106,7 +108,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       </DataBlock>
 
       <DataBlock>
-        <Label>Treatment Summary</Label>
+        <Label>{t("Treatment Summary")}</Label>
         <ListBox isSelected={selectedIndex === 4}>
           <Input
             value={formData.treatmentSummary}
