@@ -34,7 +34,7 @@ const NavigateButton = styled(Button)<{ variant?: "prev"}>`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 7rem;
+  margin-bottom: 2rem;
   ${({ variant }) =>
   variant === "prev" &&
   `

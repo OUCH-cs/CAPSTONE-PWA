@@ -6,8 +6,8 @@ const SignupSchema = z.object({
   name: z.string().min(1, { message: "Please enter your name" }),
   gender: z.enum(["MALE", "FEMALE"]),
   nationCode: z.string().min(1),
-  phoneNumber: z.string().regex(/^\d{3}-\d{4}-\d{4}$/, {
-    message: "Invalid phone number format",
+  phoneNumber: z.string().min(9, {
+    message: "Phone Number must be at least 9 characters long",
   }),
   email: z.string().email({ message: "Invalid email address" }),
   loginId: z.string().min(1, { message: "Please enter your ID" }),
@@ -15,9 +15,9 @@ const SignupSchema = z.object({
     .string()
     .min(8, {
       message:
-        "Password must be at least 8 characters long and include both letters and numbers",
+        "Password must be at least 8 characters long and include letters, numbers, and optionally special characters",
     })
-    .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
+    .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/, {
       message: "Password must include at least one letter and one number",
     }),
   nickname: z.string().min(1),

@@ -37,5 +37,5 @@ const FormContainer = styled.form`
 const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 25px;
 `;
