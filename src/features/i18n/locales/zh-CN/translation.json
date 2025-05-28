@@ -37,5 +37,18 @@
     "Purpose": "目的",
     "Log out": "退出登录",
     "Medical Document": "医疗文书",
-    "where_do_you_want_to_go": "你想去哪里？"
+    "Where do you want to go?": "你想去哪里？",
+    "duration": {
+      "LESS_THAN_1_DAY": "少于一天",
+      "ONE_TO_3_DAYS": "1到3天",
+      "MORE_THAN_3_DAYS": "超过3天",
+      "MORE_THAN_1_WEEK": "超过一周",
+      "MORE_THAN_1_MONTH": "超过一个月"
+    },
+    "mild": "轻度",
+    "severe": "重度",
+    "Search for hospital and pharmacies": "请搜索医院或药店",
+    "Medical Department": "科别",
+    "Recommended": "推荐",
+    "Distance": "距离"
   }

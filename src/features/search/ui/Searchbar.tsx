@@ -3,8 +3,10 @@ import styled from "@emotion/styled";
 import SearchIcon from "@/shared/assets/search/search.svg?react";
 import DepartmentFilterDropdown from "./dropdown/DepartmentFilterDropdown";
 import { useSearch } from "../services/hooks/useSearch";
+import { useTranslation } from "react-i18next";
 
 function Searchbar() {
+  const {t} = useTranslation()
   const { searchQuery, setSearchQuery, handleSubmit } = useSearch();
 
   return (
@@ -14,7 +16,7 @@ function Searchbar() {
           <Input
             type="text"
             value={searchQuery}
-            placeholder="Search for hospital and pharmacies"
+            placeholder= {t("Search for hospital and pharmacies")}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
 

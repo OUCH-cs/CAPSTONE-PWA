@@ -37,5 +37,18 @@
     "Purpose": "목적",
     "Log out": "로그아웃",
     "Medical Document": "의료 문서",
-    "Where do you want to go?": "어디로 가고 싶으신가요?"
+    "Where do you want to go?": "어디로 가고 싶으신가요?",
+    "duration": {
+      "LESS_THAN_1_DAY": "1일 미만",
+      "ONE_TO_3_DAYS": "1~3일",
+      "MORE_THAN_3_DAYS": "3일 초과",
+      "MORE_THAN_1_WEEK": "1주 초과",
+      "MORE_THAN_1_MONTH": "1개월 초과"
+    },
+    "mild": "경증",
+    "severe": "중증",
+    "Search for hospital and pharmacies" :"병원 또는 약국 검색해 주세요",
+    "Medical Department": "진료과",
+    "Recommended": "추천순",
+    "Distance": "거리순"
   }

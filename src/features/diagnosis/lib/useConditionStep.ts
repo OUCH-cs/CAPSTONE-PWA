@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAtom } from "jotai";
-import { selectedSystemAtom, selectedSymptomAtom, languageCodeAtom } from "../service/selfDiagnosisAtoms";
+import { selectedSystemAtom, selectedSymptomAtom } from "../service/selfDiagnosisAtoms";
+import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import { useAlgorithm } from "./diagnosis-algorithm/useAlgorithm";
 import { DiagnosisAlgorithm } from "../diagnosis.type";
 

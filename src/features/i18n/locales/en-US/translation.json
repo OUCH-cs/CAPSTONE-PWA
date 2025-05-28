@@ -37,5 +37,18 @@
     "Purpose": "Purpose",
     "Log out": "Log out",
     "Medical Document": "Medical Document",
-    "Where do you want to go?": "Where do you want to go?"
+    "Where do you want to go?": "Where do you want to go?",
+    "mild": "mild",
+    "severe": "severe",
+    "duration": {
+      "LESS_THAN_1_DAY": "Less than a day",
+      "ONE_TO_3_DAYS": "1-3 days",
+      "MORE_THAN_3_DAYS": "More than 3 days",
+      "MORE_THAN_1_WEEK": "More than a week",
+      "MORE_THAN_1_MONTH": "More than a month"
+    },
+    "Search for hospital and pharmacies": "Search for hospital and pharmacies",
+    "Medical Department": "Medical Department",
+    "Recommended": "Recommended",
+    "Distance": "Distance"
   }

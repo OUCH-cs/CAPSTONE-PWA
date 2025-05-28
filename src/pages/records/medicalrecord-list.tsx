@@ -5,6 +5,7 @@ import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
 import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
+import { useTranslation } from "react-i18next";
 
 type HospitalRecord = {
   id: number;
@@ -13,6 +14,7 @@ type HospitalRecord = {
 };
 
 export default function MedicalRecordList() {
+  const {t} =  useTranslation()
   const navigate = useNavigate();
   const [hospitalList, setHospitalList] = useState<HospitalRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -63,7 +65,7 @@ export default function MedicalRecordList() {
         <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
-        <HeaderTitle>Medical Record</HeaderTitle>
+        <HeaderTitle>{t("Medical Record")}</HeaderTitle>
       </Header>
 
       {loading ? (

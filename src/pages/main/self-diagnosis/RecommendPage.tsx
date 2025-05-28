@@ -8,9 +8,9 @@ import {
   selectedSystemAtom,
   selectedConditionAtom,
   selectedSymptomAtom,
-  languageCodeAtom,
   destinationAtom
 } from '@/features/diagnosis/service/selfDiagnosisAtoms';
+import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import LoadingOverlay from "@/shared/components/overlay/LoadingOverlay";
 import LocationImg from "@/shared/assets/common/location.png"
 import { Button } from "@/shared/components/button/Button";

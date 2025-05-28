@@ -3,7 +3,10 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
 import HealthStatusData from "@/features/records/ui/HealthStatusData"; 
+import { useTranslation } from "react-i18next";
+
 export default function HealthStatus() {
+  const {t} =  useTranslation()
   const navigate = useNavigate();
 
   const handleEditIconPress = () => {
@@ -16,7 +19,7 @@ export default function HealthStatus() {
         <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Health Status</HeaderTitle>
+        <HeaderTitle>{t("Health Status")}</HeaderTitle>
         <EditIconWrapper onClick={handleEditIconPress}>
           <EditIcon width={20} height={20} />
         </EditIconWrapper>

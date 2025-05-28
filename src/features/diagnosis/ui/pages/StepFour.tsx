@@ -46,7 +46,7 @@ const StepFour = ({ onNext, onPrev }: StepProps) => {
                     selected={duration === item}
                     onClick={() => {toogleDuration(item)}}
                     >
-                    {DURATION_LABELS[item]}
+                    {t(`duration.${item}`)}
                   </ItemWrapper>
                 </Accordion.Item>
               ))}

@@ -2,9 +2,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DiagnosisData from "@/features/records/ui/SelfDiagnosisData"
-
+import { useTranslation } from "react-i18next";
 
 export default function SelfDiagnosis() {
+  const {t} =  useTranslation()
   const navigate = useNavigate();
   const { id } = useParams(); 
 
@@ -21,7 +22,7 @@ export default function SelfDiagnosis() {
         <BackButton onClick={() => navigate("/records/self-diagnosis-list")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Self-Diagnosis</HeaderTitle>
+        <HeaderTitle>{t("Self-Diagnosis")}</HeaderTitle>
       </Header>
 
       <DiagnosisData id={id} />
