@@ -7,6 +7,10 @@ import { getDiagnosis, deleteDiagnosis } from "@/features/records/service/diagno
 import Modal from "@/shared/components/modal/Modal";
 import AddIcon from "@/shared/assets/records/diagnosis-add.svg?react";
 import NoneDiagnosis from "@/features/records/ui/NoneDiagnosis";
+import { FloatingButton } from "@/shared/components/button/FloatingButton";
+import { useSetAtom } from "jotai";
+import { isAuthAtom } from "@/features/sign-in/services/atoms";
+
 
 export type DiagnosisRecord = {
   diagnosisId: number;
@@ -29,30 +33,32 @@ export default function DiagnosisList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
-
+  const setIsAuth = useSetAtom(isAuthAtom);
   useEffect(() => {
     fetchDiagnosisData();
   }, []);
 
   const fetchDiagnosisData = async () => {
-    try {
-      const res = await getDiagnosis();
-      if (res.data) {
-        setDiagnosisList(res.data);
-        setError(null);
-      } else {
-        throw new Error("응답 데이터가 없습니다.");
-      }
-    } catch (error: any) {
-      if (error.response) {
-        setError(`서버 오류: ${error.response.status} - ${error.response.data.message || "진단기록을 불러오는 데 실패했습니다."}`);
-      } else {
-        setError("네트워크 오류 또는 서버와 연결할 수 없습니다.");
-      }
-    } finally {
-      setLoading(false);
+  try {
+    setLoading(true);
+    const res = await getDiagnosis();
+    if (res.data) {
+      setDiagnosisList(res.data);
+      setError(null);
+    } else {
+      throw new Error("응답 데이터가 없습니다.");
     }
-  };
+  } catch (error: any) {
+    // 어떤 에러든 로그인 페이지로 이동
+    localStorage.removeItem("accessToken");
+    setIsAuth(false);
+    alert("로그인이 만료되었거나 오류가 발생했습니다. 다시 로그인해주세요.");
+    navigate("/sign-in");
+    return;
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleConfirmDelete = async () => {
     if (selectedDeleteId !== null) {
@@ -108,11 +114,14 @@ export default function DiagnosisList() {
       )}
       {/* 자가진단 데이터 없을때 New버튼 안나오게 */}
       {diagnosisList.length > 0 && (
-  <FabButton onClick={() => navigate("/self-diagnosis")}>
-    <AddIcon style={{ marginRight: "6px", width: "20px", height: "20px" }} />
-    New
-  </FabButton>
-)}
+        
+     <FloatingButton
+  text="New"
+  icon={<AddIcon width = "20px" height ="20px" />}
+  to="/self-diagnosis"
+/>
+      )}
+
 
       {selectedDeleteId !== null && (
         <Modal isOpen={true} toggle={() => setSelectedDeleteId(null)}>
@@ -133,11 +142,15 @@ export default function DiagnosisList() {
 
 
 const Container = styled.div`
+  flex: 1;
   background-color: #f5f9fc;
+  padding-bottom: 40px;
   position: relative;
   padding-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
+  min-height: 90vh; /* 고정 height 삭제하고 최소 높이로 변경 */
+  overflow-y: auto; /* ✅ 세로 스크롤 추가 */
 `;
 
 const Header = styled.div`
@@ -200,22 +213,7 @@ const ListText = styled.span`
   color: #000;
 `;
 
-const FabButton = styled.button`
-  display: flex;
-  position: absolute;
-  margin-top:350px;
-  right: 24px;
-  background-color: #0097a7;
-  border-radius: 24px;
-  padding: 12px 16px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: Pretendard;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
-`;
+
 
 const ErrorText = styled.p`
   color: red;

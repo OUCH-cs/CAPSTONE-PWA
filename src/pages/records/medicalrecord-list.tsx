@@ -4,7 +4,12 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
+import NoneRecord from "@/features/records/ui/NoneRecord";
 import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
+import { FloatingButton } from "@/shared/components/button/FloatingButton";
+import PlusIcon from "@/shared/assets/records/plus.svg?react";
+import { useSetAtom } from "jotai";
+import { isAuthAtom } from "@/features/sign-in/services/atoms";
 
 type HospitalRecord = {
   id: number;
@@ -18,30 +23,33 @@ export default function MedicalRecordList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
+  const setIsAuth = useSetAtom(isAuthAtom);
 
   useEffect(() => {
     fetchHospitalData();
   }, []);
 
   const fetchHospitalData = async () => {
-    try {
-      const res = await getHospitals();
-      if (res.data) {
-        setHospitalList(res.data);
-        setError(null);
-      } else {
-        throw new Error("응답 데이터가 없습니다.");
-      }
-    } catch (error: any) {
-      if (error.response) {
-        setError(`서버 오류: ${error.response.status} - ${error.response.data.message || "의료기록을 불러오는 데 실패했습니다."}`);
-      } else {
-        setError("네트워크 오류 또는 서버와 연결할 수 없습니다.");
-      }
+  try {
+    setLoading(true);
+    const res = await getHospitals();
+    if (res.data) {
+      setHospitalList(res.data);
+      setError(null);
+    } else {
+      throw new Error("응답 데이터가 없습니다.");
+    }
+  } catch (error: any) {
+   localStorage.removeItem("accessToken");
+      setIsAuth(false);
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+      navigate("/sign-in");
+      return;
     } finally {
       setLoading(false);
     }
   };
+
 
   const handleConfirmDelete = async () => {
     if (selectedDeleteId !== null) {
@@ -70,7 +78,9 @@ export default function MedicalRecordList() {
         <p>불러오는 중...</p>
       ) : error ? (
         <ErrorText>{error}</ErrorText>
-      ) : (
+      ) :  hospitalList.length === 0 ? (
+      <NoneRecord/>
+    ):(
         hospitalList.map((hospital) => (
           <div key={hospital.id}>
             <DateWrapper>
@@ -92,8 +102,13 @@ export default function MedicalRecordList() {
           </div>
         ))
       )}
-
-      <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>
+      {hospitalList.length > 0 && (
+        <FloatingButton
+  text="New"
+  icon={<PlusIcon width = "12px" height ="12px"/>}
+  to="/records/medicalrecord-add"
+/>
+      )}
 
       {/* Modal 적용 부분 */}
       {selectedDeleteId !== null && (
@@ -114,12 +129,15 @@ export default function MedicalRecordList() {
 }
 
 const Container = styled.div`
+flex: 1;
   background-color: #f5f9fc;
   padding-bottom: 40px;
   position: relative;
   padding-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
+  min-height: 100vh; /* 고정 height 삭제하고 최소 높이로 변경 */
+  overflow-y: auto; /* ✅ 세로 스크롤 추가 */
 `;
 
 const Header = styled.div`
@@ -182,21 +200,6 @@ const ListText = styled.span`
   color: #000;
 `;
 
-const FabButton = styled.button`
-  position: absolute;
-  margin-top: 450px;
-  right: 24px;
-  background-color: #0097a7;
-  border-radius: 24px;
-  padding: 12px 16px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: Pretendard;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
-`;
 
 const ErrorText = styled.p`
   color: red;
