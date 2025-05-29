@@ -8,6 +8,8 @@ import NoneRecord from "@/features/records/ui/NoneRecord";
 import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
 import { FloatingButton } from "@/shared/components/button/FloatingButton";
 import PlusIcon from "@/shared/assets/records/plus.svg?react";
+import { useSetAtom } from "jotai";
+import { isAuthAtom } from "@/features/sign-in/services/atoms";
 
 type HospitalRecord = {
   id: number;
@@ -21,6 +23,7 @@ export default function MedicalRecordList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
+  const setIsAuth = useSetAtom(isAuthAtom);
 
   useEffect(() => {
     fetchHospitalData();
@@ -37,13 +40,15 @@ export default function MedicalRecordList() {
       throw new Error("응답 데이터가 없습니다.");
     }
   } catch (error: any) {
-    alert("로그인이 만료되었거나 오류가 발생했습니다. 다시 로그인해주세요.");
-    navigate("/sign-in");
-    return;
-  } finally {
-    setLoading(false);
-  }
-};
+   localStorage.removeItem("accessToken");
+      setIsAuth(false);
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+      navigate("/sign-in");
+      return;
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   const handleConfirmDelete = async () => {

@@ -8,6 +8,8 @@ import Modal from "@/shared/components/modal/Modal";
 import AddIcon from "@/shared/assets/records/diagnosis-add.svg?react";
 import NoneDiagnosis from "@/features/records/ui/NoneDiagnosis";
 import { FloatingButton } from "@/shared/components/button/FloatingButton";
+import { useSetAtom } from "jotai";
+import { isAuthAtom } from "@/features/sign-in/services/atoms";
 
 
 export type DiagnosisRecord = {
@@ -31,7 +33,7 @@ export default function DiagnosisList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
-
+  const setIsAuth = useSetAtom(isAuthAtom);
   useEffect(() => {
     fetchDiagnosisData();
   }, []);
@@ -48,8 +50,11 @@ export default function DiagnosisList() {
     }
   } catch (error: any) {
     // 어떤 에러든 로그인 페이지로 이동
+    localStorage.removeItem("accessToken");
+    setIsAuth(false);
     alert("로그인이 만료되었거나 오류가 발생했습니다. 다시 로그인해주세요.");
     navigate("/sign-in");
+    return;
   } finally {
     setLoading(false);
   }
