@@ -1,30 +1,46 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import { getHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi"; 
+import {
+  getHealthStatus,
+  HealthStatus,
+} from "@/features/records/service/healthDataApi";
 import { formatMeasurement } from "@/features/records/lib/BloodForm";
 import { useTranslation } from "react-i18next";
-
 export default function HealthStatusData() {
   const {t} = useTranslation();
-  const [healthStatusData, setHealthStatusData] = useState<HealthStatus | null>(null);  // 상태 저장
-  const [loading, setLoading] = useState<boolean>(true);  // 로딩 상태
-  const [error, setError] = useState<string | null>(null);  // 에러 상태
+import { useSetAtom } from "jotai";
+import { isAuthAtom } from "@/features/sign-in/services/atoms";
+export default function HealthStatusData() {
+  const [healthStatusData, setHealthStatusData] = useState<HealthStatus | null>(
+    null
+  ); // 상태 저장
+  const [loading, setLoading] = useState<boolean>(true); // 로딩 상태
+  const [error, setError] = useState<string | null>(null); // 에러 상태
+  const navigate = useNavigate();
+  const setIsAuth = useSetAtom(isAuthAtom);
 
   // 데이터 fetch 함수
   const fetchHealthStatusData = async () => {
     try {
       setLoading(true);
-      const data = await getHealthStatus(); 
-      setHealthStatusData(data.data);  // 데이터 상태 업데이트
-    } catch (error: any) {
-      setError("건강기록을 불러오는 데 실패했습니다."); 
+      const data = await getHealthStatus();
+      setHealthStatusData(data.data);
+      setError(null);
+    } catch (error) {
+      // 어떤 에러든 로그인 페이지로 이동
+      localStorage.removeItem("accessToken");
+      setIsAuth(false);
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+      navigate("/sign-in");
+      return;
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchHealthStatusData();  // 컴포넌트가 마운트될 때 데이터 불러오기
+    fetchHealthStatusData(); // 컴포넌트가 마운트될 때 데이터 불러오기
   }, []);
 
   // 로딩 중일 때 처리
@@ -36,8 +52,6 @@ export default function HealthStatusData() {
   if (error) {
     return <ErrorText>{error}</ErrorText>;
   }
-
-
 
   return (
     <Container>
@@ -75,7 +89,6 @@ export default function HealthStatusData() {
   );
 }
 
-
 const Container = styled.div`
   background-color: #f5f9fc;
   position: relative;
@@ -91,23 +104,23 @@ const LabelText = styled.p`
   font-size: 18px;
   font-weight: 400;
   font-family: Pretendard;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 `;
 
 const List = styled.div`
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
-  border: 1px solid #E5E5EC;
+  border: 1px solid #e5e5ec;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   height: 60px;
   margin-bottom: -10px;
-   font-size: 16px;
+  font-size: 16px;
   font-weight: 400;
   color: #434343;
   font-family: Pretendard;
 `;
-  const Unit = styled.span`
+const Unit = styled.span`
   font-size: 14px;
   font-weight: 400;
   margin-left: 4px;

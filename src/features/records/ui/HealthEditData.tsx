@@ -243,7 +243,7 @@ const Unit = styled.span`
 
 const SaveButton = styled.button`
   position: absolute;
-  margin-top: 100px;
+  margin-top: 80px;
   padding: 13px;
   font-size: 18px;
   font-weight: 400;
