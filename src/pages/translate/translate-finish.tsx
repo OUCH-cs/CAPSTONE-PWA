@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 function TranslateFinishPage() {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -18,7 +18,10 @@ function TranslateFinishPage() {
 
       <FormWrapper style={{ marginBottom: "24px" }}>
         <Label>{t("Hospital")}</Label>
-        <HospitalInput type="text" placeholder={t("Please write a hospital.")} />
+        <HospitalInput
+          type="text"
+          placeholder={t("Please write a hospital.")}
+        />
       </FormWrapper>
 
       <FormWrapper style={{ marginBottom: "80px" }}>
@@ -27,7 +30,7 @@ function TranslateFinishPage() {
       </FormWrapper>
 
       <Button width={328} height={48} onClick={() => navigate("/translate")}>
-        Submit
+        {t("Submit")}
       </Button>
     </Container>
   );

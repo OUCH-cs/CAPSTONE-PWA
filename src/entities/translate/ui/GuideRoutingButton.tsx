@@ -2,13 +2,16 @@ import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
 import RoutingIcon from "@/shared/assets/translate/guide-routing.svg?react";
 import Arrow from "@/shared/assets/common/arrow.svg?react";
+import { useTranslation } from "react-i18next";
 
 export default function GuideRoutingButton({ toggle }: { toggle: () => void }) {
+  const { t } = useTranslation();
+
   return (
     <Container onClick={toggle}>
       <TextWrapper>
         <RoutingIcon />
-        Situational Guide
+        {t("Situational Guide")}
       </TextWrapper>
 
       <ArrowIconWrapper>
@@ -23,8 +26,9 @@ const Container = styled.button`
   align-items: center;
   justify-content: center;
   gap: 18px;
-  width: 211px;
+  width: fit-content;
   height: 51px;
+  padding: 0 18px;
   border-radius: 12px;
   background-color: ${theme.colors.white};
   margin-bottom: 181px;
