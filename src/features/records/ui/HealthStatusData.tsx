@@ -7,11 +7,11 @@ import {
 } from "@/features/records/service/healthDataApi";
 import { formatMeasurement } from "@/features/records/lib/BloodForm";
 import { useTranslation } from "react-i18next";
-export default function HealthStatusData() {
-  const {t} = useTranslation();
 import { useSetAtom } from "jotai";
 import { isAuthAtom } from "@/features/sign-in/services/atoms";
+
 export default function HealthStatusData() {
+  const { t } = useTranslation();
   const [healthStatusData, setHealthStatusData] = useState<HealthStatus | null>(
     null
   ); // 상태 저장
@@ -67,14 +67,16 @@ export default function HealthStatusData() {
           </DataLabel>
           <DataLabel>
             <LabelText>{t("Blood Pressure")}</LabelText>
-             <List>
-              {formatMeasurement(healthStatusData.bloodPressure)} <Unit>mmHg</Unit>
+            <List>
+              {formatMeasurement(healthStatusData.bloodPressure)}{" "}
+              <Unit>mmHg</Unit>
             </List>
           </DataLabel>
           <DataLabel>
             <LabelText>{t("BloodSugar")}</LabelText>
-             <List>
-              {formatMeasurement(healthStatusData.bloodSugar)} <Unit>mg/dL</Unit>
+            <List>
+              {formatMeasurement(healthStatusData.bloodSugar)}{" "}
+              <Unit>mg/dL</Unit>
             </List>
           </DataLabel>
           <DataLabel>
