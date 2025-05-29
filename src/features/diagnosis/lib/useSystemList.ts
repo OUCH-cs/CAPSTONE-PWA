@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useSystems } from "./diagnosis-algorithm/useSystems";
 import { useAtom } from "jotai";
-import { selectedSystemAtom,languageCodeAtom } from "../service/selfDiagnosisAtoms";
+import { selectedSystemAtom} from "../service/selfDiagnosisAtoms";
+import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 
 /**
  * 시스템(systems) 리스트를 가져오고 선택 상태를 관리하는 커스텀 훅입니다.

@@ -7,6 +7,7 @@ import { initialMedicalFormData } from "@/features/records/consts/medicalConstan
 import { addHospital } from "@/features/records/service/medicalDataApi";
 import Modal from "@/shared/components/modal/Modal";  // 새로 추가
 import { formatDate } from "@/features/records/lib/DateForm";
+import { useTranslation } from "react-i18next";
 
 type HospitalRecord = {
   visitDate: string;
@@ -17,6 +18,7 @@ type HospitalRecord = {
 };
 
 export default function MedicalRecordAdd() {
+  const {t} =  useTranslation()
   const navigate = useNavigate();
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
   const [showModal, setShowModal] = useState(false);
@@ -60,7 +62,7 @@ export default function MedicalRecordAdd() {
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
-        <HeaderTitle>Medical Record</HeaderTitle>
+        <HeaderTitle>{t("Medical Record")}</HeaderTitle>
       </Header>
 
       <MedicalAddData onDataChange={setMedicalData} />

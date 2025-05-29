@@ -1,7 +1,8 @@
 import { useFormContext } from "react-hook-form";
 import { useSymptoms } from "./diagnosis-algorithm/useSymptoms";
 import { useAtom } from "jotai";
-import { selectedSystemAtom, selectedSymptomAtom,languageCodeAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
+import { selectedSystemAtom, selectedSymptomAtom} from "@/features/diagnosis/service/selfDiagnosisAtoms";
+import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 
 
 /**

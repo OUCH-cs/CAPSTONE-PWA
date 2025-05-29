@@ -5,6 +5,7 @@ import { Guide } from "../../translate.types";
 import GuideAccordion from "./GuideAccordion";
 import { useNavigate } from "react-router-dom";
 import GuideProgressBar from "@/entities/translate/ui/GuideProgressBar";
+import { useTranslation } from "react-i18next";
 
 interface FunnelStepPlateProps {
   data: Guide;
@@ -13,6 +14,7 @@ interface FunnelStepPlateProps {
 }
 
 function FunnelStepPlate({ data, currentStep, setStep }: FunnelStepPlateProps) {
+  const {t} = useTranslation();
   const navigate = useNavigate();
 
   const guideData = Object.entries(data)
@@ -43,7 +45,7 @@ function FunnelStepPlate({ data, currentStep, setStep }: FunnelStepPlateProps) {
       <GuideProgressBar currentStep={currentStep} title={data.title} />
 
       <TitleWrapper>
-        <Title>Purpose</Title>
+        <Title>{t("Purpose")}</Title>
         <Description>"{data.purpose.en}"</Description>
       </TitleWrapper>
 

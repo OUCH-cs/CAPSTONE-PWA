@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { getDiagnosisById } from "@/features/records/service/diagnosisApi";
+import { useTranslation } from "react-i18next";
 
 interface Diagnosis {
   diagnosisId: number;
@@ -22,6 +23,7 @@ interface SelfDiagnosisDataProps {
 }
 
 const SelfDiagnosisData: React.FC<SelfDiagnosisDataProps> = ({ id }) => {
+  const {t} = useTranslation();
   const [diagnosis, setDiagnosis] = useState<Diagnosis | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -54,42 +56,42 @@ const SelfDiagnosisData: React.FC<SelfDiagnosisDataProps> = ({ id }) => {
       {diagnosis ? (
         <>
           <DataBlock>
-            <Label>Date of visit </Label>
+            <Label>{t("Date of visit")} </Label>
             <ListBox>
               <ListText>{diagnosis.createdAt}</ListText>
             </ListBox>
           </DataBlock>
 
           <DataBlock>
-            <Label>Visiting Hospital / Pharmacy </Label>
+            <Label>{t("Visiting Hospital / Pharmacy")} </Label>
             <ListBox>
-              <ListText>{diagnosis.visitType }</ListText>
+              <ListText>{t(diagnosis.visitType) }</ListText>
             </ListBox>
           </DataBlock>
 
           <DataBlock>
-            <Label>Symptoms </Label>
+            <Label>{t("Symptoms")} </Label>
             <ListBox>
               <ListText>{diagnosis.symptoms}</ListText>
             </ListBox>
           </DataBlock>
 
           <DataBlock>
-            <Label>Duration of symptoms </Label>
+            <Label>{t("Duration of symptoms")} </Label>
             <ListBox>
-              <ListText>{diagnosis.duration}</ListText>
+              <ListText>{t(`duration.${diagnosis.duration}`)}</ListText>
             </ListBox>
           </DataBlock>
 
           <DataBlock>
-            <Label>Severity of SymptomsList(0~10) </Label>
+            <Label>{t("Severity of SymptomsList(0~10)")} </Label>
             <ListBox>
               <ListText>{diagnosis.painSeverity}</ListText>
             </ListBox>
           </DataBlock>
 
           <DataBlock>
-            <Label>Additional Notes </Label>
+            <Label>{t("Additional Notes")} </Label>
             <ListBox>
               <ListText>{diagnosis.additionalNote}</ListText>
             </ListBox>

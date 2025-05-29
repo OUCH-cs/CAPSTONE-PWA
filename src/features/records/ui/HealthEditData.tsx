@@ -4,6 +4,7 @@ import { getHealthStatus, HealthStatus } from "@/features/records/service/health
 import BloodPressurePart from "./BloodPressurePart";
 import BloodSugarPart from "./BloodSugarPart";
 import Modal from "@/shared/components/modal/Modal";  // Modal import
+import { useTranslation } from "react-i18next";
 
 interface Props {
   initialData?: HealthStatus;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const HealthEditData: React.FC<Props> = ({ onSave }) => {
+  const {t} = useTranslation();
   const [disease, setDisease] = useState("");
   const [allergy, setAllergy] = useState("");
   const [medicineHistory, setMedicineHistory] = useState("");
@@ -84,7 +86,7 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
   return (
     <Container>
       <DataBlock>
-        <Label>Disease</Label>
+        <Label>{t("Disease")}</Label>
         <ListBox
           isSelected={selectedField === "disease"}
           onClick={() => setSelectedField("disease")}
@@ -94,7 +96,7 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
       </DataBlock>
 
       <DataBlock>
-        <Label>Allergy</Label>
+        <Label>{t("Allergy")}</Label>
         <ListBox
           isSelected={selectedField === "allergy"}
           onClick={() => setSelectedField("allergy")}
@@ -104,7 +106,7 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
       </DataBlock>
 
       <DataBlock>
-        <Label>Blood Pressure</Label>
+        <Label>{t("Blood Pressure")}</Label>
         <ListBox
           isSelected={selectedField === "bloodPressure"}
           onClick={() => {
@@ -120,7 +122,7 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
       </DataBlock>
 
       <DataBlock>
-        <Label>Blood Sugar</Label>
+        <Label>{t("Blood Sugar")}</Label>
         <ListBox
           isSelected={selectedField === "bloodSugar"}
           onClick={() => {
@@ -136,7 +138,7 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
       </DataBlock>
 
       <DataBlock>
-        <Label>Medicine History</Label>
+        <Label>{t("History")}</Label>
         <ListBox
           isSelected={selectedField === "medicineHistory"}
           onClick={() => setSelectedField("medicineHistory")}

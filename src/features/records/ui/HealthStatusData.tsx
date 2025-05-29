@@ -6,9 +6,12 @@ import {
   HealthStatus,
 } from "@/features/records/service/healthDataApi";
 import { formatMeasurement } from "@/features/records/lib/BloodForm";
+import { useTranslation } from "react-i18next";
 import { useSetAtom } from "jotai";
 import { isAuthAtom } from "@/features/sign-in/services/atoms";
+
 export default function HealthStatusData() {
+  const { t } = useTranslation();
   const [healthStatusData, setHealthStatusData] = useState<HealthStatus | null>(
     null
   ); // 상태 저장
@@ -55,29 +58,29 @@ export default function HealthStatusData() {
       {healthStatusData ? (
         <>
           <DataLabel>
-            <LabelText>Dieases</LabelText>
+            <LabelText>{t("Disease")}</LabelText>
             <List>{healthStatusData.disease}</List>
           </DataLabel>
           <DataLabel>
-            <LabelText>Allergy</LabelText>
+            <LabelText>{t("Allergy")}</LabelText>
             <List>{healthStatusData.allergy}</List>
           </DataLabel>
           <DataLabel>
-            <LabelText>Blood Pressure</LabelText>
+            <LabelText>{t("Blood Pressure")}</LabelText>
             <List>
               {formatMeasurement(healthStatusData.bloodPressure)}{" "}
               <Unit>mmHg</Unit>
             </List>
           </DataLabel>
           <DataLabel>
-            <LabelText>BloodSugar</LabelText>
+            <LabelText>{t("BloodSugar")}</LabelText>
             <List>
               {formatMeasurement(healthStatusData.bloodSugar)}{" "}
               <Unit>mg/dL</Unit>
             </List>
           </DataLabel>
           <DataLabel>
-            <LabelText>MedicineHistory</LabelText>
+            <LabelText>{t("MedicineHistory")}</LabelText>
             <List>{healthStatusData.medicineHistory}</List>
           </DataLabel>
         </>

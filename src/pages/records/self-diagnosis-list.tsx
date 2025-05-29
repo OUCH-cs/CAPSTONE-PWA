@@ -7,6 +7,7 @@ import { getDiagnosis, deleteDiagnosis } from "@/features/records/service/diagno
 import Modal from "@/shared/components/modal/Modal";
 import AddIcon from "@/shared/assets/records/diagnosis-add.svg?react";
 import NoneDiagnosis from "@/features/records/ui/NoneDiagnosis";
+import { useTranslation } from "react-i18next";
 import { FloatingButton } from "@/shared/components/button/FloatingButton";
 import { useSetAtom } from "jotai";
 import { isAuthAtom } from "@/features/sign-in/services/atoms";
@@ -28,6 +29,7 @@ export type DiagnosisRecord = {
 };
 
 export default function DiagnosisList() {
+  const {t} =  useTranslation()
   const navigate = useNavigate();
   const [diagnosisList, setDiagnosisList] = useState<DiagnosisRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -80,7 +82,7 @@ export default function DiagnosisList() {
         <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
-        <HeaderTitle>Self-Diagnosis</HeaderTitle>
+        <HeaderTitle>{t("Self-Diagnosis")}</HeaderTitle>
       </Header>
 
       {loading ? (

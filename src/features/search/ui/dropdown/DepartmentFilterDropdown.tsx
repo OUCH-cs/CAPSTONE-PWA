@@ -11,11 +11,14 @@ import Skeleton from "@/shared/components/skeleton/Skeleton";
 import { useEffect } from "react";
 import { getDepartment } from "../../services/api/searcApi";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function DepartmentFilterDropdown() {
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const [department, setDepartment] = useAtom(departmentFilterAtom); // 선택한 진료과
   const { isOpen, setIsOpen, toggle } = useToggle();
+  const fallbackDept = t("Medical Department");
 
   // 진료과 필터 리스트 api 호출
   const {
@@ -46,7 +49,7 @@ export default function DepartmentFilterDropdown() {
         <Dropdown setIsOpen={setIsOpen}>
           <Dropdown.Trigger onClick={toggle}>
             <TriggerWrapper>
-              {department || "Medical Department"}
+              {department || fallbackDept}
               <IconWrapper>
                 <DropdownMenuIcon width="16" height="16" stroke="#767676" />
               </IconWrapper>

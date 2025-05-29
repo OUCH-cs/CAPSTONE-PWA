@@ -4,8 +4,10 @@ import { SelectDestinationProps, DestinationType } from "../diagnosis.type";
 import { useFormContext } from "react-hook-form";
 import { useAtom } from "jotai";
 import { destinationAtom } from "../service/selfDiagnosisAtoms";
+import { useTranslation } from "react-i18next";
 
 const SelectDestination = ({ selectedDestination }: SelectDestinationProps) => {
+  const {t} = useTranslation()
   const { setValue } = useFormContext<{ visitType: DestinationType }>();
   const [, setDestination] = useAtom(destinationAtom);
 
@@ -19,7 +21,7 @@ const SelectDestination = ({ selectedDestination }: SelectDestinationProps) => {
         }}
       >
         <OptionText selected={selectedDestination === "HOSPITAL"}>
-          Hospital
+          {t("Hospital")}
         </OptionText>
       </OptionButton>
 
@@ -31,7 +33,7 @@ const SelectDestination = ({ selectedDestination }: SelectDestinationProps) => {
         }}
       >
         <OptionText selected={selectedDestination === "PHARMACY"}>
-          Pharmacy
+          {t("Pharmacy")}
         </OptionText>
       </OptionButton>
     </ButtonContainer>

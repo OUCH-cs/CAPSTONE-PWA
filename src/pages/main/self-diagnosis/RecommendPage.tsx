@@ -8,16 +8,18 @@ import {
   selectedSystemAtom,
   selectedConditionAtom,
   selectedSymptomAtom,
-  languageCodeAtom,
-  destinationAtom,
-} from "@/features/diagnosis/service/selfDiagnosisAtoms";
+  destinationAtom
+} from '@/features/diagnosis/service/selfDiagnosisAtoms';
+import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import LoadingOverlay from "@/shared/components/overlay/LoadingOverlay";
 import LocationImg from "@/shared/assets/common/location.png";
 import { Button } from "@/shared/components/button/Button";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { departmentFilterAtom } from "@/features/search/services/store/filterAtom";
 
 function RecommendPage() {
+  const {t} = useTranslation()
   const setDepartments = useSetAtom(departmentFilterAtom);
 
   const navigate = useNavigate();
@@ -66,8 +68,8 @@ function RecommendPage() {
       {isLoading && <LoadingOverlay />}
       <Question>
         {destination === "HOSPITAL"
-          ? "Recommended Hospital"
-          : "Identified Symptoms"}
+          ? t("Recommended Hospital") 
+          : t("Identified Symptoms")}
       </Question>
       {destination === "HOSPITAL" ? (
         <>
@@ -92,10 +94,10 @@ function RecommendPage() {
       <ButtonGroup>
         <FindButton onClick={handleResetAndSearch}>
           {destination === "HOSPITAL"
-            ? "Find Recommended Hospitals"
-            : "Find Pharmacy"}
+            ? t("Find Recommended Hospitals")
+            : t("Find Pharmacy")}
         </FindButton>
-        <FinishButton onClick={handleResetAndGoHome}>Finish</FinishButton>
+        <FinishButton onClick={handleResetAndGoHome}>{t("Finish")}</FinishButton>
       </ButtonGroup>
     </Container>
   );

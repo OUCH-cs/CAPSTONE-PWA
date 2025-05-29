@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import { Controller, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 const PainLevelBar = () => {
+  const {t} =  useTranslation()
   const { control } = useFormContext<{ painSeverity: number }>();
 
   return (
@@ -27,10 +29,9 @@ const PainLevelBar = () => {
           )}
         />
       </SliderWrapper>
-
       <ScaleLabelContainer>
-        <ScaleText>mild</ScaleText>
-        <ScaleText>severe</ScaleText>
+        <ScaleText>{t("mild")}</ScaleText>
+        <ScaleText>{t("severe")}</ScaleText>
       </ScaleLabelContainer>
     </ScaleContainer>
   );

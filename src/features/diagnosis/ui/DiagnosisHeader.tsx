@@ -1,18 +1,19 @@
-
 import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import CloseIcon from "@/shared/assets/common/closed.svg?react";
 import { useNavigate } from "react-router-dom";
-import Modal from '@/shared/components/modal/Modal';
-import useToggle from '@/shared/lib/useToggle';
+import Modal from "@/shared/components/modal/Modal";
+import useToggle from "@/shared/lib/useToggle";
+import { useTranslation } from "react-i18next";
 
 function Header() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { isOpen, toggle } = useToggle();
 
   const handlePrevClick = () => {
     toggle();
-    navigate(-1)
+    navigate(-1);
   };
 
   return (
@@ -21,23 +22,22 @@ function Header() {
         <BackwardIconWrapper onClick={toggle}>
           <CloseIcon width={28} height={28} />
         </BackwardIconWrapper>
-        <Title>Self-diagnosis</Title>
+        <Title>{t("Self-diagnosis")}</Title>
       </HeaderWrapper>
       <Modal isOpen={isOpen} toggle={toggle}>
         <Wrapper>
-          <Message>Do you want to stop<br/>the self-diagnosis?</Message>
+          <Message>{t("Do you want to stop\nthe self-diagnosis?")}</Message>
           <ButtonGroup>
             <ActionButton onClick={toggle} variant="cancel">
-              Cancel
+              {t("Cancel")}
             </ActionButton>
             <ActionButton onClick={handlePrevClick} variant="stop">
-              Stop
+              {t("Stop")}
             </ActionButton>
           </ButtonGroup>
         </Wrapper>
       </Modal>
     </Container>
-    
   );
 }
 
@@ -60,15 +60,13 @@ const HeaderWrapper = styled.div`
   align-items: center;
   padding: 1.5rem;
   margin-bottom: 1rem;
-
-`
+`;
 
 const Title = styled.p`
   font-size: 1.7rem;
   font-weight: 500;
   text-align: center;
 `;
-
 
 const BackwardIconWrapper = styled.div`
   position: absolute;
@@ -80,14 +78,13 @@ const BackwardIconWrapper = styled.div`
   transform: rotate(90deg);
 `;
 
-
 const Wrapper = styled.div`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 10px;
   text-align: center;
   width: 316px;
   font-family: Pretendard;
-  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
   padding: 66px 0 0 0;
 `;
 
@@ -102,11 +99,11 @@ const Message = styled.p`
 
 const ButtonGroup = styled.div`
   display: flex;
-  justify-content: space-between;     
+  justify-content: space-between;
 `;
 
 const ActionButton = styled.button<{ variant: "cancel" | "stop" }>`
-  flex: 1;               
+  flex: 1;
   height: 48px;
   border: none;
   border-radius: 0.75rem;
@@ -115,9 +112,8 @@ const ActionButton = styled.button<{ variant: "cancel" | "stop" }>`
   cursor: pointer;
   background-color: ${({ variant, theme }) =>
     variant === "cancel" ? theme.colors.white_f1 : theme.colors.primary};
-  color: ${({ variant }) => (variant === "cancel" ? theme.colors.black : theme.colors.white)};
+  color: ${({ variant }) =>
+    variant === "cancel" ? theme.colors.black : theme.colors.white};
   border-radius: ${(props) =>
-  props.variant === "cancel" ? "0 0 0 10px" : "0 0 10px 0"};
+    props.variant === "cancel" ? "0 0 0 10px" : "0 0 10px 0"};
 `;
-
-

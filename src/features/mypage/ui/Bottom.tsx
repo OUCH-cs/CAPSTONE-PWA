@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
+import { useTranslation } from "react-i18next";
 import { useSetAtom } from "jotai";
 import { isAuthAtom } from "@/features/sign-in/services/atoms";
 import { useNavigate } from "react-router-dom";
 
 const Bottom = () => {
+  const {t} = useTranslation();
   const navigate = useNavigate();
   const setIsAuth = useSetAtom(isAuthAtom);
 
@@ -16,19 +18,19 @@ const Bottom = () => {
   return (
     <Header>
       <Section>
-        <TitleText>Notice</TitleText>
+        <TitleText>{t("Notice")}</TitleText>
         <StyledArrowIcon width="20px" height="20px" />
       </Section>
       <Section>
-        <TitleText>Feedback</TitleText>
+        <TitleText>{t("Feedback")}</TitleText>
         <StyledArrowIcon width="20px" height="20px" />
       </Section>
       <Section>
-        <TitleText>Customer Service</TitleText>
+        <TitleText>{t("Customer Service")}</TitleText>
         <StyledArrowIcon width="20px" height="20px" />
       </Section>
       <Section>
-        <LogoutButton onClick={handleLogout}>Log out</LogoutButton>
+        <LogoutButton onClick={handleLogout}>{t("Log out")}</LogoutButton>
       </Section>
     </Header>
   );

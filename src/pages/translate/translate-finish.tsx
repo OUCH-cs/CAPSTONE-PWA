@@ -3,8 +3,10 @@ import finishImg from "@/shared/assets/translate/translate-finish.svg";
 import theme from "@/shared/styles/theme";
 import { Button } from "@/shared/components/button/Button";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function TranslateFinishPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -12,20 +14,23 @@ function TranslateFinishPage() {
       <ImgWrapper>
         <img src={finishImg} alt="translation-finish-img" />
       </ImgWrapper>
-      <Title>Your consultation is complete!</Title>
+      <Title>{t("Your consultation is complete!")}</Title>
 
       <FormWrapper style={{ marginBottom: "24px" }}>
-        <Label>Hospital</Label>
-        <HospitalInput type="text" placeholder="Please write a hospital." />
+        <Label>{t("Hospital")}</Label>
+        <HospitalInput
+          type="text"
+          placeholder={t("Please write a hospital.")}
+        />
       </FormWrapper>
 
       <FormWrapper style={{ marginBottom: "80px" }}>
-        <Label>Review</Label>
-        <ReviewTextarea placeholder="Please leave a review." />
+        <Label>{t("Review")}</Label>
+        <ReviewTextarea placeholder={t("Please leave a review.")} />
       </FormWrapper>
 
       <Button width={328} height={48} onClick={() => navigate("/translate")}>
-        Submit
+        {t("Submit")}
       </Button>
     </Container>
   );

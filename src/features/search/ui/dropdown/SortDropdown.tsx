@@ -5,8 +5,10 @@ import { sortFilterAtom } from "../../services/store/filterAtom";
 import { Sort } from "../../types/search.types";
 import Dropdown from "@/shared/components/dropdown/Dropdown";
 import useToggle from "@/shared/lib/useToggle";
+import { useTranslation } from "react-i18next";
 
 export default function SortDropdown() {
+  const {t} =  useTranslation()
   const [sort, setSort] = useAtom(sortFilterAtom);
   const { isOpen, setIsOpen, toggle } = useToggle(); // 필터 드롭다운 토글
 
@@ -20,7 +22,7 @@ export default function SortDropdown() {
       <Dropdown setIsOpen={setIsOpen}>
         <Dropdown.Trigger onClick={toggle}>
           <TriggerWrapper>
-            {sort}
+            {t(sort)}
             <IconWrapper>
               <DropdownMenuIcon width="16" height="16" stroke="#767676" />
             </IconWrapper>
@@ -29,7 +31,7 @@ export default function SortDropdown() {
 
         <Dropdown.Menu isOpen={isOpen} top="30px" right="10px">
           <MenuWrapper>
-            {(["Recommended", "Distance"] as Sort[]).map((menu, index) => (
+            {([t("Recommended"), t("Distance")] as Sort[]).map((menu, index) => (
               <MenuItem
                 key={index}
                 onClick={() => handleClick(menu)}
