@@ -4,11 +4,13 @@ import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import MedicalEditData from "@/features/records/ui/MedicalEditData";
 import styled from "@emotion/styled";
 import { getMedicalRecordById, editHospitals, HospitalRecord } from "@/features/records/service/medicalDataApi";
+import { useTranslation } from "react-i18next";
+
 
 const MedicalRecordEdit: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-
+  const {t} =  useTranslation()
   const [hospitalRecord, setHospitalRecord] = useState<HospitalRecord | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +56,7 @@ const MedicalRecordEdit: React.FC = () => {
         <BackButton onClick={() => navigate(`/records/medicalrecord/${hospitalRecord.id}`)}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Medical Record</HeaderTitle>
+        <HeaderTitle>{t("Medical Record")}</HeaderTitle>
       </Header>
 
       <div>

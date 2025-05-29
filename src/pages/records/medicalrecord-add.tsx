@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -67,18 +67,22 @@ export default function MedicalRecordAdd() {
 
       <MedicalAddData onDataChange={setMedicalData} />
 
-      <SaveButton onClick={handleConfirmSave}>Save</SaveButton>
+      <SaveButton onClick={handleConfirmSave}>{t("Save")}</SaveButton>
 
       {/* Modal 컴포넌트 사용 */}
       <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
         <ModalBox>
           <MessageText>
-            Do you want to save your <br />
-            changes before exiting?
+            {t("Do you want to save your changes before exiting?").split('\n').map((line, i, arr) => (
+              <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+              </React.Fragment>
+        ))}
           </MessageText>
           <ButtonWrapper>
-            <CancelButton onClick={() => setShowModal(false)}>Cancel</CancelButton>
-            <ConfirmButton onClick={handleRealSave}>Save</ConfirmButton>
+            <CancelButton onClick={() => setShowModal(false)}>{t("Cancel")}</CancelButton>
+            <ConfirmButton onClick={handleRealSave}>{t("Save")}</ConfirmButton>
           </ButtonWrapper>
         </ModalBox>
       </Modal>

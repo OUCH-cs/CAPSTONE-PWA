@@ -2,6 +2,7 @@ import  { useRef, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import Modal from "@/shared/components/modal/Modal"; 
+import { useTranslation } from "react-i18next";
 
 const years = Array.from({ length: 100 }, (_, i) => (2000 + i).toString().slice(2));
 const months = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, "0"));
@@ -14,7 +15,7 @@ interface DateSelectionProps {
 }
 
 export default function DateSelection({ isOpen, onClose, onDateSelect }: DateSelectionProps) {
-
+  const {t} =  useTranslation()
   const today = dayjs();
   const [centerItem, setCenterItem] = useState({
     year: today.format("YY"),
@@ -117,7 +118,7 @@ export default function DateSelection({ isOpen, onClose, onDateSelect }: DateSel
   return (
     <Modal isOpen={isOpen} toggle={onClose}>
       <ModalContent>
-        <Title>Date of Visit</Title>
+        <Title>{t("Date of Visit")}</Title>
         <PickerWrapper>
           <CenterLine />
           <PickerContainer>
@@ -130,7 +131,7 @@ export default function DateSelection({ isOpen, onClose, onDateSelect }: DateSel
                   ref={scrollRefs[type as keyof typeof scrollRefs]}
                   onScroll={() => handleScroll(type as "year" | "month" | "day")}
                 >
-                  <StickyLabel>{type === "year" ? "YY" : type === "month" ? "MM" : "DD"}</StickyLabel>
+                  <StickyLabel>{type === "year" ? t("YY") : type === "month" ? t("MM") : t("DD")}</StickyLabel>
                   {list.map((value) => (
                     <PickerItem
                       key={value}
@@ -145,7 +146,7 @@ export default function DateSelection({ isOpen, onClose, onDateSelect }: DateSel
             })}
           </PickerContainer>
         </PickerWrapper>
-        <SaveButton onClick={handleSave}>Save</SaveButton>
+        <SaveButton onClick={handleSave}>{t("Save")}</SaveButton>
       </ModalContent>
     </Modal>
   );

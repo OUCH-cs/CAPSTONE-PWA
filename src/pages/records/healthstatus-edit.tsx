@@ -4,10 +4,11 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import { getHealthStatus, editHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi";
 import HealthEditData from "@/features/records/ui/HealthEditData"; 
+import { useTranslation } from "react-i18next";
 
 const HealthStatusEdit: React.FC = () => {
   const navigate = useNavigate();
-
+  const {t} =  useTranslation();
   const [healthStatus, setHealthStatus] = useState<HealthStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -52,7 +53,7 @@ const HealthStatusEdit: React.FC = () => {
         <BackButton onClick={() => navigate("/records/healthstatus")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Health Status</HeaderTitle>
+        <HeaderTitle>{t("Health Status")}</HeaderTitle>
       </Header>
 
       <div>
