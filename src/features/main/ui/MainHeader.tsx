@@ -4,30 +4,29 @@ import HomeLocation from "@/shared/assets/home/HomeLocation.svg?react";
 import { useTranslation } from "react-i18next";
 import { useAtom } from "jotai";
 import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
-
+import { useEffect } from "react";
 
 const MainHeader = () => {
   const { i18n } = useTranslation();
   const [languageCode, setLanguageCode] = useAtom(languageCodeAtom);
 
   const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const lang = e.target.value;
-    setLanguageCode(lang);
+    const lang = e.target.value as "ko-KR" | "en-US" | "zh-CN";
 
-    switch (lang) {
-      case "ko":
-        i18n.changeLanguage("ko-KR");
-        break;
-      case "en":
-        i18n.changeLanguage("en-US");
-        break;
-      case "zh":
-        i18n.changeLanguage("zh-CN");
-        break;
-      default:
-        break;
-    }
+    setLanguageCode(lang);
+    i18n.changeLanguage(lang);
   };
+
+  // 최초 마운트 시 localStorage와 Atom 상태 맞추기
+  useEffect(() => {
+    const stored = localStorage.getItem("i18nextLng") as
+      | "ko-KR"
+      | "en-US"
+      | "zh-CN";
+
+    setLanguageCode(stored);
+    i18n.changeLanguage(stored);
+  }, []);
 
   return (
     <Header>
@@ -36,9 +35,9 @@ const MainHeader = () => {
         <LocationText>Banseok-dong</LocationText>
       </Location>
       <LangSelect value={languageCode} onChange={handleLangChange}>
-        <option value="ko">KO</option>
-        <option value="en">ENG</option>
-        <option value="zh">中文</option>
+        <option value="ko-KR">KO</option>
+        <option value="en-US">ENG</option>
+        <option value="zh-CN">中文</option>
       </LangSelect>
     </Header>
   );
