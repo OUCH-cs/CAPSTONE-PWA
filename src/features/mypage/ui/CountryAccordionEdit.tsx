@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Accordion } from "@/shared/components/accordion";
 import { COUNTRY_LIST } from "@/features/mypage/MyPage.constants";
 import ArrowChevronIcon from "@/shared/assets/common/arrow.svg?react";
+import { useTranslation } from "react-i18next";
 interface ControllerProps<T> {
   value: T;
   onChange: (value: T) => void;
@@ -12,19 +13,21 @@ export default function CountryAccordionEdit({
   value,
   onChange,
 }: ControllerProps<string>) {
+  const {t} =  useTranslation();
+
   const [selectedItem, setSelectedItem] = useState<string>("");
 
   useEffect(() => {
     const matchedItem = COUNTRY_LIST.find((item) => item.code === value);
-    setSelectedItem(matchedItem?.name ?? "");
-  }, [value]);
+    setSelectedItem(matchedItem ? t(`country.${matchedItem.nationCode}`) : "");
+  }, [value, t]);
 
   return (
     <Accordion>
       <Accordion.Header>
         <AccordionHeaderWrapper>
           <AccordionHeaderTitle $isSelected={!!selectedItem}>
-            {selectedItem || "Select your country"}
+             {selectedItem || t("select_country")}
           </AccordionHeaderTitle>
           <Accordion.Trigger>
             <StyledArrowIcon />
@@ -34,10 +37,10 @@ export default function CountryAccordionEdit({
 
       <Accordion.Body>
         <AccordionBodyWrapper>
-          {COUNTRY_LIST.map(({ code, name }) => (
+          {COUNTRY_LIST.map(({ code, nationCode }) => (
             <Accordion.Item key={code} onClick={() => onChange(code)}>
               <AccordionItemWrapper $isSelected={value === code}>
-                {name}
+                 {t(`country.${nationCode}`)}
               </AccordionItemWrapper>
             </Accordion.Item>
           ))}
