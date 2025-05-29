@@ -1,7 +1,7 @@
 import "@/features/i18n/i18n";
 import { atomWithStorage } from "jotai/utils";
 
-export const languageCodeAtom = atomWithStorage<"ko-KR" | "en-US" | "zh-CN">(
+export const languageCodeAtom = atomWithStorage<"ko" | "en" | "zh">(
   "i18nextLng",
-  "en-US"
+  "en"
 );

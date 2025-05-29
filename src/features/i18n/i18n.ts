@@ -8,9 +8,9 @@ import ko from "./locales/ko-KR/translation.json"; // locales 폴더내에 생�
 import zh from "./locales/zh-CN/translation.json";
 
 const resources = {
-  "ko-KR": { translation: ko },
-  "en-US": { translation: en },
-  "zh-CN": { translation: zh },
+  ko: { translation: ko },
+  en: { translation: en },
+  zh: { translation: zh },
 };
 
 i18n
@@ -23,7 +23,7 @@ i18n
       order: ["localStorage", "navigator"], // 1. localStorage  2. 브라우저 설정 순으로 언어 감지
       caches: ["localStorage"], // 감지한 언어를 localStorage에 저장
     },
-    fallbackLng: "en-US", // 감지 실패 시 기본 사용할 언어
+    fallbackLng: "en", // 감지 실패 시 기본 사용할 언어
     debug: false,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

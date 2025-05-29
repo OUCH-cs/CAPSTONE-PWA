@@ -11,7 +11,7 @@ const MainHeader = () => {
   const [languageCode, setLanguageCode] = useAtom(languageCodeAtom);
 
   const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const lang = e.target.value as "ko-KR" | "en-US" | "zh-CN";
+    const lang = e.target.value as "ko" | "en" | "zh";
 
     setLanguageCode(lang);
     i18n.changeLanguage(lang);
@@ -19,10 +19,7 @@ const MainHeader = () => {
 
   // 최초 마운트 시 localStorage와 Atom 상태 맞추기
   useEffect(() => {
-    const stored = localStorage.getItem("i18nextLng") as
-      | "ko-KR"
-      | "en-US"
-      | "zh-CN";
+    const stored = localStorage.getItem("i18nextLng") as "ko" | "en" | "zh";
 
     setLanguageCode(stored);
     i18n.changeLanguage(stored);
