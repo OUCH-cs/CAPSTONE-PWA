@@ -8,19 +8,14 @@ import MainHeader from "@/features/main/ui/MainHeader";
 import { fallbackLocaton } from "@/shared/consts/common";
 import { SearchList } from "@/features/search/ui";
 import Skeleton from "@/shared/components/skeleton/Skeleton";
-import { useAtom } from "jotai";
-import { useEffect } from "react";
-import { getLanguage } from "@/shared/api/languageApi";
-import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import { fetchNearbySearch } from "@/features/search/services/api/searcApi";
 import { useTranslation } from "react-i18next";
 
-function MainPage() { ;
-  const { t } = useTranslation()
+function MainPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const [languageCode, setLanguageCode] = useAtom(languageCodeAtom); //전역으로 사용자 언어 관리
   const currLocation = fallbackLocaton; // 임시 위치 설정 하드코딩
 
   // 근처 병원 검색 API 호출
@@ -31,15 +26,6 @@ function MainPage() { ;
       dedupingInterval: 1000 * 60 * 60, // 1시간
     }
   );
-
-  // 메인페이지 렌더링 시 사용자 언어 초기화
-  useEffect(() => {
-    if (languageCode) return;
-
-    getLanguage()
-      .then((code) => setLanguageCode(code))
-      .catch(() => setLanguageCode("en"));
-  }, [languageCode, setLanguageCode]);
 
   return (
     <Container>
@@ -65,7 +51,9 @@ function MainPage() { ;
           <Skeleton width={185} height={21} />
         </SkeletonWrapper>
       )}
-      {data && <RecommendationTitle>{t("Recommended Hospital")}</RecommendationTitle>}
+      {data && (
+        <RecommendationTitle>{t("Recommended Hospital")}</RecommendationTitle>
+      )}
 
       {isLoading && (
         <SkeletonList>
