@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSystems } from "./diagnosis-algorithm/useSystems";
 import { useAtom } from "jotai";
 import { selectedSystemAtom} from "../service/selfDiagnosisAtoms";
-import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
+import { useLanguage } from "@/shared/services/useLanguage";
 
 /**
  * 시스템(systems) 리스트를 가져오고 선택 상태를 관리하는 커스텀 훅입니다.
@@ -17,10 +17,10 @@ import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 */
 
 export const useSystemsList = () => {
-  const [languageCode]=useAtom(languageCodeAtom)
+  const {languageCode} = useLanguage();
   const { systems = [], isLoading } = useSystems(languageCode);
   const [selectedSystem, setSelectedSystem] = useAtom(selectedSystemAtom);
-
+  
   useEffect(() => {
     if (systems.length > 0 && !selectedSystem) {
       setSelectedSystem(systems[0]); // 기본 선택

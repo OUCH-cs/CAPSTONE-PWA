@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { selectedSystemAtom, selectedSymptomAtom } from "../service/selfDiagnosisAtoms";
-import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import { useAlgorithm } from "./diagnosis-algorithm/useAlgorithm";
 import { DiagnosisAlgorithm } from "../diagnosis.type";
+import { useLanguage } from "@/shared/services/useLanguage";
 
 /**
  * 조건 기반(condition) 알고리즘 스텝 진입 여부를 판단하고, 관련 상태를 관리하는 커스텀 훅입니다.
@@ -27,7 +27,7 @@ import { DiagnosisAlgorithm } from "../diagnosis.type";
 export const useConditionStep = (onNext: () => void = () => {}) => {
   const [symptom] = useAtom(selectedSymptomAtom);
   const [system] = useAtom(selectedSystemAtom);
-  const [languageCode] = useAtom(languageCodeAtom)
+  const {languageCode} = useLanguage();
   const { algorithms = [] } = useAlgorithm();
   /**
     * 조건 스텝(three-step 알고리즘)을 보여줄지 여부를 관리하는 상태

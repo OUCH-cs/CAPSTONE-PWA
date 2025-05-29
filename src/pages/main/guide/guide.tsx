@@ -8,7 +8,7 @@ function GuidePage () {
     return(
         <Container>
             <GuideHeader/>
-            <GuideCategories></GuideCategories>
+            <GuideCategories/>
             <GuideQuestions/>
         </Container>
     )

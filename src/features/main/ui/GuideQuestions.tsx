@@ -4,16 +4,14 @@ import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import theme from "@/shared/styles/theme";
 import { useAtom } from "jotai";
 import { selectedCategoriesAtom } from "../service/guideAtoms";
-import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import { useGetGuideQustion } from "../lib/useGuideCategories";
 import Skeleton from "@/shared/components/skeleton/Skeleton";
+import { useLanguage } from "@/shared/services/useLanguage";
 
 function GuideQuestions() {
     const [selectedCategories] = useAtom(selectedCategoriesAtom);
-    const [languageCode] = useAtom(languageCodeAtom)
-    const selectedCategory = selectedCategories || "";
-  
-    const { data = [], isLoading } = useGetGuideQustion(selectedCategory, languageCode);
+    const {languageCode} =useLanguage();
+    const { data = [], isLoading } = useGetGuideQustion(selectedCategories, languageCode);
     
     return (
         <Container>
