@@ -5,7 +5,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { DiagnosisFormData } from "../../diagnosis.type";
 import { StepSixProps } from "../../diagnosis.type";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 const StepSix = ({ onPrev }: StepSixProps) => {
   const { t } = useTranslation();
@@ -15,9 +15,9 @@ const StepSix = ({ onPrev }: StepSixProps) => {
   return (
     <S.Container>
       <S.Question>
-        {t(
-          "Please write down what you would like to tell the doctor additionally"
-        )}
+        <Trans i18nKey="addition Message" >
+          "Please write down what you would like to<br/> tell the doctor additionally"
+        </Trans>
       </S.Question>
       <Controller
         name="additionalNote"
