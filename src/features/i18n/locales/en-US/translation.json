@@ -98,7 +98,8 @@
   "country": {
     "US": "United States",
     "KO": "South Korea",
-    "JP": "Japan"
+    "JP": "Japan",
+    "ZH": "China"
   },
   "select_country": "Select your country",
   "Would you like to start Self-Diagnosis?" : "Would you like to starㅅ \n Self-Diagnosis?",

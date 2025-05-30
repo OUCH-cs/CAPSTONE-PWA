@@ -101,7 +101,8 @@
   "country": {
     "US": "미국",
     "KO": "대한민국",
-    "JP": "일본"
+    "JP": "일본",
+    "ZH": "중국"
   },
   "select_country": "국가를 선택하세요",
   "Would you like to start Self-Diagnosis?" : "자가진단을 \n 시작하시겠습니까?",
