@@ -25,7 +25,9 @@ export const useSystemsList = () => {
     if (systems.length > 0 && !selectedSystem) {
       setSelectedSystem(systems[0]); // 기본 선택
     }
-  }, [systems, selectedSystem, setSelectedSystem]);
+  }, [systems]);
+
+  console.log(selectedSystem)
 
   const toggleSystem = (system: string) => {
     setSelectedSystem(system);
