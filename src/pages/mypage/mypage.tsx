@@ -23,5 +23,4 @@ const Container = styled.div`
   flex-direction: column;
   background-color: ${theme.colors.background};
   height: 90vh;
-  overflow: hidden;
 `;

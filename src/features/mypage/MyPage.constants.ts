@@ -5,9 +5,11 @@ const COUNTRY_LIST = [
   { code: "japan", name: "Japan", nationCode: "JP" },
 ];
 const LANGUAGE_LIST = [
-  { name: "korean", code: "kr" },
-  { name: "english", code: "en" },
-  { name: "japanese", code: "ja" },
+  { name: "english", code: "en", label : "English (United States)"},
+  { name: "korean", code: "ko", label : "한국어"},
+  { name: "japanese", code: "jp", label : "日本語" },
+  { name: "chinese", code: "zh", label : "中文" },
 ];
+
 
 export { COUNTRY_LIST, LANGUAGE_LIST };

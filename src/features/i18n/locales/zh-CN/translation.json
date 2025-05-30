@@ -103,5 +103,6 @@
   },
   "select_country": "请选择您的国家",
   "Would you like to start Self-Diagnosis?" : "您想开始自我诊断吗？",
-  "Would you like to start Medical Record?" : "您想开始医疗记录吗？"
+  "Would you like to start Medical Record?" : "您想开始医疗记录吗？",
+  "Language Settings":"语言设置"
 }

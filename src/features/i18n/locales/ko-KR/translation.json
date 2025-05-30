@@ -105,5 +105,6 @@
   },
   "select_country": "국가를 선택하세요",
   "Would you like to start Self-Diagnosis?" : "자가진단을 \n 시작하시겠습니까?",
-  "Would you like to start Medical Record?" : "의료기록 작성을 \n 시작하시겠습니까?"
+  "Would you like to start Medical Record?" : "의료기록 작성을 \n 시작하시겠습니까?",
+  "Language Settings":"언어 설정"
 }
