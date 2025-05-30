@@ -2,8 +2,10 @@
 import styled from "@emotion/styled";
 import BackArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function GuideHeader() {
+  const {t} = useTranslation()
   const navigate = useNavigate();
 
   return (
@@ -12,7 +14,7 @@ function GuideHeader() {
         <BackwardIconWrapper onClick={() => navigate("/")}>
           <BackArrowIcon width={28} height={28} />
         </BackwardIconWrapper>
-        <Title>OUCH guide</Title>
+        <Title>{t("OUCH guide")}</Title>
       </HeaderWrapper>
     </Container>
     
