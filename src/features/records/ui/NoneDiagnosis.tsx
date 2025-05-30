@@ -1,15 +1,25 @@
 // 자가진단 데이터 없을때
+import React from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function NoneDiagnosis() {
+  const {t} = useTranslation();
     const navigate = useNavigate();
   return (
     <>
     <Container>
-      <Message>"Would you like to start<br />Self-Diagnosis?"</Message>
+      <Message>
+        {t("Would you like to start Self-Diagnosis?").split('\n').map((line, i, arr) => (
+                      <React.Fragment key={i}>
+                      {line}
+                      {i !== arr.length - 1 && <br />}
+                      </React.Fragment>
+                ))}
+      </Message>
     </Container>
-    <StartButton onClick={() => navigate("/self-diagnosis")}>Start</StartButton>
+    <StartButton onClick={() => navigate("/self-diagnosis")}>{t("Start")}</StartButton>
     </>
   );
 }
@@ -33,11 +43,11 @@ const Message = styled.p`
 
 const StartButton = styled.button`
     display:flex;
-    width: 112px;
+    width: 125px;
     height: 52px;
     background-color: #0097A7;
     color: #FFF;
-    padding: 15px 34px;
+    padding: 15px 30px;
     border-radius: 20px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.08);
     justify-content: center;

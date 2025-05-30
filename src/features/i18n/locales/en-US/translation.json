@@ -100,5 +100,9 @@
     "KO": "South Korea",
     "JP": "Japan"
   },
-  "select_country": "Select your country"
+  "select_country": "Select your country",
+  "Would you like to start Self-Diagnosis?" : "Would you like to starㅅ \n Self-Diagnosis?",
+  "Would you like to start Medical Record?" : "Would you like to start \n Medical Record?"
+
+
 }
