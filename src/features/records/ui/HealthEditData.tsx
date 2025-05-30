@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { getHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi"; 
+import { getHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi";
 import BloodPressurePart from "./BloodPressurePart";
 import BloodSugarPart from "./BloodSugarPart";
-import Modal from "@/shared/components/modal/Modal";  // Modal import
+import Modal from "@/shared/components/modal/Modal";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -12,25 +12,25 @@ interface Props {
 }
 
 const HealthEditData: React.FC<Props> = ({ onSave }) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [disease, setDisease] = useState("");
   const [allergy, setAllergy] = useState("");
   const [medicineHistory, setMedicineHistory] = useState("");
   const [bloodPressure, setBloodPressure] = useState({ contraction: "", relaxation: "" });
   const [bloodSugar, setBloodSugar] = useState({ fasting: "", postprandial: "" });
-  const [loading, setLoading] = useState(false); 
-  const [error] = useState<string | null>(null); 
-
+  const [loading, setLoading] = useState(false);
+  const [error] = useState<string | null>(null);
   const [bpModalOpen, setBpModalOpen] = useState(false);
   const [bsModalOpen, setBsModalOpen] = useState(false);
-  const [selectedField, setSelectedField] = useState<string | null>(null); 
-  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false); 
+  const [selectedField, setSelectedField] = useState<string | null>(null);
+  const [isConfirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [isModified, setIsModified] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     getHealthStatus()
       .then((response) => {
-        const data = response.data; 
+        const data = response.data;
         if (data.bloodPressure !== undefined && data.bloodPressure !== null) {
           if (typeof data.bloodPressure === "number" && !isNaN(data.bloodPressure)) {
             const contraction = Math.floor(data.bloodPressure / 1000);
@@ -57,7 +57,8 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
   }, []);
 
   const handleSave = () => {
-    setConfirmModalOpen(true); 
+    if (!isModified) return;
+    setConfirmModalOpen(true);
   };
 
   const handleConfirmSave = () => {
@@ -74,10 +75,11 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
 
     onSave(updatedData);
     setConfirmModalOpen(false);
+    setIsModified(false);
   };
 
   const handleCancelSave = () => {
-    setConfirmModalOpen(false); 
+    setConfirmModalOpen(false);
   };
 
   if (loading) return <p>데이터를 불러오는 중...</p>;
@@ -87,21 +89,29 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
     <Container>
       <DataBlock>
         <Label>{t("Disease")}</Label>
-        <ListBox
-          isSelected={selectedField === "disease"}
-          onClick={() => setSelectedField("disease")}
-        >
-          <Input value={disease} onChange={(e) => setDisease(e.target.value)} />
+        <ListBox isSelected={selectedField === "disease"} onClick={() => setSelectedField("disease")}>
+          <Input
+            value={disease}
+            onChange={(e) => {
+              setDisease(e.target.value);
+              setIsModified(true);
+            }}
+            placeholder={t("e.g. diabetes, colic")}
+          />
         </ListBox>
       </DataBlock>
 
       <DataBlock>
         <Label>{t("Allergy")}</Label>
-        <ListBox
-          isSelected={selectedField === "allergy"}
-          onClick={() => setSelectedField("allergy")}
-        >
-          <Input value={allergy} onChange={(e) => setAllergy(e.target.value)} />
+        <ListBox isSelected={selectedField === "allergy"} onClick={() => setSelectedField("allergy")}>
+          <Input
+            value={allergy}
+            onChange={(e) => {
+              setAllergy(e.target.value);
+              setIsModified(true);
+            }}
+            placeholder={t("e.g. pollen, sellfish, peach")}
+          />
         </ListBox>
       </DataBlock>
 
@@ -115,7 +125,9 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
           }}
         >
           <Text>
-            {bloodPressure.contraction} / {bloodPressure.relaxation}
+            {bloodPressure.contraction && bloodPressure.relaxation
+              ? `${bloodPressure.contraction} / ${bloodPressure.relaxation}`
+              : "138 / 75"}
             <Unit> mmHg</Unit>
           </Text>
         </ListBox>
@@ -131,7 +143,9 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
           }}
         >
           <Text>
-            {bloodSugar.fasting} / {bloodSugar.postprandial}
+            {bloodSugar.fasting && bloodSugar.postprandial
+              ? `${bloodSugar.fasting} / ${bloodSugar.postprandial}`
+              : "90 / 164"}
             <Unit> mg/dL</Unit>
           </Text>
         </ListBox>
@@ -143,11 +157,20 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
           isSelected={selectedField === "medicineHistory"}
           onClick={() => setSelectedField("medicineHistory")}
         >
-          <Input value={medicineHistory} onChange={(e) => setMedicineHistory(e.target.value)} />
+          <Input
+            value={medicineHistory}
+            onChange={(e) => {
+              setMedicineHistory(e.target.value);
+              setIsModified(true);
+            }}
+            placeholder={t("e.g. Aspirin")}
+          />
         </ListBox>
       </DataBlock>
 
-       <SaveButton onClick={handleSave}>{t("Save")}</SaveButton>
+      <SaveButton onClick={handleSave} isModified={isModified}>
+        {t("Save")}
+      </SaveButton>
 
       {bpModalOpen && (
         <BloodPressurePart
@@ -155,6 +178,7 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
           onSave={(data) => {
             setBloodPressure(data);
             setBpModalOpen(false);
+            setIsModified(true);
           }}
         />
       )}
@@ -164,20 +188,22 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
           onSave={(data) => {
             setBloodSugar(data);
             setBsModalOpen(false);
+            setIsModified(true);
           }}
         />
       )}
 
-      {/* Modal을 사용한 저장 확인 */}
       <Modal isOpen={isConfirmModalOpen} toggle={handleCancelSave}>
         <ModalBox>
           <MessageText>
-            {t("Do you want to save your changes before exiting?").split('\n').map((line, i, arr) => (
-              <React.Fragment key={i}>
-              {line}
-              {i !== arr.length - 1 && <br />}
-              </React.Fragment>
-        ))}
+            {t("Do you want to save your changes before exiting?")
+              .split("\n")
+              .map((line, i, arr) => (
+                <React.Fragment key={i}>
+                  {line}
+                  {i !== arr.length - 1 && <br />}
+                </React.Fragment>
+              ))}
           </MessageText>
           <ButtonWrapper>
             <CancelButton onClick={handleCancelSave}>{t("Cancel")}</CancelButton>
@@ -185,7 +211,6 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
           </ButtonWrapper>
         </ModalBox>
       </Modal>
-      
     </Container>
   );
 };
@@ -220,7 +245,7 @@ const ListBox = styled.div<{ isSelected?: boolean }>`
 `;
 
 const Input = styled.input`
-  color: #434343;  
+  color: #434343;
   margin-left: -5px;
   font-size: 16px;
   font-weight: 400;
@@ -246,14 +271,14 @@ const Unit = styled.span`
   color: #434343;
 `;
 
-const SaveButton = styled.button`
+const SaveButton = styled.button<{ isModified: boolean }>`
   position: absolute;
   margin-top: 80px;
   padding: 13px;
   font-size: 18px;
   font-weight: 400;
-  background-color: #0097a7;
-  color: #fff;
+  background-color: ${(props) => (props.isModified ? "#0097a7" : "#cccccc")};
+  color: ${(props) => (props.isModified ? "#FFFFFF" : "#767676")};
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -261,12 +286,12 @@ const SaveButton = styled.button`
 `;
 
 const ModalBox = styled.div`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 10px;
   text-align: center;
   width: 316px;
   font-family: Pretendard;
-  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
   padding: 66px 0 0 0;
 `;
 
@@ -286,7 +311,7 @@ const ButtonWrapper = styled.div`
 
 const CancelButton = styled.button`
   flex: 1;
-  background-color: #F1F1F5;
+  background-color: #f1f1f5;
   border: none;
   border-radius: 0 0 0 10px;
   font-weight: 500;
