@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -6,7 +6,6 @@ import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
 import NoneRecord from "@/features/records/ui/NoneRecord";
 import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
-
 import { useTranslation } from "react-i18next";
 import { FloatingButton } from "@/shared/components/button/FloatingButton";
 import PlusIcon from "@/shared/assets/records/plus.svg?react";
@@ -108,7 +107,7 @@ export default function MedicalRecordList() {
       )}
       {hospitalList.length > 0 && (
         <FloatingButton
-  text="New"
+  text={t("New")}
   icon={<PlusIcon width = "12px" height ="12px"/>}
   to="/records/medicalrecord-add"
 />
@@ -119,11 +118,16 @@ export default function MedicalRecordList() {
         <Modal isOpen={true} toggle={() => setSelectedDeleteId(null)}>
           <ModalBox>
             <MessageText>
-              Do you want to delete <br /> this medical record?
+              {t("Do you want to delete this medical record?").split('\n').map((line, i, arr) => (
+              <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+              </React.Fragment>
+        ))}
             </MessageText>
             <ButtonWrapper>
-              <CancelButton onClick={() => setSelectedDeleteId(null)}>Cancel</CancelButton>
-              <ConfirmButton onClick={handleConfirmDelete}>Delete</ConfirmButton>
+              <CancelButton onClick={() => setSelectedDeleteId(null)}>{t("Cancel")}</CancelButton>
+              <ConfirmButton onClick={handleConfirmDelete}>{t("Delete")}</ConfirmButton>
             </ButtonWrapper>
           </ModalBox>
         </Modal>

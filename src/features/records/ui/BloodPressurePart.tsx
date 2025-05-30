@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onClose: () => void;
@@ -7,6 +8,7 @@ type Props = {
 };
 
 export default function BloodPressurePart({ onClose, onSave }: Props) {
+  const {t} =  useTranslation();
   const [contraction, setContraction] = useState("");
   const [relaxation, setRelaxation] = useState("");
   const [focusedInput, setFocusedInput] = useState<"contraction" | "relaxation" | null>(null);
@@ -21,7 +23,7 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
   return (
     <Overlay>
       <Container>
-        <SectionTitle>Blood Pressure</SectionTitle>
+        <SectionTitle>{t("Blood Pressure")}</SectionTitle>
 
         <Card>
           {/* Contraction */}
@@ -35,7 +37,7 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
                 onBlur={() => setFocusedInput(null)}
                 isFocused={focusedInput === "contraction"}
               />
-              <Label>Contraction</Label>
+              <Label>{t("Contraction")}</Label>
             </InputContainer>
           </Box>
 
@@ -50,14 +52,14 @@ export default function BloodPressurePart({ onClose, onSave }: Props) {
                 onBlur={() => setFocusedInput(null)}
                 isFocused={focusedInput === "relaxation"}
               />
-              <Label>Relaxation</Label>
+              <Label>{t("Relaxation")}</Label>
             </InputContainer>
           </Box>
         </Card>
 
         <UnitText>mmHg</UnitText>
 
-        <SaveButton onClick={handleSave}>Save</SaveButton>
+        <SaveButton onClick={handleSave}>{t("Save")}</SaveButton>
       </Container>
     </Overlay>
   );

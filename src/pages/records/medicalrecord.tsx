@@ -3,11 +3,13 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
 import MedicalRecordData from "@/features/records/ui/MedicalRecordData";
+import { useTranslation } from "react-i18next";
 
 
 export default function MedicalRecord() {
   const navigate = useNavigate();
   const { id } = useParams(); 
+  const {t} =  useTranslation()
 
   const handleEditIconPress = () => {
     navigate(`/records/medicalrecord-edit/${id}`);
@@ -26,7 +28,7 @@ export default function MedicalRecord() {
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Medical Record</HeaderTitle>
+        <HeaderTitle>{t("Medical Record")}</HeaderTitle>
         <EditIconWrapper onClick={handleEditIconPress}>
           <EditIcon width={20} height={20} />
         </EditIconWrapper>

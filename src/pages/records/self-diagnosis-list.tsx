@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
@@ -118,7 +118,7 @@ export default function DiagnosisList() {
       {diagnosisList.length > 0 && (
         
      <FloatingButton
-  text="New"
+  text={t("New")}
   icon={<AddIcon width = "20px" height ="20px" />}
   to="/self-diagnosis"
 />
@@ -129,11 +129,16 @@ export default function DiagnosisList() {
         <Modal isOpen={true} toggle={() => setSelectedDeleteId(null)}>
           <ModalBox>
             <MessageText>
-              Do you want to delete <br /> a Self-Diagnosis
+              {t("Do you want to delete a Self-Diagnosis").split('\n').map((line, i, arr) => (
+              <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+              </React.Fragment>
+        ))}
             </MessageText>
             <ButtonWrapper>
-              <CancelButton onClick={() => setSelectedDeleteId(null)}>Cancel</CancelButton>
-              <ConfirmButton onClick={handleConfirmDelete}>Delete</ConfirmButton>
+              <CancelButton onClick={() => setSelectedDeleteId(null)}>{t("Cancel")}</CancelButton>
+              <ConfirmButton onClick={handleConfirmDelete}>{t("Delete")}</ConfirmButton>
             </ButtonWrapper>
           </ModalBox>
         </Modal>

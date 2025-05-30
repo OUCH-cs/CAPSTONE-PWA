@@ -147,7 +147,7 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
         </ListBox>
       </DataBlock>
 
-       <SaveButton onClick={handleSave}>Save</SaveButton>
+       <SaveButton onClick={handleSave}>{t("Save")}</SaveButton>
 
       {bpModalOpen && (
         <BloodPressurePart
@@ -172,11 +172,16 @@ const HealthEditData: React.FC<Props> = ({ onSave }) => {
       <Modal isOpen={isConfirmModalOpen} toggle={handleCancelSave}>
         <ModalBox>
           <MessageText>
-            Do you want to save your <br /> changes before exiting?
+            {t("Do you want to save your changes before exiting?").split('\n').map((line, i, arr) => (
+              <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+              </React.Fragment>
+        ))}
           </MessageText>
           <ButtonWrapper>
-            <CancelButton onClick={handleCancelSave}>Cancel</CancelButton>
-            <ConfirmButton onClick={handleConfirmSave}>Save</ConfirmButton>
+            <CancelButton onClick={handleCancelSave}>{t("Cancel")}</CancelButton>
+            <ConfirmButton onClick={handleConfirmSave}>{t("Save")}</ConfirmButton>
           </ButtonWrapper>
         </ModalBox>
       </Modal>

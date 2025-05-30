@@ -1,14 +1,17 @@
 import styled from "@emotion/styled";
 import { useLanguage } from "@/shared/services/useLanguage";
 import theme from "@/shared/styles/theme";
+import { useTranslation } from "react-i18next";
 
 const TopHeader = () => {
   const { languageCode, handleLangChange } = useLanguage();
+  const {t} =  useTranslation();
+
 
   return (
     <Header>
       <Location>
-        <PageText>My page</PageText>
+        <PageText>{t("My page")}</PageText>
       </Location>
       <LangSelect value={languageCode} onChange={handleLangChange}>
         <option value="en-US">EN</option>
@@ -29,7 +32,7 @@ const Header = styled.div`
   align-items: center;
   padding: 16px 16px;
   margin-bottom: 40px;
-  position: relative; /* 부모 요소에 relative position 추가 */
+  position: relative; 
 `;
 
 const Location = styled.div`

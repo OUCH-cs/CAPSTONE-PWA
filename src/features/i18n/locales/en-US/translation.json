@@ -83,5 +83,31 @@
   "1-3 days": "1-3 days",
   "More than 3 days": "More than 3 days",
   "More than a week": "More than a week",
-  "More than a month": "More than a month"
+  "More than a month": "More than a month",
+  "Do you want to delete a Self-Diagnosis" : "Do you want to delete \n a Self-Diagnosis",
+  "Delete" : "Delete",
+  "New":"New",
+  "Do you want to delete this medical record?" : "Do you want to delete \n this medical record?" ,
+  "YY":"YY" ,
+  "MM":"MM",
+  "DD":"DD",
+  "Do you want to save your changes before exiting?" : "Do you want to save your \n changes before exiting?",
+  "Contraction": "Contraction",
+  "Fasting" : "Fasting",
+  "Relaxation":"Relaxation",
+  "Postprandial":"PostPrandial",
+  "My page":"My page",
+  "Edit Profile":"Edit Profile",
+  "male" : "male",
+  "female" : "female",
+  "country": {
+    "US": "United States",
+    "KO": "South Korea",
+    "JP": "Japan"
+  },
+  "select_country": "Select your country",
+  "Would you like to start Self-Diagnosis?" : "Would you like to starㅅ \n Self-Diagnosis?",
+  "Would you like to start Medical Record?" : "Would you like to start \n Medical Record?"
+
+
 }
