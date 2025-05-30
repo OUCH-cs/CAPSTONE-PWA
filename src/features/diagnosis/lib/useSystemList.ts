@@ -27,8 +27,6 @@ export const useSystemsList = () => {
     }
   }, [systems]);
 
-  console.log(selectedSystem)
-
   const toggleSystem = (system: string) => {
     setSelectedSystem(system);
   };
