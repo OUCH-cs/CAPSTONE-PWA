@@ -81,5 +81,29 @@
   "Do you want to stop\nthe self-diagnosis?": "자가진단을\n중지하시겠습니까?",
   "Prev": "이전",
   "Next": "다음",
-  "Save": "저장하기"
+  "Save": "저장하기",
+  "Do you want to delete a Self-Diagnosis":"자가진단을 \n 삭제하시겠습니까?",
+  "Delete": "삭제하기",
+  "New": "생성",
+  "Do you want to delete this medical record?" : "의료기록을 \n 삭제하시겠습니까?" ,
+  "YY":"연도",
+  "MM":"월",
+  "DD":"일",
+  "Do you want to save your changes before exiting?" : "변경사항을 \n 저장하시겠습니까?",
+  "Contraction": "수축기",
+  "Fasting" : "공복",
+  "Relaxation":"이완기",
+  "Postprandial":"식사후",
+  "My page": "마이페이지",
+  "Edit Profile":"프로필 수정",
+  "male":"남성",
+  "female":"여성",
+  "country": {
+    "US": "미국",
+    "KO": "대한민국",
+    "JP": "일본"
+  },
+  "select_country": "국가를 선택하세요",
+  "Would you like to start Self-Diagnosis?" : "자가진단을 \n 시작하시겠습니까?",
+  "Would you like to start Medical Record?" : "의료기록 작성을 \n 시작하시겠습니까?"
 }
