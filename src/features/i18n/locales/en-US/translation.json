@@ -97,12 +97,14 @@
   "female" : "female",
   "country": {
     "US": "United States",
-    "KO": "South Korea",
-    "JP": "Japan"
+    "KO": "Republic of Korea",
+    "JP": "Japan",
+    "ZH": "China"
   },
   "select_country": "Select your country",
   "Would you like to start Self-Diagnosis?" : "Would you like to starㅅ \n Self-Diagnosis?",
-  "Would you like to start Medical Record?" : "Would you like to start \n Medical Record?"
+  "Would you like to start Medical Record?" : "Would you like to start \n Medical Record?",
+  "Language Settings":"Language Settings"
 
 
 }
