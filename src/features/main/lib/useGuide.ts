@@ -2,7 +2,7 @@ import { useGetGuideCategories } from "./useGuideCategories";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { selectedCategoriesAtom } from "../service/guideAtoms";
-import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
+import { useLanguage } from "@/shared/services/useLanguage";
 
 /**
  * 가이드 카테고리를 관리하는 커스텀 훅입니다.
@@ -21,9 +21,8 @@ import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 
 
 export const useGuideCategories = () => {
-    const [languageCode] = useAtom(languageCodeAtom)
+    const {languageCode} =useLanguage();
     const { guideCategories = [], isLoading } = useGetGuideCategories(languageCode);
-  
     const [selectedCategories, setSelectedCategories] = useAtom(selectedCategoriesAtom);
   
     useEffect(() => {

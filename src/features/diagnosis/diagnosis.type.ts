@@ -94,13 +94,6 @@ export interface DiagnosisAlgorithm {
   };
 }
 
-export interface LanguageResponse<T> {
-  success: boolean;
-  code: string;
-  message: string;
-  data: T;
-}
-
 export interface NameCodeData {
   name: string;
   code: string;

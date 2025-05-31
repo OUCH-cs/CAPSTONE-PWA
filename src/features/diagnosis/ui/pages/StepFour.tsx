@@ -28,7 +28,7 @@ const StepFour = ({ onNext, onPrev }: StepProps) => {
           <Accordion.Header>
             <AccordionHeaderWrapper selected={!duration.length}>
               {duration.length
-                ? DURATION_LABELS[duration]
+                ? t(DURATION_LABELS[duration])
                 : t("Duration of symptoms")}
               {/* 아코디언 아이콘 컨테이너 */}
               <Accordion.Trigger>

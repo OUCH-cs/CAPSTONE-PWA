@@ -18,20 +18,21 @@ export const useGetGuideCategories = (
       };
 }
 
-
 export const useGetGuideQustion = (
-    categories: string, languageCode: string
-) => {
+    category: string,
+    languageCode: string
+  ) => {
+    const shouldFetch = !!category && category !== "" && languageCode !== "";
+  
     const { data, error, isLoading, mutate } = useSWR<GuideQnA[]>(
-        ['/categories', categories, languageCode], 
-        () => getGuideQustion(categories, languageCode) 
-    );    
-
+      shouldFetch ? ['/categories', category, languageCode] : null,
+      () => getGuideQustion(category, languageCode)
+    );
+  
     return {
-        data: data,
-        isLoading,
-        isError: error,
-        mutate,
-      };
-
-}
+      data,
+      isLoading,
+      isError: error,
+      mutate,
+    };
+  };

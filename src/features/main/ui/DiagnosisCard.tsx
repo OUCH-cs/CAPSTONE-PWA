@@ -12,8 +12,8 @@ const HomeDiagnosisCard = () => {
       <Card>
         <HomeDiagnosis/>
         <ResponsiveText>
-          <Trans i18nKey="selfDiagnosisMessage">
-            Let’s fill out the <span>self-diagnosis form</span> to explain your disease!
+          <Trans i18nKey="selfDiagnosisMessage" >
+            Let’s fill out the <span>self-diagnosis form</span><br />to explain your disease!
           </Trans>
         </ResponsiveText>
       </Card>
