@@ -1,6 +1,6 @@
 const COUNTRY_LIST = [
+  { code: "korea", name: "Republic of Korea", nationCode: "KO" },
   { code: "america", name: "United States", nationCode: "US" },
-  { code: "korea", name: "South Korea", nationCode: "KO" },
   { code: "china", name: "China", nationCode: "ZH" },
   { code: "japan", name: "Japan", nationCode: "JP" },
 ];
