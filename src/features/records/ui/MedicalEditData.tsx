@@ -15,11 +15,18 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
   const [formData, setFormData] = useState<HospitalRecord>(initialData);
   const [isDateSelectionOpen, setDateSelectionOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-   const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isModified, setIsModified] = useState(false);
 
   useEffect(() => {
     setFormData(initialData);
   }, [initialData]);
+
+  useEffect(() => {
+    const isChanged = JSON.stringify(formData) !== JSON.stringify(initialData);
+    setIsModified(isChanged);
+  }, [formData, initialData]);
+  
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -34,7 +41,9 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
   };
 
   const handleSave = () => {
-    setShowModal(true);
+     if (isModified) {
+      setShowModal(true);
+    }
   };
 
   const handleDateChange = (date: string) => {
@@ -118,7 +127,9 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
         </ListBox>
       </DataBlock>
 
-      <SaveButton onClick={handleSave}>{t("Save")}</SaveButton>
+      <SaveButton onClick={handleSave} isModified={isModified}>
+        {t("Save")}
+      </SaveButton>
 
        <Modal isOpen={showModal} toggle={handleCancelSave}>
         <ModalBox>
@@ -182,14 +193,14 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const SaveButton = styled.button`
+const SaveButton = styled.button<{ isModified: boolean }>`
   position: absolute;
   margin-top: 80px;
   padding: 13px;
   font-size: 18px;
   font-weight: 400;
-  background-color: #0097a7;
-  color: #fff;
+  background-color: ${(props) => (props.isModified ? "#0097a7" : "#E5E5EC")};
+  color: ${(props) => (props.isModified ? "#FFFFFF" : "#767676")};
   border: none;
   border-radius: 10px;
   cursor: pointer;

@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
-import NoneRecord from "@/features/records/ui/NoneRecord";
 import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
 import { useTranslation } from "react-i18next";
 import { FloatingButton } from "@/shared/components/button/FloatingButton";
@@ -82,7 +81,7 @@ export default function MedicalRecordList() {
       ) : error ? (
         <ErrorText>{error}</ErrorText>
       ) :  hospitalList.length === 0 ? (
-      <NoneRecord/>
+       <NoRecordText>{t("No Medical Record Yet")}</NoRecordText>
     ):(
         hospitalList.map((hospital) => (
           <div key={hospital.id}>
@@ -105,13 +104,11 @@ export default function MedicalRecordList() {
           </div>
         ))
       )}
-      {hospitalList.length > 0 && (
         <FloatingButton
-  text={t("New")}
-  icon={<PlusIcon width = "12px" height ="12px"/>}
-  to="/records/medicalrecord-add"
-/>
-      )}
+          text={t("New")}
+          icon={<PlusIcon width = "12px" height ="12px"/>}
+          to="/records/medicalrecord-add"
+        />
 
       {/* Modal 적용 부분 */}
       {selectedDeleteId !== null && (
@@ -260,4 +257,12 @@ const ConfirmButton = styled.button`
   font-weight: 500;
   padding: 16px;
   cursor: pointer;
+`;
+const NoRecordText = styled.p`
+  text-align: center;
+  margin-top: 303px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Pretendard;
 `;
