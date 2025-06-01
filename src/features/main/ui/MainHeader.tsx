@@ -2,15 +2,17 @@ import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import HomeLocation from "@/shared/assets/home/HomeLocation.svg?react";
 import { useLanguage } from "@/shared/services/useLanguage";
+import { useTranslation } from "react-i18next";
 
 const MainHeader = () => {
   const { languageCode, handleLangChange } = useLanguage();
+  const { t } = useTranslation();
 
   return (
     <Header>
       <Location>
         <HomeLocation width={"16px"} height={"21px"} />
-        <LocationText>Banseok-dong</LocationText>
+        <LocationText>{t("Sadong, Sangnok-gu")}</LocationText>
       </Location>
       <LangSelect value={languageCode} onChange={handleLangChange}>
         <option value="en-US">EN</option>
