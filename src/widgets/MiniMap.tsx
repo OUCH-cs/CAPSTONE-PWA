@@ -23,6 +23,7 @@ export default function MiniMap({ lat, lng, data }: MiniMapProps) {
         name: data.name,
         address: data.address,
         type: data.type,
+        tel: data.tel,
       },
     });
   };
