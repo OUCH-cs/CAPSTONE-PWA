@@ -10,7 +10,7 @@ import {
   selectedSymptomAtom,
   destinationAtom
 } from '@/features/diagnosis/service/selfDiagnosisAtoms';
-import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
+import { useLanguage } from "@/shared/services/useLanguage";
 import LoadingOverlay from "@/shared/components/overlay/LoadingOverlay";
 import LocationImg from "@/shared/assets/common/location.png";
 import { Button } from "@/shared/components/button/Button";
@@ -26,17 +26,17 @@ function RecommendPage() {
   const [symptom, setSymptom] = useAtom(selectedSymptomAtom);
   const [system, setSystem] = useAtom(selectedSystemAtom);
   const [condition, setCondition] = useAtom(selectedConditionAtom);
-  const [language] = useAtom(languageCodeAtom);
+  const {languageCode} =useLanguage();
   const [destination, setDestination] = useAtom(destinationAtom);
 
   const input: RecommendRequest = useMemo(
     () => ({
-      language,
+      language : languageCode,
       system,
       symptom,
       condition,
     }),
-    [system, symptom, condition, language]
+    [system, symptom, condition,languageCode,]
   );
 
   const shouldFetch = !!system && !!symptom;
@@ -75,16 +75,16 @@ function RecommendPage() {
         <>
           {response?.data.departments.map(
             (dept: Record<string, string>, index: number) => (
-              <Departments key={index}>- {dept[language]}</Departments>
+              <Departments key={index}>- {dept[languageCode]}</Departments>
             )
           )}
-          <Description>{response?.data.note[language]}</Description>
+          <Description>{response?.data.note[languageCode]}</Description>
         </>
       ) : (
         <>
-          <Departments>- {response?.data.system[language]}</Departments>
-          {response?.data.condition?.[language].length && (
-            <Departments>- {response?.data.condition[language]}</Departments>
+          <Departments>- {response?.data.system[languageCode]}</Departments>
+          {response?.data.condition?.[languageCode].length && (
+            <Departments>- {response?.data.condition[languageCode]}</Departments>
           )}
         </>
       )}

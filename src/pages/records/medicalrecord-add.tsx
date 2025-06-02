@@ -5,7 +5,7 @@ import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import MedicalAddData from "@/features/records/ui/MedicalAddData";
 import { initialMedicalFormData } from "@/features/records/consts/medicalConstants";
 import { addHospital } from "@/features/records/service/medicalDataApi";
-import Modal from "@/shared/components/modal/Modal";  // 새로 추가
+import Modal from "@/shared/components/modal/Modal";  
 import { formatDate } from "@/features/records/lib/DateForm";
 import { useTranslation } from "react-i18next";
 
@@ -17,13 +17,16 @@ type HospitalRecord = {
   treatmentSummary: string;
 };
 
+
 export default function MedicalRecordAdd() {
   const {t} =  useTranslation()
   const navigate = useNavigate();
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
   const [showModal, setShowModal] = useState(false);
+  const isFilled = medicalData.every((item) => item.value && item.value.trim() !== "");
 
   const handleConfirmSave = () => {
+     if (!isFilled) return;
     setShowModal(true);
   };
 
@@ -67,7 +70,9 @@ export default function MedicalRecordAdd() {
 
       <MedicalAddData onDataChange={setMedicalData} />
 
-      <SaveButton onClick={handleConfirmSave}>{t("Save")}</SaveButton>
+      <SaveButton onClick={handleConfirmSave} disabled={!isFilled}>
+      {t("Save")}
+      </SaveButton>
 
       {/* Modal 컴포넌트 사용 */}
       <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
@@ -125,17 +130,18 @@ const HeaderTitle = styled.h2`
   font-family: Pretendard;
 `;
 
-const SaveButton = styled.button`
+const SaveButton = styled.button<{ disabled: boolean }>`
   margin-top: 80px;
   padding: 13px;
   font-size: 18px;
   font-weight: 400;
-  background-color: #0097a7;
-  color: #fff;
+  background-color: ${({ disabled }) => (disabled ? "#E5E5EC" : "#0097a7")};
+  color: ${({ disabled }) => (disabled ? "#767676" : "#fff")};
   border: none;
   border-radius: 10px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   width: 100%;
+  transition: background-color 0.2s, color 0.2s;
 `;
 
 const ModalBox = styled.div`

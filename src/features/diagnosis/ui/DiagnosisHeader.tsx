@@ -5,14 +5,18 @@ import { useNavigate } from "react-router-dom";
 import Modal from "@/shared/components/modal/Modal";
 import useToggle from "@/shared/lib/useToggle";
 import { useTranslation } from "react-i18next";
+import { useSetAtom } from "jotai";
+import { selectedSystemAtom } from "../service/selfDiagnosisAtoms";
 
 function Header() {
   const { t } = useTranslation();
+  const setSelectedSystem = useSetAtom(selectedSystemAtom);
   const navigate = useNavigate();
   const { isOpen, toggle } = useToggle();
 
   const handlePrevClick = () => {
     toggle();
+    setSelectedSystem("");
     navigate(-1);
   };
 

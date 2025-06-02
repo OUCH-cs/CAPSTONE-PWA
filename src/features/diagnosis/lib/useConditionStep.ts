@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { selectedSystemAtom, selectedSymptomAtom } from "../service/selfDiagnosisAtoms";
-import { languageCodeAtom } from "@/shared/services/languageCodeAtom";
 import { useAlgorithm } from "./diagnosis-algorithm/useAlgorithm";
 import { DiagnosisAlgorithm } from "../diagnosis.type";
+import { useLanguage } from "@/shared/services/useLanguage";
 
 /**
  * 조건 기반(condition) 알고리즘 스텝 진입 여부를 판단하고, 관련 상태를 관리하는 커스텀 훅입니다.
@@ -27,7 +27,7 @@ import { DiagnosisAlgorithm } from "../diagnosis.type";
 export const useConditionStep = (onNext: () => void = () => {}) => {
   const [symptom] = useAtom(selectedSymptomAtom);
   const [system] = useAtom(selectedSystemAtom);
-  const [languageCode] = useAtom(languageCodeAtom)
+  const {languageCode} = useLanguage();
   const { algorithms = [] } = useAlgorithm();
   /**
     * 조건 스텝(three-step 알고리즘)을 보여줄지 여부를 관리하는 상태
@@ -42,11 +42,12 @@ export const useConditionStep = (onNext: () => void = () => {}) => {
   const [conditionData, setConditionData] = useState<DiagnosisAlgorithm[] | null>(null);
 
   const checkConditionsAndProceed = () => {
+    
     // symptom과 system이 정확히 일치하는 항목 필터링
     const matchingItems = algorithms.filter(
       (item) =>
-        item.system?.en === system &&
-        item.symptom?.en === symptom
+        item.system[languageCode] === system &&
+        item.symptom[languageCode] === symptom
     );
 
     // 그 중 type이 "three-step"인 항목이 하나라도 있으면 조건 스텝으로 이동
