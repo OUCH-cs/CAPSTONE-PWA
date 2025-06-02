@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import SearchDetailInfo from "@/features/search/ui/detail/SearchDetailInfo";
 import ContactFavoritePanel from "@/features/search/ui/detail/ContactFavoritePanel";
 import { getDetailInfo } from "@/features/search/services/api/searcApi";
+import MiniMap from "@/widgets/MiniMap";
 
 export default function SearchDetailPage() {
   const navigate = useNavigate();
@@ -15,8 +16,6 @@ export default function SearchDetailPage() {
   const { data, error } = useSWR(`/hospitals/${id}`, getDetailInfo, {
     dedupingInterval: 1000 * 60 * 60, // 1시간
   });
-
-  console.log(data);
 
   // 에러 예외 처리
   useEffect(() => {
@@ -33,6 +32,8 @@ export default function SearchDetailPage() {
           <SearchDetailHeader>{data.name}</SearchDetailHeader>
           <SearchDetailInfo {...data} />
           <ContactFavoritePanel tel={data.tel} />
+
+          {data && <MiniMap lat={data.lat} lng={data.lng} data={data} />}
         </Container>
       )}
     </>
