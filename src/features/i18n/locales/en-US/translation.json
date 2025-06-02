@@ -121,5 +121,7 @@
   "e.g. Aspirin": "e.g. Aspirin",
   "Sadong, Sangnok-gu": "Sadong, Sangnok-gu",
   "Search for Address": "Search for Address",
-  "Recommend":"Based on the analysis,\nwe'll recommend departments."
+  "Recommend":"Based on the analysis,\nwe'll recommend departments.",
+  "commingsoon": "This service is under development.\nWe'll see you soon!",
+  "commingback":"Back"
 }
