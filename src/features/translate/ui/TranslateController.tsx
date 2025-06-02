@@ -7,9 +7,12 @@ import TranslateSessionView from "./TranslateSessionView";
 import useToggle from "@/shared/lib/useToggle";
 import FinishTranslationModal from "./FinishTranslationModal";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function TranslateController() {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+  const languageCode = i18n.language; // 현재 언어 코드 가져오기
 
   const [isTranslating, setIsTranslating] = useState<boolean>(false);
   const [pc, setPc] = useState<RTCPeerConnection | null>(null);
@@ -27,7 +30,11 @@ export default function TranslateController() {
   // 통역 시작
   const handleStartTranslate = async () => {
     setIsTranslating(true);
-    const data = await apiRequest({ url: "/session", method: "POST" });
+    const data = await apiRequest({
+      // url: `/session/${languageCode}`,
+      url: `/session`,
+      method: "POST",
+    });
 
     const EPHEMERAL_KEY = data.data.client_secret.value; //임시 키 발급
 
