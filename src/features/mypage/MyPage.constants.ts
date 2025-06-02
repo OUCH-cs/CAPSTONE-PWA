@@ -7,7 +7,6 @@ const COUNTRY_LIST = [
 const LANGUAGE_LIST = [
   { name: "english", code: "en", label : "English (United States)"},
   { name: "korean", code: "ko", label : "한국어"},
-  { name: "japanese", code: "jp", label : "日本語" },
   { name: "chinese", code: "zh", label : "中文" },
 ];
 

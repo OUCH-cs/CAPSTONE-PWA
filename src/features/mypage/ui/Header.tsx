@@ -7,7 +7,6 @@ const languageLabelMap: Record<string, string> = {
   en: "ENG",
   ko: "한국어",
   zh: "中文",
-  jp: "日本語"
 };
 
 const TopHeader = () => {
