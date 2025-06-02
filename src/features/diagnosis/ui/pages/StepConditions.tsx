@@ -3,6 +3,7 @@ import * as S from '../common'
 import { StepConditionsProps } from "../../diagnosis.type";
 import { useConditionList } from "../../lib/useConditionList";
 import theme from "@/shared/styles/theme";
+import { useTranslation } from "react-i18next";
 
 
 export const StepConditions = ({
@@ -12,12 +13,12 @@ export const StepConditions = ({
   onNext,
   onPrev,
   }: StepConditionsProps) => {
-
+    const { t } = useTranslation();
     const { selectedCondition, allConditions, toggleCondition, } = useConditionList({system, symptom,languageCode});
 
     return (
         <S.Container>
-            <S.Question>When or how dose this symptom appear?</S.Question>
+            <S.Question>{t("When or how does this symptom appear?")}</S.Question>
             <ConditionContaniner>
               {allConditions.map((item)=>(
                 <ConditionItem

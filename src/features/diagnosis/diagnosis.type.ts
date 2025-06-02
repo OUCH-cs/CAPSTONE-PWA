@@ -75,30 +75,28 @@ export interface DiagnosisAlgorithm {
   system: {
     ko: string;
     en: string;
+    zh: string;
   };
   symptom: {
     ko: string;
     en: string;
+    zh: string;
   };
   condition: {
     ko: string;
     en: string;
+    zh: string;
   };
   departments: {
     ko: string;
     en: string;
+    zh: string;
   }[];
   note: {
     ko: string;
     en: string;
+    zh: string;
   };
-}
-
-export interface LanguageResponse<T> {
-  success: boolean;
-  code: string;
-  message: string;
-  data: T;
 }
 
 export interface NameCodeData {
