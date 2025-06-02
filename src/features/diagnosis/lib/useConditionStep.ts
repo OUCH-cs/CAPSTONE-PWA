@@ -42,11 +42,12 @@ export const useConditionStep = (onNext: () => void = () => {}) => {
   const [conditionData, setConditionData] = useState<DiagnosisAlgorithm[] | null>(null);
 
   const checkConditionsAndProceed = () => {
+    
     // symptom과 system이 정확히 일치하는 항목 필터링
     const matchingItems = algorithms.filter(
       (item) =>
-        item.system?.en === system &&
-        item.symptom?.en === symptom
+        item.system[languageCode] === system &&
+        item.symptom[languageCode] === symptom
     );
 
     // 그 중 type이 "three-step"인 항목이 하나라도 있으면 조건 스텝으로 이동
