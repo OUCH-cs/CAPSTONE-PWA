@@ -59,29 +59,33 @@ export default function HealthStatusData() {
         <>
           <DataLabel>
             <LabelText>{t("Disease")}</LabelText>
-            <List>{healthStatusData.disease}</List>
+            <List>{healthStatusData.disease || t("e.g. diabetes, colic")}</List>
           </DataLabel>
           <DataLabel>
             <LabelText>{t("Allergy")}</LabelText>
-            <List>{healthStatusData.allergy}</List>
+            <List>{healthStatusData.allergy || t("e.g. pollen, sellfish, peach")}</List>
           </DataLabel>
           <DataLabel>
             <LabelText>{t("Blood Pressure")}</LabelText>
             <List>
-              {formatMeasurement(healthStatusData.bloodPressure)}{" "}
+                {healthStatusData.bloodPressure
+                ? `${formatMeasurement(healthStatusData.bloodPressure)}`
+                : "138 / 75"}
               <Unit>mmHg</Unit>
             </List>
           </DataLabel>
           <DataLabel>
             <LabelText>{t("BloodSugar")}</LabelText>
             <List>
-              {formatMeasurement(healthStatusData.bloodSugar)}{" "}
+               {healthStatusData.bloodSugar
+              ? `${formatMeasurement(healthStatusData.bloodSugar)}`
+            : "90 / 164"}
               <Unit>mg/dL</Unit>
             </List>
           </DataLabel>
           <DataLabel>
             <LabelText>{t("MedicineHistory")}</LabelText>
-            <List>{healthStatusData.medicineHistory}</List>
+            <List>{healthStatusData.medicineHistory || t("e.g. Aspirin")}</List>
           </DataLabel>
         </>
       ) : (

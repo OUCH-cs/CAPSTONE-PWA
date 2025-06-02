@@ -7,7 +7,6 @@ import Modal from "@/shared/components/modal/Modal";
 import useToggle from "@/shared/lib/useToggle";
 import { useNavigate } from "react-router-dom";
 import theme from "@/shared/styles/theme";
-import { Button } from "@/shared/components/button/Button";
 import { useTranslation } from "react-i18next";
 
 const StepOne = ({ onNext }: StepProps) => {
@@ -58,43 +57,41 @@ const StepOne = ({ onNext }: StepProps) => {
 export default StepOne;
 
 const Wrapper = styled.div`
-  padding: 1rem;
-  background-color: ${theme.colors.white};
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 15rem;
-  width: 24rem;
-  overflow: hidden;
+  background-color: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+  width: 316px;
+  font-family: Pretendard;
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
+  padding: 66px 0 0 0;
 `;
 
 const Message = styled.p`
-  font-size: 1.3rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  width: 100%;
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
   text-align: center;
-  white-space: pre-line;
+  line-height: normal;
+  margin-bottom: 46px;
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  gap: 0.5rem;
 `;
 
-const ActionButton = styled(Button)<{ variant: "cancel" | "stop" }>`
+const ActionButton = styled.button<{ variant: "cancel" | "stop" }>`
   flex: 1;
   height: 48px;
+  border: none;
   border-radius: 0.75rem;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   background-color: ${({ variant, theme }) =>
     variant === "cancel" ? theme.colors.white_f1 : theme.colors.primary};
-  color: ${({ variant, theme }) =>
+  color: ${({ variant }) =>
     variant === "cancel" ? theme.colors.black : theme.colors.white};
+  border-radius: ${(props) =>
+    props.variant === "cancel" ? "0 0 0 10px" : "0 0 10px 0"};
 `;
