@@ -3,12 +3,16 @@ import { useNavigate } from "react-router-dom";
 import GenderSelect from "@/features/mypage/ui/GenderSelect";
 import CountryAccordionEdit from "@/features/mypage/ui/CountryAccordionEdit";
 import Modal from "@/shared/components/modal/Modal";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getInformation } from "@/features/mypage/service/MyPageApi";
 import { editInformation } from "@/features/mypage/service/MyPageApi"; 
 import { COUNTRY_LIST, LANGUAGE_LIST } from "@/features/mypage/MyPage.constants";
+import { useTranslation } from "react-i18next";
+
 
 const EditForm = () => {
+  const {t} =  useTranslation();
+
    const navigate = useNavigate();
   const [name, setName] = useState("");
   const [gender, setGender] = useState<"MALE" | "FEMALE">("MALE");
@@ -95,17 +99,22 @@ const EditForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <SaveButton type="submit">Save</SaveButton>
+        <SaveButton type="submit">{t("Save")}</SaveButton>
       </FormWrapper>
 
       <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
         <ModalBox>
           <MessageText>
-            Do you want to save your <br /> changes before exiting?
+            {t("Do you want to save your changes before exiting?").split('\n').map((line, i, arr) => (
+              <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+              </React.Fragment>
+        ))}
           </MessageText>
           <ButtonWrapper>
-            <CancelButton onClick={() => setShowModal(false)}>Cancel</CancelButton>
-            <ConfirmButton onClick={handleConfirmSave}>Save</ConfirmButton>
+            <CancelButton onClick={() => setShowModal(false)}>{t("Cancel")}</CancelButton>
+            <ConfirmButton onClick={handleConfirmSave}>{t("Save")}</ConfirmButton>
           </ButtonWrapper>
         </ModalBox>
       </Modal>

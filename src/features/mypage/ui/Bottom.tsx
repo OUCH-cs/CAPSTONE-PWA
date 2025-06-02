@@ -1,24 +1,36 @@
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
+import { useTranslation } from "react-i18next";
+import { useSetAtom } from "jotai";
+import { isAuthAtom } from "@/features/sign-in/services/atoms";
+import { useNavigate } from "react-router-dom";
 
+const Bottom = () => {
+  const {t} = useTranslation();
+  const navigate = useNavigate();
+  const setIsAuth = useSetAtom(isAuthAtom);
 
-const Bottom = ({ setIsAuth }: { setIsAuth: (value: boolean) => void }) => {
+  const handleLogout = () => {
+    setIsAuth(false);
+    navigate("/sign-in");
+  };
+
   return (
     <Header>
       <Section>
-        <TitleText>Notice</TitleText>
+        <TitleText>{t("Notice")}</TitleText>
         <StyledArrowIcon width="20px" height="20px" />
       </Section>
       <Section>
-        <TitleText>Feedback</TitleText>
+        <TitleText>{t("Feedback")}</TitleText>
         <StyledArrowIcon width="20px" height="20px" />
       </Section>
       <Section>
-        <TitleText>Customer Service</TitleText>
+        <TitleText>{t("Customer Service")}</TitleText>
         <StyledArrowIcon width="20px" height="20px" />
       </Section>
       <Section>
-        <LogoutButton onClick={() => setIsAuth(false)}>Log out</LogoutButton>
+        <LogoutButton onClick={handleLogout}>{t("Log out")}</LogoutButton>
       </Section>
     </Header>
   );
@@ -33,7 +45,7 @@ const Header = styled.div`
   box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
-  height:100vh;
+  height: 100vh;
 `;
 
 const Section = styled.div`
@@ -63,11 +75,10 @@ const StyledArrowIcon = styled(ArrowIcon)`
 
 const LogoutButton = styled.button`
   margin-top: 25px;
-  margin-left:16px;
+  margin-left: 16px;
   cursor: pointer;
   font-size: 16px;
-  color: #DC0000;
-  padding:0;
+  color: #dc0000;
+  padding: 0;
   background-color: transparent;
-  
 `;

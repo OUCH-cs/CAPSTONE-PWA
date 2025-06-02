@@ -1,25 +1,20 @@
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
 import MedicalRecordData from "@/features/records/ui/MedicalRecordData";
+import { useTranslation } from "react-i18next";
 
 
 export default function MedicalRecord() {
   const navigate = useNavigate();
   const { id } = useParams(); 
+  const {t} =  useTranslation()
 
   const handleEditIconPress = () => {
     navigate(`/records/medicalrecord-edit/${id}`);
   };
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);  
 
   // id가 없는 경우 예외 처리 
   if (!id) {
@@ -33,7 +28,7 @@ export default function MedicalRecord() {
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Medical Record</HeaderTitle>
+        <HeaderTitle>{t("Medical Record")}</HeaderTitle>
         <EditIconWrapper onClick={handleEditIconPress}>
           <EditIcon width={20} height={20} />
         </EditIconWrapper>
@@ -46,12 +41,10 @@ export default function MedicalRecord() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
   padding-bottom: 40px;
-  padding-top: 10px;
+  padding-top: 24px;
   margin-left: 16px;
   margin-right: 16px;
-  margin-top: 14px;
 `;
 
 const Header = styled.div`

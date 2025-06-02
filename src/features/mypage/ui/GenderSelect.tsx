@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 interface ControllerProps<T> {
   value: T;
   onChange: (value: T) => void;
@@ -9,6 +10,8 @@ export default function GenderSelect({
   value,
   onChange,
 }: ControllerProps<"MALE" | "FEMALE">) {
+  const {t} =  useTranslation();
+
   return (
     <GenderSelectWrapper>
       <GenderSelectItem
@@ -17,7 +20,7 @@ export default function GenderSelect({
         onClick={() => onChange("MALE")}
       >
         <GenderSelectContent isSelected={value === "MALE"}>
-          male
+          {t("male")}
         </GenderSelectContent>
       </GenderSelectItem>
       <GenderSelectItem
@@ -26,7 +29,7 @@ export default function GenderSelect({
         onClick={() => onChange("FEMALE")}
       >
         <GenderSelectContent isSelected={value === "FEMALE"}>
-          female
+          {t("female")}
         </GenderSelectContent>
       </GenderSelectItem>
     </GenderSelectWrapper>

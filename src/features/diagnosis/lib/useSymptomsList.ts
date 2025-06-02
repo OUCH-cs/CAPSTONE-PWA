@@ -1,8 +1,8 @@
 import { useFormContext } from "react-hook-form";
 import { useSymptoms } from "./diagnosis-algorithm/useSymptoms";
 import { useAtom } from "jotai";
-import { selectedSystemAtom, selectedSymptomAtom,languageCodeAtom } from "@/features/diagnosis/service/selfDiagnosisAtoms";
-
+import { selectedSystemAtom, selectedSymptomAtom} from "@/features/diagnosis/service/selfDiagnosisAtoms";
+import { useLanguage } from "@/shared/services/useLanguage";
 
 /**
  * 증상(Symptoms) 리스트를 가져오고 선택 상태를 관리하는 커스텀 훅입니다.
@@ -16,7 +16,7 @@ import { selectedSystemAtom, selectedSymptomAtom,languageCodeAtom } from "@/feat
 */
 
 export const useSymptomsList = () => {
-  const [languageCode]=useAtom(languageCodeAtom)
+  const {languageCode} = useLanguage();
   const [selectedSystem] = useAtom(selectedSystemAtom);
   const [selectedSymptom, setSelectedSymptom] = useAtom(selectedSymptomAtom);
   const { setValue } = useFormContext<{ symptom: string }>();

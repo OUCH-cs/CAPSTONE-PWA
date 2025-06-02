@@ -1,14 +1,24 @@
 import styled from "@emotion/styled";
+import theme from "@/shared/styles/theme";
 import HomeLocation from "@/shared/assets/home/HomeLocation.svg?react";
+import { useLanguage } from "@/shared/services/useLanguage";
+import { useTranslation } from "react-i18next";
 
 const MainHeader = () => {
+  const { languageCode, handleLangChange } = useLanguage();
+  const { t } = useTranslation();
+
   return (
     <Header>
       <Location>
         <HomeLocation width={"16px"} height={"21px"} />
-        <LocationText>Banseok-dong</LocationText>
+        <LocationText>{t("Sadong, Sangnok-gu")}</LocationText>
       </Location>
-      <LangText>ENG</LangText>
+      <LangSelect value={languageCode} onChange={handleLangChange}>
+        <option value="en">ENG</option>
+        <option value="ko">한국어</option>
+        <option value="zh">中文</option>
+      </LangSelect>
     </Header>
   );
 };
@@ -21,7 +31,7 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.3rem;
 `;
 
 const Location = styled.div`
@@ -34,6 +44,9 @@ const LocationText = styled.p`
   margin-left: 0.5rem;
 `;
 
-const LangText = styled.p`
-  font-size: 1.4rem;
+const LangSelect = styled.select`
+  position: relative;
+  font-size: 1.3rem;
+  background-color: ${theme.colors.background};
+  cursor: pointer;
 `;

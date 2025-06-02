@@ -1,16 +1,23 @@
 import styled from "@emotion/styled";
-import Option from "@/shared/assets/mypage/option.svg?react";
+import { useLanguage } from "@/shared/services/useLanguage";
+import theme from "@/shared/styles/theme";
+import { useTranslation } from "react-i18next";
 
 const TopHeader = () => {
+  const { languageCode, handleLangChange } = useLanguage();
+  const {t} =  useTranslation();
+
+
   return (
     <Header>
       <Location>
-        <PageText>My page</PageText>
+        <PageText>{t("My page")}</PageText>
       </Location>
-      <LangText>ENG</LangText>
-      <OptionWrapper>
-        <Option width="20px" height="20px" />
-      </OptionWrapper>
+      <LangSelect value={languageCode} onChange={handleLangChange}>
+        <option value="en-US">EN</option>
+        <option value="ko-KR">한국어</option>
+        <option value="zh-CN">中文</option>
+      </LangSelect>
     </Header>
   );
 };
@@ -25,7 +32,7 @@ const Header = styled.div`
   align-items: center;
   padding: 16px 16px;
   margin-bottom: 40px;
-  position: relative; /* 부모 요소에 relative position 추가 */
+  position: relative; 
 `;
 
 const Location = styled.div`
@@ -35,19 +42,11 @@ const Location = styled.div`
 const PageText = styled.p`
   font-size: 20px;
   font-weight: 500;
-  white-space: nowrap; 
+  white-space: nowrap;
 `;
 
-const LangText = styled.p`
-  font-size: 16px;
-  font-weight: 400;
-  margin-right: 30px; 
-  white-space: nowrap; 
-`;
-
-const OptionWrapper = styled.div`
-  position: absolute;
-  right: 16px; 
-  top: 30px;
-  transform: translateY(-50%); 
+const LangSelect = styled.select`
+  font-size: 1.3rem;
+  background-color: ${theme.colors.background};
+  cursor: pointer;
 `;

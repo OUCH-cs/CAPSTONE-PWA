@@ -8,24 +8,24 @@ import MuteToggleButton from "@/entities/translate/ui/MuteToggleButton";
 
 interface GuideFunnelModalProps {
   isOpen: boolean;
-  toggle: () => void;
+  funnelModalToggle: () => void;
   isMuted: boolean;
   toggleMuted: () => void;
 }
 
 export default function GuideFunnelModal({
   isOpen,
-  toggle,
+  funnelModalToggle,
   isMuted,
   toggleMuted,
 }: GuideFunnelModalProps) {
   const { Funnel, Step, setStep, currentStep } = useFunnel(STEPS[0]); // 퍼널 렌더링
 
   return (
-    <Modal isOpen={isOpen} toggle={toggle}>
+    <Modal isOpen={isOpen} toggle={funnelModalToggle}>
       <ModalWrapper>
         {/* 닫기 버튼 */}
-        <ClosedIconWrapper onClick={toggle}>
+        <ClosedIconWrapper onClick={funnelModalToggle}>
           <ClosedIcon />
         </ClosedIconWrapper>
 
@@ -44,6 +44,7 @@ export default function GuideFunnelModal({
           Funnel={Funnel}
           Step={Step}
           currentStep={currentStep}
+          funnelModalToggle={funnelModalToggle}
         />
       </ModalWrapper>
     </Modal>

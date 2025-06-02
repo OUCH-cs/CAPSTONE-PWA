@@ -2,12 +2,14 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import DateSelection from "./DateSelection";
 import { initialMedicalFormData } from "../consts/medicalConstants";
+import { useTranslation } from "react-i18next";
 
 interface MedicalAddDataProps {
   onDataChange: (data: any) => void; 
 }
 
 export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
+  const {t} = useTranslation();
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
   const [dateModalOpen, setDateModalOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -36,7 +38,7 @@ export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
 
         return (
           <div key={index}>
-            <Label>{item.title}</Label>
+            <Label>{t(item.title)}</Label>
 
             {item.title === "Date of Visit" ? (
               <List
@@ -46,13 +48,16 @@ export default function MedicalAddData({ onDataChange }: MedicalAddDataProps) {
                   setDateModalOpen(true);
                 }}
               >
-                <DateText isFilled={!!item.value}>{item.value}</DateText>
+                <DateText isFilled={!!item.value}>
+                {item.value || t(item.placeholder)} {/* 비어 있을 땐 placeholder 보이기 */}
+                </DateText>
               </List>
             ) : (
               <List isSelected={isSelected} onClick={() => setSelectedIndex(index)}>
                 <Input
                   type="text"
                   value={item.value}
+                   placeholder={t(item.placeholder)} //  여기 추가
                   onChange={(e) => handleInputChange(e, index)}
                 />
               </List>
@@ -105,10 +110,10 @@ const DateText = styled.span<{ isFilled: boolean }>`
   color: ${(props) => (props.isFilled ? "#434343" : "#767676")};
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ isFilled?: boolean }>`
   font-size: 16px;
   font-weight: 400;
-  color: #434343;
+  color: ${(props) => (props.isFilled ? "#434343" : "#767676")};
   font-family: Pretendard;
   outline: none;
   border: none;

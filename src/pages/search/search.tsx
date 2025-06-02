@@ -12,6 +12,8 @@ import {
   searchTypeAtom,
 } from "@/features/search/services/store/filterAtom";
 import NoSearchResults from "@/features/search/ui/NoSearchResults";
+import MapIcon from "@/shared/assets/map/map.svg?react";
+import { FloatingButton } from "@/shared/components/button/FloatingButton";
 
 function SearchPage() {
   const currLocation = fallbackLocaton; // 임시 위치 설정 하드코딩
@@ -58,6 +60,15 @@ function SearchPage() {
         currLocation={currLocation}
         // 구글 맵 없애기 전까지 임시로 타입 확언
         places={nearbyPlaces as NearbyPlacesResponse[]}
+      />
+
+      {/* 지도 라우팅 플로팅 버튼 */}
+      <FloatingButton
+        text="View Map"
+        icon={<MapIcon />}
+        to="/map"
+        width="120px"
+        height="46px"
       />
     </Container>
   );

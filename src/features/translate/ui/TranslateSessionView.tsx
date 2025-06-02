@@ -5,6 +5,7 @@ import { Button } from "@/shared/components/button/Button";
 import useToggle from "@/shared/lib/useToggle";
 import styled from "@emotion/styled";
 import GuideFunnelModal from "./guide/GuideFunnelModal";
+import { useTranslation } from "react-i18next";
 
 interface TranslateSessionViewProps {
   isMuted: boolean;
@@ -17,14 +18,15 @@ export default function TranslateSessionView({
   toggleMuted,
   toggle,
 }: TranslateSessionViewProps) {
-  const { isOpen: isFunnelModalOpen, toggle: isFunnelModalToggle } =
-    useToggle(); // 통역 가이드 퍼털 모달 토글 훅
+  const { t } = useTranslation();
+
+  const { isOpen: isFunnelModalOpen, toggle: funnelModalToggle } = useToggle(); // 통역 가이드 퍼털 모달 토글 훅
 
   return (
     <>
       <Container>
         {/* 가이드 라우팅 버튼 */}
-        <GuideRoutingButton toggle={isFunnelModalToggle} />
+        <GuideRoutingButton toggle={funnelModalToggle} />
 
         {/* 통역 마이크 아이콘 */}
         <TranslateMicIndicator />
@@ -38,14 +40,14 @@ export default function TranslateSessionView({
 
         {/* 종료 버튼 */}
         <Button width={112} height={52} onClick={toggle}>
-          Finish
+          {t("Finish")}
         </Button>
       </Container>
 
       {/* 통역 가이드 퍼널 모달 */}
       <GuideFunnelModal
         isOpen={isFunnelModalOpen}
-        toggle={isFunnelModalToggle}
+        funnelModalToggle={funnelModalToggle}
         isMuted={isMuted}
         toggleMuted={toggleMuted}
       />

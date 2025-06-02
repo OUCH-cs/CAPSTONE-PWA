@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Modal from "@/shared/components/modal/Modal";
 import theme from "@/shared/styles/theme";
+import { useTranslation } from "react-i18next";
 
 interface FinishTranslationModalProps {
   isOpen: boolean;
@@ -13,14 +14,17 @@ export default function FinishTranslationModal({
   toggle,
   finishTranslate,
 }: FinishTranslationModalProps) {
+  const { t } = useTranslation();
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
       <ModalWrapper>
-        <Title>Are you sure you want to finish the interpretation?</Title>
+        <Title>
+          {t("Are you sure you want to finish the interpretation?")}
+        </Title>
 
         <ButtonWrapper>
-          <CancelButton onClick={toggle}>Cancel</CancelButton>
-          <FinishButton onClick={finishTranslate}>Finish</FinishButton>
+          <CancelButton onClick={toggle}>{t("Cancel")}</CancelButton>
+          <FinishButton onClick={finishTranslate}>{t("Finish")}</FinishButton>
         </ButtonWrapper>
       </ModalWrapper>
     </Modal>

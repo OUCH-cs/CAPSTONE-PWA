@@ -1,12 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import MedicalAddData from "@/features/records/ui/MedicalAddData";
 import { initialMedicalFormData } from "@/features/records/consts/medicalConstants";
 import { addHospital } from "@/features/records/service/medicalDataApi";
-import Modal from "@/shared/components/modal/Modal";  // 새로 추가
+import Modal from "@/shared/components/modal/Modal";  
 import { formatDate } from "@/features/records/lib/DateForm";
+import { useTranslation } from "react-i18next";
 
 type HospitalRecord = {
   visitDate: string;
@@ -16,12 +17,16 @@ type HospitalRecord = {
   treatmentSummary: string;
 };
 
+
 export default function MedicalRecordAdd() {
+  const {t} =  useTranslation()
   const navigate = useNavigate();
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
   const [showModal, setShowModal] = useState(false);
+  const isFilled = medicalData.every((item) => item.value && item.value.trim() !== "");
 
   const handleConfirmSave = () => {
+     if (!isFilled) return;
     setShowModal(true);
   };
 
@@ -60,23 +65,29 @@ export default function MedicalRecordAdd() {
         <BackButton onClick={() => navigate("/records/medicalrecord-list")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
-        <HeaderTitle>Medical Record</HeaderTitle>
+        <HeaderTitle>{t("Medical Record")}</HeaderTitle>
       </Header>
 
       <MedicalAddData onDataChange={setMedicalData} />
 
-      <SaveButton onClick={handleConfirmSave}>Save</SaveButton>
+      <SaveButton onClick={handleConfirmSave} disabled={!isFilled}>
+      {t("Save")}
+      </SaveButton>
 
       {/* Modal 컴포넌트 사용 */}
       <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
         <ModalBox>
           <MessageText>
-            Do you want to save your <br />
-            changes before exiting?
+            {t("Do you want to save your changes before exiting?").split('\n').map((line, i, arr) => (
+              <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+              </React.Fragment>
+        ))}
           </MessageText>
           <ButtonWrapper>
-            <CancelButton onClick={() => setShowModal(false)}>Cancel</CancelButton>
-            <ConfirmButton onClick={handleRealSave}>Save</ConfirmButton>
+            <CancelButton onClick={() => setShowModal(false)}>{t("Cancel")}</CancelButton>
+            <ConfirmButton onClick={handleRealSave}>{t("Save")}</ConfirmButton>
           </ButtonWrapper>
         </ModalBox>
       </Modal>
@@ -86,9 +97,8 @@ export default function MedicalRecordAdd() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  padding-bottom: 40px;
   position: relative;
-  margin-top: 28px;
+  padding-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
 `;
@@ -120,17 +130,18 @@ const HeaderTitle = styled.h2`
   font-family: Pretendard;
 `;
 
-const SaveButton = styled.button`
-  margin-top: 100px;
+const SaveButton = styled.button<{ disabled: boolean }>`
+  margin-top: 80px;
   padding: 13px;
   font-size: 18px;
   font-weight: 400;
-  background-color: #0097a7;
-  color: #fff;
+  background-color: ${({ disabled }) => (disabled ? "#E5E5EC" : "#0097a7")};
+  color: ${({ disabled }) => (disabled ? "#767676" : "#fff")};
   border: none;
   border-radius: 10px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   width: 100%;
+  transition: background-color 0.2s, color 0.2s;
 `;
 
 const ModalBox = styled.div`

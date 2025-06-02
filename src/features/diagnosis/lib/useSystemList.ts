@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useSystems } from "./diagnosis-algorithm/useSystems";
 import { useAtom } from "jotai";
-import { selectedSystemAtom,languageCodeAtom } from "../service/selfDiagnosisAtoms";
+import { selectedSystemAtom} from "../service/selfDiagnosisAtoms";
+import { useLanguage } from "@/shared/services/useLanguage";
 
 /**
  * 시스템(systems) 리스트를 가져오고 선택 상태를 관리하는 커스텀 훅입니다.
@@ -16,15 +17,15 @@ import { selectedSystemAtom,languageCodeAtom } from "../service/selfDiagnosisAto
 */
 
 export const useSystemsList = () => {
-  const [languageCode]=useAtom(languageCodeAtom)
+  const {languageCode} = useLanguage();
   const { systems = [], isLoading } = useSystems(languageCode);
   const [selectedSystem, setSelectedSystem] = useAtom(selectedSystemAtom);
-
+  
   useEffect(() => {
     if (systems.length > 0 && !selectedSystem) {
       setSelectedSystem(systems[0]); // 기본 선택
     }
-  }, [systems, selectedSystem, setSelectedSystem]);
+  }, [systems]);
 
   const toggleSystem = (system: string) => {
     setSelectedSystem(system);

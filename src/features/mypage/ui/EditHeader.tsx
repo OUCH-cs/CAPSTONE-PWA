@@ -1,14 +1,17 @@
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const EditHeader = () => {
+  const {t} =  useTranslation();
+
   return (
     <Header>
       <BackLink to="/mypage">
         <ArrowIcon width="25px" height="25px" stroke="black" />
       </BackLink>
-      <TitleText>Edit Profile</TitleText>
+      <TitleText>{t("Edit Profile")}</TitleText>
     </Header>
   );
 };

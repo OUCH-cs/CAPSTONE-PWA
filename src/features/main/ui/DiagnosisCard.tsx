@@ -3,14 +3,18 @@ import styled from "@emotion/styled";
 import theme from "@/shared/styles/theme";
 import { Link } from "react-router-dom";
 import HomeDiagnosis from "@/shared/assets/home/HomeDiagnosis";
+import { Trans} from "react-i18next";
 
 const HomeDiagnosisCard = () => {
+
   return (
     <StyledLink to="/self-diagnosis">
       <Card>
         <HomeDiagnosis/>
         <ResponsiveText>
-          Let’s fill out the <span>self-diagnosis form</span> to explain your disease!
+          <Trans i18nKey="selfDiagnosisMessage" >
+            Let’s fill out the <span>self-diagnosis form</span><br />to explain your disease!
+          </Trans>
         </ResponsiveText>
       </Card>
     </StyledLink>

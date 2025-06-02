@@ -4,20 +4,16 @@ import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import MedicalEditData from "@/features/records/ui/MedicalEditData";
 import styled from "@emotion/styled";
 import { getMedicalRecordById, editHospitals, HospitalRecord } from "@/features/records/service/medicalDataApi";
+import { useTranslation } from "react-i18next";
+
 
 const MedicalRecordEdit: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-
+  const {t} =  useTranslation()
   const [hospitalRecord, setHospitalRecord] = useState<HospitalRecord | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);  
 
   // id로 기존 데이터 불러오기
   useEffect(() => {
@@ -60,7 +56,7 @@ const MedicalRecordEdit: React.FC = () => {
         <BackButton onClick={() => navigate(`/records/medicalrecord/${hospitalRecord.id}`)}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Medical Record</HeaderTitle>
+        <HeaderTitle>{t("Medical Record")}</HeaderTitle>
       </Header>
 
       <div>
@@ -74,12 +70,9 @@ const MedicalRecordEdit: React.FC = () => {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
-  padding-bottom: 40px;
-  padding-top: 10px;
+  padding-top: 24px;
   margin-left: 16px;
   margin-right: 16px;
-  margin-top: 14px;
 `;
 
 const Header = styled.div`

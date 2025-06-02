@@ -2,13 +2,16 @@ import styled from "@emotion/styled";
 import Like from "@/shared/assets/mypage/like.svg?react";
 import Favorite from "@/shared/assets/mypage/favorite.svg?react";
 import Review from "@/shared/assets/mypage/review.svg?react";
+import { useTranslation } from "react-i18next";
 
 const Action = () => {
+  const {t} = useTranslation()
+
   return (
     <Header>
-      <Section><Review width = "24px" height = "24px"></Review><TitleText>Review</TitleText></Section>
-      <SectionMid><Like width = "24px" height = "24px"></Like><TitleText>Like</TitleText></SectionMid>
-      <Section><Favorite width = "24px" height = "24px"></Favorite><TitleText>Favorite</TitleText></Section>
+      <Section><Review width = "24px" height = "24px"></Review><TitleText>{t("Review")}</TitleText></Section>
+      <SectionMid><Like width = "24px" height = "24px"></Like><TitleText>{t("Like")}</TitleText></SectionMid>
+      <Section><Favorite width = "24px" height = "24px"></Favorite><TitleText>{t("Favorite")}</TitleText></Section>
     </Header>
   );
 };

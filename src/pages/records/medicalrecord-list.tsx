@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import DeleteIcon from "@/shared/assets/common/delete-icon.svg?react";
 import { getHospitals, deleteHospitals } from "@/features/records/service/medicalDataApi";
 import Modal from "@/shared/components/modal/Modal"; // Modal 컴포넌트 import
+import { useTranslation } from "react-i18next";
+import { FloatingButton } from "@/shared/components/button/FloatingButton";
+import PlusIcon from "@/shared/assets/records/plus.svg?react";
+import { useSetAtom } from "jotai";
+import { isAuthAtom } from "@/features/sign-in/services/atoms";
+
 
 type HospitalRecord = {
   id: number;
@@ -13,39 +19,39 @@ type HospitalRecord = {
 };
 
 export default function MedicalRecordList() {
+  const {t} =  useTranslation()
   const navigate = useNavigate();
   const [hospitalList, setHospitalList] = useState<HospitalRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedDeleteId, setSelectedDeleteId] = useState<number | null>(null);
+  const setIsAuth = useSetAtom(isAuthAtom);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
     fetchHospitalData();
-    return () => {
-      document.body.style.overflow = '';
-    };
   }, []);
 
   const fetchHospitalData = async () => {
-    try {
-      const res = await getHospitals();
-      if (res.data) {
-        setHospitalList(res.data);
-        setError(null);
-      } else {
-        throw new Error("응답 데이터가 없습니다.");
-      }
-    } catch (error: any) {
-      if (error.response) {
-        setError(`서버 오류: ${error.response.status} - ${error.response.data.message || "의료기록을 불러오는 데 실패했습니다."}`);
-      } else {
-        setError("네트워크 오류 또는 서버와 연결할 수 없습니다.");
-      }
+  try {
+    setLoading(true);
+    const res = await getHospitals();
+    if (res.data) {
+      setHospitalList(res.data);
+      setError(null);
+    } else {
+      throw new Error("응답 데이터가 없습니다.");
+    }
+  } catch (error: any) {
+   localStorage.removeItem("accessToken");
+      setIsAuth(false);
+      alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+      navigate("/sign-in");
+      return;
     } finally {
       setLoading(false);
     }
   };
+
 
   const handleConfirmDelete = async () => {
     if (selectedDeleteId !== null) {
@@ -67,14 +73,16 @@ export default function MedicalRecordList() {
         <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" style={{ marginLeft: -20 }} />
         </BackButton>
-        <HeaderTitle>Medical Record</HeaderTitle>
+        <HeaderTitle>{t("Medical Record")}</HeaderTitle>
       </Header>
 
       {loading ? (
         <p>불러오는 중...</p>
       ) : error ? (
         <ErrorText>{error}</ErrorText>
-      ) : (
+      ) :  hospitalList.length === 0 ? (
+       <NoRecordText>{t("No Medical Record Yet")}</NoRecordText>
+    ):(
         hospitalList.map((hospital) => (
           <div key={hospital.id}>
             <DateWrapper>
@@ -96,19 +104,27 @@ export default function MedicalRecordList() {
           </div>
         ))
       )}
-
-      <FabButton onClick={() => navigate("/records/medicalrecord-add")}>+ New</FabButton>
+        <FloatingButton
+          text={t("New")}
+          icon={<PlusIcon width = "12px" height ="12px"/>}
+          to="/records/medicalrecord-add"
+        />
 
       {/* Modal 적용 부분 */}
       {selectedDeleteId !== null && (
         <Modal isOpen={true} toggle={() => setSelectedDeleteId(null)}>
           <ModalBox>
             <MessageText>
-              Do you want to delete <br /> this medical record?
+              {t("Do you want to delete this medical record?").split('\n').map((line, i, arr) => (
+              <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+              </React.Fragment>
+        ))}
             </MessageText>
             <ButtonWrapper>
-              <CancelButton onClick={() => setSelectedDeleteId(null)}>Cancel</CancelButton>
-              <ConfirmButton onClick={handleConfirmDelete}>Delete</ConfirmButton>
+              <CancelButton onClick={() => setSelectedDeleteId(null)}>{t("Cancel")}</CancelButton>
+              <ConfirmButton onClick={handleConfirmDelete}>{t("Delete")}</ConfirmButton>
             </ButtonWrapper>
           </ModalBox>
         </Modal>
@@ -118,13 +134,15 @@ export default function MedicalRecordList() {
 }
 
 const Container = styled.div`
+flex: 1;
   background-color: #f5f9fc;
-  min-height: 100vh;
   padding-bottom: 40px;
   position: relative;
-  margin-top: 28px;
+  padding-top: 28px;
   margin-left: 16px;
   margin-right: 16px;
+  min-height: 100vh; /* 고정 height 삭제하고 최소 높이로 변경 */
+  overflow-y: auto; /* ✅ 세로 스크롤 추가 */
 `;
 
 const Header = styled.div`
@@ -187,21 +205,6 @@ const ListText = styled.span`
   color: #000;
 `;
 
-const FabButton = styled.button`
-  position: absolute;
-  bottom: 90px;
-  right: 24px;
-  background-color: #0097a7;
-  border-radius: 24px;
-  padding: 12px 16px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: Pretendard;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
-`;
 
 const ErrorText = styled.p`
   color: red;
@@ -254,4 +257,12 @@ const ConfirmButton = styled.button`
   font-weight: 500;
   padding: 16px;
   cursor: pointer;
+`;
+const NoRecordText = styled.p`
+  text-align: center;
+  margin-top: 303px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Pretendard;
 `;

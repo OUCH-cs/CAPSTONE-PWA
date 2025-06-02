@@ -4,19 +4,14 @@ import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import { getHealthStatus, editHealthStatus, HealthStatus } from "@/features/records/service/healthDataApi";
 import HealthEditData from "@/features/records/ui/HealthEditData"; 
+import { useTranslation } from "react-i18next";
 
 const HealthStatusEdit: React.FC = () => {
   const navigate = useNavigate();
-
+  const {t} =  useTranslation();
   const [healthStatus, setHealthStatus] = useState<HealthStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +53,7 @@ const HealthStatusEdit: React.FC = () => {
         <BackButton onClick={() => navigate("/records/healthstatus")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Health Status</HeaderTitle>
+        <HeaderTitle>{t("Health Status")}</HeaderTitle>
       </Header>
 
       <div>
@@ -70,9 +65,7 @@ const HealthStatusEdit: React.FC = () => {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
-  padding: 10px 16px 40px;
-  margin-top: 14px;
+  padding: 24px 16px 40px;
 `;
 
 const Header = styled.div`

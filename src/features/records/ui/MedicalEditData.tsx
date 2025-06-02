@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { HospitalRecord } from "@/features/records/service/medicalDataApi";
 import DateSelection from "./DateSelection";
 import Modal from "@/shared/components/modal/Modal";
+import { useTranslation } from "react-i18next";
 
 interface MedicalEditDataProps {
   initialData: HospitalRecord;
@@ -10,14 +11,22 @@ interface MedicalEditDataProps {
 }
 
 const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }) => {
+  const {t} = useTranslation();
   const [formData, setFormData] = useState<HospitalRecord>(initialData);
   const [isDateSelectionOpen, setDateSelectionOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-   const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isModified, setIsModified] = useState(false);
 
   useEffect(() => {
     setFormData(initialData);
   }, [initialData]);
+
+  useEffect(() => {
+    const isChanged = JSON.stringify(formData) !== JSON.stringify(initialData);
+    setIsModified(isChanged);
+  }, [formData, initialData]);
+  
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -32,7 +41,9 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
   };
 
   const handleSave = () => {
-    setShowModal(true);
+     if (isModified) {
+      setShowModal(true);
+    }
   };
 
   const handleDateChange = (date: string) => {
@@ -56,7 +67,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
   return (
     <Container>
       <DataBlock>
-        <Label>Date of Visit</Label>
+        <Label>{t("Date of Visit")}</Label>
         <ListBox
           isSelected={selectedIndex === 0}
           onClick={() => setDateSelectionOpen(true)}
@@ -73,7 +84,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       </DataBlock>
 
       <DataBlock>
-        <Label>Visiting Hospital</Label>
+        <Label>{t("Visiting Hospital")}</Label>
         <ListBox isSelected={selectedIndex === 1}>
           <Input
             value={formData.visitingHospital}
@@ -84,7 +95,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       </DataBlock>
 
       <DataBlock>
-        <Label>Medical Subject</Label>
+        <Label>{t("Medical Subject")}</Label>
         <ListBox isSelected={selectedIndex === 2}>
           <Input
             value={formData.medicalSubject}
@@ -95,7 +106,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       </DataBlock>
 
       <DataBlock>
-        <Label>Symptoms</Label>
+        <Label>{t("Symptoms")}</Label>
         <ListBox isSelected={selectedIndex === 3}>
           <Input
             value={formData.symptoms}
@@ -106,7 +117,7 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
       </DataBlock>
 
       <DataBlock>
-        <Label>Treatment Summary</Label>
+        <Label>{t("Treatment Summary")}</Label>
         <ListBox isSelected={selectedIndex === 4}>
           <Input
             value={formData.treatmentSummary}
@@ -116,16 +127,23 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
         </ListBox>
       </DataBlock>
 
-      <SaveButton onClick={handleSave}>Save</SaveButton>
+      <SaveButton onClick={handleSave} isModified={isModified}>
+        {t("Save")}
+      </SaveButton>
 
        <Modal isOpen={showModal} toggle={handleCancelSave}>
         <ModalBox>
           <MessageText>
-            Do you want to save your <br /> changes before exiting?
+            {t("Do you want to save your changes before exiting?").split('\n').map((line, i, arr) => (
+              <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+              </React.Fragment>
+        ))}
           </MessageText>
           <ButtonWrapper>
-            <CancelButton onClick={handleCancelSave}>Cancel</CancelButton>
-            <ConfirmButton onClick={handleConfirmSave}>Save</ConfirmButton>
+            <CancelButton onClick={handleCancelSave}>{t("Cancel")}</CancelButton>
+            <ConfirmButton onClick={handleConfirmSave}>{t("Save")}</ConfirmButton>
           </ButtonWrapper>
         </ModalBox>
       </Modal>
@@ -136,7 +154,6 @@ const MedicalEditData: React.FC<MedicalEditDataProps> = ({ initialData, onSave }
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  min-height: 100vh;
   position: relative;
 `;
 
@@ -176,14 +193,14 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const SaveButton = styled.button`
+const SaveButton = styled.button<{ isModified: boolean }>`
   position: absolute;
-  margin-top: 100px;
+  margin-top: 80px;
   padding: 13px;
   font-size: 18px;
   font-weight: 400;
-  background-color: #0097a7;
-  color: #fff;
+  background-color: ${(props) => (props.isModified ? "#0097a7" : "#E5E5EC")};
+  color: ${(props) => (props.isModified ? "#FFFFFF" : "#767676")};
   border: none;
   border-radius: 10px;
   cursor: pointer;

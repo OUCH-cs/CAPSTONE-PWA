@@ -1,23 +1,17 @@
-import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import ArrowIcon from "@/shared/assets/common/backarrow.svg?react";
 import EditIcon from "@/shared/assets/common/edit-icon.svg?react";
 import HealthStatusData from "@/features/records/ui/HealthStatusData"; 
+import { useTranslation } from "react-i18next";
+
 export default function HealthStatus() {
+  const {t} =  useTranslation()
   const navigate = useNavigate();
 
   const handleEditIconPress = () => {
   navigate("/records/healthstatus-edit");
 };
-
-
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';  
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
 
   return (
     <Container>
@@ -25,7 +19,7 @@ export default function HealthStatus() {
         <BackButton onClick={() => navigate("/records")}>
           <ArrowIcon width="25px" height="25px" stroke="black" />
         </BackButton>
-        <HeaderTitle>Health Status</HeaderTitle>
+        <HeaderTitle>{t("Health Status")}</HeaderTitle>
         <EditIconWrapper onClick={handleEditIconPress}>
           <EditIcon width={20} height={20} />
         </EditIconWrapper>
@@ -37,11 +31,9 @@ export default function HealthStatus() {
 
 const Container = styled.div`
   background-color: #f5f9fc;
-  padding-bottom: 40px;
-  padding-top: 10px;
+  padding-top: 24px;
   margin-left: 16px;
   margin-right: 16px;
-  margin-top: 14px;
 `;
 
 const Header = styled.div`

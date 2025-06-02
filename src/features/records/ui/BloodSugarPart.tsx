@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onClose: () => void;
@@ -7,6 +8,7 @@ type Props = {
 };
 
 export default function BloodSugarPart({ onClose, onSave }: Props) {
+  const {t} =  useTranslation();
   const [fasting, setFasting] = useState("");
   const [postprandial, setPostPrandial] = useState("");
   const [focusedInput, setFocusedInput] = useState<"fasting" | "postprandial" | null>(null);
@@ -21,7 +23,7 @@ export default function BloodSugarPart({ onClose, onSave }: Props) {
   return (
     <Overlay>
       <Container>
-        <SectionTitle>Blood Sugar</SectionTitle>
+        <SectionTitle>{t("Blood Sugar")}</SectionTitle>
 
         <Card>
           <Box>
@@ -34,7 +36,7 @@ export default function BloodSugarPart({ onClose, onSave }: Props) {
                 onBlur={() => setFocusedInput(null)}
                 isFocused={focusedInput === "fasting"}
               />
-              <LabelLeft>Fasting</LabelLeft>
+              <LabelLeft>{t("Fasting")}</LabelLeft>
             </InputContainer>
           </Box>
 
@@ -48,14 +50,14 @@ export default function BloodSugarPart({ onClose, onSave }: Props) {
                 onBlur={() => setFocusedInput(null)}
                 isFocused={focusedInput === "postprandial"}
               />
-              <LabelRight>Postprandial</LabelRight>
+              <LabelRight>{t("Postprandial")}</LabelRight>
             </InputContainer>
           </Box>
         </Card>
 
         <UnitText>mg/dL</UnitText>
 
-        <SaveButton onClick={handleSave}>Save</SaveButton>
+        <SaveButton onClick={handleSave}>{t("Save")}</SaveButton>
       </Container>
     </Overlay>
   );
