@@ -18,15 +18,15 @@ export default function TranslateSessionView({
   toggleMuted,
   toggle,
 }: TranslateSessionViewProps) {
-  const {t} = useTranslation();
-  const { isOpen: isFunnelModalOpen, toggle: isFunnelModalToggle } =
-    useToggle(); // 통역 가이드 퍼털 모달 토글 훅
+  const { t } = useTranslation();
+
+  const { isOpen: isFunnelModalOpen, toggle: funnelModalToggle } = useToggle(); // 통역 가이드 퍼털 모달 토글 훅
 
   return (
     <>
       <Container>
         {/* 가이드 라우팅 버튼 */}
-        <GuideRoutingButton toggle={isFunnelModalToggle} />
+        <GuideRoutingButton toggle={funnelModalToggle} />
 
         {/* 통역 마이크 아이콘 */}
         <TranslateMicIndicator />
@@ -47,7 +47,7 @@ export default function TranslateSessionView({
       {/* 통역 가이드 퍼널 모달 */}
       <GuideFunnelModal
         isOpen={isFunnelModalOpen}
-        toggle={isFunnelModalToggle}
+        funnelModalToggle={funnelModalToggle}
         isMuted={isMuted}
         toggleMuted={toggleMuted}
       />
