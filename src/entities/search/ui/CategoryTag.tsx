@@ -16,5 +16,5 @@ const Container = styled.div<{ $type: any }>`
   font-weight: 400;
   color: #111111;
   background-color: ${({ $type }) =>
-    $type === "약국" ? "#E5EEF5" : "#E1F5EC"};
+    $type === "약국" || $type === "pharmacy" ? "#E5EEF5" : "#E1F5EC"};
 `;

@@ -5,20 +5,15 @@ import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
 import LocationIcon from "@/shared/assets/map/location.svg?react";
 import TelIcon from "@/shared/assets/map/phone.svg?react";
+import { useNavigate } from "react-router-dom";
+import { SummaryInfo } from "../map.types";
 
 interface SummaryInfoCardProps {
-  data: {
-    name: string;
-    address: string;
-    lat: number;
-    lng: number;
-    type: string;
-    tel: string;
-  };
+  data: SummaryInfo;
 }
 
 export default function SummaryInfoCard(data: SummaryInfoCardProps) {
-  console.log(data);
+  const navigate = useNavigate();
 
   const distance = getDistanceInMeters(fallbackLocaton, {
     latitude: data.data.lat,
@@ -27,7 +22,7 @@ export default function SummaryInfoCard(data: SummaryInfoCardProps) {
   const distanceLabel = formatDistance(distance); // 거리 포맷팅 (760m, 1.2km 등)
 
   return (
-    <Container>
+    <Container onClick={() => navigate(`/search/${data.data.id}`)}>
       <TitleWrapper>
         <Title>{data.data.name}</Title>
         <PlaceMetrics>

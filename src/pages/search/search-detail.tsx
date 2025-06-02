@@ -17,8 +17,6 @@ export default function SearchDetailPage() {
     dedupingInterval: 1000 * 60 * 60, // 1시간
   });
 
-  console.log(data);
-
   // 에러 예외 처리
   useEffect(() => {
     if (error) {

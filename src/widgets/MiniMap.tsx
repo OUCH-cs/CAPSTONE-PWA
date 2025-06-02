@@ -18,6 +18,7 @@ export default function MiniMap({ lat, lng, data }: MiniMapProps) {
   const handleClick = () => {
     navigate("/map", {
       state: {
+        id: data.ykiho,
         lat: data.lat,
         lng: data.lng,
         name: data.name,
