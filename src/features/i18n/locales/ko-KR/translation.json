@@ -34,7 +34,7 @@
   "Text translation": "OCR",
   "OUCH guide": "OUCH 가이드",
   "Recommended Hospital": "추천 병원",
-  "Identified Symptoms": "확인된 증상",
+  "Identified Symptoms": "분석을 기반으로 \n증상 확인해 드릴게요",
   "Find Recommended Hospitals": "추천 병원 찾기",
   "Find Pharmacy": "약국 찾기",
   "Finish": "종료",
@@ -121,5 +121,5 @@
   "e.g. pollen, sellfish, peach": "예: 꽃가루, 조개류, 복숭아",
   "e.g. Aspirin": "예: 아스피린",
   "When or how does this symptom appear?": "증상이 언제 어떻게 나타나나요?",
-  "Recommend": "진료과 추천 결과"
+  "Recommend": "분석을 기반으로 \n맞춤 진료과 안내해 드릴게요"
 }
