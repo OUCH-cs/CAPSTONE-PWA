@@ -7,9 +7,10 @@ interface IRecordingIndicatorProps {
 interface GuideFunnelProps extends Omit<ClassPostProps, "nextClickHandler"> {
   setStep: React.Dispatch<React.SetStateAction<string>>;
   currentStep: string;
+  funnelModalToggle: () => void;
 }
 
-type Locale = "ko" | "en";
+type Locale = "ko" | "en" | "zh";
 type LocalizedText = Record<Locale, string>;
 
 interface Guide {
@@ -36,6 +37,4 @@ export type {
   LocalizedText,
   Guide,
   GuideAccordionProps,
-
 };
-

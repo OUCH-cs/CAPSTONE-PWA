@@ -125,5 +125,9 @@
   "Search for Address": "查找地址",
   "Recommend": "根据分析结果，\n为您推荐合适的科室。",
   "commingsoon": "服务开发中，\n敬请期待！",
-  "commingback":"返回"
+  "commingback":"返回",
+  "Reception": "接待",
+  "Waiting Room": "等候室",
+  "Consultation": "咨询",
+  "Payment": "支付"
 }
