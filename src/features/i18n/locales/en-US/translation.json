@@ -102,9 +102,19 @@
     "ZH": "China"
   },
   "select_country": "Select your country",
-  "Would you like to start Self-Diagnosis?" : "Would you like to starㅅ \n Self-Diagnosis?",
   "Would you like to start Medical Record?" : "Would you like to start \n Medical Record?",
-  "Language Settings":"Language Settings"
+  "Language Settings":"Language Settings",
+   "Would you like to start Self-Diagnosis?" : "Would you like to start \n Self-Diagnosis?",
+  "No Medical Record Yet":"No Medical Record Yet",
+  "e.g. 2025.05.11":"e.g. 2025.05.11",
+  "e.g. Hanyang Hospital":"e.g. Hanyang Hospital",
+  "e.g. pollen":"e.g.pollen",
+  "e.g. headache": "e.g. headache",
+  "e.g. you don't have a milk": "e.g. you don't have a milk",
+  "e.g. diabetes, colic":"e.g. diabetes, colic",
+  "e.g. pollen, sellfish, peach":"e.g. pollen, sellfish, peach",
+  "e.g. Aspirin":"e.g. Aspirin",
+  "When or how does this symptom appear?":"When or how does this symptom appear?"
 
 
 }
