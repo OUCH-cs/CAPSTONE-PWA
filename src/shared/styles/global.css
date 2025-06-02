@@ -80,3 +80,10 @@ ol {
   padding-left: 0;
   list-style: none;
 }
+
+.gm-svpc,       /* 스트리트뷰 버튼 등 */
+.gm-style-cc,   /* '© Google' 또는 '©2025 TMap Mobility' 등 저작권 영역 */
+.gm-iv-address, /* '약관' / '저작권' / '단축키' 같은 텍스트 블록 */
+.gm-rah {
+  display: none !important;
+}
