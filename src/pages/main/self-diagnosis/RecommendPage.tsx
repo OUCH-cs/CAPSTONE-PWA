@@ -68,7 +68,7 @@ function RecommendPage() {
       {isLoading && <LoadingOverlay />}
       <Question>
         {destination === "HOSPITAL"
-          ? t("Recommended Hospital") 
+          ? t("Recommend") 
           : t("Identified Symptoms")}
       </Question>
       {destination === "HOSPITAL" ? (
@@ -109,6 +109,7 @@ const Container = styled.div`
   background-color: ${theme.colors.background};
   padding: 16px;
   overflow: hidden;
+   animation: fadeIn 0.6s ease-out forwards;
 `;
 
 const Question = styled.p`
@@ -123,6 +124,7 @@ const Departments = styled.div`
   line-height: 1.4;
   font-weight: 600;
   margin-bottom: 1rem;
+  color: ${theme.colors.primary};
 `;
 
 const Description = styled.p`
