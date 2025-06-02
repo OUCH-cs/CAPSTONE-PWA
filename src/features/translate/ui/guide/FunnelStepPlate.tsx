@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Button } from "@/shared/components/button/Button";
 import theme from "@/shared/styles/theme";
-import { Guide } from "../../translate.types";
+import { Guide, LocalizedText } from "../../translate.types";
 import GuideAccordion from "./GuideAccordion";
 import { useNavigate } from "react-router-dom";
 import GuideProgressBar from "@/entities/translate/ui/GuideProgressBar";
@@ -11,10 +11,17 @@ interface FunnelStepPlateProps {
   data: Guide;
   currentStep: string;
   setStep: React.Dispatch<React.SetStateAction<string>>;
+  funnelModalToggle: () => void;
 }
 
-function FunnelStepPlate({ data, currentStep, setStep }: FunnelStepPlateProps) {
-  const {t} = useTranslation();
+function FunnelStepPlate({
+  data,
+  currentStep,
+  setStep,
+  funnelModalToggle,
+}: FunnelStepPlateProps) {
+  const { t, i18n } = useTranslation();
+  const languageCode = i18n.language as keyof LocalizedText;
   const navigate = useNavigate();
 
   const guideData = Object.entries(data)
@@ -35,6 +42,7 @@ function FunnelStepPlate({ data, currentStep, setStep }: FunnelStepPlateProps) {
   const handleNextBtnClick = () => {
     if (currentStep === "5") {
       navigate("/translate");
+      funnelModalToggle();
     } else {
       setStep((prev) => String(Number(prev) + 1));
     }
@@ -46,7 +54,7 @@ function FunnelStepPlate({ data, currentStep, setStep }: FunnelStepPlateProps) {
 
       <TitleWrapper>
         <Title>{t("Purpose")}</Title>
-        <Description>"{data.purpose.en}"</Description>
+        <Description>"{data.purpose[languageCode]}"</Description>
       </TitleWrapper>
 
       <GuideList>
@@ -60,11 +68,11 @@ function FunnelStepPlate({ data, currentStep, setStep }: FunnelStepPlateProps) {
           <PrevButton
             onClick={() => setStep((prev) => String(Number(prev) - 1))}
           >
-            Prev
+            {t("Prev")}
           </PrevButton>
         )}
         <Button width={154} height={52} onClick={handleNextBtnClick}>
-          {currentStep === "5" ? "Finish" : "Next"}
+          {currentStep === "5" ? t("Finish") : t("Next")}
         </Button>
       </ButtonWrapper>
     </Container>

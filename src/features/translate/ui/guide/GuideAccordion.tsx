@@ -2,18 +2,22 @@ import { Accordion } from "@/shared/components/accordion";
 import styled from "@emotion/styled";
 import ArrowChevronIcon from "@/shared/assets/common/arrow.svg?react";
 import theme from "@/shared/styles/theme";
-import { GuideAccordionProps } from "../../translate.types";
+import { GuideAccordionProps, LocalizedText } from "../../translate.types";
+import { useTranslation } from "react-i18next";
 
 export default function GuideAccordion({
   data,
 }: {
   data: GuideAccordionProps;
 }) {
+  const { t, i18n } = useTranslation();
+  const languageCode = i18n.language as keyof LocalizedText;
+
   return (
     <Accordion>
       <Accordion.Header>
         <AccordionHeaderWrapper>
-          <AccordionHeaderTitle>{data.title}</AccordionHeaderTitle>
+          <AccordionHeaderTitle>{t(data.title)}</AccordionHeaderTitle>
           <Accordion.Trigger>
             <ArrowChevronIcon width={20} height={20} stroke="#000" />
           </Accordion.Trigger>
@@ -23,7 +27,9 @@ export default function GuideAccordion({
       <Accordion.Body>
         <AccordionBodyWrapper>
           {data.text.map((item, idx) => (
-            <AccordionItem key={idx}>{`${idx + 1}. ${item.en}`}</AccordionItem>
+            <AccordionItem key={idx}>{`${idx + 1}. ${
+              item[languageCode]
+            }`}</AccordionItem>
           ))}
         </AccordionBodyWrapper>
       </Accordion.Body>

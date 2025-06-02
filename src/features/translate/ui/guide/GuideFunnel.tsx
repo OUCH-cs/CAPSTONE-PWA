@@ -11,6 +11,7 @@ export default function GuideFunnel({
   setStep,
   Funnel,
   Step,
+  funnelModalToggle,
 }: GuideFunnelProps) {
   const navigate = useNavigate();
 
@@ -35,6 +36,7 @@ export default function GuideFunnel({
               data={data[parseInt(currentStep) - 1]}
               currentStep={currentStep}
               setStep={setStep}
+              funnelModalToggle={funnelModalToggle}
             />
           )}
         </Step>
