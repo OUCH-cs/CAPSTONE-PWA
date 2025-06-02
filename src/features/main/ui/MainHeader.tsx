@@ -4,6 +4,8 @@ import HomeLocation from "@/shared/assets/home/HomeLocation.svg?react";
 import { useLanguage } from "@/shared/services/useLanguage";
 import { useState } from "react";
 import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
+import { useTranslation } from "react-i18next";
+
 
 const languageLabelMap: Record<string, string> = {
   en: "ENG",
@@ -13,6 +15,7 @@ const languageLabelMap: Record<string, string> = {
 
 const MainHeader = () => {
   const { languageCode, handleLangChange } = useLanguage();
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => setIsOpen(prev => !prev);
@@ -26,8 +29,8 @@ const MainHeader = () => {
   return (
     <Header>
       <Location>
-        <HomeLocation width="16px" height="21px" />
-        <LocationText>Banseok-dong</LocationText>
+        <HomeLocation width={"16px"} height={"21px"} />
+        <LocationText>{t("Sadong, Sangnok-gu")}</LocationText>
       </Location>
 
       <LangWrapper>

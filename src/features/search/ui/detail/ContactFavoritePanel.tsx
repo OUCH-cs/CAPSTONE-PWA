@@ -39,6 +39,7 @@ const Container = styled.section`
   width: 328px;
   height: 80px;
   border-radius: 10px;
+  margin-bottom: 20px;
   background-color: ${theme.colors.white};
 `;
 
