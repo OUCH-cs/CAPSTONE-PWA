@@ -69,7 +69,7 @@ export default function MapContent() {
         setSelectedPlace(null);
       }
     });
-  }, [map, placesLib, location, department]);
+  }, [map, placesLib, department]);
 
   return (
     location && (

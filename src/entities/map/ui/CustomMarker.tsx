@@ -13,13 +13,11 @@ export default function CustomMarker({
   markerSize,
   onClick,
 }: CustomMarkerProps) {
-  const customMarkerUrl = "/src/shared/assets/map/marker.svg";
-
   return (
     <Marker
       position={{ lat, lng }}
       icon={{
-        url: customMarkerUrl,
+        url: "/src/shared/assets/map/marker.svg",
         scaledSize: new google.maps.Size(markerSize, markerSize),
       }}
       onClick={onClick}

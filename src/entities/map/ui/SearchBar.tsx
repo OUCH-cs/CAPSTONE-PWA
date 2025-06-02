@@ -5,9 +5,11 @@ import { useState } from "react";
 import CategoryTag from "@/entities/search/ui/CategoryTag";
 import { useSetAtom } from "jotai";
 import { departmentAtom } from "../services/atom";
+import { useTranslation } from "react-i18next";
 
 export default function SearchBar() {
   const setDepartment = useSetAtom(departmentAtom);
+  const { t } = useTranslation();
 
   const [inputValue, setInputValue] = useState<string>("");
 
@@ -25,7 +27,7 @@ export default function SearchBar() {
       <FormContainer onSubmit={handleSubmit}>
         <Input
           type="text"
-          placeholder="Search for Address"
+          placeholder={t("Search for Address")}
           value={inputValue}
           onChange={handleChange}
         />
@@ -40,7 +42,7 @@ export default function SearchBar() {
             key={department}
             onClick={() => setDepartment(department as "hospital" | "pharmacy")}
           >
-            <CategoryTag>{department}</CategoryTag>
+            <CategoryTag>{t(department)}</CategoryTag>
           </CategoryTagWrapper>
         ))}
       </DepartmentsTagList>
