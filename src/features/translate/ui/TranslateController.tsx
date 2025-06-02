@@ -31,8 +31,7 @@ export default function TranslateController() {
   const handleStartTranslate = async () => {
     setIsTranslating(true);
     const data = await apiRequest({
-      // url: `/session/${languageCode}`,
-      url: `/session`,
+      url: `/session/${languageCode}`,
       method: "POST",
     });
 
