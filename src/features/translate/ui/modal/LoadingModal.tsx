@@ -28,14 +28,14 @@ const ModalWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 16px;
   width: 220px;
   height: 150px;
   background-color: ${theme.colors.white};
 `;
 
 const Title = styled.p`
-  width: 204px;
+  max-width: 100%;
   font-size: 18px;
   font-weight: 400;
   text-align: center;

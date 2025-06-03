@@ -15,8 +15,6 @@ const LoadingDots = styled.div`
   justify-content: center;
   align-items: center;
   gap: 6px;
-  width: 48px;
-  height: 48px;
 `;
 
 const LoadingDot = styled.div<{ $size: number }>`
