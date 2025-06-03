@@ -35,6 +35,9 @@ function MainPage() {
         <HomeActionButton
           icon={<HomeCamera width={29} height={29} />}
           label={t("Text translation")}
+          onClick={() => {
+            navigate("/commingsoon");
+          }}
         />
         <HomeActionButton
           onClick={() => {

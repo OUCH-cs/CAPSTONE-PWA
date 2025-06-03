@@ -14,6 +14,7 @@ import {
   GuidePage,
   TranslateFinishPage,
   RecommendPage,
+  CommingSoonPage
 } from "@/pages";
 import MedicalRecordList from "@/pages/records/medicalrecord-list";
 import MedicalRecord from "@/pages/records/medicalrecord";
@@ -88,6 +89,7 @@ export default function AppRoutes() {
       <Route path="/records/self-diagnosis/:id" element={<Diagnosis />} />
 
       <Route path="guide" element={<GuidePage />} />
+      <Route path="/commingsoon" element={<CommingSoonPage/>} />
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
