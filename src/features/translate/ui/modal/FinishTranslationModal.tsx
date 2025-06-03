@@ -60,9 +60,11 @@ const ButtonWrapper = styled.div`
 const Button = styled.button`
   flex: 1;
   font-size: 14px;
+  font-weight: 500;
   height: 48px;
 `;
 const CancelButton = styled(Button)`
+  color: ${theme.colors.black};
   background-color: ${theme.colors.white_f1};
 `;
 const FinishButton = styled(Button)`
