@@ -49,6 +49,12 @@ export default function DepartmentFilterDropdown() {
     }
   }, [error]);
 
+  useEffect(() => {
+    return () => {
+      setDepartment(null);
+    };
+  }, []);
+
   return (
     <>
       {isLoading && <Skeleton width={100} height={31} />}

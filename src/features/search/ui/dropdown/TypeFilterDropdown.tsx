@@ -6,6 +6,7 @@ import { typeFilterAtom } from "../../services/store/filterAtom";
 import Dropdown from "@/shared/components/dropdown/Dropdown";
 import useToggle from "@/shared/lib/useToggle";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export default function TypeFilterDropdown() {
   const { t } = useTranslation();
@@ -28,6 +29,12 @@ export default function TypeFilterDropdown() {
   };
 
   const enName = getEnName(type) ?? "";
+
+  useEffect(() => {
+    return () => {
+      setType(null);
+    };
+  }, []);
 
   return (
     <>

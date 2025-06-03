@@ -43,6 +43,12 @@ export default function RegionFilterDropdown() {
     }
   }, [error]);
 
+  useEffect(() => {
+    return () => {
+      setRegion(null);
+    };
+  }, []);
+
   return (
     <>
       {isLoading && <Skeleton width={100} height={31} />}
