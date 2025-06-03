@@ -49,6 +49,12 @@ export default function DepartmentFilterDropdown() {
     }
   }, [error]);
 
+  useEffect(() => {
+    return () => {
+      setDepartment(null);
+    };
+  }, []);
+
   return (
     <>
       {isLoading && <Skeleton width={100} height={31} />}
@@ -95,6 +101,9 @@ const TriggerWrapper = styled.button<{ $isSelected: boolean }>`
   padding: 0 12px;
   border: 1px solid ${theme.colors.white_e5};
   border-radius: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  color: ${theme.colors.black}
   white-space: nowrap;
   overflow: hidden;
   background-color: ${({ $isSelected, theme }) =>

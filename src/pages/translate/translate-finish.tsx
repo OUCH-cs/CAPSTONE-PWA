@@ -4,10 +4,12 @@ import theme from "@/shared/styles/theme";
 import { Button } from "@/shared/components/button/Button";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 function TranslateFinishPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState("Lion's Hall");
 
   return (
     <Container>
@@ -21,6 +23,8 @@ function TranslateFinishPage() {
         <HospitalInput
           type="text"
           placeholder={t("Please write a hospital.")}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
         />
       </FormWrapper>
 
