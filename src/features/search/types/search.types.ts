@@ -1,5 +1,11 @@
 type Sort = "Recommended" | "Distance";
-type SearchParamType = "병원" | "약국";
+type SearchParamType =
+  | "병원"
+  | "약국"
+  | "Hospital"
+  | "Pharmacy"
+  | "医院"
+  | "药房";
 
 interface PlacesResponseBase {
   ykiho: string;

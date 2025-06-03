@@ -170,17 +170,16 @@ export default function TranslateController() {
         console.log("▶️ DataChannel open");
         promptUpdate(newDc, languageCode); // 초기 지침 전송
 
-        // 마이크 트랙을 활성화해서 음성이 전송되도록 함
-        if (audioTrackRef.current) {
-          audioTrackRef.current.enabled = true;
-        }
-
-        // 첫 문장 정확도를 위해 1초 로딩 더 주기
+        // 첫 문장 정확도를 위해 3초 로딩 더 주기
         setTimeout(() => {
+          // 마이크 트랙을 활성화해서 음성이 전송되도록 함
+          if (audioTrackRef.current) {
+            audioTrackRef.current.enabled = true;
+          }
           // 로딩 모달 닫고, 화면 전환(세션 뷰 렌더) 시작
           loadingModalToggle();
           setIsTranslating(true);
-        }, 1000);
+        }, 3000);
       };
 
       newDc.onclose = () => {

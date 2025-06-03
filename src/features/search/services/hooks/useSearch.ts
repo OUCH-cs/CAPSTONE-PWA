@@ -2,7 +2,7 @@ import { useAtom, useSetAtom } from "jotai";
 import {
   departmentFilterAtom,
   searchQueryAtom,
-  searchTypeAtom,
+  typeFilterAtom,
 } from "../../services/store/filterAtom";
 import { DEPARTMENT_NAMES_EN, DEPARTMENT_NAMES_KR } from "../../search.consts";
 import {
@@ -13,7 +13,7 @@ import {
 export function useSearch() {
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
   const setDepartment = useSetAtom(departmentFilterAtom);
-  const setType = useSetAtom(searchTypeAtom);
+  const setType = useSetAtom(typeFilterAtom);
 
   // 진료과명 유효성 검사
   const isValidDepartment = (query: string): boolean => {

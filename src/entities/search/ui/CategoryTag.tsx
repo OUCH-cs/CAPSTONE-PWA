@@ -9,8 +9,10 @@ const Container = styled.div<{ $type: any }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 76px;
+  min-width: 76px;
+  width: fit-content;
   height: 28px;
+  padding: 7px 11px;
   border-radius: 8px;
   font-size: 12px;
   font-weight: 400;

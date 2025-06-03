@@ -15,6 +15,7 @@ import {
   TranslateFinishPage,
   RecommendPage,
   CommingSoonPage,
+  ReviewForm,
 } from "@/pages";
 import MedicalRecordList from "@/pages/records/medicalrecord-list";
 import MedicalRecord from "@/pages/records/medicalrecord";
@@ -47,6 +48,7 @@ export default function AppRoutes() {
           {/* 검색 페이지 */}
           <Route path="/search" element={<SearchPage />} />
           <Route path="/search/:id" element={<SearchDetailPage />} />
+          <Route path="/review" element={<ReviewForm />} />
 
           {/* 기록 페이지 */}
           <Route path="/records" element={<RecordsPage />} />
