@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
 import theme from "@/shared/styles/theme";
 import { useRecommend } from "../../../features/diagnosis/lib/useRecommend";
 import { RecommendRequest } from "../../../features/diagnosis/diagnosis.type";
@@ -15,7 +16,7 @@ import LoadingOverlay from "@/shared/components/overlay/LoadingOverlay";
 import LocationImg from "@/shared/assets/common/location.png";
 import { Button } from "@/shared/components/button/Button";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans} from "react-i18next";
 import { departmentFilterAtom } from "@/features/search/services/store/filterAtom";
 
 function RecommendPage() {
@@ -67,9 +68,7 @@ function RecommendPage() {
     <Container>
       {isLoading && <LoadingOverlay />}
       <Question>
-        {destination === "HOSPITAL"
-          ? t("Recommended Hospital") 
-          : t("Identified Symptoms")}
+      <Trans i18nKey={destination === "HOSPITAL" ? "Recommend" : "Identified Symptoms"}/>
       </Question>
       {destination === "HOSPITAL" ? (
         <>
@@ -84,7 +83,7 @@ function RecommendPage() {
         <>
           <Departments>- {response?.data.system[languageCode]}</Departments>
           {response?.data.condition?.[languageCode].length && (
-            <Departments>- {response?.data.condition[languageCode]}</Departments>
+            <SystemText>- {response?.data.condition[languageCode]}</SystemText>
           )}
         </>
       )}
@@ -104,17 +103,29 @@ function RecommendPage() {
 }
 
 export { RecommendPage };
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const Container = styled.div`
   background-color: ${theme.colors.background};
   padding: 16px;
   overflow: hidden;
+  animation: ${fadeInUp} 0.6s ease-out;
 `;
 
 const Question = styled.p`
   margin-top: 4.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-size: 2rem;
+  white-space: pre-line;
   font-weight: 600;
 `;
 
@@ -122,23 +133,31 @@ const Departments = styled.div`
   font-size: 1.7rem;
   line-height: 1.4;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  color: ${theme.colors.primary};
 `;
 
 const Description = styled.p`
   font-size: 1.2rem;
   color: ${theme.colors.gray_4};
-  margin-bottom: 7rem;
 `;
 
 const IconContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 7rem;
   margin-bottom: 6.3rem;
 `;
 
+const SystemText = styled.p`
+font-size: 1.7rem;
+color: ${theme.colors.gray_4};
+line-height: 1.4;
+font-weight: 600;
+`;
 const FindButton = styled(Button)`
   width: 100%;
+  font-weight: 500;
 `;
 
 const FinishButton = styled.button`
@@ -148,6 +167,7 @@ const FinishButton = styled.button`
   border: none;
   color: ${theme.colors.black};
   cursor: pointer;
+  font-weight: 500;
 `;
 
 const ButtonGroup = styled.div`

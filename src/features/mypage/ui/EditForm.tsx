@@ -8,6 +8,7 @@ import { getInformation } from "@/features/mypage/service/MyPageApi";
 import { editInformation } from "@/features/mypage/service/MyPageApi"; 
 import { COUNTRY_LIST, LANGUAGE_LIST } from "@/features/mypage/MyPage.constants";
 import { useTranslation } from "react-i18next";
+import LanguageAccordion from "@/features/mypage/ui/LanguageAccordion";
 
 
 const EditForm = () => {
@@ -99,6 +100,9 @@ const EditForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+         <LanguageAccordion />
+
+
         <SaveButton type="submit">{t("Save")}</SaveButton>
       </FormWrapper>
 
@@ -129,12 +133,11 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  overflow: hidden;
 `;
 
 const FormField = styled.input`
   padding: 18px;
-  border: 1px solid #ccc;
+  border: 1px solid #E5E5EC;
   border-radius: 12px;
   font-size: 16px;
 `;

@@ -1,34 +1,37 @@
 import styled from "@emotion/styled";
 import { useLanguage } from "@/shared/services/useLanguage";
-import theme from "@/shared/styles/theme";
 import { useTranslation } from "react-i18next";
+import Options from "@/shared/assets/mypage/option.svg?react"
+
+const languageLabelMap: Record<string, string> = {
+  en: "ENG",
+  ko: "한국어",
+  zh: "中文",
+};
 
 const TopHeader = () => {
-  const { languageCode, handleLangChange } = useLanguage();
-  const {t} =  useTranslation();
-
+  const { languageCode } = useLanguage();
+  const { t } = useTranslation();
 
   return (
     <Header>
       <Location>
         <PageText>{t("My page")}</PageText>
       </Location>
-      <LangSelect value={languageCode} onChange={handleLangChange}>
-        <option value="en-US">EN</option>
-        <option value="ko-KR">한국어</option>
-        <option value="zh-CN">中文</option>
-      </LangSelect>
+
+      <RightWrapper>
+        <SelectedLanguage>{languageLabelMap[languageCode] || languageCode}</SelectedLanguage>
+        <Options width="20px" height="20px" />
+      </RightWrapper>
     </Header>
   );
 };
 
 export default TopHeader;
 
-// 스타일 그대로 분리
 const Header = styled.div`
   margin-top: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 16px 16px;
   margin-bottom: 40px;
@@ -45,8 +48,17 @@ const PageText = styled.p`
   white-space: nowrap;
 `;
 
-const LangSelect = styled.select`
-  font-size: 1.3rem;
-  background-color: ${theme.colors.background};
-  cursor: pointer;
+const SelectedLanguage = styled.div`
+position: relative;
+  font-size: 16px;
+  color: #000;
+  font-weight: 400;
+  top:0px;
+`;
+
+const RightWrapper = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px; 
 `;

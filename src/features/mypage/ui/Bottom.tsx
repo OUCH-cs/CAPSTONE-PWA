@@ -45,7 +45,7 @@ const Header = styled.div`
   box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 58vh;
 `;
 
 const Section = styled.div`
