@@ -8,19 +8,28 @@ import StarFilled from "@/shared/assets/search/star.svg?react";
 import StarOutlined from "@/shared/assets/search/star_outlined.svg?react";
 import { Button } from "@/shared/components/button/Button";
 import { useTranslation } from "react-i18next";
+import { ReviewRequest } from "@/features/search/types/search.types";
+import apiRequest from "@/shared/api/apiRequest";
 
 function ReviewForm() {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const data = location.state.data;
+
   // 별점 상태 (1~5). 0이면 아직 선택 안 된 상태
-  const [rating, setRating] = useState<number>(0);
+  const [inputValue, setInputValue] = useState<ReviewRequest>({
+    hospitalYkiho: data.ykiho,
+    contents: "",
+    score: 0,
+    imageUrl: "",
+  });
 
   // 별 아이콘을 렌더링하는 헬퍼
   const renderStar = (index: number) => {
     // index는 1부터 시작한다는 가정
-    const isFilled = index <= rating;
+    const isFilled = index <= inputValue.score;
     const Icon = isFilled ? (
       <StarFilled width="25" height="23" />
     ) : (
@@ -28,10 +37,22 @@ function ReviewForm() {
     );
 
     return (
-      <StarButton key={index} onClick={() => setRating(index)}>
+      <StarButton
+        key={index}
+        onClick={() => setInputValue({ ...inputValue, score: index })}
+      >
         {Icon}
       </StarButton>
     );
+  };
+
+  const handleSubmit = () => {
+    apiRequest({
+      method: "POST",
+      url: "/reviews",
+      data: inputValue,
+    });
+    navigate(`/search/${data.ykiho}`);
   };
 
   return (
@@ -39,7 +60,7 @@ function ReviewForm() {
       <SearchDetailHeader>Review</SearchDetailHeader>
 
       <TitleWrapper>
-        <Title>{location.state.name}</Title>
+        <Title>{data.name}</Title>
         <Date>{dayjs().format("YYYY-MM-DD")}</Date>
       </TitleWrapper>
 
@@ -47,9 +68,19 @@ function ReviewForm() {
         {[1, 2, 3, 4, 5].map((i) => renderStar(i))}
       </StarsContainer>
 
-      <ReviewTextArea placeholder={t("Please write a review")} />
+      <ReviewTextArea
+        placeholder={t("Please write a review")}
+        onChange={(e) =>
+          setInputValue({
+            ...inputValue,
+            contents: e.target.value,
+          })
+        }
+      />
 
-      <Button onClick={() => navigate("/search")}>Save</Button>
+      <Button disabled={inputValue.score === 0} onClick={handleSubmit}>
+        Save
+      </Button>
     </Container>
   );
 }

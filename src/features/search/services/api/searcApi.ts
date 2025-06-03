@@ -6,6 +6,7 @@ import {
 } from "../../types/department.types";
 import {
   NearbyPlacesResponse,
+  ReviewResponse,
   SearchDetailResponse,
   SearchParamType,
 } from "../../types/search.types";
@@ -58,6 +59,15 @@ export const getRegions = async (url: string): Promise<RegionResponse[]> => {
 export const getDetailInfo = async (
   url: string
 ): Promise<SearchDetailResponse> => {
+  const res = await apiRequest({
+    url,
+  });
+
+  return res.data;
+};
+
+// 특정 병원 리뷰 조회
+export const getReviews = async (url: string): Promise<ReviewResponse[]> => {
   const res = await apiRequest({
     url,
   });

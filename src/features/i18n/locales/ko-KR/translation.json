@@ -142,5 +142,9 @@
   "No reviews available yet.": "아직 리뷰가 없습니다.",
   "Please write a review": "리뷰를 작성해주세요",
   "Region": "지역",
-  "Facility": "의료기관"
+  "Facility": "의료기관",
+  "Yes": "예",
+  "Current Location": "현재 위치",
+  "(estimated)medical institution": "근처 의료기관 (추정)",
+  "Is this the correct\ninstitution you want to use?": "다음 기관에서 활용하시는 게\n 맞습니까?"
 }

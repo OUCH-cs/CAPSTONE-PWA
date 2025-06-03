@@ -50,7 +50,7 @@ export default function SearchDetailPage() {
 
         <ContentWrapper>
           {data && activetab === "Info" && <DetailInfoSection data={data} />}
-          {data && activetab === "Review" && <ReviewSection name={data.name} />}
+          {data && activetab === "Review" && <ReviewSection data={data} />}
         </ContentWrapper>
       </Container>
     </>

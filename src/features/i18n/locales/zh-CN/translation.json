@@ -140,5 +140,9 @@
   "No reviews available yet.": "暂无评论",
   "Please write a review": "请撰写评论",
   "Region": "地区",
-  "Facility": "医疗保健"
+  "Facility": "医疗保健",
+  "Yes": "是",
+  "Current Location": "当前位置",
+  "(estimated)medical institution": "预估附近医疗机构",
+  "Is this the correct\ninstitution you want to use?": "这是您想使用的正确\n医疗机构吗？"
 }
