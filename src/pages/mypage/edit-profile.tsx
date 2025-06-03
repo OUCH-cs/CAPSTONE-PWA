@@ -22,5 +22,4 @@ const Container = styled.div`
   flex-direction: column;
   background-color: ${theme.colors.background};
   min-height: 90vh;  
-  
 `;
