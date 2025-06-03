@@ -64,7 +64,7 @@ const Container = styled.div`
   width: 100%;
   min-width: 360px;
   max-width: 450px;
-  height: 52px;
+  height: 60px;
   padding: 0 30px;
   border-top: 1px solid ${({ theme }) => theme.colors.white_f5};
   background-color: #fbfdff;

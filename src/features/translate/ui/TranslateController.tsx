@@ -175,9 +175,12 @@ export default function TranslateController() {
           audioTrackRef.current.enabled = true;
         }
 
-        // 로딩 모달 닫고, 화면 전환(세션 뷰 렌더) 시작
-        loadingModalToggle();
-        setIsTranslating(true);
+        // 첫 문장 정확도를 위해 1초 로딩 더 주기
+        setTimeout(() => {
+          // 로딩 모달 닫고, 화면 전환(세션 뷰 렌더) 시작
+          loadingModalToggle();
+          setIsTranslating(true);
+        }, 1000);
       };
 
       newDc.onclose = () => {

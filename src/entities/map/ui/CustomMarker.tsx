@@ -17,7 +17,7 @@ export default function CustomMarker({
     <Marker
       position={{ lat, lng }}
       icon={{
-        url: "/src/shared/assets/map/marker.svg",
+        url: "/icons/marker.svg",
         scaledSize: new google.maps.Size(markerSize, markerSize),
       }}
       onClick={onClick}

@@ -41,7 +41,7 @@ const TextWrapper = styled.div`
   gap: 6px;
   font-size: 16px;
   font-weight: 400;
-  color: "#000000";
+  color: ${theme.colors.black};
 `;
 
 const ArrowIconWrapper = styled.div`

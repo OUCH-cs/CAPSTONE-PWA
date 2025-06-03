@@ -55,5 +55,5 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 70px 0 70px;
+  padding: 70px 0 86px 0;
 `;

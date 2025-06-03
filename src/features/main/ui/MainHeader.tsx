@@ -6,7 +6,6 @@ import { useState } from "react";
 import ArrowIcon from "@/shared/assets/common/arrow.svg?react";
 import { useTranslation } from "react-i18next";
 
-
 const languageLabelMap: Record<string, string> = {
   en: "ENG",
   ko: "한국어",
@@ -18,10 +17,12 @@ const MainHeader = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = () => setIsOpen(prev => !prev);
+  const toggleDropdown = () => setIsOpen((prev) => !prev);
 
   const handleSelect = (code: string) => {
-    const fakeEvent = { target: { value: code } } as React.ChangeEvent<HTMLSelectElement>;
+    const fakeEvent = {
+      target: { value: code },
+    } as React.ChangeEvent<HTMLSelectElement>;
     handleLangChange(fakeEvent);
     setIsOpen(false);
   };
@@ -90,13 +91,13 @@ const SelectedBox = styled.div`
   background-color: ${theme.colors.background};
   padding: 0.6rem 1rem;
   border-radius: 6px;
-  gap:3px;
+  gap: 3px;
   cursor: pointer;
 `;
 
 const Arrow = styled(ArrowIcon)<{ open: boolean }>`
   transition: transform 0.3s ease;
-  transform: rotate(${props => (props.open ? "180deg" : "0deg")});
+  transform: rotate(${(props) => (props.open ? "180deg" : "0deg")});
 `;
 
 const LangDropdown = styled.ul`
@@ -113,6 +114,6 @@ const LangDropdown = styled.ul`
 const LangItem = styled.li<{ selected: boolean }>`
   padding: 0.6rem 1rem;
   background-color: ${({ selected }) =>
-    selected ? theme.colors.tertiary: "transparent"};
+    selected ? theme.colors.tertiary : "transparent"};
   cursor: pointer;
 `;
