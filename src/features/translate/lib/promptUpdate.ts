@@ -1,8 +1,8 @@
-import { PROMPT } from "../translate.consts";
+import { getPrompt } from "../translate.consts";
 
 // session.update 메시지를 서버로 전송 (지침 업데이트)
-function promptUpdate(dc: RTCDataChannel) {
-  const instructions = PROMPT.trim();
+function promptUpdate(dc: RTCDataChannel, languageCode: string) {
+  const instructions = getPrompt(languageCode).trim();
   try {
     dc.send(
       JSON.stringify({ type: "session.update", session: { instructions } })
