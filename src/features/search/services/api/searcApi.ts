@@ -9,6 +9,7 @@ import {
   SearchDetailResponse,
   SearchParamType,
 } from "../../types/search.types";
+import { AllRegions, RegionResponse } from "../../types/region.types";
 
 // 근처 병원 검색
 export const fetchNearbySearch = async (
@@ -16,6 +17,7 @@ export const fetchNearbySearch = async (
   currLocation: LatLng,
   size = 20,
   department?: AllDepartments | null,
+  region?: AllRegions | null,
   type?: SearchParamType | null
 ): Promise<NearbyPlacesResponse[]> => {
   const res = await apiRequest({
@@ -25,6 +27,7 @@ export const fetchNearbySearch = async (
       lng: currLocation.longitude!.toString(),
       size: size.toString(),
       ...(department ? { department } : {}),
+      ...(region ? { sido: region } : {}),
       ...(type ? { type } : {}),
     },
   });
@@ -33,9 +36,18 @@ export const fetchNearbySearch = async (
 };
 
 // 진료과 리스트
-export const getDepartment = async (
+export const getDepartments = async (
   url: string
 ): Promise<DepartmentResponse[]> => {
+  const res = await apiRequest({
+    url,
+  });
+
+  return res.data;
+};
+
+// 지역(시,도) 리스트
+export const getRegions = async (url: string): Promise<RegionResponse[]> => {
   const res = await apiRequest({
     url,
   });

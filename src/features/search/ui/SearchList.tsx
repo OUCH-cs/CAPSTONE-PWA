@@ -31,7 +31,7 @@ const Container = styled.ul<{ $isSearchPage: boolean }>`
   flex-direction: ${({ $isSearchPage }) => ($isSearchPage ? "column" : "row")};
   gap: 12px;
   margin-bottom: 50px;
-  overflow-y: auto;
+  overflow-x: auto;
   &::-webkit-scrollbar {
     display: none;
   }

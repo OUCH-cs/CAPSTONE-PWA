@@ -55,7 +55,7 @@
     "MORE_THAN_1_MONTH": "More than a month"
   },
   "Search for hospital and pharmacies": "Search for hospital and pharmacies",
-  "Medical Department": "Medical Department",
+  "Department": "Department",
   "Recommended": "Recommended",
   "Distance": "Distance",
   "Dieases": "Dieases",
@@ -136,5 +136,8 @@
   "Interpretation": "Interpretation",
   "Guide": "Guide",
   "Info": "Info",
-  "No reviews available yet.": "No reviews available yet."
+  "No reviews available yet.": "No reviews available yet.",
+  "Please write a review": "Please write a review",
+  "Region": "Region",
+  "Facility": "Facility"
 }

@@ -55,7 +55,7 @@
   "mild": "轻度",
   "severe": "重度",
   "Search for hospital and pharmacies": "请搜索医院或药店",
-  "Medical Department": "科别",
+  "Department": "科别",
   "Recommended": "推荐",
   "Distance": "距离",
   "Disease": "疾病",
@@ -137,5 +137,8 @@
   "Interpretation": "解释中",
   "Guide": "指南",
   "Info": "信息",
-  "No reviews available yet.": "暂无评论"
+  "No reviews available yet.": "暂无评论",
+  "Please write a review": "请撰写评论",
+  "Region": "地区",
+  "Facility": "医疗保健"
 }

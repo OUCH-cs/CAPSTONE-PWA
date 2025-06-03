@@ -4,9 +4,11 @@ import SearchIcon from "@/shared/assets/search/search.svg?react";
 import DepartmentFilterDropdown from "./dropdown/DepartmentFilterDropdown";
 import { useSearch } from "../services/hooks/useSearch";
 import { useTranslation } from "react-i18next";
+import RegionFilterDropdown from "./dropdown/RegionFilterDropdown";
+import TypeFilterDropdown from "./dropdown/TypeFilterDropdown";
 
 function Searchbar() {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const { searchQuery, setSearchQuery, handleSubmit } = useSearch();
 
   return (
@@ -16,7 +18,7 @@ function Searchbar() {
           <Input
             type="text"
             value={searchQuery}
-            placeholder= {t("Search for hospital and pharmacies")}
+            placeholder={t("Search for hospital and pharmacies")}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
 
@@ -27,7 +29,9 @@ function Searchbar() {
 
         {/* 진료과 필터 드롭다운 */}
         <FilterWrapper>
+          <TypeFilterDropdown />
           <DepartmentFilterDropdown />
+          <RegionFilterDropdown />
         </FilterWrapper>
       </Container>
     </>
@@ -42,7 +46,9 @@ const Container = styled.div`
   align-items: center;
   gap: 10px;
   width: 100%;
-  height: 100px;
+  min-height: 100px;
+  height: fit-content;
+
   margin-bottom: 16px;
   background-color: ${theme.colors.white};
 `;
@@ -77,4 +83,12 @@ const IconWrapper = styled.button`
 
 const FilterWrapper = styled.div`
   width: 328px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 4px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  margin-bottom: 10px;
 `;

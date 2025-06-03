@@ -55,7 +55,7 @@
   "mild": "경증",
   "severe": "중증",
   "Search for hospital and pharmacies": "병원 또는 약국을 검색해 주세요",
-  "Medical Department": "진료과",
+  "Department": "진료과",
   "Recommended": "추천순",
   "Distance": "거리순",
   "Disease": "질병",
@@ -139,5 +139,8 @@
   "Interpretation": "통역중",
   "Guide": "가이드",
   "Info": "정보",
-  "No reviews available yet.": "아직 리뷰가 없습니다."
+  "No reviews available yet.": "아직 리뷰가 없습니다.",
+  "Please write a review": "리뷰를 작성해주세요",
+  "Region": "지역",
+  "Facility": "의료기관"
 }

@@ -1,4 +1,4 @@
-type LanguageCode = "kr" | "en";
+type LanguageCode = "kr" | "en" | "zh";
 
 interface LatLng {
   latitude: number | undefined;

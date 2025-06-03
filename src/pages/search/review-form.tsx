@@ -7,10 +7,12 @@ import { useState } from "react";
 import StarFilled from "@/shared/assets/search/star.svg?react";
 import StarOutlined from "@/shared/assets/search/star_outlined.svg?react";
 import { Button } from "@/shared/components/button/Button";
+import { useTranslation } from "react-i18next";
 
 function ReviewForm() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // 별점 상태 (1~5). 0이면 아직 선택 안 된 상태
   const [rating, setRating] = useState<number>(0);
@@ -45,7 +47,7 @@ function ReviewForm() {
         {[1, 2, 3, 4, 5].map((i) => renderStar(i))}
       </StarsContainer>
 
-      <ReviewTextArea placeholder="Please write a review" />
+      <ReviewTextArea placeholder={t("Please write a review")} />
 
       <Button onClick={() => navigate("/search")}>Save</Button>
     </Container>
