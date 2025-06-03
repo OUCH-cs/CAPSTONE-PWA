@@ -1,9 +1,5 @@
 import { ClassPostProps } from "../diagnosis/ui/Funnel";
 
-interface IRecordingIndicatorProps {
-  children: React.ReactNode;
-}
-
 interface GuideFunnelProps extends Omit<ClassPostProps, "nextClickHandler"> {
   setStep: React.Dispatch<React.SetStateAction<string>>;
   currentStep: string;
@@ -30,11 +26,18 @@ interface GuideAccordionProps {
   text: LocalizedText[];
 }
 
+interface ChatMessage {
+  id: string;
+  speaker: "doctor" | "user";
+  original: string;
+  translation: string;
+}
+
 export type {
-  IRecordingIndicatorProps,
   GuideFunnelProps,
   Locale,
   LocalizedText,
   Guide,
   GuideAccordionProps,
+  ChatMessage,
 };
