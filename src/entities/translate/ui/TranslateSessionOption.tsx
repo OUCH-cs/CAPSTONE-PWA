@@ -30,7 +30,7 @@ export default function TranslateSessionOption({
 
 const Container = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -39,4 +39,5 @@ const Container = styled.div`
   width: 100%;
   height: 70px;
   padding: 0 20px;
+  background-color: transparent;
 `;

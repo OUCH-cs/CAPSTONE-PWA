@@ -1,4 +1,4 @@
 export * from "./SearchList";
 export * from "./SearchPreviewCard";
 export * from "./Searchbar";
-export * from "./detail/SearchDetailHeader";
+export * from "../../../entities/search/ui/detail/SearchDetailHeader";

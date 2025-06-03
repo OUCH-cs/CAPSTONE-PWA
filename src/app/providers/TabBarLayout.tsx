@@ -14,5 +14,5 @@ function TabBarLayout() {
 export { TabBarLayout };
 
 const Container = styled.div`
-  padding-bottom: 52px;
+  padding-bottom: 60px;
 `;

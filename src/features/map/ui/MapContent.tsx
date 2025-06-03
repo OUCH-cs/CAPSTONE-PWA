@@ -129,6 +129,6 @@ export default function MapContent() {
 
 const Container = styled.div`
   position: relative;
-  width: 100dvw;
+  width: 100%;
   height: 100dvh;
 `;
