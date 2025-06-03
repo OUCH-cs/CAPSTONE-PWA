@@ -140,7 +140,8 @@
   "Please write a review": "Please write a review",
   "Region": "Region",
   "Facility": "Facility",
-  "Yes": "Yes",
+  "Please fill in all fields before saving":"Please fill in all fields before saving",
+  "Yes" : "Yes",
   "Current Location": "Current Location",
   "(estimated)medical institution": "(estimated)medical institution",
   "Is this the correct\ninstitution you want to use?": "Is this the correct\ninstitution you want to use?"
