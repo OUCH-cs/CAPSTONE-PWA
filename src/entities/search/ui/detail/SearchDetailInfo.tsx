@@ -1,6 +1,6 @@
 import theme from "@/shared/styles/theme";
 import styled from "@emotion/styled";
-import { SearchDetailResponse } from "../../types/search.types";
+import { SearchDetailResponse } from "../../../../features/search/types/search.types";
 
 export default function SearchDetailInfo(data: SearchDetailResponse) {
   return (

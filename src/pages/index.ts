@@ -7,12 +7,13 @@ export * from "./auth/sign-in";
 export * from "./main/mainpage";
 export * from "./main/commingsoon";
 export * from "./main/self-diagnosis/self-diagnosis";
-export * from "./main/guide/guide"
+export * from "./main/guide/guide";
 export * from "./main/self-diagnosis/RecommendPage";
 
 // 검색 (지도)
 export * from "./search/search";
 export * from "./search/search-detail";
+export * from "./search/review-form";
 export * from "./map/map";
 
 // 의료 기록 관리
