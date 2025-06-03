@@ -42,7 +42,6 @@ const Container = styled.button<{ $isMuted: boolean; $isModalMode: boolean }>`
   height: 52px;
   border-radius: ${({ $isModalMode }) =>
     $isModalMode ? "20px 0 0 20px" : "20px"};
-  margin-bottom: 80px;
   background-color: ${({ theme, $isMuted }) =>
     $isMuted ? theme.colors.white_f1 : theme.colors.white};
   box-shadow: ${({ $isMuted }) =>

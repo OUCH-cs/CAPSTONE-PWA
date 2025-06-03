@@ -11,7 +11,7 @@ export default function GuideRoutingButton({ toggle }: { toggle: () => void }) {
     <Container onClick={toggle}>
       <TextWrapper>
         <RoutingIcon />
-        {t("Situational Guide")}
+        {t("Guide")}
       </TextWrapper>
 
       <ArrowIconWrapper>
@@ -31,7 +31,6 @@ const Container = styled.button`
   padding: 0 18px;
   border-radius: 12px;
   background-color: ${theme.colors.white};
-  margin-bottom: 181px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 `;
 
