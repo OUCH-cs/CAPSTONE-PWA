@@ -110,15 +110,9 @@
     "ZH": "中国"
   },
   "select_country": "请选择您的国家",
-  "Would you like to start Self-Diagnosis?" : "您想开始自我诊断吗？",
-  "Would you like to start Medical Record?" : "您想开始医疗记录吗？",
-  "Language Settings":"语言设置",
-   "No Medical Record Yet":"暂无医疗记录",
-  "e.g. 2025.05.11":"例如: 2025.05.11",
-  "e.g. Hanyang Hospital":"例如：汉阳医院",
-  "e.g. pollen":"例如：花粉过敏",
   "Would you like to start Self-Diagnosis?": "您想开始自我诊断吗？",
   "Would you like to start Medical Record?": "您想开始医疗记录吗？",
+  "Language Settings": "语言设置",
   "No Medical Record Yet": "暂无医疗记录",
   "e.g. 2025.05.11": "例如: 2025.05.11",
   "e.g. Hanyang Hospital": "例如：汉阳医院",
@@ -133,9 +127,13 @@
   "Search for Address": "查找地址",
   "Recommend": "根据分析结果，\n为您推荐合适的科室。",
   "commingsoon": "服务开发中，\n敬请期待！",
-  "commingback":"返回",
+  "commingback": "返回",
   "Reception": "接待",
   "Waiting Room": "等候室",
   "Consultation": "咨询",
-  "Payment": "支付"
+  "Payment": "支付",
+  "Loading...": "加载中...",
+  "Doctor": "医生",
+  "Interpretation": "解释中",
+  "Guide": "指南"
 }

@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function DepartmentFilterDropdown() {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [department, setDepartment] = useAtom(departmentFilterAtom); // 선택한 진료과
   const { isOpen, setIsOpen, toggle } = useToggle();
@@ -96,13 +96,12 @@ const IconWrapper = styled.div`
 const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 172px;
-  max-height: 200px;
+  height: 200px;
   border-radius: 16px;
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.08);
-  overflow: auto;
+  overflow-y: auto;
 `;
 
 const MenuItem = styled.button<{ $isSelected: boolean }>`

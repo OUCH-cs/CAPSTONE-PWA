@@ -16,10 +16,10 @@ export default function TranslateSessionHeader({
         <Profile />
 
         <InfoWrapper>
-          <Title>Doctor</Title>
+          <Title>{t("Doctor")}</Title>
           <Interpretation>
             <StatusDot />
-            interpretation
+            {t("Interpretation")}
           </Interpretation>
         </InfoWrapper>
       </ProfileWrapper>

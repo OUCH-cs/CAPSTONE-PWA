@@ -112,15 +112,9 @@
     "ZH": "중국"
   },
   "select_country": "국가를 선택하세요",
-  "Would you like to start Self-Diagnosis?" : "자가진단을 \n 시작하시겠습니까?",
-  "Would you like to start Medical Record?" : "의료기록 작성을 \n 시작하시겠습니까?",
-  "Language Settings":"언어 설정",
-  "No Medical Record Yet" : "아직 의료기록이 없습니다",
-  "e.g. 2025.05.11":"예: 2025.05.11",
-  "e.g. Hanyang Hospital":"예: 한양병원",
-  "e.g. pollen":"예: 꽃가루알러지",
   "Would you like to start Self-Diagnosis?": "자가진단을 \n 시작하시겠습니까?",
   "Would you like to start Medical Record?": "의료기록 작성을 \n 시작하시겠습니까?",
+  "Language Settings": "언어 설정",
   "No Medical Record Yet": "아직 의료기록이 없습니다",
   "e.g. 2025.05.11": "예: 2025.05.11",
   "e.g. Hanyang Hospital": "예: 한양병원",
@@ -135,9 +129,13 @@
   "Search for Address": "주소를 검색하세요",
   "Recommend": "분석을 기반으로 \n맞춤 진료과 안내해 드릴게요",
   "commingsoon": "서비스 준비 중입니다.\n곧 만나뵐게요!",
-  "commingback":"뒤로가기",
+  "commingback": "뒤로가기",
   "Reception": "접수",
   "Waiting Room": "대기실",
   "Consultation": "상담",
-  "Payment": "결제"
+  "Payment": "결제",
+  "Loading...": "로딩 중...",
+  "Doctor": "의사",
+  "Interpretation": "통역중",
+  "Guide": "가이드"
 }
