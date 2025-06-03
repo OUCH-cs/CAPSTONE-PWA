@@ -80,7 +80,7 @@ export default function TranslateController() {
 
         // 번역 지침 갱신
         if (dcRef.current && dcRef.current.readyState === "open") {
-          promptUpdate(dcRef.current);
+          promptUpdate(dcRef.current, languageCode);
         } else {
           console.warn(
             "[WARN] Cannot send session.update. DataChannel not open or available."
@@ -168,7 +168,7 @@ export default function TranslateController() {
       // DataChannel open 시점에 "준비 완료"
       newDc.onopen = () => {
         console.log("▶️ DataChannel open");
-        promptUpdate(newDc); // 초기 지침 전송
+        promptUpdate(newDc, languageCode); // 초기 지침 전송
 
         // 마이크 트랙을 활성화해서 음성이 전송되도록 함
         if (audioTrackRef.current) {
