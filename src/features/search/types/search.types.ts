@@ -31,9 +31,29 @@ interface SearchDetailResponse extends PlacesResponseBase {
   }[];
 }
 
+interface ReviewRequest {
+  hospitalYkiho: string;
+  contents: string;
+  score: number;
+  imageUrl: string;
+}
+
+interface ReviewResponse {
+  id: number;
+  userNickname: string;
+  hospitalYkiho: string;
+  contents: string;
+  score: number;
+  imageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type {
   Sort,
   SearchParamType,
   NearbyPlacesResponse,
   SearchDetailResponse,
+  ReviewRequest,
+  ReviewResponse,
 };

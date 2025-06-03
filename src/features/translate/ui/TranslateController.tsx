@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { promptUpdate } from "../lib/promptUpdate";
 import LoadingModal from "./modal/LoadingModal";
 import { ChatMessage } from "../translate.types";
+import LocationConfirmModal from "./modal/LocationConfirmModal";
 
 export default function TranslateController() {
   const navigate = useNavigate();
@@ -26,9 +27,11 @@ export default function TranslateController() {
   const dcRef = useRef<RTCDataChannel | null>(null);
   const audioTrackRef = useRef<MediaStreamTrack | null>(null);
 
-  const { isOpen: isFinishModalOpen, toggle: finishModalToggle } = useToggle(); // 통역 중지 모달 토글 훅
+  const { isOpen: isLocationModalOpen, toggle: locationModalToggle } =
+    useToggle(); // 위치 확인 모달 토글 훅
   const { isOpen: isLoadingModalOpen, toggle: loadingModalToggle } =
     useToggle(); // 로딩 모달 토글 훅
+  const { isOpen: isFinishModalOpen, toggle: finishModalToggle } = useToggle(); // 통역 중지 모달 토글 훅
 
   // Function to send conversation.item.delete
   const deleteChatItem = (itemId: string) => {
@@ -80,7 +83,10 @@ export default function TranslateController() {
 
         // 번역 지침 갱신
         if (dcRef.current && dcRef.current.readyState === "open") {
-          promptUpdate(dcRef.current, languageCode);
+          promptUpdate(
+            dcRef.current,
+            languageCode === "en" ? "영어" : "중국어"
+          );
         } else {
           console.warn(
             "[WARN] Cannot send session.update. DataChannel not open or available."
@@ -335,7 +341,7 @@ export default function TranslateController() {
     <>
       <Container>
         {/* 통역 중이 아닐 때 (초기 화면) */}
-        {!isTranslating && <TranslateStarter onStart={handleStartTranslate} />}
+        {!isTranslating && <TranslateStarter onStart={locationModalToggle} />}
 
         {/* 통역 중일 때 */}
         {isTranslating && (
@@ -347,6 +353,16 @@ export default function TranslateController() {
           />
         )}
       </Container>
+
+      {/* 위치 확인 모달 */}
+      <LocationConfirmModal
+        isOpen={isLocationModalOpen}
+        toggle={locationModalToggle}
+        onConfirm={() => {
+          locationModalToggle();
+          handleStartTranslate();
+        }}
+      />
 
       {/* 로딩 모달 */}
       <LoadingModal isOpen={isLoadingModalOpen} toggle={loadingModalToggle} />
@@ -364,5 +380,5 @@ export default function TranslateController() {
 const Container = styled.div`
   position: relative;
   width: 100%;
-  height: calc(100vh - 52px);
+  height: calc(100vh - 60px);
 `;
