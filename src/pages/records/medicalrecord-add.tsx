@@ -17,26 +17,37 @@ type HospitalRecord = {
   treatmentSummary: string;
 };
 
-
 export default function MedicalRecordAdd() {
-  const {t} =  useTranslation()
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [medicalData, setMedicalData] = useState(initialMedicalFormData);
   const [showModal, setShowModal] = useState(false);
-  const isFilled = medicalData.every((item) => item.value && item.value.trim() !== "");
+  const [showWarning, setShowWarning] = useState(false);
+
+  const isAnyFieldFilled = medicalData.some(
+  (item) => item.value && item.value.trim() !== ""
+);
+
+const isAllFieldsFilled = medicalData.every(
+  (item) => item.value && item.value.trim() !== ""
+);
+
 
   const handleConfirmSave = () => {
-     if (!isFilled) return;
-    setShowModal(true);
-  };
+  if (!isAllFieldsFilled) {
+    setShowWarning(true); 
+    return;
+  }
+  setShowWarning(false);
+  setShowModal(true);
+};
 
   const handleRealSave = async () => {
     try {
       const record: HospitalRecord = {
-        visitDate:
-          formatDate(
-            medicalData.find((item) => item.title === "Date of Visit")?.value || ""
-          ),
+        visitDate: formatDate(
+          medicalData.find((item) => item.title === "Date of Visit")?.value || ""
+        ),
         visitingHospital:
           medicalData.find((item) => item.title === "Visiting Hospital")?.value || "",
         medicalSubject:
@@ -54,7 +65,6 @@ export default function MedicalRecordAdd() {
         navigate("/records/medicalrecord-list");
       }
     } catch (err) {
-      alert("저장 중 오류가 발생했습니다.");
       console.error(err);
     }
   };
@@ -70,24 +80,35 @@ export default function MedicalRecordAdd() {
 
       <MedicalAddData onDataChange={setMedicalData} />
 
-      <SaveButton onClick={handleConfirmSave} disabled={!isFilled}>
+      <SaveButton onClick={handleConfirmSave} disabled={!isAnyFieldFilled}>
       {t("Save")}
       </SaveButton>
 
-      {/* Modal 컴포넌트 사용 */}
+      
+      {showWarning && (
+        <WarningText>{t("Please fill in all fields before saving")}</WarningText>
+      )}
+
+
       <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
         <ModalBox>
           <MessageText>
-            {t("Do you want to save your changes before exiting?").split('\n').map((line, i, arr) => (
-              <React.Fragment key={i}>
-              {line}
-              {i !== arr.length - 1 && <br />}
-              </React.Fragment>
-        ))}
+            {t("Do you want to save your changes before exiting?")
+              .split("\n")
+              .map((line, i, arr) => (
+                <React.Fragment key={i}>
+                  {line}
+                  {i !== arr.length - 1 && <br />}
+                </React.Fragment>
+              ))}
           </MessageText>
           <ButtonWrapper>
-            <CancelButton onClick={() => setShowModal(false)}>{t("Cancel")}</CancelButton>
-            <ConfirmButton onClick={handleRealSave}>{t("Save")}</ConfirmButton>
+            <CancelButton onClick={() => setShowModal(false)}>
+              {t("Cancel")}
+            </CancelButton>
+            <ConfirmButton onClick={handleRealSave}>
+              {t("Save")}
+            </ConfirmButton>
           </ButtonWrapper>
         </ModalBox>
       </Modal>
@@ -95,6 +116,7 @@ export default function MedicalRecordAdd() {
   );
 }
 
+// Styled Components
 const Container = styled.div`
   background-color: #f5f9fc;
   position: relative;
@@ -145,12 +167,12 @@ const SaveButton = styled.button<{ disabled: boolean }>`
 `;
 
 const ModalBox = styled.div`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 10px;
   text-align: center;
   width: 316px;
   font-family: Pretendard;
-  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
   padding: 66px 0 0 0;
 `;
 
@@ -170,7 +192,7 @@ const ButtonWrapper = styled.div`
 
 const CancelButton = styled.button`
   flex: 1;
-  background-color: #F1F1F5;
+  background-color: #f1f1f5;
   border: none;
   border-radius: 0 0 0 10px;
   font-weight: 500;
@@ -187,4 +209,11 @@ const ConfirmButton = styled.button`
   font-weight: 500;
   padding: 16px;
   cursor: pointer;
+`;
+const WarningText = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 500;
 `;
