@@ -3,20 +3,33 @@ import Like from "@/shared/assets/mypage/like.svg?react";
 import Favorite from "@/shared/assets/mypage/favorite.svg?react";
 import Review from "@/shared/assets/mypage/review.svg?react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Action = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <Header>
-      <Section><Review width = "24px" height = "24px"></Review><TitleText>{t("Review")}</TitleText></Section>
-      <SectionMid><Like width = "24px" height = "24px"></Like><TitleText>{t("Like")}</TitleText></SectionMid>
-      <Section><Favorite width = "24px" height = "24px"></Favorite><TitleText>{t("Favorite")}</TitleText></Section>
+      <LinkSection to="/mypage/review">
+        <Review width="24px" height="24px" />
+        <TitleText>{t("Review")}</TitleText>
+      </LinkSection>
+
+      <SectionMid>
+        <Like width="24px" height="24px" />
+        <TitleText>{t("Like")}</TitleText>
+      </SectionMid>
+
+      <Section>
+        <Favorite width="24px" height="24px" />
+        <TitleText>{t("Favorite")}</TitleText>
+      </Section>
     </Header>
   );
 };
 
 export default Action;
+
 
 
 const Header = styled.div`
@@ -56,4 +69,12 @@ const TitleText = styled.p`
   font-size:14px;
   font-weight: 400;
   margin-top:4px;
+`;
+const LinkSection = styled(Link)`
+  width: 109px;
+  display: flex;
+  flex-direction: column;  
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;  // 링크 밑줄 제거
 `;
