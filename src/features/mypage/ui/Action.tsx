@@ -3,17 +3,19 @@ import Like from "@/shared/assets/mypage/like.svg?react";
 import Favorite from "@/shared/assets/mypage/favorite.svg?react";
 import Review from "@/shared/assets/mypage/review.svg?react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Action = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
 
   return (
     <Header>
-      <LinkSection to="/mypage/review">
+      <Section onClick={() => navigate("/mypage/review")}>
         <Review width="24px" height="24px" />
         <TitleText>{t("Review")}</TitleText>
-      </LinkSection>
+      </Section>
 
       <SectionMid>
         <Like width="24px" height="24px" />
@@ -51,6 +53,7 @@ display: flex;
 flex-direction: column;  
 justify-content: center;
 align-items: center;
+cursor: pointer;
 `;
 const SectionMid = styled.div`
   width: 160px;
@@ -69,12 +72,4 @@ const TitleText = styled.p`
   font-size:14px;
   font-weight: 400;
   margin-top:4px;
-`;
-const LinkSection = styled(Link)`
-  width: 109px;
-  display: flex;
-  flex-direction: column;  
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;  // 링크 밑줄 제거
 `;
