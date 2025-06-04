@@ -248,8 +248,33 @@ export default function TranslateController() {
   };
 
   // 통역 종료
-  const handleFinishTranslate = () => {
+  const handleFinishTranslate = async () => {
     setIsTranslating(false); // UI 반응 먼저
+
+    const originalMessages = messages
+      .filter((msg) => msg.original)
+      .map((msg) => msg.original)
+      .join(" ");
+
+    const { data } = await apiRequest({
+      url: `/summarize/${languageCode}`,
+      method: "POST",
+      data: { messages: [originalMessages] },
+    });
+
+    if (data) {
+      await apiRequest({
+        url: `/medical-record`,
+        method: "POST",
+        data: {
+          visitDate: "2025-06-04",
+          visitingHospital: "Lion's Hall",
+          medicalSubject: "",
+          symptoms: "",
+          treatmentSummary: data.summary,
+        },
+      });
+    }
 
     if (dcRef.current) {
       // Use ref for cleanup
