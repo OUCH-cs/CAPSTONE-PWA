@@ -12,15 +12,12 @@ import { isAuthAtom } from "@/features/sign-in/services/atoms";
 
 export default function HealthStatusData() {
   const { t } = useTranslation();
-  const [healthStatusData, setHealthStatusData] = useState<HealthStatus | null>(
-    null
-  ); // 상태 저장
-  const [loading, setLoading] = useState<boolean>(true); // 로딩 상태
-  const [error, setError] = useState<string | null>(null); // 에러 상태
+  const [healthStatusData, setHealthStatusData] = useState<HealthStatus | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const setIsAuth = useSetAtom(isAuthAtom);
 
-  // 데이터 fetch 함수
   const fetchHealthStatusData = async () => {
     try {
       setLoading(true);
@@ -28,7 +25,6 @@ export default function HealthStatusData() {
       setHealthStatusData(data.data);
       setError(null);
     } catch (error) {
-      // 어떤 에러든 로그인 페이지로 이동
       localStorage.removeItem("accessToken");
       setIsAuth(false);
       alert("세션이 만료되었습니다. 다시 로그인해주세요.");
@@ -40,15 +36,13 @@ export default function HealthStatusData() {
   };
 
   useEffect(() => {
-    fetchHealthStatusData(); // 컴포넌트가 마운트될 때 데이터 불러오기
+    fetchHealthStatusData();
   }, []);
 
-  // 로딩 중일 때 처리
   if (loading) {
     return <LoadingText>데이터를 불러오는 중...</LoadingText>;
   }
 
-  // 오류 처리
   if (error) {
     return <ErrorText>{error}</ErrorText>;
   }
@@ -59,33 +53,33 @@ export default function HealthStatusData() {
         <>
           <DataLabel>
             <LabelText>{t("Disease")}</LabelText>
-            <List>{healthStatusData.disease || t("e.g. diabetes, colic")}</List>
+            <List>{healthStatusData.disease || ""}</List>
           </DataLabel>
           <DataLabel>
             <LabelText>{t("Allergy")}</LabelText>
-            <List>{healthStatusData.allergy || t("e.g. pollen, sellfish, peach")}</List>
+            <List>{healthStatusData.allergy || ""}</List>
           </DataLabel>
           <DataLabel>
             <LabelText>{t("Blood Pressure")}</LabelText>
             <List>
-                {healthStatusData.bloodPressure
+              {healthStatusData.bloodPressure
                 ? `${formatMeasurement(healthStatusData.bloodPressure)}`
-                : "138 / 75"}
-              <Unit>mmHg</Unit>
+                : ""}
+              <Unit>{healthStatusData.bloodPressure ? "mmHg" : ""}</Unit>
             </List>
           </DataLabel>
           <DataLabel>
             <LabelText>{t("BloodSugar")}</LabelText>
             <List>
-               {healthStatusData.bloodSugar
-              ? `${formatMeasurement(healthStatusData.bloodSugar)}`
-            : "90 / 164"}
-              <Unit>mg/dL</Unit>
+              {healthStatusData.bloodSugar
+                ? `${formatMeasurement(healthStatusData.bloodSugar)}`
+                : ""}
+              <Unit>{healthStatusData.bloodSugar ? "mg/dL" : ""}</Unit>
             </List>
           </DataLabel>
           <DataLabel>
             <LabelText>{t("MedicineHistory")}</LabelText>
-            <List>{healthStatusData.medicineHistory || t("e.g. Aspirin")}</List>
+            <List>{healthStatusData.medicineHistory || ""}</List>
           </DataLabel>
         </>
       ) : (
@@ -126,12 +120,14 @@ const List = styled.div`
   color: #434343;
   font-family: Pretendard;
 `;
+
 const Unit = styled.span`
   font-size: 14px;
   font-weight: 400;
   margin-left: 4px;
   color: #434343;
 `;
+
 const LoadingText = styled.p`
   text-align: center;
   font-size: 16px;
