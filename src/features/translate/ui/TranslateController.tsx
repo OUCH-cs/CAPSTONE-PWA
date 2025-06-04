@@ -79,6 +79,7 @@ export default function TranslateController() {
         if (!text) return;
 
         pendingTranscriptRef.current = text; // 임시로 저장
+
         console.log("▶ STT 완료:", text);
 
         // 번역 지침 갱신
@@ -119,8 +120,6 @@ export default function TranslateController() {
             translation: trans,
           },
         ]);
-
-        pendingTranscriptRef.current = null; // 다음 사이클을 위해 초기화
 
         console.log("▶ 번역 완료:", trans);
 
