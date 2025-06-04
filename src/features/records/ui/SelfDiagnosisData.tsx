@@ -126,9 +126,11 @@ const ListBox = styled.div`
   border-radius: 12px;
   background-color: #F1F1F5;
   border: 1px solid #E5E5EC;
-  height: 60px;
+  min-height: 60px;
   margin-top: 10px;
   margin-bottom: -10px;
+   word-break: break-word;   
+  white-space: pre-wrap;    
 `;
 
 const ListText = styled.span`

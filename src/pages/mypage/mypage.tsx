@@ -22,5 +22,5 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${theme.colors.background};
-  min-height: 90vh;
+  max-height: 90vh;
 `;
