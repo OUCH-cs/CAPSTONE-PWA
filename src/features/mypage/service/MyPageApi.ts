@@ -36,3 +36,17 @@ export const editInformation = async (payload: {
   }
 };
 
+// 리뷰
+export const reviewInformation = async () => {
+  try {
+    const response = await apiRequest({
+      url: "/reviews/me",
+      method: "GET",
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error("review error:", error);
+    return null;
+  }
+};
+

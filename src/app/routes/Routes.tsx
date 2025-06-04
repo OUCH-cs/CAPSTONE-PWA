@@ -28,6 +28,7 @@ import Diagnosis from "@/pages/records/self-diagnosis";
 import { RedirectIfAuth, TabBarLayout } from "@/app/providers";
 import SearchDetailPage from "@/pages/search/search-detail";
 import EditProfile from "@/pages/mypage/edit-profile";
+import Review from "@/pages/mypage/review";
 import AuthGuard from "../providers/AuthGuard";
 
 export default function AppRoutes() {
@@ -88,6 +89,7 @@ export default function AppRoutes() {
           {/* 마이 페이지 */}
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/mypage/edit-profile" element={<EditProfile />} />
+          <Route path="/mypage/review" element={<Review />} />
         </Route>
 
         {/* 자가진단 페이지 */}

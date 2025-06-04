@@ -113,12 +113,14 @@ const List = styled.div`
   background-color: #fff;
   border: 1px solid #e5e5ec;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
-  height: 60px;
+  min-height: 60px;
   margin-bottom: -10px;
   font-size: 16px;
   font-weight: 400;
   color: #434343;
   font-family: Pretendard;
+   word-break: break-word;   
+  white-space: pre-wrap;    
 `;
 
 const Unit = styled.span`
