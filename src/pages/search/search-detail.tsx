@@ -74,6 +74,7 @@ const TabButton = styled.button<{ $isSelected: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   flex: 1;
   font-size: 18px;
   font-weight: 500;
