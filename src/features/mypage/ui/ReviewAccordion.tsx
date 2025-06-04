@@ -35,7 +35,8 @@ export default function ReviewAccordion() {
       {reviews.map((review, index) => (
         <div key={review.id}>
           <CreatedAtText>{review.createdAt}</CreatedAtText>
-          <AccordionHeaderWrapper
+          <Accordion.Header>
+            <AccordionHeaderWrapper
             isExpanded={expandedIndex === index}
             onClick={() =>
               setExpandedIndex((prev) => (prev === index ? null : index))
@@ -50,6 +51,8 @@ export default function ReviewAccordion() {
               }}
             />
           </AccordionHeaderWrapper>
+
+          </Accordion.Header>
 
           {expandedIndex === index && (
             <AccordionBodyWrapper>
@@ -80,18 +83,22 @@ const AccordionHeaderWrapper = styled.div<{ isExpanded: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 56px;
+  max-width: 400px;
+  height: fit-content;
+  min-height: 56px;
   padding: 18px;
   border: 1px solid ${({ theme }) => theme.colors.white_e5};
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.white};
   cursor: pointer;
+  white-space: pre;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.04);
   border-bottom: ${({ isExpanded, theme }) => (isExpanded ? "none" : `1px solid ${theme.colors.white_e5}`)};
+  overflow: hidden;
 `;
 
 const AccordionHeaderTitle = styled.div`
+width: 100%;
   font-size: 16px;
   font-weight: 400;
   color:#000; 
@@ -101,16 +108,15 @@ const AccordionBodyWrapper = styled.div`
   border-radius: 10px;
   background-color: #FFF;
   padding-left: 16px;
-  height: 200px;
-  paddint-top: 26px;
+  min-height: 200px;
   border-bottom:1px solid ${({ theme }) => theme.colors.white_e5};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.04);
+  padding-top:26px;
 `;
 
 const AccordionItemWrapper = styled.div`
   font-size: 15px;
   color: ${({ theme }) => theme.colors.black};
-  line-height: 1.6;
 `;
 
 const StyledArrowIcon = styled(ArrowChevronIcon)`

@@ -100,9 +100,11 @@ const ListBox = styled.div`
   border: 1px solid #E5E5EC;
   border-radius:12px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
-  height: 60px;
+  min-height: 60px;
   margin-top:10px;
   margin-bottom: -10px;
+   word-break: break-word;   
+  white-space: pre-wrap;    
 `;
 
 const ListText = styled.span`
