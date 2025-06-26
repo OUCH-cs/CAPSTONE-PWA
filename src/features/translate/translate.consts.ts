@@ -1,6 +1,6 @@
 const STEPS = ["1", "2", "3", "4", "5"];
 
-const MODEL = "model=gpt-4o-mini-realtime-preview-2024-12-17";
+const MODEL = "model=gpt-4o-realtime-preview-2025-06-03";
 
 const getPrompt = (languageCode: string) => {
   return `너는 ${languageCode}-한국어 번역기야. 오직 번역만 해.
